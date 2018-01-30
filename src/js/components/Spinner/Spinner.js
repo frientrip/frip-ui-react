@@ -79,7 +79,7 @@ const Wrapper = styled.div`
 `;
 
 const Leaf = styled.div`
-  height: 20%;
+  height: 18%;
   background: ${color.grey};
   position: absolute;
   left: 49%;
