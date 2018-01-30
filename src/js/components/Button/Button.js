@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import color from '../Color';
 
+import Spinner from '../Spinner';
+
 const propTypes = {
   labelText: PropTypes.string.isRequired,
   labelTextWeight: PropTypes.number,
@@ -16,6 +18,10 @@ const propTypes = {
   borderColorDisabled: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  large: PropTypes.bool,
+  fluid: PropTypes.bool,
+  icon: PropTypes.node,
 };
 
 const defaultProps = {
@@ -30,6 +36,10 @@ const defaultProps = {
   bgColorDisabled: '#f5f8fa',
   borderColor: '',
   borderColorDisabled: '',
+  isLoading: false,
+  large: false,
+  fluid: false,
+  icon: null,
 };
 
 const disabledCss = css`
@@ -53,22 +63,52 @@ const enabledCss = css`
 `;
 
 const Wrapper = styled.div`
-  display: inline-block;
+  position: relative;
+  display: ${({ fluid }) => (fluid ? 'block' : 'inline-block')};
   background-color: ${({ disabled, bgColor, bgColorDisabled }) => (disabled ? bgColorDisabled : bgColor)};
   border-radius: 4px;
   padding: 8px 16px;
-  font-size: 14px;
   transition: background-color 0.3s;
+  text-align: center;
 
   ${props => (props.disabled ? disabledCss : enabledCss)}
 `;
 
 const Label = styled.div`
-  font-size: 14px;
+  display: inline-block;
+  vertical-align: ${({ vAlign }) => vAlign};
+  height: 24px;
+  font-size: ${({ fontSize }) => fontSize}px;
   text-align: center;
   font-weight: ${({ labelTextWeight }) => labelTextWeight};
   color: ${({ disabled, labelColor, labelColorDisabled }) => (disabled ? labelColorDisabled : labelColor)};
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
+  opacity: ${({ isLoading }) => (isLoading ? 0 : '')};
+`;
+
+const SpinnerWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+`;
+
+const IconWrapper = styled.div`
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  vertical-align: middle;
+`;
+
+const LeftIconWrapper = styled(IconWrapper)`
+  margin-right: 8px;
+`;
+
+const RightIconWrapper = styled(IconWrapper)`
+  margin-left: 8px;
 `;
 
 const Button = ({
@@ -76,26 +116,44 @@ const Button = ({
   labelText, labelTextWeight, labelColor, labelColorDisabled,
   bgColor, bgColorHover, bgColorActive, bgColorDisabled,
   borderColor, borderColorDisabled,
+  isLoading,
+  large,
+  fluid,
+  icon,
 }) =>
   (
     <Wrapper
-      onClick={disabled ? () => {} : onClick}
-      disabled={disabled}
+      onClick={disabled || isLoading ? () => {} : onClick}
+      disabled={disabled || isLoading}
       bgColor={bgColor}
       bgColorHover={bgColorHover}
       bgColorActive={bgColorActive}
       bgColorDisabled={bgColorDisabled}
       borderColor={borderColor}
       borderColorDisabled={borderColorDisabled}
+      fluid={fluid}
     >
+      {
+        icon &&
+        <LeftIconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
+      }
       <Label
         disabled={disabled}
         labelTextWeight={labelTextWeight}
         labelColor={labelColor}
         labelColorDisabled={labelColorDisabled}
+        isLoading={isLoading}
+        fontSize={large ? 17 : 14}
+        vAlign={large ? '2px' : 'middle'}
       >
         {labelText}
       </Label>
+      {
+        isLoading &&
+        <SpinnerWrapper>
+          <Spinner size={large ? 64 : 40} />
+        </SpinnerWrapper>
+      }
     </Wrapper>
   );
 
@@ -109,8 +167,8 @@ const ButtonPrimary = props =>
     <Button
       {...props}
       bgColor={color.primary}
-      bgColorHover="#3591ed"
-      bgColorActive="#3789db"
+      bgColorHover="#3789db"
+      bgColorActive="#3c79b7"
       bgColorDisabled="#99ccff"
       labelTextWeight={500}
       labelColor={color.white}
@@ -123,8 +181,8 @@ const ButtonDanger = props =>
     <Button
       {...props}
       bgColor={color.red}
-      bgColorHover="#ed6363"
-      bgColorActive="#db6060"
+      bgColorHover="#db6060"
+      bgColorActive="#b75b5b"
       bgColorDisabled="#ebf0f5"
       labelTextWeight={500}
       labelColor={color.white}
@@ -147,8 +205,24 @@ const ButtonGhost = props =>
     />
   );
 
+const ButtonGhostPrimary = props =>
+  (
+    <Button
+      {...props}
+      bgColor={color.white}
+      bgColorHover="#d7ebff"
+      bgColorActive="#aed7ff"
+      bgColorDisabled={color.white}
+      labelColor={color.primary}
+      labelColorDisabled={color.primary}
+      borderColor={color.primary}
+      borderColorDisabled="rgba(51, 153, 255, 0.4)"
+    />
+  );
+
 export {
   ButtonPrimary,
   ButtonDanger,
   ButtonGhost,
+  ButtonGhostPrimary,
 };
