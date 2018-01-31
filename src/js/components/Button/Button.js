@@ -51,7 +51,7 @@ const enabledCss = css`
   ${({ borderColor }) => (borderColor ? `border: 1px solid ${borderColor};` : '')}
   
   ${({ bgColorHover, bgColorActive }) => `
-    &:hover {
+    &:hover, &:focus {
       background-color: ${bgColorHover};
     };
 
@@ -123,6 +123,7 @@ const Button = ({
 }) =>
   (
     <Wrapper
+      tabIndex="0"
       onClick={disabled || isLoading ? () => {} : onClick}
       disabled={disabled || isLoading}
       bgColor={bgColor}
