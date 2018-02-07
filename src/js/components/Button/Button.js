@@ -22,6 +22,7 @@ const propTypes = {
   large: PropTypes.bool,
   fluid: PropTypes.bool,
   icon: PropTypes.node,
+  iconPosition: PropTypes.string,
 };
 
 const defaultProps = {
@@ -40,6 +41,7 @@ const defaultProps = {
   large: false,
   fluid: false,
   icon: null,
+  iconPosition: 'left',
 };
 
 const disabledCss = css`
@@ -62,7 +64,8 @@ const enabledCss = css`
   cursor: pointer;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
+  border: none;
   position: relative;
   display: ${({ fluid }) => (fluid ? 'block' : 'inline-block')};
   background-color: ${({ disabled, bgColor, bgColorDisabled }) => (disabled ? bgColorDisabled : bgColor)};
@@ -107,6 +110,9 @@ const LeftIconWrapper = styled(IconWrapper)`
   margin-right: 8px;
 `;
 
+const CenterIconWrapper = styled(IconWrapper)`
+`;
+
 const RightIconWrapper = styled(IconWrapper)`
   margin-left: 8px;
 `;
@@ -120,10 +126,11 @@ const Button = ({
   large,
   fluid,
   icon,
+  iconPosition,
 }) =>
   (
     <Wrapper
-      tabIndex="0"
+      tabIndex={disabled ? undefined : '0'}
       onClick={disabled || isLoading ? () => {} : onClick}
       disabled={disabled || isLoading}
       bgColor={bgColor}
@@ -135,8 +142,12 @@ const Button = ({
       fluid={fluid}
     >
       {
-        icon &&
+        icon && iconPosition === 'left' &&
         <LeftIconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
+      }
+      {
+        icon && iconPosition === 'center' &&
+        <CenterIconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
       }
       <Label
         disabled={disabled}
@@ -149,6 +160,10 @@ const Button = ({
       >
         {labelText}
       </Label>
+      {
+        icon && iconPosition === 'right' &&
+        <RightIconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
+      }
       {
         isLoading &&
         <SpinnerWrapper>
@@ -196,8 +211,8 @@ const ButtonGhost = props =>
     <Button
       {...props}
       bgColor={color.white}
-      bgColorHover="#fcfcfd"
-      bgColorActive="#f8f9fb"
+      bgColorHover="#f3f3f3"
+      bgColorActive="#e6e6e6"
       bgColorDisabled={color.white}
       labelColor={color.grey}
       labelColorDisabled={color.grey}
@@ -221,9 +236,19 @@ const ButtonGhostPrimary = props =>
     />
   );
 
+const IconButton = props =>
+  (
+    <ButtonGhost
+      {...props}
+      labelText=""
+      iconPosition="center"
+    />
+  );
+
 export {
   ButtonPrimary,
   ButtonDanger,
   ButtonGhost,
   ButtonGhostPrimary,
+  IconButton,
 };

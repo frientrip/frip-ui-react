@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Button, { ButtonPrimary, ButtonDanger, ButtonGhost, ButtonGhostPrimary } from './Button';
+import Button, { ButtonPrimary, ButtonDanger, ButtonGhost, ButtonGhostPrimary, IconButton } from './Button';
 import DownloadIcon from '../../assets/svgs/ic-download-grey.svg';
 
 storiesOf('Button', module)
@@ -55,4 +55,10 @@ storiesOf('Button', module)
       <span> </span>
       <ButtonDanger labelText="Button Danger" onClick={action('Button Danger Clicked')} />
     </div>
+  ))
+  .add('Button w/ Icon', () => (
+    <ButtonGhost labelText="Download File" icon={DownloadIcon} onClick={action('Button Ghost w/ Icon Clicked')} />
+  ))
+  .add('Icon Button', () => (
+    <IconButton icon={DownloadIcon} onClick={action('Button Ghost w/ Icon Clicked')} />
   ));
