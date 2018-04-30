@@ -52,8 +52,8 @@ const Button = styled.button`
 `;
 
 class ButtonGroup extends React.PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
   handleButtonClick(idx) {
