@@ -28,6 +28,7 @@ const TabLabel = styled.div`
   border-bottom: ${({ isActive }) => (isActive ? '1px solid' : 'none')};
   font-weight: 400;
   cursor: pointer;
+  transition: color 0.2s;
 
   &:hover {
     color: ${({ isActive }) => (isActive ? color.primary : color.black)};

@@ -77,7 +77,9 @@ const MenuUl = styled.ul`
   margin: 0;
   padding: 0;
   height: ${({ isOpen, numItems }) => (isOpen ? `${numItems * 40}px` : '0')};
-  transition: height 0.4s ease-in-out;
+  transform-origin: left top;
+  transform: ${({ isOpen }) => (isOpen ? 'translateY(0) scale(1,1)' : 'translateY(-10px) scale(1,0)')};
+  transition: height 0.2s ease-in-out, transform 0.2s ease-in-out;
 `;
 
 class MenuSection extends React.Component {
