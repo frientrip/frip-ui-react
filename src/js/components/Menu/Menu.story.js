@@ -33,7 +33,7 @@ storiesOf('Menu', module)
     <div style={{ width: '300px' }}>
       <MenuSection icon={ControlIcon} label="프립 관리">
         <MenuItem label="That's it!" onClick={action('MenuItem Clicked')} />
-        <MenuItem label="Despacito" />
+        <MenuItem label="Despacito" isSelected />
         <MenuItem label="Que Bonita" />
       </MenuSection>
       <MenuSection icon={HostIcon} label="호스트 관리">

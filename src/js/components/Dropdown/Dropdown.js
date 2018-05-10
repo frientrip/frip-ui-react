@@ -88,7 +88,6 @@ const SelectedOption = styled.div`
   &:active {
     background-color: ${color.lightGrey};
   }
-
 `;
 
 const Options = styled.div`

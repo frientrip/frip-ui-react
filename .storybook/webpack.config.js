@@ -1,10 +1,4 @@
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.svg$/,
-        loader: 'svg-inline-loader'
-      }
-    ]
-  }
-};
+const path = require("path");
+const webpackConfig = require("../webpack.config.js");
+
+module.exports = webpackConfig;

@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import color from '../Color';
 
 const propTypes = {
   label: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 const defaultProps = {
+  isSelected: false,
   onClick: () => {},
 };
 
@@ -20,14 +23,16 @@ const ListItem = styled.li`
   text-align: left;
   list-style-type: none;
   cursor: pointer;
+  background-color: ${({ isSelected }) => (isSelected ? '#f5faff' : color.white)};
+  color: ${({ isSelected }) => (isSelected ? color.primary : color.black)};
 
   &:hover {
     background-color: #f5faff;
   }
 `;
 
-const MenuItem = ({ label, onClick }) => (
-  <ListItem onClick={onClick}>{label}</ListItem>
+const MenuItem = ({ label, isSelected, onClick }) => (
+  <ListItem isSelected={isSelected} onClick={onClick}>{label}</ListItem>
 );
 
 MenuItem.propTypes = propTypes;

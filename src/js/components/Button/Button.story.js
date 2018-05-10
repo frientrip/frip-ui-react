@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Button, { ButtonPrimary, ButtonDanger, ButtonGhost, ButtonGhostPrimary, IconButton } from './Button';
+import { Button, ButtonPrimary, ButtonDanger, ButtonGhost, ButtonGhostPrimary, IconButton } from './Button';
 import DownloadIcon from '../../assets/svgs/ic-download-grey.svg';
 
 storiesOf('Button', module)

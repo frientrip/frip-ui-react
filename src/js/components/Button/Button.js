@@ -87,6 +87,7 @@ const Label = styled.div`
   color: ${({ disabled, labelColor, labelColorDisabled }) => (disabled ? labelColorDisabled : labelColor)};
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   opacity: ${({ isLoading }) => (isLoading ? 0 : '')};
+  user-select: none;
 `;
 
 const SpinnerWrapper = styled.div`
@@ -176,8 +177,6 @@ const Button = ({
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
-export default Button;
-
 const ButtonPrimary = props =>
   (
     <Button
@@ -246,6 +245,7 @@ const IconButton = props =>
   );
 
 export {
+  Button,
   ButtonPrimary,
   ButtonDanger,
   ButtonGhost,
