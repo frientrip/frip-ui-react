@@ -1,0 +1,76 @@
+.rbc-header {
+  font-weight: 300;
+  padding: 8px 16px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.rbc-off-range-bg {
+  background: none;
+}
+
+.rbc-date-cell {
+  text-align: left;
+  font-size: 14px;
+  color: #4a4a4a;
+  font-weight: 300;
+  padding: 4px 8px;
+}
+
+.rbc-off-range {
+  color: #c0c0c0;
+}
+
+.rbc-month-view,
+.rbc-day-bg + .rbc-day-bg,
+.rbc-header + .rbc-header {
+  border-color: #c0c0c0;
+}
+
+.rbc-day-bg {
+  padding: 0 8px;
+}
+
+.rbc-event {
+  font-size: 12px;
+  font-weight: 300;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: #3399ff;
+  margin: 0 8px;
+}
+
+.rbc-event:hover,
+.rbc-event.rbc-selected:hover {
+  background-color: #3789db;
+}
+
+.rbc-event.rbc-selected {
+  background-color: #3399ff;
+}
+
+.rbc-show-more {
+  font-weight: 400;
+  font-size: 12px;
+  margin: 0 8px;
+  color: #3399ff;
+}
+
+.rbc-day-slot .rbc-events-container {
+  right: 18px;
+}
+
+.rbc-day-slot .rbc-event {
+  border: none;
+}
+
+.rbc-current-time-indicator {
+  background-color: #ff6666;
+}
+
+.rbc-today {
+  background-color: #f4f4f4;
+}
+
+.rbc-label {
+  font-size: 14px;
+}
