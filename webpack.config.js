@@ -7,6 +7,19 @@ module.exports = {
     filename: "js/[name].js",
     libraryTarget: "commonjs2"
   },
+  externals: {
+    // STORYBOOK HACK
+    // styled: {
+    //   commonjs: 'styled-components',
+    //   commonjs2: 'styled-components',
+    //   amd: 'styled-components'
+    // }
+    'styled-component': {
+      commonjs: 'styled-components',
+      commonjs2: 'styled-components',
+      amd: 'styled-components'
+    }
+  },
   module: {
     rules: [
       {
