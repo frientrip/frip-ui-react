@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import color from '../Color';
 
 import DeleteIcon from '../../assets/svgs/ic-delete-l-grey.svg';
+import ErrorIcon from '../../assets/svgs/ic-danger-red.svg';
 
 const propTypes = {
   type: PropTypes.string,
@@ -11,6 +12,8 @@ const propTypes = {
   label: PropTypes.string,
   message: PropTypes.string,
   required: PropTypes.bool,
+  error: PropTypes.bool,
+  value: PropTypes.string,
 };
 
 const defaultProps = {
@@ -19,6 +22,8 @@ const defaultProps = {
   label: '',
   message: '',
   required: false,
+  error: false,
+  value: '',
 };
 
 const Wrapper = styled.div`
@@ -42,11 +47,11 @@ const Input = styled.input`
   padding: 0 24px 0 16px;
   font-size: 14px;
   color: ${color.black};
-  border: 1px solid ${color.lightGrey};
+  border: 1px solid ${({ error }) => (error ? color.red : color.lightGrey)};
   transition: border 0.2s;
 
   &:focus {
-    border: 1px solid ${color.primary};
+    border: 1px solid ${({ error }) => (error ? color.red : color.primary)};
     outline: none;
   }
 
@@ -63,19 +68,25 @@ const IconWrapper = styled.div`
   right: 8px;
   top: 8px;
   opacity: 0;
+  user-select: none;
+`;
+
+const IconWrapperVisible = styled(IconWrapper)`
+  opacity: 1;
+  background-color: ${color.white};
 `;
 
 const MessageWrapper = styled.div`
   width: 100%;
   margin-top: 2px;
   font-size: 12px;
-  color: ${color.grey};
+  color: ${({ error }) => (error ? color.red : color.grey)};
   font-weight: 300;
 `;
 
 const LabelWrapper = styled.div`
   position: relative;
-  color: ${color.black};
+  color: ${({ error }) => (error ? color.red : color.black)};
   font-size: 12px;
   font-weight: 600;
   min-height: 18px;
@@ -90,7 +101,7 @@ class InputComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: props.value || '',
     };
 
     this.inputRef = React.createRef();
@@ -98,12 +109,20 @@ class InputComponent extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.resetInput = this.resetInput.bind(this);
   }
+  componentWillReceiveProps({ value }) {
+    this.setState({
+      value,
+    });
+  }
   handleInputChange(e) {
     const val = e.target.value;
 
-    this.setState({
-      value: val,
-    });
+    if (this.props.value === undefined) {
+      this.setState({
+        value: val,
+      });
+    }
+
     this.props.onChange(val, e);
   }
   resetInput() {
@@ -111,6 +130,7 @@ class InputComponent extends React.Component {
     this.setState({
       value: '',
     });
+    this.props.onChange('');
   }
   render() {
     const {
@@ -118,29 +138,37 @@ class InputComponent extends React.Component {
       label,
       required,
       message,
+      error,
     } = this.props;
 
     return (
       <Wrapper>
-        <LabelWrapper>
+        <LabelWrapper error={error}>
           {label}
           {required && <RequiredWrapper> *</RequiredWrapper>}
         </LabelWrapper>
         <InputWrapper>
           <Input
             type={type}
+            error={error}
             onChange={this.handleInputChange}
             value={this.state.value}
             innerRef={this.inputRef}
           />
           {
-            this.state.value && <IconWrapper
+            this.state.value && !error && <IconWrapper
               dangerouslySetInnerHTML={{ __html: DeleteIcon }}
               onClick={this.resetInput}
             />
           }
+          {
+            error && <IconWrapperVisible
+              dangerouslySetInnerHTML={{ __html: ErrorIcon }}
+              onClick={this.resetInput}
+            />
+          }
         </InputWrapper>
-        <MessageWrapper>
+        <MessageWrapper error={error}>
           {message}
         </MessageWrapper>
       </Wrapper>
