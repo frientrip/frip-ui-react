@@ -14,7 +14,7 @@ module.exports = {
     //   commonjs2: 'styled-components',
     //   amd: 'styled-components'
     // }
-    'styled-component': {
+    'styled-components': {
       commonjs: 'styled-components',
       commonjs2: 'styled-components',
       amd: 'styled-components'
