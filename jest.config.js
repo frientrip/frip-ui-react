@@ -68,9 +68,10 @@ module.exports = {
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
-    "ts",
-    "tsx",
-    "js"
+    'ts',
+    'tsx',
+    'js',
+    'json',
   ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
@@ -118,7 +119,9 @@ module.exports = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: [],
+  setupFiles: [
+    '<rootDir>/src/tests/setup.ts',
+  ],
 
   // The path to a module that runs some code to configure or set up the testing framework before each test
   // setupTestFrameworkScriptFile: null,
@@ -141,9 +144,10 @@ module.exports = {
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  // testPathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/lib/',
+  ],
 
   // The regexp pattern Jest uses to detect test files
   // testRegex: "",
