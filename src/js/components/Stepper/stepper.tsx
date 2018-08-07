@@ -29,6 +29,14 @@ export default class Stepper extends React.Component<Props, State> {
     };
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    const newState: State = {
+      ...this.state,
+      ...nextProps,
+    };
+    this.setState(newState);
+  }
+
   render() {
     const listElements: any[] = this.state.totalSteps.map((step: string, index: number) => {
       return (
