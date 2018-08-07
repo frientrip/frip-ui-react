@@ -6,7 +6,7 @@ module.exports = (baseConfig, env) => {
   // For example, add typescript loader:
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
-    loader: require.resolve('awesome-typescript-loader')
+    loader: require.resolve("ts-loader")
   });
   config.resolve.extensions.push('.ts', '.tsx');
   config.externals = {
