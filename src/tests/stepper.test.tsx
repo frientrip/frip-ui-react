@@ -33,3 +33,13 @@ it('현재 step을 변경할 수 있다.', () => {
   wrapper.setProps({ currentStep: 2 });
   expect(wrapper.find('.active').text()).toBe(mockSteps[2]);
 });
+
+it('현재 step 이전 step은 해결됨 상태를 가진다.', () => {
+  // 활성화의 기준은 resolved class로.
+  const ACTIVE_STEP_INDEX = 2;
+  const mockSteps = ['기본 정보 입력', '세부 사항 및 일정', '프립 소개 및 홍보', '추가 옵션'];
+  const wrapper = shallow(<Stepper currentStep={ACTIVE_STEP_INDEX} totalSteps={mockSteps} />);
+  expect(wrapper.find('.resolved').map((element) => {
+    return element.text();
+  })).toEqual(mockSteps.slice(0, ACTIVE_STEP_INDEX));
+});

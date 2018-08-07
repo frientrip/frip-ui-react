@@ -39,10 +39,18 @@ export default class Stepper extends React.Component<Props, State> {
 
   render() {
     const listElements: JSX.Element[] = this.state.totalSteps.map((step: string, index: number) => {
+      let className: string = '';
+
+      if (this.state.currentStep === index) {
+        className = 'active';
+      } else if (this.state.currentStep > index) {
+        className = 'resolved';
+      }
+
       return (
         <li
           key={step}
-          className={index === this.state.currentStep ? 'active' : ''}
+          className={className}
         >
           {step}
         </li>
