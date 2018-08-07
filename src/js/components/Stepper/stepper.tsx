@@ -38,7 +38,7 @@ export default class Stepper extends React.Component<Props, State> {
   }
 
   render() {
-    const listElements: any[] = this.state.totalSteps.map((step: string, index: number) => {
+    const listElements: JSX.Element[] = this.state.totalSteps.map((step: string, index: number) => {
       return (
         <li
           key={step}
