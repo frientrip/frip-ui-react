@@ -10,11 +10,13 @@ const propTypes = {
   icon: PropTypes.node,
   label: PropTypes.string.isRequired,
   children: PropTypes.node,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
   icon: null,
   children: null,
+  onClick: () => {},
 };
 
 const Section = styled.div`
@@ -23,6 +25,11 @@ const Section = styled.div`
   margin: 0;
   color: ${color.black};
   font-weight: 400;
+  border-top: 1px solid ${color.silver};
+
+  &:first-of-type {
+    border: none;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -68,6 +75,7 @@ const Label = styled.div`
   display: inline-block;
   font-size: 18px;
   vertical-align: 5px;
+  user-select: none;
 `;
 
 const MenuUl = styled.ul`
@@ -94,6 +102,7 @@ class MenuSection extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen,
     });
+    this.props.onClick();
   }
   render() {
     const {
@@ -114,14 +123,20 @@ class MenuSection extends React.Component {
             icon && <IconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
           }
           <Label>{label}</Label>
-          <ChevronWrapper
-            dangerouslySetInnerHTML={{ __html: ChevronIcon }}
-            down={this.state.isOpen}
-          />
+          {
+            !!filteredChildren.length &&
+            <ChevronWrapper
+              dangerouslySetInnerHTML={{ __html: ChevronIcon }}
+              down={this.state.isOpen}
+            />
+          }
         </SectionLabelWrapper>
-        <MenuUl isOpen={this.state.isOpen} numItems={filteredChildren.length}>
-          {filteredChildren}
-        </MenuUl>
+        {
+          !!filteredChildren.length &&
+          <MenuUl isOpen={this.state.isOpen} numItems={filteredChildren.length}>
+            {filteredChildren}
+          </MenuUl>
+        }
       </Section>
     );
   }

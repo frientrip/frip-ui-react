@@ -31,6 +31,7 @@ storiesOf('Menu', module)
   ))
   .add('Stacked MenuSections', () => (
     <div style={{ width: '300px' }}>
+      <MenuSection icon={HostIcon} label="홈" />
       <MenuSection icon={ControlIcon} label="프립 관리">
         <MenuItem label="That's it!" onClick={action('MenuItem Clicked')} />
         <MenuItem label="Despacito" isSelected />
