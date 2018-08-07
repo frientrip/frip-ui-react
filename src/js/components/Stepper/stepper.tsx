@@ -18,6 +18,7 @@ interface State {
 
 /**
  * Stepper UI Compoment
+ * currentStep은 0부터 시작
  */
 export default class Stepper extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -29,8 +30,15 @@ export default class Stepper extends React.Component<Props, State> {
   }
 
   render() {
-    const listElements: any[] = this.state.totalSteps.map((step: string) => {
-      return (<li key={step}>{step}</li>);
+    const listElements: any[] = this.state.totalSteps.map((step: string, index: number) => {
+      return (
+        <li
+          key={step}
+          className={index === this.state.currentStep ? 'active' : ''}
+        >
+          {step}
+        </li>
+      );
     });
 
     return (
