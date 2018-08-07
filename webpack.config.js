@@ -17,6 +17,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(ts|tsx)$/,
+        loader: require.resolve('awesome-typescript-loader'),
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -32,5 +36,8 @@ module.exports = {
         use: ["svg-inline-loader"]
       }
     ]
-  }
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', 'jsx'],
+  },
 };
