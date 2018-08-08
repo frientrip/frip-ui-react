@@ -19,7 +19,7 @@ class StepperDemo extends React.Component<{}, {step: number, steps: string[]}> {
   }
 
   onClickNext = () => {
-    if (this.state.step < this.state.steps.length - 1) {
+    if (this.state.step < this.state.steps.length) {
       this.setState({ step: this.state.step + 1 });
     }
   }
@@ -33,8 +33,8 @@ class StepperDemo extends React.Component<{}, {step: number, steps: string[]}> {
       <div>
         <Stepper currentStep={currentIndex} totalSteps={mockSteps} />
         <ButtonPrimary onClick={this.onClickPrevious} labelText="이전" disabled={currentIndex === 0} />
-        <ButtonPrimary onClick={this.onClickNext} labelText="다음" disabled={currentIndex === this.state.steps.length - 1} />
-        {this.state.step}
+        <ButtonPrimary onClick={this.onClickNext} labelText="다음" disabled={currentIndex === this.state.steps.length} />
+        {this.state.step + 1} 단계
       </div>
     );
   }
