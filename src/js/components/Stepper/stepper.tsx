@@ -86,8 +86,8 @@ class Stepper extends React.Component<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     const newState: State = {
-      currentStep: nextProps.currentStep || this.state.currentStep,
-      totalSteps: nextProps.totalSteps || this.state.totalSteps,
+      currentStep: nextProps.currentStep,
+      totalSteps: nextProps.totalSteps,
     };
     this.setState(newState);
   }
