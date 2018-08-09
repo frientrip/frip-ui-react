@@ -6,20 +6,21 @@ import IconCheck from '../../assets/svgs/ic-check-white.svg';
 /**
  * 단일 단계 컴포넌트
  */
-interface StepProps {
+export interface StepProps {
   className?: string;
   children?: React.ReactChild;
   state: string; // resolved | active | disabled
   index: number;
+  title: string;
 }
-const Step = (props: StepProps) => {
+export const Step = (props: StepProps) => {
   const stepIndex = props.state === 'resolved'
     ? (<div className="step-index" dangerouslySetInnerHTML={{ __html: IconCheck }} />)
     : (<div className="step-index">{props.index + 1}</div>);
   return (
     <li className={props.className}>
       {stepIndex}
-      {props.children}
+      <div className="step-title">{props.title}</div>
     </li>
   );
 };
@@ -75,7 +76,7 @@ interface State {
   currentStep: number;
   totalSteps: string[];
 }
-class Stepper extends React.Component<Props, State> {
+export class Stepper extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -107,9 +108,8 @@ class Stepper extends React.Component<Props, State> {
           key={step}
           state={state}
           index={index}
-        >
-          {step}
-        </StyledStep>
+          title={step}
+        />
       );
     });
 

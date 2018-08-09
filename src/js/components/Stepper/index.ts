@@ -1,3 +1,3 @@
-import Stepper from './stepper';
+import StyledStepper from './stepper';
 
-export default Stepper;
+export default StyledStepper;
