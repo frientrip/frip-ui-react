@@ -67,59 +67,37 @@ const StyledStep = styled(Step)`
  * Stepper UI Compoment
  * currentStep은 0부터 시작
  */
-interface Props {
+interface StepperProps {
   className?: string;
   currentStep: number;
   totalSteps: string[];
 }
-interface State {
-  currentStep: number;
-  totalSteps: string[];
-}
-export class Stepper extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      currentStep: props.currentStep,
-      totalSteps: props.totalSteps,
-    };
-  }
+export const Stepper = (props: StepperProps) => {
+  const listElements: JSX.Element[] = props.totalSteps.map((step: string, index: number) => {
+    let state: string = 'disabled';
 
-  componentWillReceiveProps(nextProps: Props) {
-    const newState: State = {
-      currentStep: nextProps.currentStep,
-      totalSteps: nextProps.totalSteps,
-    };
-    this.setState(newState);
-  }
-
-  render() {
-    const listElements: JSX.Element[] = this.state.totalSteps.map((step: string, index: number) => {
-      let state: string = 'disabled';
-
-      if (this.state.currentStep === index) {
-        state = 'active';
-      } else if (this.state.currentStep > index) {
-        state = 'resolved';
-      }
-
-      return (
-        <StyledStep
-          key={step}
-          state={state}
-          index={index}
-          title={step}
-        />
-      );
-    });
+    if (props.currentStep === index) {
+      state = 'active';
+    } else if (props.currentStep > index) {
+      state = 'resolved';
+    }
 
     return (
-      <ol className={this.props.className}>
-        {listElements}
-      </ol>
+      <StyledStep
+        key={step}
+        state={state}
+        index={index}
+        title={step}
+      />
     );
-  }
-}
+  });
+
+  return (
+    <ol className={props.className}>
+      {listElements}
+    </ol>
+  );
+};
 const StyledStepper = styled(Stepper)`
   display: flex;
   justify-content: space-between;
