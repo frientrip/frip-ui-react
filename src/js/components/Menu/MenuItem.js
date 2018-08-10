@@ -25,6 +25,7 @@ const ListItem = styled.li`
   cursor: pointer;
   background-color: ${({ isSelected }) => (isSelected ? '#f5faff' : color.white)};
   color: ${({ isSelected }) => (isSelected ? color.primary : color.black)};
+  user-select: none;
 
   &:hover {
     background-color: #f5faff;
