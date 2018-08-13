@@ -72,7 +72,7 @@ module.exports = {
     'tsx',
     'js',
     'json',
-    '.svg',
+    'svg',
   ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
@@ -143,7 +143,8 @@ module.exports = {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    '**/tests/?(*.)+(spec|test).+(ts|tsx|js)',
+    // '**/tests/?(*.)+(spec|test).+(ts|tsx|js)', // tests 폴더로 정리하는 방식
+    '**/?(*.)+(spec|test).+(ts|tsx|js)', // 각 컴포넌트 폴더 안에 test 파일을 두는 방식
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
