@@ -1,20 +1,17 @@
-// load the default config generator.
-const genDefaultConfig = require('@storybook/react/dist/server/config/defaults/webpack.config.js');
-module.exports = (baseConfig, env) => {
-  const config = genDefaultConfig(baseConfig, env);
-  // Extend it as you need.
-  // For example, add typescript loader:
-  config.module.rules.push({
-    test: /\.(ts|tsx)$/,
-    loader: require.resolve("ts-loader")
-  });
-  config.resolve.extensions.push('.ts', '.tsx');
-  config.externals = {
-    styled: {
-      commonjs: 'styled-components',
-      commonjs2: 'styled-components',
-      amd: 'styled-components'
-    }
-  };
-  return config;
-};
+const path = require("path");
+const webpackConfig = require("../webpack.config.js");
+
+webpackConfig.externals = {
+  styled: {
+    commonjs: 'styled-components',
+    commonjs2: 'styled-components',
+    amd: 'styled-components'
+  },
+  'jsdom': 'window',
+  'cheerio': 'window',
+  'react/lib/ExecutionEnvironment': true,
+  'react/lib/ReactContext': 'window',
+  'react/addons': true,
+}
+
+module.exports = webpackConfig;
