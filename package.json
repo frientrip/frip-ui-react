@@ -5,10 +5,9 @@
   "main": "dist/js/main.js",
   "scripts": {
     "test": "jest",
+    "test-watch": "jest --watch",
     "build": "webpack",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "jest": "jest",
-    "jest-watch": "jest --watch"
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "author": "",
   "license": "ISC",
