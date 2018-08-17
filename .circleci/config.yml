@@ -18,6 +18,8 @@ jobs:
                 key: v1-dependencies-{{ checksum "package.json" }}
             - run: yarn test
             - run: yarn build-storybook
+            - run: mkdir -p builds/frip-ui-react
+            - run: mv -v ./.out/ builds/frip-ui-react/.out
             - persist_to_workspace:
                 root: builds/frip-ui-react
                 paths:
