@@ -7,7 +7,9 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "build": "webpack",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "build-storybook": "build-storybook -c .storybook -o .out",
+    "deploy-storybook": "aws s3 cp .out s3://ui-comp.frip.co.kr/ --recursive --cache-control no-cache --exclude .DS_Store"
   },
   "author": "",
   "license": "ISC",

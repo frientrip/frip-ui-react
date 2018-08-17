@@ -1,0 +1,49 @@
+version: 2
+
+jobs:
+    build_and_test:
+        docker:
+            - image: circleci/node:8.9
+        working_directory: ~/repo/frip-ui-react
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ checksum "package.json" }}
+                    - v1-dependencies-
+            - run: yarn install
+            - save_cache:
+                paths:
+                    - node_modules
+                key: v1-dependencies-{{ checksum "package.json" }}
+            - run: yarn test
+            - run: yarn build-storybook
+            - persist_to_workspace:
+                root: builds/frip-ui-react
+                paths:
+                    - .out
+
+    deploy:
+        docker:
+            - image: circleci/node:8.9
+        working_directory: ~/repo/frip-ui-react
+        steps:
+            - checkout
+            - attach_workspace:
+                at: builds/frip-ui-react
+            - run: mkdir .out
+            - run: mv -v builds/frip-ui-react/.out/ ./
+            - run: npm run deploy-storybook
+
+workflows:
+    version: 2
+    test_and_deploy:
+        jobs:
+            - build_and_test
+            - deploy:
+                requires:
+                    - build_and_test
+                filters:
+                    branches:
+                        only: master
+
