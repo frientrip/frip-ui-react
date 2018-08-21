@@ -9,10 +9,10 @@ export default describe('Step Default', () => {
     expect(wrapper.find('.step-title').text()).toBe(mockTitle);
   });
 
-  it('주어진 index를 표시해야한다.', () => {
+  it('첫 번째 div tag로 주어진 index를 표시해야한다.', () => {
     const index = 2;
     const wrapper = mount(<Step state="disabled" index={index} title="hello" />);
-    expect(wrapper.find('.step-index').text()).toBe((index + 1).toString());
+    expect(wrapper.find('div').first().text()).toBe((index + 1).toString());
   });
 
   // TODO: state에 따라 스타일 제대로 들어가는지 테스트
