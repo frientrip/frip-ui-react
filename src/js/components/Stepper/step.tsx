@@ -17,7 +17,7 @@ interface StepSymbolProps {
  * symbol이 number, string이 아니면 html에 넣을 수 있는 값(svg)으로 간주
  * @param props {StepIndexProps}
  */
-const StepSymbol = styled((props: StepSymbolProps) => {
+export const StepSymbol = styled((props: StepSymbolProps) => {
   return ['number', 'string'].includes(typeof props.symbol)
     ? (<div className={props.className}>{props.symbol}</div>)
     : (<div className={props.className} dangerouslySetInnerHTML={{ __html: props.symbol }} />);
@@ -54,7 +54,7 @@ export const Step = (props: StepProps) => {
   return (
     <li className={props.className}>
       <StepSymbol symbol={props.state === 'resolved' ? IconCheck : props.index + 1} disabled={props.state === 'disabled'} />
-      <div>{props.title}</div>
+      {props.title}
     </li>
   );
 };

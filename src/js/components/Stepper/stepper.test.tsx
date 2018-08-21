@@ -13,9 +13,9 @@ export default describe('stepper Default', () => {
   it('li tag 안에 주어진 단계의 제목들을 모두 표시한다.', () => {
     const mockSteps = ['기본 정보 입력', '세부 사항 및 일정', '프립 소개 및 홍보', '추가 옵션'];
     const wrapper = mount(<Stepper currentStep={1} stepLabels={mockSteps}/>);
-    expect(wrapper.find('li').map((node) => {
-      return node.find('div').last().text();
-    })).toEqual(mockSteps);
+    expect(wrapper.find('li').map((node, index) => {
+      return node.contains(mockSteps[index]);
+    })).toEqual([true, true, true, true]);
   });
 
   it('현재 step을 기준으로 이전 step은 resolved, 이후 step은 disabled 상태를 가진다.', () => {
