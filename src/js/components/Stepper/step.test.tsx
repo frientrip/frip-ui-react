@@ -9,11 +9,11 @@ export default describe('Step Default', () => {
     const wrapper = shallow(<Step state="disabled" index={index} title={mockTitle} />);
 
     // HACK: 제목에서 <Styled(..) />를 제거하고 비교
-    expect(wrapper.text().replace(/<[A-Za-z()]* \/>/g, '')).toEqual(mockTitle);
+    expect(wrapper.contains(mockTitle)).toBe(true);
     wrapper.setProps({ state: 'active' });
-    expect(wrapper.text().replace(/<[A-Za-z()]* \/>/g, '')).toEqual(mockTitle);
+    expect(wrapper.contains(mockTitle)).toBe(true);
     wrapper.setProps({ state: 'resolved' });
-    expect(wrapper.text().replace(/<[A-Za-z()]* \/>/g, '')).toEqual(mockTitle);
+    expect(wrapper.contains(mockTitle)).toBe(true);
   });
 
   it('주어진 index + 1값이나 icon을 표시합니다.', () => {
