@@ -6,10 +6,12 @@ import IconCheck from '../../assets/svgs/ic-check-white.svg';
 /**
  * 단일 단계 컴포넌트
  */
+export type TStepState = 'resolved' | 'active' | 'disabled';
+
 export interface StepProps {
   className?: string;
   children?: React.ReactChild;
-  state: string; // resolved | active | disabled
+  state: TStepState;
   index: number;
   title: string;
 }

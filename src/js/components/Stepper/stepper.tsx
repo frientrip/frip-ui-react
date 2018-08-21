@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import Step from './step';
+import Step, { TStepState } from './step';
 
 /**
  * Stepper UI Compoment
@@ -13,7 +13,7 @@ export interface StepperProps {
 }
 export const Stepper = (props: StepperProps) => {
   const listElements: JSX.Element[] = props.stepLabels.map((step: string, index: number) => {
-    let state: string = 'disabled';
+    let state: TStepState = 'disabled';
 
     if (props.currentStep === index) {
       state = 'active';
