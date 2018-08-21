@@ -10,16 +10,10 @@ export default describe('stepper Default', () => {
    */
   const stepStateMapper: (step: ReactWrapper<StepProps>) => string = step => (step.props() as StepProps).state;
 
-  it('주어진 step만큼의 list가 생성되어야 한다.', () => {
+  it('li tag 안에 주어진 단계의 제목들을 모두 표시한다.', () => {
     const mockSteps = ['기본 정보 입력', '세부 사항 및 일정', '프립 소개 및 홍보', '추가 옵션'];
     const wrapper = mount(<Stepper currentStep={1} totalSteps={mockSteps}/>);
-    expect(wrapper.find('li').length).toEqual(mockSteps.length);
-  });
-
-  it('주어진 제목이 모두 표시된다.', () => {
-    const mockSteps = ['기본 정보 입력', '세부 사항 및 일정', '프립 소개 및 홍보', '추가 옵션'];
-    const wrapper = mount(<Stepper currentStep={1} totalSteps={mockSteps} />);
-    expect(wrapper.find('.step-title').map((node) => {
+    expect(wrapper.find('li').find('.step-title').map((node) => {
       return node.text();
     })).toEqual(mockSteps);
   });
