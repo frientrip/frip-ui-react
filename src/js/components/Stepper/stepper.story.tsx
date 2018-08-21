@@ -41,7 +41,7 @@ class StepperDemo extends React.Component<{}, {step: number, steps: string[]}> {
 
     return (
       <div>
-        <Stepper currentStep={currentIndex} totalSteps={mockSteps} />
+        <Stepper currentStep={currentIndex} stepLabels={mockSteps} />
         <ButtonPrimary onClick={this.onClickPrevious} labelText="이전" disabled={currentIndex === 0} />
         <ButtonPrimary onClick={this.onClickNext} labelText="다음" disabled={currentIndex === this.state.steps.length} />
         {this.state.step + 1} 단계

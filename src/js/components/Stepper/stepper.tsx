@@ -9,10 +9,10 @@ import Step from './step';
 export interface StepperProps {
   className?: string;
   currentStep: number;
-  totalSteps: string[];
+  stepLabels: string[];
 }
 export const Stepper = (props: StepperProps) => {
-  const listElements: JSX.Element[] = props.totalSteps.map((step: string, index: number) => {
+  const listElements: JSX.Element[] = props.stepLabels.map((step: string, index: number) => {
     let state: string = 'disabled';
 
     if (props.currentStep === index) {
