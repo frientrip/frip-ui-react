@@ -8,7 +8,6 @@ export default describe('Step Default', () => {
     const index: number = 1;
     const wrapper = shallow(<Step state="disabled" index={index} title={mockTitle} />);
 
-    // HACK: 제목에서 <Styled(..) />를 제거하고 비교
     expect(wrapper.contains(mockTitle)).toBe(true);
     wrapper.setProps({ state: 'active' });
     expect(wrapper.contains(mockTitle)).toBe(true);
