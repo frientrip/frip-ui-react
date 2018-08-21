@@ -6,7 +6,7 @@ export default describe('Step Default', () => {
   it('주어진 제목을 표시해야한다.', () => {
     const mockTitle: string = 'Hello, World';
     const wrapper = mount(<Step state="disabled" index={1} title={mockTitle} />);
-    expect(wrapper.find('.step-title').text()).toBe(mockTitle);
+    expect(wrapper.find('div').last().text()).toBe(mockTitle);
   });
 
   it('첫 번째 div tag로 주어진 index를 표시해야한다.', () => {
