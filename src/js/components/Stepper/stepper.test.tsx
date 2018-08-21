@@ -13,8 +13,8 @@ export default describe('stepper Default', () => {
   it('li tag 안에 주어진 단계의 제목들을 모두 표시한다.', () => {
     const mockSteps = ['기본 정보 입력', '세부 사항 및 일정', '프립 소개 및 홍보', '추가 옵션'];
     const wrapper = mount(<Stepper currentStep={1} stepLabels={mockSteps}/>);
-    expect(wrapper.find('li').find('.step-title').map((node) => {
-      return node.text();
+    expect(wrapper.find('li').map((node) => {
+      return node.find('div').last().text();
     })).toEqual(mockSteps);
   });
 

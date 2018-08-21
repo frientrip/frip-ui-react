@@ -54,7 +54,7 @@ export const Step = (props: StepProps) => {
   return (
     <li className={props.className}>
       <StepSymbol symbol={props.state === 'resolved' ? IconCheck : props.index + 1} disabled={props.state === 'disabled'} />
-      <div className="step-title">{props.title}</div>
+      <div>{props.title}</div>
     </li>
   );
 };
