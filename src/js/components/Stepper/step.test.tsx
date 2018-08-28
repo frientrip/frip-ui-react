@@ -30,7 +30,7 @@ export default describe('Step Default', () => {
       state: 'resolved',
       index: index + 1,
     });
-    expect(wrapper.find(StepSymbol).text()).toEqual('test-file-stub');
+    expect(wrapper.find(StepSymbol).find('div').prop('dangerouslySetInnerHTML')).toEqual({ __html: 'stub-file' });
   });
 
   // TODO: state에 따라 스타일 제대로 들어가는지 테스트
