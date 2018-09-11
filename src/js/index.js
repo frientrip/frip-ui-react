@@ -5,6 +5,8 @@ import { MenuSection, MenuItem } from './components/Menu';
 import Color from './components/Color';
 import { Form, Input } from './components/Form';
 import Stepper from './components/Stepper/index.ts';
+import { Tabs, Tab } from './components/Tabs';
+import { PageButton, PrevButton, NextButton } from './components/Pagination';
 
 export {
   Button,
@@ -16,4 +18,9 @@ export {
   Form,
   Input,
   Stepper,
+  Tabs,
+  Tab,
+  PageButton,
+  PrevButton,
+  NextButton,
 };
