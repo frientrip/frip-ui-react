@@ -8201,14 +8201,16 @@ var propTypes = {
   activeIndex: _propTypes2.default.number,
   big: _propTypes2.default.bool,
   children: _propTypes2.default.node,
-  onChange: _propTypes2.default.func
+  onChange: _propTypes2.default.func,
+  className: _propTypes2.default.string
 };
 
 var defaultProps = {
   activeIndex: 0,
   big: false,
   children: null,
-  onChange: function onChange() {}
+  onChange: function onChange() {},
+  className: ''
 };
 
 var TabLabel = _styledComponents2.default.div(_templateObject, function (_ref) {
@@ -8274,7 +8276,7 @@ var Tabs = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { className: this.props.className },
         _react2.default.createElement(
           TabLabels,
           null,

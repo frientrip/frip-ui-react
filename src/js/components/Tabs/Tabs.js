@@ -10,6 +10,7 @@ const propTypes = {
   big: PropTypes.bool,
   children: PropTypes.node,
   onChange: PropTypes.func,
+  className: PropTypes.string,
 };
 
 const defaultProps = {
@@ -17,6 +18,7 @@ const defaultProps = {
   big: false,
   children: null,
   onChange: () => {},
+  className: '',
 };
 
 const TabLabel = styled.div`
@@ -71,7 +73,7 @@ class Tabs extends React.Component {
     const tabLabels = filteredChildren.map(({ props: { label } }) => label);
 
     return (
-      <div>
+      <div className={this.props.className}>
         <TabLabels>
           {
             tabLabels.map((label, index) =>
