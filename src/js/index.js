@@ -1,4 +1,4 @@
-import Button from './components/Button';
+import Button, { ButtonPrimary } from './components/Button';
 import Dropdown from './components/Dropdown';
 import List from './components/List';
 import { MenuSection, MenuItem } from './components/Menu';
@@ -10,6 +10,7 @@ import { PageButton, PrevButton, NextButton } from './components/Pagination';
 
 export {
   Button,
+  ButtonPrimary,
   Dropdown,
   List,
   MenuSection,
