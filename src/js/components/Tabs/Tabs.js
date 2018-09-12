@@ -7,7 +7,7 @@ import Tab from './Tab';
 
 const propTypes = {
   activeIndex: PropTypes.number,
-  big: PropTypes.boolean,
+  big: PropTypes.bool,
   children: PropTypes.node,
   onChange: PropTypes.func,
 };

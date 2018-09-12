@@ -8198,7 +8198,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var propTypes = {
   activeIndex: _propTypes2.default.number,
-  big: _propTypes2.default.boolean,
+  big: _propTypes2.default.bool,
   children: _propTypes2.default.node,
   onChange: _propTypes2.default.func
 };
