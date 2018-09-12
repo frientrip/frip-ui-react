@@ -1639,7 +1639,7 @@ module.exports = __webpack_require__(21);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NextButton = exports.PrevButton = exports.PageButton = exports.Tab = exports.Tabs = exports.Stepper = exports.Input = exports.Form = exports.Color = exports.MenuItem = exports.MenuSection = exports.List = exports.Dropdown = exports.ButtonPrimary = exports.Button = undefined;
+exports.NextButton = exports.PrevButton = exports.PageButton = exports.Tab = exports.Tabs = exports.Stepper = exports.Input = exports.Form = exports.Color = exports.MenuItem = exports.MenuSection = exports.List = exports.Dropdown = exports.IconButton = exports.ButtonPrimary = exports.Button = undefined;
 
 var _Button = __webpack_require__(22);
 
@@ -1673,6 +1673,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.Button = _Button2.default;
 exports.ButtonPrimary = _Button.ButtonPrimary;
+exports.IconButton = _Button.IconButton;
 exports.Dropdown = _Dropdown2.default;
 exports.List = _List2.default;
 exports.MenuSection = _Menu.MenuSection;
