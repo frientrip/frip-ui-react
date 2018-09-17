@@ -2,18 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Color from '../Color';
+import leftArrow from '../../assets/svgs/small-prev-black.svg';
+import rightArrow from '../../assets/svgs/small-next-black.svg';
 
 const propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  icon: PropTypes.string,
 };
 
 const defaultProps = {
+  label: null,
   isSelected: false,
   onClick: () => {},
   disabled: false,
+  icon: null,
 };
 
 const Wrapper = styled.div`
@@ -22,23 +27,22 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.div`
-  background-color: ${({ isSelected }) => (isSelected ? 'rgba(192, 192, 192, 0.4)' : Color.white)};
   width: 32px;
   height: 32px;
-  border-radius: 4px;
+  line-height: 24px;
   font-size: 14px;
   padding: 4px 0;
   color: ${Color.black};
+  background-color: white;
   text-align: center;
-  border: 1px solid ${Color.lightGrey};
   cursor: pointer;
   margin: 4px;
   user-select: none;
+  font-weight: ${({ isSelected }) => (isSelected ? 'bold' : 'normal')};
 
   &:hover,
   &:focus {
-    background-color: rgba(51, 153, 255, 0.2);
-    border-color: ${Color.primary}
+    background-color: ${Color.veryLightBlue};
   }
 `;
 
@@ -54,11 +58,19 @@ const Blocker = styled.div`
   z-index: 100;
 `;
 
-const PageButton = ({ label, isSelected, disabled, onClick }) => (
+const IconWrapper = styled.div`
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+`;
+
+const PageButton = ({ label, isSelected, disabled, onClick, icon }) => (
   <Wrapper>
     {disabled && <Blocker />}
     <Button onClick={onClick} isSelected={isSelected}>
-      {label}
+      {icon
+        ? <IconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
+        : label}
     </Button>
   </Wrapper>
 );
@@ -67,10 +79,10 @@ PageButton.propTypes = propTypes;
 PageButton.defaultProps = defaultProps;
 
 const PrevButton = props =>
-  <PageButton {...props} label="《" />;
+  <PageButton {...props} icon={leftArrow} />;
 
 const NextButton = props =>
-  <PageButton {...props} label="》" />;
+  <PageButton {...props} icon={rightArrow} />;
 
 export {
   PageButton,

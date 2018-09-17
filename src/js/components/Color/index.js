@@ -10,6 +10,7 @@ const colors = {
   yellow: '#fed535',
   red: '#ff6666',
   purple: '#a082fa',
+  veryLightBlue: 'rgb(214, 235, 255)',
 };
 
 export default colors;
