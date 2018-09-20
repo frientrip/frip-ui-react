@@ -49,16 +49,10 @@ const TabContent = styled.div`
 class Tabs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      activeIndex: props.activeIndex,
-    };
+
     this.handleTabClick = this.handleTabClick.bind(this);
   }
   handleTabClick(index) {
-    this.setState({
-      activeIndex: index,
-    });
-
     this.props.onChange(index);
   }
   render() {
@@ -82,7 +76,7 @@ class Tabs extends React.Component {
                   key={label}
                   big={big}
                   onClick={() => this.handleTabClick(index)}
-                  isActive={this.state.activeIndex === index}
+                  isActive={this.props.activeIndex === index}
                 >
                   {label}
                 </TabLabel>
@@ -91,7 +85,7 @@ class Tabs extends React.Component {
         </TabLabels>
         <TabContent>
           {
-            filteredChildren[this.state.activeIndex]
+            filteredChildren[this.props.activeIndex]
           }
         </TabContent>
       </div>

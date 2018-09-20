@@ -8267,9 +8267,6 @@ var Tabs = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call(this, props));
 
-    _this.state = {
-      activeIndex: props.activeIndex
-    };
     _this.handleTabClick = _this.handleTabClick.bind(_this);
     return _this;
   }
@@ -8277,10 +8274,6 @@ var Tabs = function (_React$Component) {
   _createClass(Tabs, [{
     key: 'handleTabClick',
     value: function handleTabClick(index) {
-      this.setState({
-        activeIndex: index
-      });
-
       this.props.onChange(index);
     }
   }, {
@@ -8317,7 +8310,7 @@ var Tabs = function (_React$Component) {
                 onClick: function onClick() {
                   return _this2.handleTabClick(index);
                 },
-                isActive: _this2.state.activeIndex === index
+                isActive: _this2.props.activeIndex === index
               },
               label
             );
@@ -8326,7 +8319,7 @@ var Tabs = function (_React$Component) {
         _react2.default.createElement(
           TabContent,
           null,
-          filteredChildren[this.state.activeIndex]
+          filteredChildren[this.props.activeIndex]
         )
       );
     }
