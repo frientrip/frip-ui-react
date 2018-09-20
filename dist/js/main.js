@@ -141,7 +141,8 @@ var colors = {
   green: '#46c8b4',
   yellow: '#fed535',
   red: '#ff6666',
-  purple: '#a082fa'
+  purple: '#a082fa',
+  veryLightBlue: 'rgb(214, 235, 255)'
 };
 
 exports.default = colors;
@@ -1653,19 +1654,19 @@ var _List = __webpack_require__(32);
 
 var _List2 = _interopRequireDefault(_List);
 
-var _Menu = __webpack_require__(46);
+var _Menu = __webpack_require__(48);
 
 var _Color = __webpack_require__(3);
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _Form = __webpack_require__(48);
+var _Form = __webpack_require__(50);
 
-var _index = __webpack_require__(53);
+var _index = __webpack_require__(55);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _Tabs = __webpack_require__(57);
+var _Tabs = __webpack_require__(59);
 
 var _Pagination = __webpack_require__(17);
 
@@ -4466,7 +4467,7 @@ var _ListPagination = __webpack_require__(42);
 
 var _ListPagination2 = _interopRequireDefault(_ListPagination);
 
-__webpack_require__(44);
+__webpack_require__(46);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7261,8 +7262,9 @@ exports.NextButton = exports.PrevButton = exports.PageButton = undefined;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  display: inline-block;\n'], ['\n  position: relative;\n  display: inline-block;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  background-color: ', ';\n  width: 32px;\n  height: 32px;\n  border-radius: 4px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  text-align: center;\n  border: 1px solid ', ';\n  cursor: pointer;\n  margin: 4px;\n  user-select: none;\n\n  &:hover,\n  &:focus {\n    background-color: rgba(51, 153, 255, 0.2);\n    border-color: ', '\n  }\n'], ['\n  background-color: ', ';\n  width: 32px;\n  height: 32px;\n  border-radius: 4px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  text-align: center;\n  border: 1px solid ', ';\n  cursor: pointer;\n  margin: 4px;\n  user-select: none;\n\n  &:hover,\n  &:focus {\n    background-color: rgba(51, 153, 255, 0.2);\n    border-color: ', '\n  }\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n'], ['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  width: 32px;\n  height: 32px;\n  line-height: 24px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  background-color: white;\n  text-align: center;\n  cursor: pointer;\n  margin: 4px;\n  user-select: none;\n  font-weight: ', ';\n\n  &:hover,\n  &:focus {\n    background-color: ', ';\n  }\n'], ['\n  width: 32px;\n  height: 32px;\n  line-height: 24px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  background-color: white;\n  text-align: center;\n  cursor: pointer;\n  margin: 4px;\n  user-select: none;\n  font-weight: ', ';\n\n  &:hover,\n  &:focus {\n    background-color: ', ';\n  }\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n'], ['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -7280,37 +7282,51 @@ var _Color = __webpack_require__(3);
 
 var _Color2 = _interopRequireDefault(_Color);
 
+var _smallPrevBlack = __webpack_require__(44);
+
+var _smallPrevBlack2 = _interopRequireDefault(_smallPrevBlack);
+
+var _smallNextBlack = __webpack_require__(45);
+
+var _smallNextBlack2 = _interopRequireDefault(_smallNextBlack);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var propTypes = {
-  label: _propTypes2.default.string.isRequired,
+  label: _propTypes2.default.string,
   isSelected: _propTypes2.default.bool,
   onClick: _propTypes2.default.func,
-  disabled: _propTypes2.default.bool
+  disabled: _propTypes2.default.bool,
+  icon: _propTypes2.default.string
 };
 
 var defaultProps = {
+  label: null,
   isSelected: false,
   onClick: function onClick() {},
-  disabled: false
+  disabled: false,
+  icon: null
 };
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
 
-var Button = _styledComponents2.default.div(_templateObject2, function (_ref) {
+var Button = _styledComponents2.default.div(_templateObject2, _Color2.default.black, function (_ref) {
   var isSelected = _ref.isSelected;
-  return isSelected ? 'rgba(192, 192, 192, 0.4)' : _Color2.default.white;
-}, _Color2.default.black, _Color2.default.lightGrey, _Color2.default.primary);
+  return isSelected ? 'bold' : 'normal';
+}, _Color2.default.veryLightBlue);
 
 var Blocker = _styledComponents2.default.div(_templateObject3);
+
+var IconWrapper = _styledComponents2.default.div(_templateObject4);
 
 var PageButton = function PageButton(_ref2) {
   var label = _ref2.label,
       isSelected = _ref2.isSelected,
       disabled = _ref2.disabled,
-      onClick = _ref2.onClick;
+      onClick = _ref2.onClick,
+      icon = _ref2.icon;
   return _react2.default.createElement(
     Wrapper,
     null,
@@ -7318,7 +7334,7 @@ var PageButton = function PageButton(_ref2) {
     _react2.default.createElement(
       Button,
       { onClick: onClick, isSelected: isSelected },
-      label
+      icon ? _react2.default.createElement(IconWrapper, { dangerouslySetInnerHTML: { __html: icon } }) : label
     )
   );
 };
@@ -7327,11 +7343,11 @@ PageButton.propTypes = propTypes;
 PageButton.defaultProps = defaultProps;
 
 var PrevButton = function PrevButton(props) {
-  return _react2.default.createElement(PageButton, _extends({}, props, { label: '\u300A' }));
+  return _react2.default.createElement(PageButton, _extends({}, props, { icon: _smallPrevBlack2.default }));
 };
 
 var NextButton = function NextButton(props) {
-  return _react2.default.createElement(PageButton, _extends({}, props, { label: '\u300B' }));
+  return _react2.default.createElement(PageButton, _extends({}, props, { icon: _smallNextBlack2.default }));
 };
 
 exports.PageButton = PageButton;
@@ -7340,10 +7356,22 @@ exports.NextButton = NextButton;
 
 /***/ }),
 /* 44 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" stroke=\"#4A4A4A\" d=\"M13.5 17.45L8.55 12.5l4.95-4.95\"></path></svg>"
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" stroke=\"#4A4A4A\" d=\"M10.5 7.55l4.95 4.95-4.95 4.95\"></path></svg>"
+
+/***/ }),
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(45);
+var content = __webpack_require__(47);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -7389,7 +7417,7 @@ if(false) {
 }
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -7403,7 +7431,7 @@ exports.push([module.i, "\n.ReactTable {\n  border: none;\n}\n\n.ReactTable .rt-
 
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7414,7 +7442,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MenuItem = exports.MenuSection = undefined;
 
-var _MenuSection = __webpack_require__(47);
+var _MenuSection = __webpack_require__(49);
 
 var _MenuSection2 = _interopRequireDefault(_MenuSection);
 
@@ -7428,7 +7456,7 @@ exports.MenuSection = _MenuSection2.default;
 exports.MenuItem = _MenuItem2.default;
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7589,7 +7617,7 @@ MenuSection.defaultProps = defaultProps;
 exports.default = MenuSection;
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7600,11 +7628,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Input = exports.Form = undefined;
 
-var _Form = __webpack_require__(49);
+var _Form = __webpack_require__(51);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _Input = __webpack_require__(50);
+var _Input = __webpack_require__(52);
 
 var _Input2 = _interopRequireDefault(_Input);
 
@@ -7614,7 +7642,7 @@ exports.Form = _Form2.default;
 exports.Input = _Input2.default;
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7793,7 +7821,7 @@ Form.defaultProps = defaultProps;
 exports.default = Form;
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7830,11 +7858,11 @@ var _Color = __webpack_require__(3);
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _icDeleteLGrey = __webpack_require__(51);
+var _icDeleteLGrey = __webpack_require__(53);
 
 var _icDeleteLGrey2 = _interopRequireDefault(_icDeleteLGrey);
 
-var _icDangerRed = __webpack_require__(52);
+var _icDangerRed = __webpack_require__(54);
 
 var _icDangerRed2 = _interopRequireDefault(_icDangerRed);
 
@@ -8007,19 +8035,19 @@ InputComponent.defaultProps = defaultProps;
 exports.default = InputComponent;
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\"><g fill=\"none\" fill-rule=\"evenodd\"><circle cx=\"8\" cy=\"8\" r=\"7.5\" fill=\"#C0C0C0\"></circle><path stroke=\"#FFF\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5.172 5.172l5.656 5.656M5.172 10.828l5.656-5.656\"></path></g></svg>"
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports) {
 
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\"><g fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(0 -1)\"><circle cx=\"8\" cy=\"9\" r=\"7.5\" stroke=\"#F66\"></circle><text fill=\"#F66\" font-family=\"SpoqaHanSans-Bold, SpoqaHanSans\" font-size=\"12\" font-weight=\"bold\"><tspan x=\"5.78\" y=\"14\">!</tspan></text></g></svg>"
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8028,12 +8056,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var stepper_1 = __importDefault(__webpack_require__(54));
+var stepper_1 = __importDefault(__webpack_require__(56));
 exports.default = stepper_1.default;
 
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8055,7 +8083,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(__webpack_require__(0));
 var styled_components_1 = __importDefault(__webpack_require__(2));
-var step_1 = __importDefault(__webpack_require__(55));
+var step_1 = __importDefault(__webpack_require__(57));
 exports.Stepper = function (props) {
     var listElements = props.stepLabels.map(function (step, index) {
         var state = 'disabled';
@@ -8075,7 +8103,7 @@ var templateObject_1;
 
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8098,7 +8126,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(__webpack_require__(0));
 var styled_components_1 = __importDefault(__webpack_require__(2));
 var Color_1 = __importDefault(__webpack_require__(3));
-var ic_check_white_svg_1 = __importDefault(__webpack_require__(56));
+var ic_check_white_svg_1 = __importDefault(__webpack_require__(58));
 /**
  * 각 step의 Symbol symbol prop으로 표시할 값을 넘긴다.
  * symbol이 number 이면 index, string이면 html에 넣을 수 있는 값(svg)으로 간주
@@ -8120,13 +8148,13 @@ var templateObject_1, templateObject_2;
 
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports) {
 
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" stroke=\"#FFF\" stroke-linecap=\"round\" d=\"M4 10.69l7 6L20.183 7\"></path></svg>"
 
 /***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8137,7 +8165,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Tab = exports.Tabs = undefined;
 
-var _Tabs = __webpack_require__(58);
+var _Tabs = __webpack_require__(60);
 
 var _Tabs2 = _interopRequireDefault(_Tabs);
 
@@ -8151,7 +8179,7 @@ exports.Tabs = _Tabs2.default;
 exports.Tab = _Tab2.default;
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
