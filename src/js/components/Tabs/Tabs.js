@@ -11,6 +11,7 @@ const propTypes = {
   children: PropTypes.node,
   onChange: PropTypes.func,
   className: PropTypes.string,
+  justified: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -19,9 +20,11 @@ const defaultProps = {
   children: null,
   onChange: () => {},
   className: '',
+  justified: false,
 };
 
 const TabLabel = styled.div`
+  ${({ justified }) => (justified ? 'flex-basis: 100%;' : '')}
   display: inline-block;
   font-size: ${({ big }) => (big ? '18px' : '14px')};
   padding: 12px 16px;
@@ -29,6 +32,7 @@ const TabLabel = styled.div`
   border-color: ${color.primary};
   border-bottom: ${({ isActive }) => (isActive ? '1px solid' : 'none')};
   font-weight: 400;
+  text-align: center;
   cursor: pointer;
   transition: color 0.2s;
 
@@ -38,6 +42,7 @@ const TabLabel = styled.div`
 `;
 
 const TabLabels = styled.div`
+  display: flex;
   overflow-x: auto;
   white-space: nowrap;
   margin-bottom: 10px;
@@ -74,6 +79,7 @@ class Tabs extends React.Component {
               (
                 <TabLabel
                   key={label}
+                  justified={this.props.justified}
                   big={big}
                   onClick={() => this.handleTabClick(index)}
                   isActive={this.props.activeIndex === index}

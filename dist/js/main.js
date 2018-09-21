@@ -8191,8 +8191,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n'], ['\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n'], ['\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  ', '\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  text-align: center;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n'], ['\n  ', '\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  text-align: center;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  display: flex;\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n'], ['\n  display: flex;\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n'], ['\n']);
 
 var _react = __webpack_require__(0);
@@ -8230,7 +8230,8 @@ var propTypes = {
   big: _propTypes2.default.bool,
   children: _propTypes2.default.node,
   onChange: _propTypes2.default.func,
-  className: _propTypes2.default.string
+  className: _propTypes2.default.string,
+  justified: _propTypes2.default.bool
 };
 
 var defaultProps = {
@@ -8238,20 +8239,24 @@ var defaultProps = {
   big: false,
   children: null,
   onChange: function onChange() {},
-  className: ''
+  className: '',
+  justified: false
 };
 
 var TabLabel = _styledComponents2.default.div(_templateObject, function (_ref) {
-  var big = _ref.big;
-  return big ? '18px' : '14px';
+  var justified = _ref.justified;
+  return justified ? 'flex-basis: 100%;' : '';
 }, function (_ref2) {
-  var isActive = _ref2.isActive;
-  return isActive ? _Color2.default.primary : _Color2.default.grey;
-}, _Color2.default.primary, function (_ref3) {
+  var big = _ref2.big;
+  return big ? '18px' : '14px';
+}, function (_ref3) {
   var isActive = _ref3.isActive;
-  return isActive ? '1px solid' : 'none';
-}, function (_ref4) {
+  return isActive ? _Color2.default.primary : _Color2.default.grey;
+}, _Color2.default.primary, function (_ref4) {
   var isActive = _ref4.isActive;
+  return isActive ? '1px solid' : 'none';
+}, function (_ref5) {
+  var isActive = _ref5.isActive;
   return isActive ? _Color2.default.primary : _Color2.default.black;
 });
 
@@ -8290,8 +8295,8 @@ var Tabs = function (_React$Component) {
         return node.type && node.type.displayName === _Tab2.default.displayName;
       });
 
-      var tabLabels = filteredChildren.map(function (_ref5) {
-        var label = _ref5.props.label;
+      var tabLabels = filteredChildren.map(function (_ref6) {
+        var label = _ref6.props.label;
         return label;
       });
 
@@ -8306,6 +8311,7 @@ var Tabs = function (_React$Component) {
               TabLabel,
               {
                 key: label,
+                justified: _this2.props.justified,
                 big: big,
                 onClick: function onClick() {
                   return _this2.handleTabClick(index);
