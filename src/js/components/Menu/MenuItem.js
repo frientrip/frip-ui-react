@@ -7,10 +7,12 @@ const propTypes = {
   label: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 const defaultProps = {
   isSelected: false,
+  isMobile: false,
   onClick: () => {},
 };
 
@@ -18,7 +20,7 @@ const ListItem = styled.li`
   width: 100%;
   height: 40px;
   margin: 0;
-  padding: 8px 8px 8px 56px;
+  padding: 8px 8px 8px ${({ isMobile }) => (isMobile ? '56px' : '48px')};
   line-height: 24px;
   text-align: left;
   list-style-type: none;
@@ -32,8 +34,8 @@ const ListItem = styled.li`
   }
 `;
 
-const MenuItem = ({ label, isSelected, onClick }) => (
-  <ListItem isSelected={isSelected} onClick={onClick}>{label}</ListItem>
+const MenuItem = ({ label, isSelected, onClick, isMobile }) => (
+  <ListItem isMobile={isMobile} isSelected={isSelected} onClick={onClick}>{label}</ListItem>
 );
 
 MenuItem.propTypes = propTypes;

@@ -40,7 +40,7 @@ const IconWrapper = styled.div`
   display: inline-block;
   width: 24px;
   height: 24px;
-  margin-right: 8px;
+  margin-right: ${({ isMobile }) => (isMobile ? '16px' : '8px')};
   overflow: hidden;
   z-index: 2;
 `;

@@ -1509,7 +1509,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px 56px;\n  line-height: 24px;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px 56px;\n  line-height: 24px;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px ', ';\n  line-height: 24px;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px ', ';\n  line-height: 24px;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -1534,29 +1534,35 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var propTypes = {
   label: _propTypes2.default.string.isRequired,
   isSelected: _propTypes2.default.bool,
-  onClick: _propTypes2.default.func
+  onClick: _propTypes2.default.func,
+  isMobile: _propTypes2.default.bool
 };
 
 var defaultProps = {
   isSelected: false,
+  isMobile: false,
   onClick: function onClick() {}
 };
 
 var ListItem = _styledComponents2.default.li(_templateObject, function (_ref) {
-  var isSelected = _ref.isSelected;
-  return isSelected ? '#f5faff' : _Color2.default.white;
+  var isMobile = _ref.isMobile;
+  return isMobile ? '56px' : '48px';
 }, function (_ref2) {
   var isSelected = _ref2.isSelected;
+  return isSelected ? '#f5faff' : _Color2.default.white;
+}, function (_ref3) {
+  var isSelected = _ref3.isSelected;
   return isSelected ? _Color2.default.primary : _Color2.default.black;
 });
 
-var MenuItem = function MenuItem(_ref3) {
-  var label = _ref3.label,
-      isSelected = _ref3.isSelected,
-      onClick = _ref3.onClick;
+var MenuItem = function MenuItem(_ref4) {
+  var label = _ref4.label,
+      isSelected = _ref4.isSelected,
+      onClick = _ref4.onClick,
+      isMobile = _ref4.isMobile;
   return _react2.default.createElement(
     ListItem,
-    { isSelected: isSelected, onClick: onClick },
+    { isMobile: isMobile, isSelected: isSelected, onClick: onClick },
     label
   );
 };
@@ -7474,7 +7480,7 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  display: block;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-weight: 400;\n  border-top: 1px solid ', ';\n\n  &:first-of-type {\n    border: none;\n  }\n'], ['\n  position: relative;\n  display: block;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-weight: 400;\n  border-top: 1px solid ', ';\n\n  &:first-of-type {\n    border: none;\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: 8px;\n  overflow: hidden;\n  z-index: 2;\n'], ['\n  ', '\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: 8px;\n  overflow: hidden;\n  z-index: 2;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: ', ';\n  overflow: hidden;\n  z-index: 2;\n'], ['\n  ', '\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: ', ';\n  overflow: hidden;\n  z-index: 2;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: absolute;\n  width: 24px;\n  height: 24px;\n  top: 16px;\n  right: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n'], ['\n  display: inline-block;\n  position: absolute;\n  width: 24px;\n  height: 24px;\n  top: 16px;\n  right: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  position: relative;\n  padding: 16px;\n  width: 100%;\n  height: 56px;\n  background-color: white;\n  transition: background-color 0.4s;\n  cursor: pointer;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  position: relative;\n  padding: 16px;\n  width: 100%;\n  height: 56px;\n  background-color: white;\n  transition: background-color 0.4s;\n  cursor: pointer;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  display: inline-block;\n  font-size: 18px;\n  vertical-align: 5px;\n  user-select: none;\n'], ['\n  display: inline-block;\n  font-size: 18px;\n  vertical-align: 5px;\n  user-select: none;\n']),
@@ -7534,10 +7540,13 @@ var Section = _styledComponents2.default.div(_templateObject, _Color2.default.bl
 var IconWrapper = _styledComponents2.default.div(_templateObject2, function (_ref) {
   var isMobile = _ref.isMobile;
   return isMobile ? 'position: absolute; top:8px;left:16px;' : '';
+}, function (_ref2) {
+  var isMobile = _ref2.isMobile;
+  return isMobile ? '16px' : '8px';
 });
 
-var ChevronWrapper = _styledComponents2.default.div(_templateObject3, function (_ref2) {
-  var down = _ref2.down;
+var ChevronWrapper = _styledComponents2.default.div(_templateObject3, function (_ref3) {
+  var down = _ref3.down;
   return down ? 'rotate(0)' : 'rotate(90deg)';
 });
 
@@ -7545,18 +7554,18 @@ var SectionLabelWrapper = _styledComponents2.default.div(_templateObject4);
 
 var Label = _styledComponents2.default.div(_templateObject5);
 
-var MenuUl = _styledComponents2.default.ul(_templateObject6, function (_ref3) {
-  var isMobile = _ref3.isMobile;
+var MenuUl = _styledComponents2.default.ul(_templateObject6, function (_ref4) {
+  var isMobile = _ref4.isMobile;
   return isMobile ? 'padding-left: 48px;' : '';
-}, function (_ref4) {
-  var isOpen = _ref4.isOpen,
-      numItems = _ref4.numItems;
-  return isOpen ? numItems * 40 + 'px' : '0';
 }, function (_ref5) {
-  var isOpen = _ref5.isOpen;
-  return isOpen ? 'translateY(0) scale(1,1)' : 'translateY(-5px) scale(1,0)';
+  var isOpen = _ref5.isOpen,
+      numItems = _ref5.numItems;
+  return isOpen ? numItems * 40 + 'px' : '0';
 }, function (_ref6) {
-  var isMobile = _ref6.isMobile;
+  var isOpen = _ref6.isOpen;
+  return isOpen ? 'translateY(0) scale(1,1)' : 'translateY(-5px) scale(1,0)';
+}, function (_ref7) {
+  var isMobile = _ref7.isMobile;
   return isMobile ? 'padding-left: 8px;' : '';
 });
 
