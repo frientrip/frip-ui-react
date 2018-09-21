@@ -7262,9 +7262,8 @@ exports.NextButton = exports.PrevButton = exports.PageButton = undefined;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  display: inline-block;\n'], ['\n  position: relative;\n  display: inline-block;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  width: 32px;\n  height: 32px;\n  line-height: 24px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  background-color: white;\n  text-align: center;\n  cursor: pointer;\n  margin: 4px;\n  user-select: none;\n  font-weight: ', ';\n\n  &:hover,\n  &:focus {\n    background-color: ', ';\n  }\n'], ['\n  width: 32px;\n  height: 32px;\n  line-height: 24px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  background-color: white;\n  text-align: center;\n  cursor: pointer;\n  margin: 4px;\n  user-select: none;\n  font-weight: ', ';\n\n  &:hover,\n  &:focus {\n    background-color: ', ';\n  }\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n'], ['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  width: 32px;\n  height: 32px;\n  line-height: 24px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  background-color: white;\n  text-align: center;\n  cursor: ', ';\n  margin: 4px;\n  user-select: none;\n  font-weight: ', ';\n\n  &:hover,\n  &:focus {\n    background-color: ', ';\n  }\n'], ['\n  width: 32px;\n  height: 32px;\n  line-height: 24px;\n  font-size: 14px;\n  padding: 4px 0;\n  color: ', ';\n  background-color: white;\n  text-align: center;\n  cursor: ', ';\n  margin: 4px;\n  user-select: none;\n  font-weight: ', ';\n\n  &:hover,\n  &:focus {\n    background-color: ', ';\n  }\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n\n  color: ', ';\n\n  svg {\n    stroke: currentColor;\n  }\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n\n  color: ', ';\n\n  svg {\n    stroke: currentColor;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -7282,13 +7281,13 @@ var _Color = __webpack_require__(3);
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _smallPrevBlack = __webpack_require__(44);
+var _smallPrev = __webpack_require__(44);
 
-var _smallPrevBlack2 = _interopRequireDefault(_smallPrevBlack);
+var _smallPrev2 = _interopRequireDefault(_smallPrev);
 
-var _smallNextBlack = __webpack_require__(45);
+var _smallNext = __webpack_require__(45);
 
-var _smallNextBlack2 = _interopRequireDefault(_smallNextBlack);
+var _smallNext2 = _interopRequireDefault(_smallNext);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7313,28 +7312,34 @@ var defaultProps = {
 var Wrapper = _styledComponents2.default.div(_templateObject);
 
 var Button = _styledComponents2.default.div(_templateObject2, _Color2.default.black, function (_ref) {
-  var isSelected = _ref.isSelected;
+  var disabled = _ref.disabled;
+  return disabled ? 'not-allowed' : 'pointer';
+}, function (_ref2) {
+  var isSelected = _ref2.isSelected;
   return isSelected ? 'bold' : 'normal';
-}, _Color2.default.veryLightBlue);
+}, function (_ref3) {
+  var disabled = _ref3.disabled;
+  return disabled ? 'white' : _Color2.default.veryLightBlue;
+});
 
-var Blocker = _styledComponents2.default.div(_templateObject3);
+var IconWrapper = _styledComponents2.default.div(_templateObject3, function (_ref4) {
+  var disabled = _ref4.disabled;
+  return disabled ? '#e6e6e6' : '#4a4a4a';
+});
 
-var IconWrapper = _styledComponents2.default.div(_templateObject4);
-
-var PageButton = function PageButton(_ref2) {
-  var label = _ref2.label,
-      isSelected = _ref2.isSelected,
-      disabled = _ref2.disabled,
-      onClick = _ref2.onClick,
-      icon = _ref2.icon;
+var PageButton = function PageButton(_ref5) {
+  var label = _ref5.label,
+      isSelected = _ref5.isSelected,
+      disabled = _ref5.disabled,
+      onClick = _ref5.onClick,
+      icon = _ref5.icon;
   return _react2.default.createElement(
     Wrapper,
     null,
-    disabled && _react2.default.createElement(Blocker, null),
     _react2.default.createElement(
       Button,
-      { onClick: onClick, isSelected: isSelected },
-      icon ? _react2.default.createElement(IconWrapper, { dangerouslySetInnerHTML: { __html: icon } }) : label
+      { onClick: onClick, isSelected: isSelected, disabled: disabled },
+      icon ? _react2.default.createElement(IconWrapper, { disabled: disabled, dangerouslySetInnerHTML: { __html: icon } }) : label
     )
   );
 };
@@ -7343,11 +7348,11 @@ PageButton.propTypes = propTypes;
 PageButton.defaultProps = defaultProps;
 
 var PrevButton = function PrevButton(props) {
-  return _react2.default.createElement(PageButton, _extends({}, props, { icon: _smallPrevBlack2.default }));
+  return _react2.default.createElement(PageButton, _extends({}, props, { icon: _smallPrev2.default }));
 };
 
 var NextButton = function NextButton(props) {
-  return _react2.default.createElement(PageButton, _extends({}, props, { icon: _smallNextBlack2.default }));
+  return _react2.default.createElement(PageButton, _extends({}, props, { icon: _smallNext2.default }));
 };
 
 exports.PageButton = PageButton;
@@ -7358,13 +7363,13 @@ exports.NextButton = NextButton;
 /* 44 */
 /***/ (function(module, exports) {
 
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" stroke=\"#4A4A4A\" d=\"M13.5 17.45L8.55 12.5l4.95-4.95\"></path></svg>"
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" d=\"M13.5 17.45L8.55 12.5l4.95-4.95\"></path></svg>"
 
 /***/ }),
 /* 45 */
 /***/ (function(module, exports) {
 
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" stroke=\"#4A4A4A\" d=\"M10.5 7.55l4.95 4.95-4.95 4.95\"></path></svg>"
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" d=\"M10.5 7.55l4.95 4.95-4.95 4.95\"></path></svg>"
 
 /***/ }),
 /* 46 */
@@ -7564,7 +7569,7 @@ var MenuSection = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MenuSection.__proto__ || Object.getPrototypeOf(MenuSection)).call(this, props));
 
     _this.state = {
-      isOpen: props.isMobile
+      isOpen: false
     };
     _this.handleButtonClick = _this.handleButtonClick.bind(_this);
     return _this;
@@ -7617,7 +7622,7 @@ var MenuSection = function (_React$Component) {
           MenuUl,
           {
             isMobile: this.props.isMobile,
-            isOpen: this.state.isOpen,
+            isOpen: this.state.isOpen || this.props.isMobile,
             numItems: filteredChildren.length
           },
           filteredChildren
