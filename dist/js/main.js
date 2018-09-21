@@ -7468,12 +7468,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: block;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-weight: 400;\n  border-top: 1px solid ', ';\n\n  &:first-of-type {\n    border: none;\n  }\n'], ['\n  display: block;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-weight: 400;\n  border-top: 1px solid ', ';\n\n  &:first-of-type {\n    border: none;\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: 8px;\n  overflow: hidden;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: 8px;\n  overflow: hidden;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  display: block;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-weight: 400;\n  border-top: 1px solid ', ';\n\n  &:first-of-type {\n    border: none;\n  }\n'], ['\n  position: relative;\n  display: block;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-weight: 400;\n  border-top: 1px solid ', ';\n\n  &:first-of-type {\n    border: none;\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: 8px;\n  overflow: hidden;\n  z-index: 2;\n'], ['\n  ', '\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  margin-right: 8px;\n  overflow: hidden;\n  z-index: 2;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: absolute;\n  width: 24px;\n  height: 24px;\n  top: 16px;\n  right: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n'], ['\n  display: inline-block;\n  position: absolute;\n  width: 24px;\n  height: 24px;\n  top: 16px;\n  right: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  position: relative;\n  padding: 16px;\n  width: 100%;\n  height: 56px;\n  background-color: white;\n  transition: background-color 0.4s;\n  cursor: pointer;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  position: relative;\n  padding: 16px;\n  width: 100%;\n  height: 56px;\n  background-color: white;\n  transition: background-color 0.4s;\n  cursor: pointer;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  display: inline-block;\n  font-size: 18px;\n  vertical-align: 5px;\n  user-select: none;\n'], ['\n  display: inline-block;\n  font-size: 18px;\n  vertical-align: 5px;\n  user-select: none;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  display: block;\n  overflow: hidden;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  height: ', ';\n  transform-origin: left top;\n  transform: ', ';\n  transition: height 0.2s ease-in-out, transform 0.2s ease-in-out;\n'], ['\n  display: block;\n  overflow: hidden;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  height: ', ';\n  transform-origin: left top;\n  transform: ', ';\n  transition: height 0.2s ease-in-out, transform 0.2s ease-in-out;\n']);
+    _templateObject6 = _taggedTemplateLiteral(['\n  display: block;\n  overflow: hidden;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  ', '\n  height: ', ';\n  transform-origin: left top;\n  transform: ', ';\n  transition: height 0.2s ease-in-out, transform 0.2s ease-in-out;\n\n  >li {\n    ', '\n  }\n'], ['\n  display: block;\n  overflow: hidden;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  ', '\n  height: ', ';\n  transform-origin: left top;\n  transform: ', ';\n  transition: height 0.2s ease-in-out, transform 0.2s ease-in-out;\n\n  >li {\n    ', '\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -7513,21 +7513,26 @@ var propTypes = {
   icon: _propTypes2.default.node,
   label: _propTypes2.default.string.isRequired,
   children: _propTypes2.default.node,
-  onClick: _propTypes2.default.func
+  onClick: _propTypes2.default.func,
+  isMobile: _propTypes2.default.bool
 };
 
 var defaultProps = {
   icon: null,
   children: null,
-  onClick: function onClick() {}
+  onClick: function onClick() {},
+  isMobile: false
 };
 
 var Section = _styledComponents2.default.div(_templateObject, _Color2.default.black, _Color2.default.silver);
 
-var IconWrapper = _styledComponents2.default.div(_templateObject2);
+var IconWrapper = _styledComponents2.default.div(_templateObject2, function (_ref) {
+  var isMobile = _ref.isMobile;
+  return isMobile ? 'position: absolute; top:8px;left:16px;' : '';
+});
 
-var ChevronWrapper = _styledComponents2.default.div(_templateObject3, function (_ref) {
-  var down = _ref.down;
+var ChevronWrapper = _styledComponents2.default.div(_templateObject3, function (_ref2) {
+  var down = _ref2.down;
   return down ? 'rotate(0)' : 'rotate(90deg)';
 });
 
@@ -7535,13 +7540,19 @@ var SectionLabelWrapper = _styledComponents2.default.div(_templateObject4);
 
 var Label = _styledComponents2.default.div(_templateObject5);
 
-var MenuUl = _styledComponents2.default.ul(_templateObject6, function (_ref2) {
-  var isOpen = _ref2.isOpen,
-      numItems = _ref2.numItems;
+var MenuUl = _styledComponents2.default.ul(_templateObject6, function (_ref3) {
+  var isMobile = _ref3.isMobile;
+  return isMobile ? 'padding-left: 48px;' : '';
+}, function (_ref4) {
+  var isOpen = _ref4.isOpen,
+      numItems = _ref4.numItems;
   return isOpen ? numItems * 40 + 'px' : '0';
-}, function (_ref3) {
-  var isOpen = _ref3.isOpen;
+}, function (_ref5) {
+  var isOpen = _ref5.isOpen;
   return isOpen ? 'translateY(0) scale(1,1)' : 'translateY(-5px) scale(1,0)';
+}, function (_ref6) {
+  var isMobile = _ref6.isMobile;
+  return isMobile ? 'padding-left: 8px;' : '';
 });
 
 var MenuSection = function (_React$Component) {
@@ -7553,7 +7564,7 @@ var MenuSection = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MenuSection.__proto__ || Object.getPrototypeOf(MenuSection)).call(this, props));
 
     _this.state = {
-      isOpen: false
+      isOpen: props.isMobile
     };
     _this.handleButtonClick = _this.handleButtonClick.bind(_this);
     return _this;
@@ -7583,7 +7594,10 @@ var MenuSection = function (_React$Component) {
       return _react2.default.createElement(
         Section,
         null,
-        _react2.default.createElement(
+        this.props.isMobile ? icon && _react2.default.createElement(IconWrapper, {
+          isMobile: this.props.isMobile,
+          dangerouslySetInnerHTML: { __html: icon }
+        }) : _react2.default.createElement(
           SectionLabelWrapper,
           {
             onClick: this.handleButtonClick
@@ -7601,7 +7615,11 @@ var MenuSection = function (_React$Component) {
         ),
         !!filteredChildren.length && _react2.default.createElement(
           MenuUl,
-          { isOpen: this.state.isOpen, numItems: filteredChildren.length },
+          {
+            isMobile: this.props.isMobile,
+            isOpen: this.state.isOpen,
+            numItems: filteredChildren.length
+          },
           filteredChildren
         )
       );
