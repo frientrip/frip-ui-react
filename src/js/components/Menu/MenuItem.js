@@ -18,8 +18,8 @@ const ListItem = styled.li`
   width: 100%;
   height: 40px;
   margin: 0;
-  padding: 8px 8px 8px 48px;
-  font-weight: 300;
+  padding: 8px 8px 8px 56px;
+  line-height: 24px;
   text-align: left;
   list-style-type: none;
   cursor: pointer;

@@ -1509,7 +1509,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px 48px;\n  font-weight: 300;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px 48px;\n  font-weight: 300;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px 56px;\n  line-height: 24px;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  width: 100%;\n  height: 40px;\n  margin: 0;\n  padding: 8px 8px 8px 56px;\n  line-height: 24px;\n  text-align: left;\n  list-style-type: none;\n  cursor: pointer;\n  background-color: ', ';\n  color: ', ';\n  user-select: none;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
