@@ -7,9 +7,11 @@ import Tab from './Tab';
 
 const propTypes = {
   activeIndex: PropTypes.number,
-  big: PropTypes.boolean,
+  big: PropTypes.bool,
   children: PropTypes.node,
   onChange: PropTypes.func,
+  className: PropTypes.string,
+  justified: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -17,9 +19,12 @@ const defaultProps = {
   big: false,
   children: null,
   onChange: () => {},
+  className: '',
+  justified: false,
 };
 
 const TabLabel = styled.div`
+  ${({ justified }) => (justified ? 'flex-basis: 100%;' : '')}
   display: inline-block;
   font-size: ${({ big }) => (big ? '18px' : '14px')};
   padding: 12px 16px;
@@ -27,6 +32,7 @@ const TabLabel = styled.div`
   border-color: ${color.primary};
   border-bottom: ${({ isActive }) => (isActive ? '1px solid' : 'none')};
   font-weight: 400;
+  text-align: center;
   cursor: pointer;
   transition: color 0.2s;
 
@@ -36,6 +42,7 @@ const TabLabel = styled.div`
 `;
 
 const TabLabels = styled.div`
+  display: flex;
   overflow-x: auto;
   white-space: nowrap;
   margin-bottom: 10px;
@@ -47,16 +54,10 @@ const TabContent = styled.div`
 class Tabs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      activeIndex: props.activeIndex,
-    };
+
     this.handleTabClick = this.handleTabClick.bind(this);
   }
   handleTabClick(index) {
-    this.setState({
-      activeIndex: index,
-    });
-
     this.props.onChange(index);
   }
   render() {
@@ -71,16 +72,17 @@ class Tabs extends React.Component {
     const tabLabels = filteredChildren.map(({ props: { label } }) => label);
 
     return (
-      <div>
+      <div className={this.props.className}>
         <TabLabels>
           {
             tabLabels.map((label, index) =>
               (
                 <TabLabel
                   key={label}
+                  justified={this.props.justified}
                   big={big}
                   onClick={() => this.handleTabClick(index)}
-                  isActive={this.state.activeIndex === index}
+                  isActive={this.props.activeIndex === index}
                 >
                   {label}
                 </TabLabel>
@@ -89,7 +91,7 @@ class Tabs extends React.Component {
         </TabLabels>
         <TabContent>
           {
-            filteredChildren[this.state.activeIndex]
+            filteredChildren[this.props.activeIndex]
           }
         </TabContent>
       </div>

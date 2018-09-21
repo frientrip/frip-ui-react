@@ -11,15 +11,18 @@ const propTypes = {
   label: PropTypes.string.isRequired,
   children: PropTypes.node,
   onClick: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 const defaultProps = {
   icon: null,
   children: null,
   onClick: () => {},
+  isMobile: false,
 };
 
 const Section = styled.div`
+  position: relative;
   display: block;
   width: 100%;
   margin: 0;
@@ -33,11 +36,13 @@ const Section = styled.div`
 `;
 
 const IconWrapper = styled.div`
+  ${({ isMobile }) => (isMobile ? 'position: absolute; top:8px;left:16px;' : '')}
   display: inline-block;
   width: 24px;
   height: 24px;
   margin-right: 8px;
   overflow: hidden;
+  z-index: 2;
 `;
 
 const ChevronWrapper = styled.div`
@@ -84,17 +89,22 @@ const MenuUl = styled.ul`
   width: 100%;
   margin: 0;
   padding: 0;
+  ${({ isMobile }) => (isMobile ? 'padding-left: 48px;' : '')}
   height: ${({ isOpen, numItems }) => (isOpen ? `${numItems * 40}px` : '0')};
   transform-origin: left top;
   transform: ${({ isOpen }) => (isOpen ? 'translateY(0) scale(1,1)' : 'translateY(-5px) scale(1,0)')};
   transition: height 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+  >li {
+    ${({ isMobile }) => (isMobile ? 'padding-left: 8px;' : '')}
+  }
 `;
 
 class MenuSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
+      isOpen: props.isMobile,
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
@@ -116,24 +126,37 @@ class MenuSection extends React.Component {
 
     return (
       <Section>
-        <SectionLabelWrapper
-          onClick={this.handleButtonClick}
-        >
-          {
-            icon && <IconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
-          }
-          <Label>{label}</Label>
-          {
-            !!filteredChildren.length &&
-            <ChevronWrapper
-              dangerouslySetInnerHTML={{ __html: ChevronIcon }}
-              down={this.state.isOpen}
+        {
+          this.props.isMobile
+          ? icon &&
+            <IconWrapper
+              isMobile={this.props.isMobile}
+              dangerouslySetInnerHTML={{ __html: icon }}
             />
-          }
-        </SectionLabelWrapper>
+          :
+          <SectionLabelWrapper
+            onClick={this.handleButtonClick}
+          >
+            {
+              icon && <IconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
+            }
+            <Label>{label}</Label>
+            {
+              !!filteredChildren.length &&
+              <ChevronWrapper
+                dangerouslySetInnerHTML={{ __html: ChevronIcon }}
+                down={this.state.isOpen}
+              />
+            }
+          </SectionLabelWrapper>
+        }
         {
           !!filteredChildren.length &&
-          <MenuUl isOpen={this.state.isOpen} numItems={filteredChildren.length}>
+          <MenuUl
+            isMobile={this.props.isMobile}
+            isOpen={this.state.isOpen}
+            numItems={filteredChildren.length}
+          >
             {filteredChildren}
           </MenuUl>
         }
