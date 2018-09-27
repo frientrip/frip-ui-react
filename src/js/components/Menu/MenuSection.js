@@ -40,7 +40,7 @@ const IconWrapper = styled.div`
   display: inline-block;
   width: 24px;
   height: 24px;
-  margin-right: 8px;
+  margin-right: ${({ isMobile }) => (isMobile ? '16px' : '8px')};
   overflow: hidden;
   z-index: 2;
 `;
@@ -104,7 +104,7 @@ class MenuSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: props.isMobile,
+      isOpen: false,
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
@@ -154,7 +154,7 @@ class MenuSection extends React.Component {
           !!filteredChildren.length &&
           <MenuUl
             isMobile={this.props.isMobile}
-            isOpen={this.state.isOpen}
+            isOpen={this.state.isOpen || this.props.isMobile}
             numItems={filteredChildren.length}
           >
             {filteredChildren}
