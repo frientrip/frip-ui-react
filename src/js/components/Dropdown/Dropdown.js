@@ -31,22 +31,9 @@ const SelectionWrapper = styled.div`
   margin: 0;
   width: 100%;
   height: 40px;
-  border: 1px solid ${color.lightGrey};
-  border-radius: 4px;
   color: ${color.black};
   font-size: 14px;
-  vertical-align: 5px;
   cursor: pointer;
-  transition: background-color 0.4s;
-  background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
-
-  &:hover {
-    background-color: ${({ active }) => (active ? color.lightGrey : '#f3f3f3')};
-  }
-
-  &:active {
-    background-color: ${color.lightGrey};
-  }
 `;
 
 const Label = styled.div`
@@ -74,7 +61,19 @@ const SelectedOption = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
+  border: 1px solid ${color.lightGrey};
+  border-radius: 4px;
   padding: 8px 16px;
+  transition: background-color 0.4s;
+  background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
+
+  &:hover {
+    background-color: ${({ active }) => (active ? color.lightGrey : '#f3f3f3')};
+  }
+
+  &:active {
+    background-color: ${color.lightGrey};
+  }
 `;
 
 const ChevronWrapper = styled.div`

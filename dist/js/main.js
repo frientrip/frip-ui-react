@@ -4257,10 +4257,10 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n'], ['\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  position: relative;\n  margin: 0;\n  width: 100%;\n  height: 40px;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  color: ', ';\n  font-size: 14px;\n  vertical-align: 5px;\n  cursor: pointer;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n'], ['\n  display: block;\n  position: relative;\n  margin: 0;\n  width: 100%;\n  height: 40px;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  color: ', ';\n  font-size: 14px;\n  vertical-align: 5px;\n  cursor: pointer;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  position: relative;\n  margin: 0;\n  width: 100%;\n  height: 40px;\n  color: ', ';\n  font-size: 14px;\n  cursor: pointer;\n'], ['\n  display: block;\n  position: relative;\n  margin: 0;\n  width: 100%;\n  height: 40px;\n  color: ', ';\n  font-size: 14px;\n  cursor: pointer;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  font-size: 12px;\n  font-weight: 600;\n  color: ', ';\n  margin-bottom: 4px;\n'], ['\n  font-size: 12px;\n  font-weight: 600;\n  color: ', ';\n  margin-bottom: 4px;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n'], ['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  padding: 8px 16px;\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  padding: 8px 16px;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n'], ['\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: inherit;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n'], ['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: inherit;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
@@ -4315,19 +4315,19 @@ var defaultProps = {
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
 
-var SelectionWrapper = _styledComponents2.default.div(_templateObject2, _Color2.default.lightGrey, _Color2.default.black, function (_ref) {
+var SelectionWrapper = _styledComponents2.default.div(_templateObject2, _Color2.default.black);
+
+var Label = _styledComponents2.default.div(_templateObject3, _Color2.default.black);
+
+var Blocker = _styledComponents2.default.div(_templateObject4);
+
+var SelectedOption = _styledComponents2.default.div(_templateObject5, _Color2.default.lightGrey, function (_ref) {
   var active = _ref.active;
   return active ? _Color2.default.lightGrey : _Color2.default.white;
 }, function (_ref2) {
   var active = _ref2.active;
   return active ? _Color2.default.lightGrey : '#f3f3f3';
 }, _Color2.default.lightGrey);
-
-var Label = _styledComponents2.default.div(_templateObject3, _Color2.default.black);
-
-var Blocker = _styledComponents2.default.div(_templateObject4);
-
-var SelectedOption = _styledComponents2.default.div(_templateObject5);
 
 var ChevronWrapper = _styledComponents2.default.div(_templateObject6, function (_ref3) {
   var down = _ref3.down;
