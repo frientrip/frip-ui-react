@@ -5,6 +5,7 @@ import color from '../Color';
 import ChevronIcon from '../../assets/svgs/ic-chevron-down-black.svg';
 
 const propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.node,
@@ -13,6 +14,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  className: '',
   label: '',
   disabled: false,
   children: null,
@@ -21,18 +23,30 @@ const defaultProps = {
 };
 
 const Wrapper = styled.div`
-
 `;
 
 const SelectionWrapper = styled.div`
   display: block;
   position: relative;
-  width: 100%;
   margin: 0;
+  width: 100%;
+  height: 40px;
+  border: 1px solid ${color.lightGrey};
+  border-radius: 4px;
   color: ${color.black};
   font-size: 14px;
-  height: 40px;
-  border-radius: 4px;
+  vertical-align: 5px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
+
+  &:hover {
+    background-color: ${({ active }) => (active ? color.lightGrey : '#f3f3f3')};
+  }
+
+  &:active {
+    background-color: ${color.lightGrey};
+  }
 `;
 
 const Label = styled.div`
@@ -40,24 +54,6 @@ const Label = styled.div`
   font-weight: 600;
   color: ${color.black};
   margin-bottom: 4px;
-`;
-
-const ChevronWrapper = styled.div`
-  display: inline-block;
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 8px;
-  right: 16px;
-  cursor: pointer;
-  opacity: 1;
-  transform: ${({ down }) => (down ? 'rotate(0)' : 'rotate(90deg)')};
-  transform: ${({ up }) => (up ? 'rotate(180deg)' : '')};
-  transition: opacity 0.4s, transform 0.5s;
-
-  &:hover {
-    opacity: 0.3;
-  }
 `;
 
 const Blocker = styled.div`
@@ -73,22 +69,25 @@ const Blocker = styled.div`
 `;
 
 const SelectedOption = styled.div`
-  font-size: 14px;
-  vertical-align: 5px;
-  cursor: pointer;
-  border-radius: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   height: 100%;
   padding: 8px 16px;
-  transition: background-color 0.4s;
-  border: 1px solid ${color.lightGrey};
-  background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
+`;
+
+const ChevronWrapper = styled.div`
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  opacity: 1;
+  transform: ${({ down }) => (down ? 'rotate(0)' : 'rotate(90deg)')};
+  transform: ${({ up }) => (up ? 'rotate(180deg)' : '')};
+  transition: opacity 0.4s, transform 0.5s;
 
   &:hover {
-    background-color: ${({ active }) => (active ? color.lightGrey : '#f3f3f3')};
-  }
-
-  &:active {
-    background-color: ${color.lightGrey};
+    opacity: 0.3;
   }
 `;
 
@@ -154,7 +153,7 @@ class Dropdown extends React.Component {
       .filter(node => node.type === 'option');
 
     return (
-      <Wrapper>
+      <Wrapper className={this.props.className}>
         {
           label ? <Label>{label}</Label> : null
         }
@@ -164,17 +163,16 @@ class Dropdown extends React.Component {
           }
           <SelectedOption
             disabled={disabled}
-            onClick={this.handleButtonClick}
             active={this.state.isOpen}
+            onClick={disabled ? null : this.handleButtonClick}
           >
-            {this.state.label}
+            <div>{this.state.label}</div>
+            <ChevronWrapper
+              dangerouslySetInnerHTML={{ __html: ChevronIcon }}
+              down
+              up={this.state.isOpen}
+            />
           </SelectedOption>
-          <ChevronWrapper
-            dangerouslySetInnerHTML={{ __html: ChevronIcon }}
-            down
-            up={this.state.isOpen}
-            onClick={this.handleButtonClick}
-          />
           <Options
             visible={this.state.isOpen}
           >
