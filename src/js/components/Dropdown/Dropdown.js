@@ -80,6 +80,7 @@ const SelectedOption = styled.div`
 const ChevronWrapper = styled.div`
   width: 16px;
   height: 16px;
+  line-height: 16px;
   cursor: pointer;
   opacity: 1;
   transform: ${({ down }) => (down ? 'rotate(0)' : 'rotate(90deg)')};
