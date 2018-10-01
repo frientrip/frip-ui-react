@@ -67,6 +67,13 @@ const SelectedOption = styled.div`
   transition: background-color 0.4s;
   background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
 
+  >div:first-child {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   &:hover {
     background-color: ${({ active }) => (active ? color.lightGrey : '#f3f3f3')};
   }
@@ -77,6 +84,7 @@ const SelectedOption = styled.div`
 `;
 
 const ChevronWrapper = styled.div`
+  flex: 0 0 auto;
   width: 16px;
   height: 16px;
   line-height: 16px;
@@ -97,7 +105,7 @@ const Options = styled.div`
   left: 0;
   width: 100%;
   background-color: ${color.white};
-  border-radius: inherit;
+  border-radius: 4px;
   border: solid 1px #d9e0e8;
   opacity: ${({ visible }) => (visible ? '1' : '0')};
   transition: transform 0.2s ease-in-out, opacity 0.2s;
@@ -110,6 +118,11 @@ const Option = styled.div`
   padding: 8px 16px;
   cursor: pointer;
   border-radius: inherit;
+
+  option {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   &:hover {
     background-color: #f5faff;

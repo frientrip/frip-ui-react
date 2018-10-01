@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Dropdown from './Dropdown';
@@ -18,6 +19,18 @@ storiesOf('Dropdown', module)
       <option value="3">Option 3</option>
     </Dropdown>
   ))
+  .add('Dropdown with specific width', () => {
+    const StyledDropdown = styled(Dropdown)`
+      width: 150px;
+    `;
+    return (
+      <StyledDropdown onChange={action('Dropdown select changed')}>
+        <option value="1">Option 1</option>
+        <option value="2"> Very Very Very Very Very Very Long Option 2</option>
+        <option value="3">Option 3</option>
+      </StyledDropdown>
+    );
+  })
   .add('Dropdown with Label', () => (
     <div style={{ width: '200px' }}>
       <Dropdown label="Option A" onChange={action('Dropdown select changed')}>
