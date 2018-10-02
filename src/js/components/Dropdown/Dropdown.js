@@ -116,11 +116,9 @@ const Option = styled.div`
   padding: 8px 16px;
   cursor: pointer;
   border-radius: inherit;
-
-  option {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     background-color: #f5faff;
@@ -185,7 +183,7 @@ class Dropdown extends React.Component {
                   key={option.props.value}
                   onClick={() => this.handleOptionClick(option.props)}
                 >
-                  {option}
+                  {option.props.children}
                 </Option>
               ))
             }

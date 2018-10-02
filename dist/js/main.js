@@ -4263,7 +4263,7 @@ var _templateObject = _taggedTemplateLiteral(['\n'], ['\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  >div:first-child {\n    flex: 1 1 auto;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  >div:first-child {\n    flex: 1 1 auto;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n'], ['\n  flex: 0 0 auto;\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: 4px;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n'], ['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: 4px;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n\n  option {\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n\n  option {\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
+    _templateObject8 = _taggedTemplateLiteral(['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -4433,7 +4433,7 @@ var Dropdown = function (_React$Component) {
                     return _this2.handleOptionClick(option.props);
                   }
                 },
-                option
+                option.props.children
               );
             })
           )
