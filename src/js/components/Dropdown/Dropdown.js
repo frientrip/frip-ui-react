@@ -9,8 +9,8 @@ const propTypes = {
   label: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.node,
-  onChange: PropTypes.func,
-  defaultValue: PropTypes.any,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -18,8 +18,6 @@ const defaultProps = {
   label: '',
   disabled: false,
   children: null,
-  onChange: () => {},
-  defaultValue: null,
 };
 
 const Wrapper = styled.div`
@@ -134,11 +132,9 @@ class Dropdown extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      label: this.props.defaultValue || 'Dropdown',
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
-    this.updateLabel = this.updateLabel.bind(this);
   }
   handleButtonClick() {
     this.setState({
@@ -148,12 +144,6 @@ class Dropdown extends React.Component {
   handleOptionClick(selectedOption) {
     this.props.onChange(selectedOption.value);
     this.handleButtonClick();
-    this.updateLabel(selectedOption.children);
-  }
-  updateLabel(value) {
-    this.setState({
-      label: value,
-    });
   }
   render() {
     const {
@@ -179,7 +169,7 @@ class Dropdown extends React.Component {
             active={this.state.isOpen}
             onClick={disabled ? null : this.handleButtonClick}
           >
-            <div>{this.state.label}</div>
+            <div>{this.props.value}</div>
             <ChevronWrapper
               dangerouslySetInnerHTML={{ __html: ChevronIcon }}
               down
@@ -189,7 +179,16 @@ class Dropdown extends React.Component {
           <Options
             visible={this.state.isOpen}
           >
-            {filteredChildren.map(option => <Option key={option.props.value} onClick={() => this.handleOptionClick(option.props)}>{option}</Option>)}
+            {
+              filteredChildren.map(option => (
+                <Option
+                  key={option.props.value}
+                  onClick={() => this.handleOptionClick(option.props)}
+                >
+                  {option}
+                </Option>
+              ))
+            }
           </Options>
         </SelectionWrapper>
       </Wrapper>

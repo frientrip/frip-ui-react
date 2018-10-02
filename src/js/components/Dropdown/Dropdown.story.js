@@ -4,48 +4,70 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Dropdown from './Dropdown';
 
+class DropdownWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '선택하세요..',
+    };
+    this.changeValue = this.changeValue.bind(this);
+  }
+
+  changeValue(value) {
+    action(`Dropdown value changes to ${value}`);
+    this.setState({ value });
+  }
+
+  render() {
+    return (
+      <Dropdown
+        className={this.props.className}
+        disabled={this.props.disabled}
+        label={this.props.label}
+        value={this.state.value}
+        onChange={this.changeValue}
+      >
+        {this.props.children}
+      </Dropdown>
+    );
+  }
+}
+
 storiesOf('Dropdown', module)
   .add('Dropdown', () => (
-    <Dropdown onChange={action('Dropdown select changed')}>
+    <DropdownWrapper>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
-    </Dropdown>
-  ))
-  .add('Dropdown with default value', () => (
-    <Dropdown defaultValue="1" onChange={action('Dropdown select changed')}>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </Dropdown>
+    </DropdownWrapper>
   ))
   .add('Dropdown with specific width', () => {
-    const StyledDropdown = styled(Dropdown)`
+    const StyledDropdownWrapper = styled(DropdownWrapper)`
       width: 150px;
     `;
     return (
-      <StyledDropdown onChange={action('Dropdown select changed')}>
+      <StyledDropdownWrapper>
         <option value="1">Option 1</option>
-        <option value="2"> Very Very Very Very Very Very Long Option 2</option>
+        <option value="2">Very very very very very very very very long option</option>
         <option value="3">Option 3</option>
-      </StyledDropdown>
+      </StyledDropdownWrapper>
     );
   })
   .add('Dropdown with Label', () => (
     <div style={{ width: '200px' }}>
-      <Dropdown label="Option A" onChange={action('Dropdown select changed')}>
+      <DropdownWrapper label="Dropdown title">
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
         <option value="3">Option 3</option>
-      </Dropdown>
+      </DropdownWrapper>
     </div>
   ))
   .add('Dropdown (disabled)', () => (
     <div style={{ width: '200px' }}>
-      <Dropdown disabled label="Option A" onChange={action('Dropdown select changed')}>
+      <DropdownWrapper disabled label="Option A">
         <option value="1">Option 1</option>
         <option value="2">Option 2</option>
         <option value="3">Option 3</option>
-      </Dropdown>
+      </DropdownWrapper>
     </div>
   ));

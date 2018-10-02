@@ -4300,17 +4300,15 @@ var propTypes = {
   label: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   children: _propTypes2.default.node,
-  onChange: _propTypes2.default.func,
-  defaultValue: _propTypes2.default.any
+  onChange: _propTypes2.default.func.isRequired,
+  value: _propTypes2.default.string.isRequired
 };
 
 var defaultProps = {
   className: '',
   label: '',
   disabled: false,
-  children: null,
-  onChange: function onChange() {},
-  defaultValue: null
+  children: null
 };
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
@@ -4356,12 +4354,10 @@ var Dropdown = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Dropdown.__proto__ || Object.getPrototypeOf(Dropdown)).call(this, props));
 
     _this.state = {
-      isOpen: false,
-      label: _this.props.defaultValue || 'Dropdown'
+      isOpen: false
     };
     _this.handleButtonClick = _this.handleButtonClick.bind(_this);
     _this.handleOptionClick = _this.handleOptionClick.bind(_this);
-    _this.updateLabel = _this.updateLabel.bind(_this);
     return _this;
   }
 
@@ -4377,14 +4373,6 @@ var Dropdown = function (_React$Component) {
     value: function handleOptionClick(selectedOption) {
       this.props.onChange(selectedOption.value);
       this.handleButtonClick();
-      this.updateLabel(selectedOption.children);
-    }
-  }, {
-    key: 'updateLabel',
-    value: function updateLabel(value) {
-      this.setState({
-        label: value
-      });
     }
   }, {
     key: 'render',
@@ -4423,7 +4411,7 @@ var Dropdown = function (_React$Component) {
             _react2.default.createElement(
               'div',
               null,
-              this.state.label
+              this.props.value
             ),
             _react2.default.createElement(ChevronWrapper, {
               dangerouslySetInnerHTML: { __html: _icChevronDownBlack2.default },
@@ -4439,9 +4427,12 @@ var Dropdown = function (_React$Component) {
             filteredChildren.map(function (option) {
               return _react2.default.createElement(
                 Option,
-                { key: option.props.value, onClick: function onClick() {
+                {
+                  key: option.props.value,
+                  onClick: function onClick() {
                     return _this2.handleOptionClick(option.props);
-                  } },
+                  }
+                },
                 option
               );
             })
