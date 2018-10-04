@@ -5,34 +5,33 @@ import color from '../Color';
 import ChevronIcon from '../../assets/svgs/ic-chevron-down-black.svg';
 
 const propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.node,
-  onChange: PropTypes.func,
-  defaultValue: PropTypes.any,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
+  className: '',
   label: '',
   disabled: false,
   children: null,
-  onChange: () => {},
-  defaultValue: null,
 };
 
 const Wrapper = styled.div`
-
 `;
 
 const SelectionWrapper = styled.div`
   display: block;
   position: relative;
-  width: 100%;
   margin: 0;
+  width: 100%;
+  height: 40px;
   color: ${color.black};
   font-size: 14px;
-  height: 40px;
-  border-radius: 4px;
+  cursor: pointer;
 `;
 
 const Label = styled.div`
@@ -40,24 +39,6 @@ const Label = styled.div`
   font-weight: 600;
   color: ${color.black};
   margin-bottom: 4px;
-`;
-
-const ChevronWrapper = styled.div`
-  display: inline-block;
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 8px;
-  right: 16px;
-  cursor: pointer;
-  opacity: 1;
-  transform: ${({ down }) => (down ? 'rotate(0)' : 'rotate(90deg)')};
-  transform: ${({ up }) => (up ? 'rotate(180deg)' : '')};
-  transition: opacity 0.4s, transform 0.5s;
-
-  &:hover {
-    opacity: 0.3;
-  }
 `;
 
 const Blocker = styled.div`
@@ -73,15 +54,23 @@ const Blocker = styled.div`
 `;
 
 const SelectedOption = styled.div`
-  font-size: 14px;
-  vertical-align: 5px;
-  cursor: pointer;
-  border-radius: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   height: 100%;
+  border: 1px solid ${color.lightGrey};
+  border-radius: 4px;
   padding: 8px 16px;
   transition: background-color 0.4s;
-  border: 1px solid ${color.lightGrey};
   background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
+
+  >div:first-child {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   &:hover {
     background-color: ${({ active }) => (active ? color.lightGrey : '#f3f3f3')};
@@ -92,13 +81,29 @@ const SelectedOption = styled.div`
   }
 `;
 
+const ChevronWrapper = styled.div`
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  cursor: pointer;
+  opacity: 1;
+  transform: ${({ down }) => (down ? 'rotate(0)' : 'rotate(90deg)')};
+  transform: ${({ up }) => (up ? 'rotate(180deg)' : '')};
+  transition: opacity 0.4s, transform 0.5s;
+
+  &:hover {
+    opacity: 0.3;
+  }
+`;
+
 const Options = styled.div`
   position: absolute;
   top: 45px;
   left: 0;
   width: 100%;
   background-color: ${color.white};
-  border-radius: inherit;
+  border-radius: 4px;
   border: solid 1px #d9e0e8;
   opacity: ${({ visible }) => (visible ? '1' : '0')};
   transition: transform 0.2s ease-in-out, opacity 0.2s;
@@ -111,6 +116,9 @@ const Option = styled.div`
   padding: 8px 16px;
   cursor: pointer;
   border-radius: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     background-color: #f5faff;
@@ -122,11 +130,9 @@ class Dropdown extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      label: this.props.defaultValue || 'Dropdown',
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
-    this.updateLabel = this.updateLabel.bind(this);
   }
   handleButtonClick() {
     this.setState({
@@ -136,12 +142,6 @@ class Dropdown extends React.Component {
   handleOptionClick(selectedOption) {
     this.props.onChange(selectedOption.value);
     this.handleButtonClick();
-    this.updateLabel(selectedOption.children);
-  }
-  updateLabel(value) {
-    this.setState({
-      label: value,
-    });
   }
   render() {
     const {
@@ -154,7 +154,7 @@ class Dropdown extends React.Component {
       .filter(node => node.type === 'option');
 
     return (
-      <Wrapper>
+      <Wrapper className={this.props.className}>
         {
           label ? <Label>{label}</Label> : null
         }
@@ -164,21 +164,29 @@ class Dropdown extends React.Component {
           }
           <SelectedOption
             disabled={disabled}
-            onClick={this.handleButtonClick}
             active={this.state.isOpen}
+            onClick={disabled ? null : this.handleButtonClick}
           >
-            {this.state.label}
+            <div>{this.props.value}</div>
+            <ChevronWrapper
+              dangerouslySetInnerHTML={{ __html: ChevronIcon }}
+              down
+              up={this.state.isOpen}
+            />
           </SelectedOption>
-          <ChevronWrapper
-            dangerouslySetInnerHTML={{ __html: ChevronIcon }}
-            down
-            up={this.state.isOpen}
-            onClick={this.handleButtonClick}
-          />
           <Options
             visible={this.state.isOpen}
           >
-            {filteredChildren.map(option => <Option key={option.props.value} onClick={() => this.handleOptionClick(option.props)}>{option}</Option>)}
+            {
+              filteredChildren.map(option => (
+                <Option
+                  key={option.props.value}
+                  onClick={() => this.handleOptionClick(option.props)}
+                >
+                  {option.props.children}
+                </Option>
+              ))
+            }
           </Options>
         </SelectionWrapper>
       </Wrapper>

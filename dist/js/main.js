@@ -4259,14 +4259,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n\n'], ['\n\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  position: relative;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-size: 14px;\n  height: 40px;\n  border-radius: 4px;\n'], ['\n  display: block;\n  position: relative;\n  width: 100%;\n  margin: 0;\n  color: ', ';\n  font-size: 14px;\n  height: 40px;\n  border-radius: 4px;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n'], ['\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  position: relative;\n  margin: 0;\n  width: 100%;\n  height: 40px;\n  color: ', ';\n  font-size: 14px;\n  cursor: pointer;\n'], ['\n  display: block;\n  position: relative;\n  margin: 0;\n  width: 100%;\n  height: 40px;\n  color: ', ';\n  font-size: 14px;\n  cursor: pointer;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  font-size: 12px;\n  font-weight: 600;\n  color: ', ';\n  margin-bottom: 4px;\n'], ['\n  font-size: 12px;\n  font-weight: 600;\n  color: ', ';\n  margin-bottom: 4px;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  position: absolute;\n  width: 24px;\n  height: 24px;\n  top: 8px;\n  right: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n'], ['\n  display: inline-block;\n  position: absolute;\n  width: 24px;\n  height: 24px;\n  top: 8px;\n  right: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n'], ['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  font-size: 14px;\n  vertical-align: 5px;\n  cursor: pointer;\n  border-radius: inherit;\n  height: 100%;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  border: 1px solid ', ';\n  background-color: ', ';\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n'], ['\n  font-size: 14px;\n  vertical-align: 5px;\n  cursor: pointer;\n  border-radius: inherit;\n  height: 100%;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  border: 1px solid ', ';\n  background-color: ', ';\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: inherit;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n'], ['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: inherit;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n'], ['\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  cursor: not-allowed;\n  background-color: white;\n  opacity: 0.7;\n  z-index: 100;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  >div:first-child {\n    flex: 1 1 auto;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n'], ['\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  height: 100%;\n  border: 1px solid ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.4s;\n  background-color: ', ';\n\n  >div:first-child {\n    flex: 1 1 auto;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  &:hover {\n    background-color: ', ';\n  }\n\n  &:active {\n    background-color: ', ';\n  }\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n'], ['\n  flex: 0 0 auto;\n  width: 16px;\n  height: 16px;\n  line-height: 16px;\n  cursor: pointer;\n  opacity: 1;\n  transform: ', ';\n  transform: ', ';\n  transition: opacity 0.4s, transform 0.5s;\n\n  &:hover {\n    opacity: 0.3;\n  }\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: 4px;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n'], ['\n  position: absolute;\n  top: 45px;\n  left: 0;\n  width: 100%;\n  background-color: ', ';\n  border-radius: 4px;\n  border: solid 1px #d9e0e8;\n  opacity: ', ';\n  transition: transform 0.2s ease-in-out, opacity 0.2s;\n  transform-origin: left top;\n  transform: ', ';\n  z-index: 99;\n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n'], ['\n  padding: 8px 16px;\n  cursor: pointer;\n  border-radius: inherit;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n\n  &:hover {\n    background-color: #f5faff;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -4299,19 +4299,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var propTypes = {
+  className: _propTypes2.default.string,
   label: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   children: _propTypes2.default.node,
-  onChange: _propTypes2.default.func,
-  defaultValue: _propTypes2.default.any
+  onChange: _propTypes2.default.func.isRequired,
+  value: _propTypes2.default.string.isRequired
 };
 
 var defaultProps = {
+  className: '',
   label: '',
   disabled: false,
-  children: null,
-  onChange: function onChange() {},
-  defaultValue: null
+  children: null
 };
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
@@ -4320,23 +4320,23 @@ var SelectionWrapper = _styledComponents2.default.div(_templateObject2, _Color2.
 
 var Label = _styledComponents2.default.div(_templateObject3, _Color2.default.black);
 
-var ChevronWrapper = _styledComponents2.default.div(_templateObject4, function (_ref) {
-  var down = _ref.down;
-  return down ? 'rotate(0)' : 'rotate(90deg)';
-}, function (_ref2) {
-  var up = _ref2.up;
-  return up ? 'rotate(180deg)' : '';
-});
+var Blocker = _styledComponents2.default.div(_templateObject4);
 
-var Blocker = _styledComponents2.default.div(_templateObject5);
-
-var SelectedOption = _styledComponents2.default.div(_templateObject6, _Color2.default.lightGrey, function (_ref3) {
-  var active = _ref3.active;
+var SelectedOption = _styledComponents2.default.div(_templateObject5, _Color2.default.lightGrey, function (_ref) {
+  var active = _ref.active;
   return active ? _Color2.default.lightGrey : _Color2.default.white;
-}, function (_ref4) {
-  var active = _ref4.active;
+}, function (_ref2) {
+  var active = _ref2.active;
   return active ? _Color2.default.lightGrey : '#f3f3f3';
 }, _Color2.default.lightGrey);
+
+var ChevronWrapper = _styledComponents2.default.div(_templateObject6, function (_ref3) {
+  var down = _ref3.down;
+  return down ? 'rotate(0)' : 'rotate(90deg)';
+}, function (_ref4) {
+  var up = _ref4.up;
+  return up ? 'rotate(180deg)' : '';
+});
 
 var Options = _styledComponents2.default.div(_templateObject7, _Color2.default.white, function (_ref5) {
   var visible = _ref5.visible;
@@ -4357,12 +4357,10 @@ var Dropdown = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Dropdown.__proto__ || Object.getPrototypeOf(Dropdown)).call(this, props));
 
     _this.state = {
-      isOpen: false,
-      label: _this.props.defaultValue || 'Dropdown'
+      isOpen: false
     };
     _this.handleButtonClick = _this.handleButtonClick.bind(_this);
     _this.handleOptionClick = _this.handleOptionClick.bind(_this);
-    _this.updateLabel = _this.updateLabel.bind(_this);
     return _this;
   }
 
@@ -4378,14 +4376,6 @@ var Dropdown = function (_React$Component) {
     value: function handleOptionClick(selectedOption) {
       this.props.onChange(selectedOption.value);
       this.handleButtonClick();
-      this.updateLabel(selectedOption.children);
-    }
-  }, {
-    key: 'updateLabel',
-    value: function updateLabel(value) {
-      this.setState({
-        label: value
-      });
     }
   }, {
     key: 'render',
@@ -4404,7 +4394,7 @@ var Dropdown = function (_React$Component) {
 
       return _react2.default.createElement(
         Wrapper,
-        null,
+        { className: this.props.className },
         label ? _react2.default.createElement(
           Label,
           null,
@@ -4418,17 +4408,20 @@ var Dropdown = function (_React$Component) {
             SelectedOption,
             {
               disabled: disabled,
-              onClick: this.handleButtonClick,
-              active: this.state.isOpen
+              active: this.state.isOpen,
+              onClick: disabled ? null : this.handleButtonClick
             },
-            this.state.label
+            _react2.default.createElement(
+              'div',
+              null,
+              this.props.value
+            ),
+            _react2.default.createElement(ChevronWrapper, {
+              dangerouslySetInnerHTML: { __html: _icChevronDownBlack2.default },
+              down: true,
+              up: this.state.isOpen
+            })
           ),
-          _react2.default.createElement(ChevronWrapper, {
-            dangerouslySetInnerHTML: { __html: _icChevronDownBlack2.default },
-            down: true,
-            up: this.state.isOpen,
-            onClick: this.handleButtonClick
-          }),
           _react2.default.createElement(
             Options,
             {
@@ -4437,10 +4430,13 @@ var Dropdown = function (_React$Component) {
             filteredChildren.map(function (option) {
               return _react2.default.createElement(
                 Option,
-                { key: option.props.value, onClick: function onClick() {
+                {
+                  key: option.props.value,
+                  onClick: function onClick() {
                     return _this2.handleOptionClick(option.props);
-                  } },
-                option
+                  }
+                },
+                option.props.children
               );
             })
           )
