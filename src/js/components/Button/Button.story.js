@@ -8,11 +8,11 @@ storiesOf('Button', module)
   .add('Button Default', () => (
     <Button labelText="Button Default" onClick={action('Button Default Clicked')} />
   ))
-  .add('Button Default', () => (
-    <Button fluid labelText="Button Default" onClick={action('Button Default Clicked')} />
-  ))
   .add('Button Default (disabled)', () => (
     <Button labelText="Button Default" onClick={action('Button Default Clicked')} disabled />
+  ))
+  .add('Button fluid', () => (
+    <Button fluid labelText="Button fluid" onClick={action('Button Default Clicked')} />
   ))
   .add('Button Primary', () => (
     <ButtonPrimary labelText="Button Primary" onClick={action('Button Primary Clicked')} />
