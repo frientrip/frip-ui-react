@@ -9,6 +9,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   children: PropTypes.node,
   onChange: PropTypes.func,
+  defaultValue: PropTypes.any,
 };
 
 const defaultProps = {
@@ -16,6 +17,7 @@ const defaultProps = {
   disabled: false,
   children: null,
   onChange: () => {},
+  defaultValue: null,
 };
 
 const Wrapper = styled.div`
@@ -120,7 +122,7 @@ class Dropdown extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      label: 'Dropdown',
+      label: this.props.defaultValue || 'Dropdown',
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
