@@ -6,6 +6,7 @@ import color from '../Color';
 import Spinner from '../Spinner';
 
 const propTypes = {
+  className: PropTypes.string,
   labelText: PropTypes.string.isRequired,
   labelTextWeight: PropTypes.number,
   labelColor: PropTypes.string,
@@ -26,6 +27,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  className: '',
   onClick: () => {},
   disabled: false,
   labelTextWeight: 300,
@@ -120,6 +122,7 @@ const RightIconWrapper = styled(IconWrapper)`
 `;
 
 const Button = ({
+  className,
   onClick, disabled,
   labelText, labelTextWeight, labelColor, labelColorDisabled,
   bgColor, bgColorHover, bgColorActive, bgColorDisabled,
@@ -132,6 +135,7 @@ const Button = ({
 }) =>
   (
     <Wrapper
+      className={className}
       tabIndex={disabled ? undefined : '0'}
       onClick={disabled || isLoading ? () => {} : onClick}
       disabled={disabled || isLoading}
