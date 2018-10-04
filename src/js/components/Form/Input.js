@@ -16,6 +16,7 @@ const propTypes = {
   error: PropTypes.bool,
   value: PropTypes.string,
   placeholder: PropTypes.string,
+  transparent: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -28,6 +29,7 @@ const defaultProps = {
   error: false,
   value: '',
   placeholder: '',
+  transparent: false,
 };
 
 const Wrapper = styled.div`
@@ -178,9 +180,12 @@ class InputComponent extends React.Component {
             />
           }
         </InputWrapper>
-        <MessageWrapper error={error}>
-          {message}
-        </MessageWrapper>
+        {
+          message &&
+          <MessageWrapper error={error}>
+            {message}
+          </MessageWrapper>
+        }
       </Wrapper>
     );
   }

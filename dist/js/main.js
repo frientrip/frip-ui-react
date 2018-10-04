@@ -7922,7 +7922,8 @@ var propTypes = {
   required: _propTypes2.default.bool,
   error: _propTypes2.default.bool,
   value: _propTypes2.default.string,
-  placeholder: _propTypes2.default.string
+  placeholder: _propTypes2.default.string,
+  transparent: _propTypes2.default.bool
 };
 
 var defaultProps = {
@@ -7934,7 +7935,8 @@ var defaultProps = {
   required: false,
   error: false,
   value: '',
-  placeholder: ''
+  placeholder: '',
+  transparent: false
 };
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
@@ -8061,7 +8063,7 @@ var InputComponent = function (_React$Component) {
             onClick: this.resetInput
           })
         ),
-        _react2.default.createElement(
+        message && _react2.default.createElement(
           MessageWrapper,
           { error: error },
           message
