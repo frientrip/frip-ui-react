@@ -41,8 +41,8 @@ const InputWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 40px;
-  border-radius: 4px;
-  background-color: ${color.white};
+  ${({ transparent }) => (transparent ? '' : 'border-radius: 4px;')}
+  background-color: ${({ transparent }) => (transparent ? 'transparent' : color.white)};
 `;
 
 const Input = styled.input`
@@ -50,14 +50,18 @@ const Input = styled.input`
   height: 100%;
   border-radius: inherit;
   border: none;
+  ${({ transparent, error }) => (transparent
+    ? `border-bottom: 0.5px solid ${error ? color.red : color.white};`
+    : `border: 1px solid ${error ? color.red : color.lightGrey};`
+  )}
   padding: 0 24px 0 16px;
   font-size: 14px;
-  color: ${color.black};
-  border: 1px solid ${({ error }) => (error ? color.red : color.lightGrey)};
+  color: ${({ transparent }) => (transparent ? color.white : color.black)};
   transition: border 0.2s;
+  background-color: transparent;
 
   &:focus {
-    border: 1px solid ${({ error }) => (error ? color.red : color.primary)};
+    border-color: ${({ error }) => (error ? color.red : color.primary)};
     outline: none;
   }
 
@@ -147,6 +151,7 @@ class InputComponent extends React.Component {
       message,
       error,
       placeholder,
+      transparent,
     } = this.props;
 
     return (
@@ -158,7 +163,7 @@ class InputComponent extends React.Component {
             {required && <RequiredWrapper> *</RequiredWrapper>}
           </LabelWrapper>
         }
-        <InputWrapper>
+        <InputWrapper transparent={transparent}>
           <Input
             type={type}
             error={error}
@@ -166,6 +171,7 @@ class InputComponent extends React.Component {
             value={this.state.value}
             innerRef={this.inputRef}
             placeholder={placeholder}
+            transparent={transparent}
           />
           {
             this.state.value && !error && <IconWrapper

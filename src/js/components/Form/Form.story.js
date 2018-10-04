@@ -24,6 +24,11 @@ storiesOf('Form', module)
   .add('Input', () => (
     <Input onChange={action('Input changed')} message="Description" />
   ))
+  .add('Input transparent', () => (
+    <div style={{ height: '1000px', padding: '30px', backgroundColor: 'black' }}>
+      <Input transparent placeholder="안녕" onChange={action('Input changed')} />
+    </div>
+  ))
   .add('Input with Error', () => (
     <Input error onChange={action('Input changed')} message="Description" />
   ))

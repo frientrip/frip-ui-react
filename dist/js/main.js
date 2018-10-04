@@ -7871,8 +7871,8 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 100%;\n'], ['\n  display: inline-block;\n  width: 100%;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  border-radius: 4px;\n  background-color: ', ';\n'], ['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  border-radius: 4px;\n  background-color: ', ';\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  border: 1px solid ', ';\n  transition: border 0.2s;\n\n  &:focus {\n    border: 1px solid ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n'], ['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  border: 1px solid ', ';\n  transition: border 0.2s;\n\n  &:focus {\n    border: 1px solid ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  ', '\n  background-color: ', ';\n'], ['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  ', '\n  background-color: ', ';\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  ', '\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  transition: border 0.2s;\n  background-color: transparent;\n\n  &:focus {\n    border-color: ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n'], ['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  ', '\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  transition: border 0.2s;\n  background-color: transparent;\n\n  &:focus {\n    border-color: ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 16px;\n  height: 16px;\n  right: 8px;\n  top: 8px;\n  opacity: 0;\n  user-select: none;\n'], ['\n  position: absolute;\n  width: 16px;\n  height: 16px;\n  right: 8px;\n  top: 8px;\n  opacity: 0;\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  opacity: 1;\n  background-color: ', ';\n'], ['\n  opacity: 1;\n  background-color: ', ';\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  width: 100%;\n  margin-top: 2px;\n  font-size: 12px;\n  color: ', ';\n  font-weight: 300;\n'], ['\n  width: 100%;\n  margin-top: 2px;\n  font-size: 12px;\n  color: ', ';\n  font-weight: 300;\n']),
@@ -7941,13 +7941,23 @@ var defaultProps = {
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
 
-var InputWrapper = _styledComponents2.default.div(_templateObject2, _Color2.default.white);
-
-var Input = _styledComponents2.default.input(_templateObject3, _Color2.default.black, function (_ref) {
-  var error = _ref.error;
-  return error ? _Color2.default.red : _Color2.default.lightGrey;
+var InputWrapper = _styledComponents2.default.div(_templateObject2, function (_ref) {
+  var transparent = _ref.transparent;
+  return transparent ? '' : 'border-radius: 4px;';
 }, function (_ref2) {
-  var error = _ref2.error;
+  var transparent = _ref2.transparent;
+  return transparent ? 'transparent' : _Color2.default.white;
+});
+
+var Input = _styledComponents2.default.input(_templateObject3, function (_ref3) {
+  var transparent = _ref3.transparent,
+      error = _ref3.error;
+  return transparent ? 'border-bottom: 0.5px solid ' + (error ? _Color2.default.red : _Color2.default.white) + ';' : 'border: 1px solid ' + (error ? _Color2.default.red : _Color2.default.lightGrey) + ';';
+}, function (_ref4) {
+  var transparent = _ref4.transparent;
+  return transparent ? _Color2.default.white : _Color2.default.black;
+}, function (_ref5) {
+  var error = _ref5.error;
   return error ? _Color2.default.red : _Color2.default.primary;
 });
 
@@ -7955,13 +7965,13 @@ var IconWrapper = _styledComponents2.default.div(_templateObject4);
 
 var IconWrapperVisible = (0, _styledComponents2.default)(IconWrapper)(_templateObject5, _Color2.default.white);
 
-var MessageWrapper = _styledComponents2.default.div(_templateObject6, function (_ref3) {
-  var error = _ref3.error;
+var MessageWrapper = _styledComponents2.default.div(_templateObject6, function (_ref6) {
+  var error = _ref6.error;
   return error ? _Color2.default.red : _Color2.default.grey;
 });
 
-var LabelWrapper = _styledComponents2.default.div(_templateObject7, function (_ref4) {
-  var error = _ref4.error;
+var LabelWrapper = _styledComponents2.default.div(_templateObject7, function (_ref7) {
+  var error = _ref7.error;
   return error ? _Color2.default.red : _Color2.default.black;
 });
 
@@ -7988,8 +7998,8 @@ var InputComponent = function (_React$Component) {
 
   _createClass(InputComponent, [{
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(_ref5) {
-      var value = _ref5.value;
+    value: function componentWillReceiveProps(_ref8) {
+      var value = _ref8.value;
 
       this.setState({
         value: value
@@ -8027,7 +8037,8 @@ var InputComponent = function (_React$Component) {
           required = _props.required,
           message = _props.message,
           error = _props.error,
-          placeholder = _props.placeholder;
+          placeholder = _props.placeholder,
+          transparent = _props.transparent;
 
 
       return _react2.default.createElement(
@@ -8045,14 +8056,15 @@ var InputComponent = function (_React$Component) {
         ),
         _react2.default.createElement(
           InputWrapper,
-          null,
+          { transparent: transparent },
           _react2.default.createElement(Input, {
             type: type,
             error: error,
             onChange: this.handleInputChange,
             value: this.state.value,
             innerRef: this.inputRef,
-            placeholder: placeholder
+            placeholder: placeholder,
+            transparent: transparent
           }),
           this.state.value && !error && _react2.default.createElement(IconWrapper, {
             dangerouslySetInnerHTML: { __html: _icDeleteLGrey2.default },
