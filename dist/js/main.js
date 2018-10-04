@@ -8025,7 +8025,7 @@ var InputComponent = function (_React$Component) {
       return _react2.default.createElement(
         Wrapper,
         null,
-        _react2.default.createElement(
+        label && _react2.default.createElement(
           LabelWrapper,
           { error: error },
           label,

@@ -143,10 +143,13 @@ class InputComponent extends React.Component {
 
     return (
       <Wrapper>
-        <LabelWrapper error={error}>
-          {label}
-          {required && <RequiredWrapper> *</RequiredWrapper>}
-        </LabelWrapper>
+        {
+          label &&
+          <LabelWrapper error={error}>
+            {label}
+            {required && <RequiredWrapper> *</RequiredWrapper>}
+          </LabelWrapper>
+        }
         <InputWrapper>
           <Input
             type={type}
