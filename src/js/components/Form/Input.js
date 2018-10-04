@@ -7,6 +7,7 @@ import DeleteIcon from '../../assets/svgs/ic-delete-l-grey.svg';
 import ErrorIcon from '../../assets/svgs/ic-danger-red.svg';
 
 const propTypes = {
+  className: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
@@ -14,9 +15,12 @@ const propTypes = {
   required: PropTypes.bool,
   error: PropTypes.bool,
   value: PropTypes.string,
+  placeholder: PropTypes.string,
+  transparent: PropTypes.bool,
 };
 
 const defaultProps = {
+  className: '',
   type: 'text',
   onChange: () => {},
   label: '',
@@ -24,6 +28,8 @@ const defaultProps = {
   required: false,
   error: false,
   value: '',
+  placeholder: '',
+  transparent: false,
 };
 
 const Wrapper = styled.div`
@@ -35,8 +41,8 @@ const InputWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 40px;
-  border-radius: 4px;
-  background-color: ${color.white};
+  ${({ transparent }) => (transparent ? '' : 'border-radius: 4px;')}
+  background-color: ${({ transparent }) => (transparent ? 'transparent' : color.white)};
 `;
 
 const Input = styled.input`
@@ -44,14 +50,18 @@ const Input = styled.input`
   height: 100%;
   border-radius: inherit;
   border: none;
+  ${({ transparent, error }) => (transparent
+    ? `border-bottom: 0.5px solid ${error ? color.red : color.white};`
+    : `border: 1px solid ${error ? color.red : color.lightGrey};`
+  )}
   padding: 0 24px 0 16px;
   font-size: 14px;
-  color: ${color.black};
-  border: 1px solid ${({ error }) => (error ? color.red : color.lightGrey)};
+  color: ${({ transparent }) => (transparent ? color.white : color.black)};
   transition: border 0.2s;
+  background-color: transparent;
 
   &:focus {
-    border: 1px solid ${({ error }) => (error ? color.red : color.primary)};
+    border-color: ${({ error }) => (error ? color.red : color.primary)};
     outline: none;
   }
 
@@ -134,26 +144,34 @@ class InputComponent extends React.Component {
   }
   render() {
     const {
+      className,
       type,
       label,
       required,
       message,
       error,
+      placeholder,
+      transparent,
     } = this.props;
 
     return (
-      <Wrapper>
-        <LabelWrapper error={error}>
-          {label}
-          {required && <RequiredWrapper> *</RequiredWrapper>}
-        </LabelWrapper>
-        <InputWrapper>
+      <Wrapper className={className}>
+        {
+          label &&
+          <LabelWrapper error={error}>
+            {label}
+            {required && <RequiredWrapper> *</RequiredWrapper>}
+          </LabelWrapper>
+        }
+        <InputWrapper transparent={transparent}>
           <Input
             type={type}
             error={error}
             onChange={this.handleInputChange}
             value={this.state.value}
             innerRef={this.inputRef}
+            placeholder={placeholder}
+            transparent={transparent}
           />
           {
             this.state.value && !error && <IconWrapper
@@ -168,9 +186,12 @@ class InputComponent extends React.Component {
             />
           }
         </InputWrapper>
-        <MessageWrapper error={error}>
-          {message}
-        </MessageWrapper>
+        {
+          message &&
+          <MessageWrapper error={error}>
+            {message}
+          </MessageWrapper>
+        }
       </Wrapper>
     );
   }

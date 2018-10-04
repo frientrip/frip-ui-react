@@ -1731,8 +1731,8 @@ exports.IconButton = exports.ButtonGhostPrimary = exports.ButtonGhost = exports.
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _templateObject = _taggedTemplateLiteral(['\n  user-select: none;\n  ', '\n'], ['\n  user-select: none;\n  ', '\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n  \n  ', '\n  cursor: pointer;\n'], ['\n  ', '\n  \n  ', '\n  cursor: pointer;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n\n  ', '\n  cursor: pointer;\n'], ['\n  ', '\n\n  ', '\n  cursor: pointer;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: ', ';\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n'], ['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: ', ';\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n'], ['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n']),
@@ -1821,33 +1821,36 @@ var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref
   var fluid = _ref4.fluid;
   return fluid ? 'block' : 'inline-block';
 }, function (_ref5) {
-  var disabled = _ref5.disabled,
-      bgColor = _ref5.bgColor,
-      bgColorDisabled = _ref5.bgColorDisabled;
+  var fluid = _ref5.fluid;
+  return fluid ? 'width: 100%;' : '';
+}, function (_ref6) {
+  var disabled = _ref6.disabled,
+      bgColor = _ref6.bgColor,
+      bgColorDisabled = _ref6.bgColorDisabled;
   return disabled ? bgColorDisabled : bgColor;
 }, function (props) {
   return props.disabled ? disabledCss : enabledCss;
 });
 
-var Label = _styledComponents2.default.div(_templateObject4, function (_ref6) {
-  var vAlign = _ref6.vAlign;
+var Label = _styledComponents2.default.div(_templateObject4, function (_ref7) {
+  var vAlign = _ref7.vAlign;
   return vAlign;
-}, function (_ref7) {
-  var fontSize = _ref7.fontSize;
-  return fontSize;
 }, function (_ref8) {
-  var labelTextWeight = _ref8.labelTextWeight;
-  return labelTextWeight;
+  var fontSize = _ref8.fontSize;
+  return fontSize;
 }, function (_ref9) {
-  var disabled = _ref9.disabled,
-      labelColor = _ref9.labelColor,
-      labelColorDisabled = _ref9.labelColorDisabled;
-  return disabled ? labelColorDisabled : labelColor;
+  var labelTextWeight = _ref9.labelTextWeight;
+  return labelTextWeight;
 }, function (_ref10) {
-  var disabled = _ref10.disabled;
-  return disabled ? 0.3 : 1;
+  var disabled = _ref10.disabled,
+      labelColor = _ref10.labelColor,
+      labelColorDisabled = _ref10.labelColorDisabled;
+  return disabled ? labelColorDisabled : labelColor;
 }, function (_ref11) {
-  var isLoading = _ref11.isLoading;
+  var disabled = _ref11.disabled;
+  return disabled ? 0.3 : 1;
+}, function (_ref12) {
+  var isLoading = _ref12.isLoading;
   return isLoading ? 0 : '';
 });
 
@@ -1861,24 +1864,24 @@ var CenterIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateOb
 
 var RightIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateObject9);
 
-var Button = function Button(_ref12) {
-  var onClick = _ref12.onClick,
-      disabled = _ref12.disabled,
-      labelText = _ref12.labelText,
-      labelTextWeight = _ref12.labelTextWeight,
-      labelColor = _ref12.labelColor,
-      labelColorDisabled = _ref12.labelColorDisabled,
-      bgColor = _ref12.bgColor,
-      bgColorHover = _ref12.bgColorHover,
-      bgColorActive = _ref12.bgColorActive,
-      bgColorDisabled = _ref12.bgColorDisabled,
-      borderColor = _ref12.borderColor,
-      borderColorDisabled = _ref12.borderColorDisabled,
-      isLoading = _ref12.isLoading,
-      large = _ref12.large,
-      fluid = _ref12.fluid,
-      icon = _ref12.icon,
-      iconPosition = _ref12.iconPosition;
+var Button = function Button(_ref13) {
+  var onClick = _ref13.onClick,
+      disabled = _ref13.disabled,
+      labelText = _ref13.labelText,
+      labelTextWeight = _ref13.labelTextWeight,
+      labelColor = _ref13.labelColor,
+      labelColorDisabled = _ref13.labelColorDisabled,
+      bgColor = _ref13.bgColor,
+      bgColorHover = _ref13.bgColorHover,
+      bgColorActive = _ref13.bgColorActive,
+      bgColorDisabled = _ref13.bgColorDisabled,
+      borderColor = _ref13.borderColor,
+      borderColorDisabled = _ref13.borderColorDisabled,
+      isLoading = _ref13.isLoading,
+      large = _ref13.large,
+      fluid = _ref13.fluid,
+      icon = _ref13.icon,
+      iconPosition = _ref13.iconPosition;
   return _react2.default.createElement(
     Wrapper,
     {
@@ -7864,8 +7867,8 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 100%;\n'], ['\n  display: inline-block;\n  width: 100%;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  border-radius: 4px;\n  background-color: ', ';\n'], ['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  border-radius: 4px;\n  background-color: ', ';\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  border: 1px solid ', ';\n  transition: border 0.2s;\n\n  &:focus {\n    border: 1px solid ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n'], ['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  border: 1px solid ', ';\n  transition: border 0.2s;\n\n  &:focus {\n    border: 1px solid ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  ', '\n  background-color: ', ';\n'], ['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  ', '\n  background-color: ', ';\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  ', '\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  transition: border 0.2s;\n  background-color: transparent;\n\n  &:focus {\n    border-color: ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n'], ['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  ', '\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  transition: border 0.2s;\n  background-color: transparent;\n\n  &:focus {\n    border-color: ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 16px;\n  height: 16px;\n  right: 8px;\n  top: 8px;\n  opacity: 0;\n  user-select: none;\n'], ['\n  position: absolute;\n  width: 16px;\n  height: 16px;\n  right: 8px;\n  top: 8px;\n  opacity: 0;\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  opacity: 1;\n  background-color: ', ';\n'], ['\n  opacity: 1;\n  background-color: ', ';\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  width: 100%;\n  margin-top: 2px;\n  font-size: 12px;\n  color: ', ';\n  font-weight: 300;\n'], ['\n  width: 100%;\n  margin-top: 2px;\n  font-size: 12px;\n  color: ', ';\n  font-weight: 300;\n']),
@@ -7907,34 +7910,50 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var propTypes = {
+  className: _propTypes2.default.string,
   type: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   label: _propTypes2.default.string,
   message: _propTypes2.default.string,
   required: _propTypes2.default.bool,
   error: _propTypes2.default.bool,
-  value: _propTypes2.default.string
+  value: _propTypes2.default.string,
+  placeholder: _propTypes2.default.string,
+  transparent: _propTypes2.default.bool
 };
 
 var defaultProps = {
+  className: '',
   type: 'text',
   onChange: function onChange() {},
   label: '',
   message: '',
   required: false,
   error: false,
-  value: ''
+  value: '',
+  placeholder: '',
+  transparent: false
 };
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
 
-var InputWrapper = _styledComponents2.default.div(_templateObject2, _Color2.default.white);
-
-var Input = _styledComponents2.default.input(_templateObject3, _Color2.default.black, function (_ref) {
-  var error = _ref.error;
-  return error ? _Color2.default.red : _Color2.default.lightGrey;
+var InputWrapper = _styledComponents2.default.div(_templateObject2, function (_ref) {
+  var transparent = _ref.transparent;
+  return transparent ? '' : 'border-radius: 4px;';
 }, function (_ref2) {
-  var error = _ref2.error;
+  var transparent = _ref2.transparent;
+  return transparent ? 'transparent' : _Color2.default.white;
+});
+
+var Input = _styledComponents2.default.input(_templateObject3, function (_ref3) {
+  var transparent = _ref3.transparent,
+      error = _ref3.error;
+  return transparent ? 'border-bottom: 0.5px solid ' + (error ? _Color2.default.red : _Color2.default.white) + ';' : 'border: 1px solid ' + (error ? _Color2.default.red : _Color2.default.lightGrey) + ';';
+}, function (_ref4) {
+  var transparent = _ref4.transparent;
+  return transparent ? _Color2.default.white : _Color2.default.black;
+}, function (_ref5) {
+  var error = _ref5.error;
   return error ? _Color2.default.red : _Color2.default.primary;
 });
 
@@ -7942,13 +7961,13 @@ var IconWrapper = _styledComponents2.default.div(_templateObject4);
 
 var IconWrapperVisible = (0, _styledComponents2.default)(IconWrapper)(_templateObject5, _Color2.default.white);
 
-var MessageWrapper = _styledComponents2.default.div(_templateObject6, function (_ref3) {
-  var error = _ref3.error;
+var MessageWrapper = _styledComponents2.default.div(_templateObject6, function (_ref6) {
+  var error = _ref6.error;
   return error ? _Color2.default.red : _Color2.default.grey;
 });
 
-var LabelWrapper = _styledComponents2.default.div(_templateObject7, function (_ref4) {
-  var error = _ref4.error;
+var LabelWrapper = _styledComponents2.default.div(_templateObject7, function (_ref7) {
+  var error = _ref7.error;
   return error ? _Color2.default.red : _Color2.default.black;
 });
 
@@ -7975,8 +7994,8 @@ var InputComponent = function (_React$Component) {
 
   _createClass(InputComponent, [{
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(_ref5) {
-      var value = _ref5.value;
+    value: function componentWillReceiveProps(_ref8) {
+      var value = _ref8.value;
 
       this.setState({
         value: value
@@ -8008,17 +8027,20 @@ var InputComponent = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          className = _props.className,
           type = _props.type,
           label = _props.label,
           required = _props.required,
           message = _props.message,
-          error = _props.error;
+          error = _props.error,
+          placeholder = _props.placeholder,
+          transparent = _props.transparent;
 
 
       return _react2.default.createElement(
         Wrapper,
-        null,
-        _react2.default.createElement(
+        { className: className },
+        label && _react2.default.createElement(
           LabelWrapper,
           { error: error },
           label,
@@ -8030,13 +8052,15 @@ var InputComponent = function (_React$Component) {
         ),
         _react2.default.createElement(
           InputWrapper,
-          null,
+          { transparent: transparent },
           _react2.default.createElement(Input, {
             type: type,
             error: error,
             onChange: this.handleInputChange,
             value: this.state.value,
-            innerRef: this.inputRef
+            innerRef: this.inputRef,
+            placeholder: placeholder,
+            transparent: transparent
           }),
           this.state.value && !error && _react2.default.createElement(IconWrapper, {
             dangerouslySetInnerHTML: { __html: _icDeleteLGrey2.default },
@@ -8047,7 +8071,7 @@ var InputComponent = function (_React$Component) {
             onClick: this.resetInput
           })
         ),
-        _react2.default.createElement(
+        message && _react2.default.createElement(
           MessageWrapper,
           { error: error },
           message
