@@ -1731,8 +1731,8 @@ exports.IconButton = exports.ButtonGhostPrimary = exports.ButtonGhost = exports.
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _templateObject = _taggedTemplateLiteral(['\n  user-select: none;\n  ', '\n'], ['\n  user-select: none;\n  ', '\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n  \n  ', '\n  cursor: pointer;\n'], ['\n  ', '\n  \n  ', '\n  cursor: pointer;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n\n  ', '\n  cursor: pointer;\n'], ['\n  ', '\n\n  ', '\n  cursor: pointer;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: ', ';\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n'], ['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: ', ';\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n'], ['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n']),
@@ -1821,33 +1821,36 @@ var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref
   var fluid = _ref4.fluid;
   return fluid ? 'block' : 'inline-block';
 }, function (_ref5) {
-  var disabled = _ref5.disabled,
-      bgColor = _ref5.bgColor,
-      bgColorDisabled = _ref5.bgColorDisabled;
+  var fluid = _ref5.fluid;
+  return fluid ? 'width: 100%;' : '';
+}, function (_ref6) {
+  var disabled = _ref6.disabled,
+      bgColor = _ref6.bgColor,
+      bgColorDisabled = _ref6.bgColorDisabled;
   return disabled ? bgColorDisabled : bgColor;
 }, function (props) {
   return props.disabled ? disabledCss : enabledCss;
 });
 
-var Label = _styledComponents2.default.div(_templateObject4, function (_ref6) {
-  var vAlign = _ref6.vAlign;
+var Label = _styledComponents2.default.div(_templateObject4, function (_ref7) {
+  var vAlign = _ref7.vAlign;
   return vAlign;
-}, function (_ref7) {
-  var fontSize = _ref7.fontSize;
-  return fontSize;
 }, function (_ref8) {
-  var labelTextWeight = _ref8.labelTextWeight;
-  return labelTextWeight;
+  var fontSize = _ref8.fontSize;
+  return fontSize;
 }, function (_ref9) {
-  var disabled = _ref9.disabled,
-      labelColor = _ref9.labelColor,
-      labelColorDisabled = _ref9.labelColorDisabled;
-  return disabled ? labelColorDisabled : labelColor;
+  var labelTextWeight = _ref9.labelTextWeight;
+  return labelTextWeight;
 }, function (_ref10) {
-  var disabled = _ref10.disabled;
-  return disabled ? 0.3 : 1;
+  var disabled = _ref10.disabled,
+      labelColor = _ref10.labelColor,
+      labelColorDisabled = _ref10.labelColorDisabled;
+  return disabled ? labelColorDisabled : labelColor;
 }, function (_ref11) {
-  var isLoading = _ref11.isLoading;
+  var disabled = _ref11.disabled;
+  return disabled ? 0.3 : 1;
+}, function (_ref12) {
+  var isLoading = _ref12.isLoading;
   return isLoading ? 0 : '';
 });
 
@@ -1861,24 +1864,24 @@ var CenterIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateOb
 
 var RightIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateObject9);
 
-var Button = function Button(_ref12) {
-  var onClick = _ref12.onClick,
-      disabled = _ref12.disabled,
-      labelText = _ref12.labelText,
-      labelTextWeight = _ref12.labelTextWeight,
-      labelColor = _ref12.labelColor,
-      labelColorDisabled = _ref12.labelColorDisabled,
-      bgColor = _ref12.bgColor,
-      bgColorHover = _ref12.bgColorHover,
-      bgColorActive = _ref12.bgColorActive,
-      bgColorDisabled = _ref12.bgColorDisabled,
-      borderColor = _ref12.borderColor,
-      borderColorDisabled = _ref12.borderColorDisabled,
-      isLoading = _ref12.isLoading,
-      large = _ref12.large,
-      fluid = _ref12.fluid,
-      icon = _ref12.icon,
-      iconPosition = _ref12.iconPosition;
+var Button = function Button(_ref13) {
+  var onClick = _ref13.onClick,
+      disabled = _ref13.disabled,
+      labelText = _ref13.labelText,
+      labelTextWeight = _ref13.labelTextWeight,
+      labelColor = _ref13.labelColor,
+      labelColorDisabled = _ref13.labelColorDisabled,
+      bgColor = _ref13.bgColor,
+      bgColorHover = _ref13.bgColorHover,
+      bgColorActive = _ref13.bgColorActive,
+      bgColorDisabled = _ref13.bgColorDisabled,
+      borderColor = _ref13.borderColor,
+      borderColorDisabled = _ref13.borderColorDisabled,
+      isLoading = _ref13.isLoading,
+      large = _ref13.large,
+      fluid = _ref13.fluid,
+      icon = _ref13.icon,
+      iconPosition = _ref13.iconPosition;
   return _react2.default.createElement(
     Wrapper,
     {
@@ -4299,14 +4302,16 @@ var propTypes = {
   label: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   children: _propTypes2.default.node,
-  onChange: _propTypes2.default.func
+  onChange: _propTypes2.default.func,
+  defaultValue: _propTypes2.default.any
 };
 
 var defaultProps = {
   label: '',
   disabled: false,
   children: null,
-  onChange: function onChange() {}
+  onChange: function onChange() {},
+  defaultValue: null
 };
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
@@ -4353,7 +4358,7 @@ var Dropdown = function (_React$Component) {
 
     _this.state = {
       isOpen: false,
-      label: 'Dropdown'
+      label: _this.props.defaultValue || 'Dropdown'
     };
     _this.handleButtonClick = _this.handleButtonClick.bind(_this);
     _this.handleOptionClick = _this.handleOptionClick.bind(_this);

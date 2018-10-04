@@ -51,7 +51,7 @@ const disabledCss = css`
 
 const enabledCss = css`
   ${({ borderColor }) => (borderColor ? `border: 1px solid ${borderColor};` : '')}
-  
+
   ${({ bgColorHover, bgColorActive }) => `
     &:hover, &:focus {
       background-color: ${bgColorHover};
@@ -68,6 +68,7 @@ const Wrapper = styled.button`
   border: none;
   position: relative;
   display: ${({ fluid }) => (fluid ? 'block' : 'inline-block')};
+  ${({ fluid }) => (fluid ? 'width: 100%;' : '')}
   background-color: ${({ disabled, bgColor, bgColorDisabled }) => (disabled ? bgColorDisabled : bgColor)};
   border-radius: 4px;
   padding: 8px 16px;
