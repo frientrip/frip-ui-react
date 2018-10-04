@@ -7,6 +7,7 @@ import DeleteIcon from '../../assets/svgs/ic-delete-l-grey.svg';
 import ErrorIcon from '../../assets/svgs/ic-danger-red.svg';
 
 const propTypes = {
+  className: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
@@ -17,6 +18,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  className: '',
   type: 'text',
   onChange: () => {},
   label: '',
@@ -134,6 +136,7 @@ class InputComponent extends React.Component {
   }
   render() {
     const {
+      className,
       type,
       label,
       required,
@@ -142,7 +145,7 @@ class InputComponent extends React.Component {
     } = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper className={className}>
         {
           label &&
           <LabelWrapper error={error}>

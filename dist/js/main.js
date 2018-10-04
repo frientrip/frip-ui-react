@@ -7914,6 +7914,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var propTypes = {
+  className: _propTypes2.default.string,
   type: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   label: _propTypes2.default.string,
@@ -7924,6 +7925,7 @@ var propTypes = {
 };
 
 var defaultProps = {
+  className: '',
   type: 'text',
   onChange: function onChange() {},
   label: '',
@@ -8015,6 +8017,7 @@ var InputComponent = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          className = _props.className,
           type = _props.type,
           label = _props.label,
           required = _props.required,
@@ -8024,7 +8027,7 @@ var InputComponent = function (_React$Component) {
 
       return _react2.default.createElement(
         Wrapper,
-        null,
+        { className: className },
         label && _react2.default.createElement(
           LabelWrapper,
           { error: error },
