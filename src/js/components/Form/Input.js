@@ -15,6 +15,7 @@ const propTypes = {
   required: PropTypes.bool,
   error: PropTypes.bool,
   value: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 const defaultProps = {
@@ -26,6 +27,7 @@ const defaultProps = {
   required: false,
   error: false,
   value: '',
+  placeholder: '',
 };
 
 const Wrapper = styled.div`
@@ -142,6 +144,7 @@ class InputComponent extends React.Component {
       required,
       message,
       error,
+      placeholder,
     } = this.props;
 
     return (
@@ -160,6 +163,7 @@ class InputComponent extends React.Component {
             onChange={this.handleInputChange}
             value={this.state.value}
             innerRef={this.inputRef}
+            placeholder={placeholder}
           />
           {
             this.state.value && !error && <IconWrapper

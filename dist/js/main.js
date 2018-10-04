@@ -7921,7 +7921,8 @@ var propTypes = {
   message: _propTypes2.default.string,
   required: _propTypes2.default.bool,
   error: _propTypes2.default.bool,
-  value: _propTypes2.default.string
+  value: _propTypes2.default.string,
+  placeholder: _propTypes2.default.string
 };
 
 var defaultProps = {
@@ -7932,7 +7933,8 @@ var defaultProps = {
   message: '',
   required: false,
   error: false,
-  value: ''
+  value: '',
+  placeholder: ''
 };
 
 var Wrapper = _styledComponents2.default.div(_templateObject);
@@ -8022,7 +8024,8 @@ var InputComponent = function (_React$Component) {
           label = _props.label,
           required = _props.required,
           message = _props.message,
-          error = _props.error;
+          error = _props.error,
+          placeholder = _props.placeholder;
 
 
       return _react2.default.createElement(
@@ -8046,7 +8049,8 @@ var InputComponent = function (_React$Component) {
             error: error,
             onChange: this.handleInputChange,
             value: this.state.value,
-            innerRef: this.inputRef
+            innerRef: this.inputRef,
+            placeholder: placeholder
           }),
           this.state.value && !error && _react2.default.createElement(IconWrapper, {
             dangerouslySetInnerHTML: { __html: _icDeleteLGrey2.default },
