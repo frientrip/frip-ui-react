@@ -1765,6 +1765,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var propTypes = {
+  className: _propTypes2.default.string,
   labelText: _propTypes2.default.string.isRequired,
   labelTextWeight: _propTypes2.default.number,
   labelColor: _propTypes2.default.string,
@@ -1785,6 +1786,7 @@ var propTypes = {
 };
 
 var defaultProps = {
+  className: '',
   onClick: function onClick() {},
   disabled: false,
   labelTextWeight: 300,
@@ -1865,7 +1867,8 @@ var CenterIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateOb
 var RightIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateObject9);
 
 var Button = function Button(_ref13) {
-  var onClick = _ref13.onClick,
+  var className = _ref13.className,
+      onClick = _ref13.onClick,
       disabled = _ref13.disabled,
       labelText = _ref13.labelText,
       labelTextWeight = _ref13.labelTextWeight,
@@ -1885,6 +1888,7 @@ var Button = function Button(_ref13) {
   return _react2.default.createElement(
     Wrapper,
     {
+      className: className,
       tabIndex: disabled ? undefined : '0',
       onClick: disabled || isLoading ? function () {} : onClick,
       disabled: disabled || isLoading,
