@@ -10,12 +10,15 @@ const propTypes = {
   labelText: PropTypes.string.isRequired,
   labelTextWeight: PropTypes.number,
   labelColor: PropTypes.string,
+  labelColorHover: PropTypes.string,
   labelColorDisabled: PropTypes.string,
   bgColor: PropTypes.string,
   bgColorHover: PropTypes.string,
   bgColorActive: PropTypes.string,
   bgColorDisabled: PropTypes.string,
   borderColor: PropTypes.string,
+  borderColorHover: PropTypes.string,
+  borderColorActive: PropTypes.string,
   borderColorDisabled: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
@@ -32,12 +35,15 @@ const defaultProps = {
   disabled: false,
   labelTextWeight: 300,
   labelColor: color.black,
+  labelColorHover: '#ffffff',
   labelColorDisabled: '#4a4a4a',
   bgColor: color.paleGrey,
   bgColorHover: color.lightBlueGrey,
   bgColorActive: '#cbcfd3',
   bgColorDisabled: color.paleGrey2,
   borderColor: '',
+  borderColorHover: '',
+  borderColorActive: '',
   borderColorDisabled: '',
   isLoading: false,
   large: false,
@@ -48,20 +54,28 @@ const defaultProps = {
 
 const disabledCss = css`
   user-select: none;
+  color: ${({ labelColorDisabled }) => labelColorDisabled};
   ${({ borderColorDisabled }) => (borderColorDisabled ? `border: 1px solid ${borderColorDisabled};` : '')}
 `;
 
 const enabledCss = css`
+  color: ${({ labelColor }) => labelColor};
   ${({ borderColor }) => (borderColor ? `border: 1px solid ${borderColor};` : '')}
 
-  ${({ bgColorHover, bgColorActive }) => `
+  ${({ bgColorHover, bgColorActive, borderColorHover, borderColorActive, labelColorHover }) => `
     &:hover, &:focus {
+      border-color: ${borderColorHover};
       background-color: ${bgColorHover};
     };
 
     &:active {
+      border-color: ${borderColorActive};
       background-color: ${bgColorActive};
     };
+
+    &:hover, &:active {
+      color: ${labelColorHover};
+    }
   `}
   cursor: pointer;
 `;
@@ -87,7 +101,7 @@ const Label = styled.div`
   font-size: ${({ fontSize }) => fontSize}px;
   text-align: center;
   font-weight: ${({ labelTextWeight }) => labelTextWeight};
-  color: ${({ disabled, labelColor, labelColorDisabled }) => (disabled ? labelColorDisabled : labelColor)};
+  color: inherit;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   opacity: ${({ isLoading }) => (isLoading ? 0 : '')};
   user-select: none;
@@ -124,9 +138,9 @@ const RightIconWrapper = styled(IconWrapper)`
 const Button = ({
   className,
   onClick, disabled,
-  labelText, labelTextWeight, labelColor, labelColorDisabled,
+  labelText, labelTextWeight, labelColor, labelColorHover, labelColorDisabled,
   bgColor, bgColorHover, bgColorActive, bgColorDisabled,
-  borderColor, borderColorDisabled,
+  borderColor, borderColorHover, borderColorActive, borderColorDisabled,
   isLoading,
   large,
   fluid,
@@ -143,7 +157,12 @@ const Button = ({
       bgColorHover={bgColorHover}
       bgColorActive={bgColorActive}
       bgColorDisabled={bgColorDisabled}
+      labelColor={labelColor}
+      labelColorHover={labelColorHover}
+      labelColorDisabled={labelColorDisabled}
       borderColor={borderColor}
+      borderColorHover={borderColorHover}
+      borderColorActive={borderColorActive}
       borderColorDisabled={borderColorDisabled}
       fluid={fluid}
     >
@@ -158,8 +177,6 @@ const Button = ({
       <Label
         disabled={disabled}
         labelTextWeight={labelTextWeight}
-        labelColor={labelColor}
-        labelColorDisabled={labelColorDisabled}
         isLoading={isLoading}
         fontSize={large ? 17 : 14}
         vAlign={large ? '2px' : 'middle'}
@@ -230,13 +247,16 @@ const ButtonGhostPrimary = props =>
     <Button
       {...props}
       bgColor={color.white}
-      bgColorHover="#d7ebff"
-      bgColorActive="#aed7ff"
+      bgColorHover={color.white}
+      bgColorActive={color.white}
       bgColorDisabled={color.white}
       labelColor={color.primary}
-      labelColorDisabled={color.primary}
+      labelColorHover={color.darySkyBlue}
+      labelColorDisabled={color.babyBlue}
       borderColor={color.primary}
-      borderColorDisabled="rgba(51, 153, 255, 0.4)"
+      borderColorHover={color.darySkyBlue}
+      borderColorActive={color.darySkyBlue}
+      borderColorDisabled={color.babyBlue}
     />
   );
 

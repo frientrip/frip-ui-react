@@ -1,4 +1,4 @@
-import Button, { ButtonPrimary, IconButton } from './components/Button';
+import Button, { ButtonPrimary, IconButton, ButtonGhostPrimary } from './components/Button';
 import Dropdown from './components/Dropdown';
 import List from './components/List';
 import { MenuSection, MenuItem } from './components/Menu';
@@ -11,6 +11,7 @@ import { PageButton, PrevButton, NextButton } from './components/Pagination';
 export {
   Button,
   ButtonPrimary,
+  ButtonGhostPrimary,
   IconButton,
   Dropdown,
   List,

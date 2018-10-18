@@ -14,6 +14,8 @@ const colors = {
   red: '#ff6666',
   purple: '#a082fa',
   veryLightBlue: 'rgb(214, 235, 255)',
+  darySkyBlue: '#3789db',
+  babyBlue: '#add6ff',
 };
 
 export default colors;

@@ -145,7 +145,9 @@ var colors = {
   yellow: '#fed535',
   red: '#ff6666',
   purple: '#a082fa',
-  veryLightBlue: 'rgb(214, 235, 255)'
+  veryLightBlue: 'rgb(214, 235, 255)',
+  darySkyBlue: '#3789db',
+  babyBlue: '#add6ff'
 };
 
 exports.default = colors;
@@ -1649,7 +1651,7 @@ module.exports = __webpack_require__(21);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NextButton = exports.PrevButton = exports.PageButton = exports.Tab = exports.Tabs = exports.Stepper = exports.Input = exports.Form = exports.Color = exports.MenuItem = exports.MenuSection = exports.List = exports.Dropdown = exports.IconButton = exports.ButtonPrimary = exports.Button = undefined;
+exports.NextButton = exports.PrevButton = exports.PageButton = exports.Tab = exports.Tabs = exports.Stepper = exports.Input = exports.Form = exports.Color = exports.MenuItem = exports.MenuSection = exports.List = exports.Dropdown = exports.IconButton = exports.ButtonGhostPrimary = exports.ButtonPrimary = exports.Button = undefined;
 
 var _Button = __webpack_require__(22);
 
@@ -1683,6 +1685,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.Button = _Button2.default;
 exports.ButtonPrimary = _Button.ButtonPrimary;
+exports.ButtonGhostPrimary = _Button.ButtonGhostPrimary;
 exports.IconButton = _Button.IconButton;
 exports.Dropdown = _Dropdown2.default;
 exports.List = _List2.default;
@@ -1733,10 +1736,10 @@ exports.IconButton = exports.ButtonGhostPrimary = exports.ButtonGhost = exports.
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _templateObject = _taggedTemplateLiteral(['\n  user-select: none;\n  ', '\n'], ['\n  user-select: none;\n  ', '\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n\n  ', '\n  cursor: pointer;\n'], ['\n  ', '\n\n  ', '\n  cursor: pointer;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  user-select: none;\n  color: ', ';\n  ', '\n'], ['\n  user-select: none;\n  color: ', ';\n  ', '\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  color: ', ';\n  ', '\n\n  ', '\n  cursor: pointer;\n'], ['\n  color: ', ';\n  ', '\n\n  ', '\n  cursor: pointer;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: ', ';\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n'], ['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: ', ';\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n'], ['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n'], ['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  margin-right: 8px;\n'], ['\n  margin-right: 8px;\n']),
@@ -1772,12 +1775,15 @@ var propTypes = {
   labelText: _propTypes2.default.string.isRequired,
   labelTextWeight: _propTypes2.default.number,
   labelColor: _propTypes2.default.string,
+  labelColorHover: _propTypes2.default.string,
   labelColorDisabled: _propTypes2.default.string,
   bgColor: _propTypes2.default.string,
   bgColorHover: _propTypes2.default.string,
   bgColorActive: _propTypes2.default.string,
   bgColorDisabled: _propTypes2.default.string,
   borderColor: _propTypes2.default.string,
+  borderColorHover: _propTypes2.default.string,
+  borderColorActive: _propTypes2.default.string,
   borderColorDisabled: _propTypes2.default.string,
   onClick: _propTypes2.default.func,
   disabled: _propTypes2.default.bool,
@@ -1794,12 +1800,15 @@ var defaultProps = {
   disabled: false,
   labelTextWeight: 300,
   labelColor: _Color2.default.black,
+  labelColorHover: '#ffffff',
   labelColorDisabled: '#4a4a4a',
   bgColor: _Color2.default.paleGrey,
   bgColorHover: _Color2.default.lightBlueGrey,
   bgColorActive: '#cbcfd3',
   bgColorDisabled: _Color2.default.paleGrey2,
   borderColor: '',
+  borderColorHover: '',
+  borderColorActive: '',
   borderColorDisabled: '',
   isLoading: false,
   large: false,
@@ -1809,53 +1818,57 @@ var defaultProps = {
 };
 
 var disabledCss = (0, _styledComponents.css)(_templateObject, function (_ref) {
-  var borderColorDisabled = _ref.borderColorDisabled;
+  var labelColorDisabled = _ref.labelColorDisabled;
+  return labelColorDisabled;
+}, function (_ref2) {
+  var borderColorDisabled = _ref2.borderColorDisabled;
   return borderColorDisabled ? 'border: 1px solid ' + borderColorDisabled + ';' : '';
 });
 
-var enabledCss = (0, _styledComponents.css)(_templateObject2, function (_ref2) {
-  var borderColor = _ref2.borderColor;
+var enabledCss = (0, _styledComponents.css)(_templateObject2, function (_ref3) {
+  var labelColor = _ref3.labelColor;
+  return labelColor;
+}, function (_ref4) {
+  var borderColor = _ref4.borderColor;
   return borderColor ? 'border: 1px solid ' + borderColor + ';' : '';
-}, function (_ref3) {
-  var bgColorHover = _ref3.bgColorHover,
-      bgColorActive = _ref3.bgColorActive;
-  return '\n    &:hover, &:focus {\n      background-color: ' + bgColorHover + ';\n    };\n\n    &:active {\n      background-color: ' + bgColorActive + ';\n    };\n  ';
+}, function (_ref5) {
+  var bgColorHover = _ref5.bgColorHover,
+      bgColorActive = _ref5.bgColorActive,
+      borderColorHover = _ref5.borderColorHover,
+      borderColorActive = _ref5.borderColorActive,
+      labelColorHover = _ref5.labelColorHover;
+  return '\n    &:hover, &:focus {\n      border-color: ' + borderColorHover + ';\n      background-color: ' + bgColorHover + ';\n    };\n\n    &:active {\n      border-color: ' + borderColorActive + ';\n      background-color: ' + bgColorActive + ';\n    };\n\n    &:hover, &:active {\n      color: ' + labelColorHover + ';\n    }\n  ';
 });
 
-var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref4) {
-  var fluid = _ref4.fluid;
+var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref6) {
+  var fluid = _ref6.fluid;
   return fluid ? 'block' : 'inline-block';
-}, function (_ref5) {
-  var fluid = _ref5.fluid;
+}, function (_ref7) {
+  var fluid = _ref7.fluid;
   return fluid ? 'width: 100%;' : '';
-}, function (_ref6) {
-  var disabled = _ref6.disabled,
-      bgColor = _ref6.bgColor,
-      bgColorDisabled = _ref6.bgColorDisabled;
+}, function (_ref8) {
+  var disabled = _ref8.disabled,
+      bgColor = _ref8.bgColor,
+      bgColorDisabled = _ref8.bgColorDisabled;
   return disabled ? bgColorDisabled : bgColor;
 }, function (props) {
   return props.disabled ? disabledCss : enabledCss;
 });
 
-var Label = _styledComponents2.default.div(_templateObject4, function (_ref7) {
-  var vAlign = _ref7.vAlign;
+var Label = _styledComponents2.default.div(_templateObject4, function (_ref9) {
+  var vAlign = _ref9.vAlign;
   return vAlign;
-}, function (_ref8) {
-  var fontSize = _ref8.fontSize;
-  return fontSize;
-}, function (_ref9) {
-  var labelTextWeight = _ref9.labelTextWeight;
-  return labelTextWeight;
 }, function (_ref10) {
-  var disabled = _ref10.disabled,
-      labelColor = _ref10.labelColor,
-      labelColorDisabled = _ref10.labelColorDisabled;
-  return disabled ? labelColorDisabled : labelColor;
+  var fontSize = _ref10.fontSize;
+  return fontSize;
 }, function (_ref11) {
-  var disabled = _ref11.disabled;
-  return disabled ? 0.3 : 1;
+  var labelTextWeight = _ref11.labelTextWeight;
+  return labelTextWeight;
 }, function (_ref12) {
-  var isLoading = _ref12.isLoading;
+  var disabled = _ref12.disabled;
+  return disabled ? 0.3 : 1;
+}, function (_ref13) {
+  var isLoading = _ref13.isLoading;
   return isLoading ? 0 : '';
 });
 
@@ -1869,25 +1882,28 @@ var CenterIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateOb
 
 var RightIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateObject9);
 
-var Button = function Button(_ref13) {
-  var className = _ref13.className,
-      onClick = _ref13.onClick,
-      disabled = _ref13.disabled,
-      labelText = _ref13.labelText,
-      labelTextWeight = _ref13.labelTextWeight,
-      labelColor = _ref13.labelColor,
-      labelColorDisabled = _ref13.labelColorDisabled,
-      bgColor = _ref13.bgColor,
-      bgColorHover = _ref13.bgColorHover,
-      bgColorActive = _ref13.bgColorActive,
-      bgColorDisabled = _ref13.bgColorDisabled,
-      borderColor = _ref13.borderColor,
-      borderColorDisabled = _ref13.borderColorDisabled,
-      isLoading = _ref13.isLoading,
-      large = _ref13.large,
-      fluid = _ref13.fluid,
-      icon = _ref13.icon,
-      iconPosition = _ref13.iconPosition;
+var Button = function Button(_ref14) {
+  var className = _ref14.className,
+      onClick = _ref14.onClick,
+      disabled = _ref14.disabled,
+      labelText = _ref14.labelText,
+      labelTextWeight = _ref14.labelTextWeight,
+      labelColor = _ref14.labelColor,
+      labelColorHover = _ref14.labelColorHover,
+      labelColorDisabled = _ref14.labelColorDisabled,
+      bgColor = _ref14.bgColor,
+      bgColorHover = _ref14.bgColorHover,
+      bgColorActive = _ref14.bgColorActive,
+      bgColorDisabled = _ref14.bgColorDisabled,
+      borderColor = _ref14.borderColor,
+      borderColorHover = _ref14.borderColorHover,
+      borderColorActive = _ref14.borderColorActive,
+      borderColorDisabled = _ref14.borderColorDisabled,
+      isLoading = _ref14.isLoading,
+      large = _ref14.large,
+      fluid = _ref14.fluid,
+      icon = _ref14.icon,
+      iconPosition = _ref14.iconPosition;
   return _react2.default.createElement(
     Wrapper,
     {
@@ -1899,7 +1915,12 @@ var Button = function Button(_ref13) {
       bgColorHover: bgColorHover,
       bgColorActive: bgColorActive,
       bgColorDisabled: bgColorDisabled,
+      labelColor: labelColor,
+      labelColorHover: labelColorHover,
+      labelColorDisabled: labelColorDisabled,
       borderColor: borderColor,
+      borderColorHover: borderColorHover,
+      borderColorActive: borderColorActive,
       borderColorDisabled: borderColorDisabled,
       fluid: fluid
     },
@@ -1910,8 +1931,6 @@ var Button = function Button(_ref13) {
       {
         disabled: disabled,
         labelTextWeight: labelTextWeight,
-        labelColor: labelColor,
-        labelColorDisabled: labelColorDisabled,
         isLoading: isLoading,
         fontSize: large ? 17 : 14,
         vAlign: large ? '2px' : 'middle'
@@ -1970,13 +1989,16 @@ var ButtonGhost = function ButtonGhost(props) {
 var ButtonGhostPrimary = function ButtonGhostPrimary(props) {
   return _react2.default.createElement(Button, _extends({}, props, {
     bgColor: _Color2.default.white,
-    bgColorHover: '#d7ebff',
-    bgColorActive: '#aed7ff',
+    bgColorHover: _Color2.default.white,
+    bgColorActive: _Color2.default.white,
     bgColorDisabled: _Color2.default.white,
     labelColor: _Color2.default.primary,
-    labelColorDisabled: _Color2.default.primary,
+    labelColorHover: _Color2.default.darySkyBlue,
+    labelColorDisabled: _Color2.default.babyBlue,
     borderColor: _Color2.default.primary,
-    borderColorDisabled: 'rgba(51, 153, 255, 0.4)'
+    borderColorHover: _Color2.default.darySkyBlue,
+    borderColorActive: _Color2.default.darySkyBlue,
+    borderColorDisabled: _Color2.default.babyBlue
   }));
 };
 
