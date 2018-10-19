@@ -34,7 +34,7 @@ const defaultProps = {
   className: '',
   onClick: () => {},
   disabled: false,
-  labelTextWeight: 300,
+  labelTextWeight: 'normal',
   labelColor: color.black,
   labelColorHover: '#ffffff',
   labelColorDisabled: '#4a4a4a',
@@ -89,9 +89,9 @@ const Wrapper = styled.button`
   ${({ fluid }) => (fluid ? 'width: 100%;' : '')}
   background-color: ${({ disabled, bgColor, bgColorDisabled }) => (disabled ? bgColorDisabled : bgColor)};
   border-radius: 4px;
-  height: ${({ small }) => (small ? '35px' : '40px')};
+  height: ${({ small, large }) => (small ? '35px' : large ? '50px' : '40px')};
   line-height: 100%;
-  padding: ${({ small }) => (small ? '10px 18px' : '8px 16px')};
+  padding: ${({ small }) => (small ? '10px 18px' : '13px 18px')};
   transition: background-color 0.3s;
   text-align: center;
 
@@ -172,6 +172,7 @@ const Button = ({
       borderColorDisabled={borderColorDisabled}
       fluid={fluid}
       small={small}
+      large={large}
     >
       {
         icon && iconPosition === 'left' &&
@@ -257,6 +258,7 @@ const ButtonGhostPrimary = props =>
       bgColorHover={color.white}
       bgColorActive={color.white}
       bgColorDisabled={color.white}
+      labelTextWeight="bold"
       labelColor={color.primary}
       labelColorHover={color.darySkyBlue}
       labelColorDisabled={color.babyBlue}
