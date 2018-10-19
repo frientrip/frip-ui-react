@@ -1799,7 +1799,7 @@ var defaultProps = {
   className: '',
   onClick: function onClick() {},
   disabled: false,
-  labelTextWeight: 300,
+  labelTextWeight: 'normal',
   labelColor: _Color2.default.black,
   labelColorHover: '#ffffff',
   labelColorDisabled: '#4a4a4a',
@@ -1854,11 +1854,12 @@ var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref
       bgColorDisabled = _ref8.bgColorDisabled;
   return disabled ? bgColorDisabled : bgColor;
 }, function (_ref9) {
-  var small = _ref9.small;
-  return small ? '35px' : '40px';
+  var small = _ref9.small,
+      large = _ref9.large;
+  return small ? '35px' : large ? '50px' : '40px';
 }, function (_ref10) {
   var small = _ref10.small;
-  return small ? '10px 18px' : '8px 16px';
+  return small ? '10px 18px' : '12px 18px';
 }, function (props) {
   return props.disabled ? disabledCss : enabledCss;
 });
@@ -1932,7 +1933,8 @@ var Button = function Button(_ref16) {
       borderColorActive: borderColorActive,
       borderColorDisabled: borderColorDisabled,
       fluid: fluid,
-      small: small
+      small: small,
+      large: large
     },
     icon && iconPosition === 'left' && _react2.default.createElement(LeftIconWrapper, { dangerouslySetInnerHTML: { __html: icon } }),
     icon && iconPosition === 'center' && _react2.default.createElement(CenterIconWrapper, { dangerouslySetInnerHTML: { __html: icon } }),
@@ -1965,7 +1967,7 @@ var ButtonPrimary = function ButtonPrimary(props) {
     bgColorHover: '#3789db',
     bgColorActive: '#3c79b7',
     bgColorDisabled: '#99ccff',
-    labelTextWeight: 500,
+    labelTextWeight: 'bold',
     labelColor: _Color2.default.white,
     labelColorDisabled: _Color2.default.white
   }));
