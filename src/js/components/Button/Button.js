@@ -91,7 +91,7 @@ const Wrapper = styled.button`
   border-radius: 4px;
   height: ${({ small }) => (small ? '35px' : '40px')};
   line-height: 100%;
-  padding: ${({ small }) => (small ? '11px 18px' : '8px 16px')};
+  padding: ${({ small }) => (small ? '10px 18px' : '8px 16px')};
   transition: background-color 0.3s;
   text-align: center;
 

@@ -1858,7 +1858,7 @@ var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref
   return small ? '35px' : '40px';
 }, function (_ref10) {
   var small = _ref10.small;
-  return small ? '11px 18px' : '8px 16px';
+  return small ? '10px 18px' : '8px 16px';
 }, function (props) {
   return props.disabled ? disabledCss : enabledCss;
 });
