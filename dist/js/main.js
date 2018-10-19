@@ -1738,8 +1738,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _templateObject = _taggedTemplateLiteral(['\n  user-select: none;\n  color: ', ';\n  ', '\n'], ['\n  user-select: none;\n  color: ', ';\n  ', '\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  color: ', ';\n  ', '\n\n  ', '\n  cursor: pointer;\n'], ['\n  color: ', ';\n  ', '\n\n  ', '\n  cursor: pointer;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  padding: 8px 16px;\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n'], ['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 24px;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  height: ', ';\n  line-height: 100%;\n  padding: ', ';\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  height: ', ';\n  line-height: 100%;\n  padding: ', ';\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 100%;\n  line-height: 100%;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n'], ['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 100%;\n  line-height: 100%;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n'], ['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  margin-right: 8px;\n'], ['\n  margin-right: 8px;\n']),
@@ -1789,6 +1789,7 @@ var propTypes = {
   disabled: _propTypes2.default.bool,
   isLoading: _propTypes2.default.bool,
   large: _propTypes2.default.bool,
+  small: _propTypes2.default.bool,
   fluid: _propTypes2.default.bool,
   icon: _propTypes2.default.node,
   iconPosition: _propTypes2.default.string
@@ -1812,6 +1813,7 @@ var defaultProps = {
   borderColorDisabled: '',
   isLoading: false,
   large: false,
+  small: false,
   fluid: false,
   icon: null,
   iconPosition: 'left'
@@ -1851,24 +1853,30 @@ var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref
       bgColor = _ref8.bgColor,
       bgColorDisabled = _ref8.bgColorDisabled;
   return disabled ? bgColorDisabled : bgColor;
+}, function (_ref9) {
+  var small = _ref9.small;
+  return small ? '35px' : '40px';
+}, function (_ref10) {
+  var small = _ref10.small;
+  return small ? '11px 18px' : '8px 16px';
 }, function (props) {
   return props.disabled ? disabledCss : enabledCss;
 });
 
-var Label = _styledComponents2.default.div(_templateObject4, function (_ref9) {
-  var vAlign = _ref9.vAlign;
+var Label = _styledComponents2.default.div(_templateObject4, function (_ref11) {
+  var vAlign = _ref11.vAlign;
   return vAlign;
-}, function (_ref10) {
-  var fontSize = _ref10.fontSize;
-  return fontSize;
-}, function (_ref11) {
-  var labelTextWeight = _ref11.labelTextWeight;
-  return labelTextWeight;
 }, function (_ref12) {
-  var disabled = _ref12.disabled;
-  return disabled ? 0.3 : 1;
+  var fontSize = _ref12.fontSize;
+  return fontSize;
 }, function (_ref13) {
-  var isLoading = _ref13.isLoading;
+  var labelTextWeight = _ref13.labelTextWeight;
+  return labelTextWeight;
+}, function (_ref14) {
+  var disabled = _ref14.disabled;
+  return disabled ? 0.3 : 1;
+}, function (_ref15) {
+  var isLoading = _ref15.isLoading;
   return isLoading ? 0 : '';
 });
 
@@ -1882,28 +1890,29 @@ var CenterIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateOb
 
 var RightIconWrapper = (0, _styledComponents2.default)(IconWrapper)(_templateObject9);
 
-var Button = function Button(_ref14) {
-  var className = _ref14.className,
-      onClick = _ref14.onClick,
-      disabled = _ref14.disabled,
-      labelText = _ref14.labelText,
-      labelTextWeight = _ref14.labelTextWeight,
-      labelColor = _ref14.labelColor,
-      labelColorHover = _ref14.labelColorHover,
-      labelColorDisabled = _ref14.labelColorDisabled,
-      bgColor = _ref14.bgColor,
-      bgColorHover = _ref14.bgColorHover,
-      bgColorActive = _ref14.bgColorActive,
-      bgColorDisabled = _ref14.bgColorDisabled,
-      borderColor = _ref14.borderColor,
-      borderColorHover = _ref14.borderColorHover,
-      borderColorActive = _ref14.borderColorActive,
-      borderColorDisabled = _ref14.borderColorDisabled,
-      isLoading = _ref14.isLoading,
-      large = _ref14.large,
-      fluid = _ref14.fluid,
-      icon = _ref14.icon,
-      iconPosition = _ref14.iconPosition;
+var Button = function Button(_ref16) {
+  var className = _ref16.className,
+      onClick = _ref16.onClick,
+      disabled = _ref16.disabled,
+      labelText = _ref16.labelText,
+      labelTextWeight = _ref16.labelTextWeight,
+      labelColor = _ref16.labelColor,
+      labelColorHover = _ref16.labelColorHover,
+      labelColorDisabled = _ref16.labelColorDisabled,
+      bgColor = _ref16.bgColor,
+      bgColorHover = _ref16.bgColorHover,
+      bgColorActive = _ref16.bgColorActive,
+      bgColorDisabled = _ref16.bgColorDisabled,
+      borderColor = _ref16.borderColor,
+      borderColorHover = _ref16.borderColorHover,
+      borderColorActive = _ref16.borderColorActive,
+      borderColorDisabled = _ref16.borderColorDisabled,
+      isLoading = _ref16.isLoading,
+      large = _ref16.large,
+      small = _ref16.small,
+      fluid = _ref16.fluid,
+      icon = _ref16.icon,
+      iconPosition = _ref16.iconPosition;
   return _react2.default.createElement(
     Wrapper,
     {
@@ -1922,7 +1931,8 @@ var Button = function Button(_ref14) {
       borderColorHover: borderColorHover,
       borderColorActive: borderColorActive,
       borderColorDisabled: borderColorDisabled,
-      fluid: fluid
+      fluid: fluid,
+      small: small
     },
     icon && iconPosition === 'left' && _react2.default.createElement(LeftIconWrapper, { dangerouslySetInnerHTML: { __html: icon } }),
     icon && iconPosition === 'center' && _react2.default.createElement(CenterIconWrapper, { dangerouslySetInnerHTML: { __html: icon } }),
@@ -1932,7 +1942,7 @@ var Button = function Button(_ref14) {
         disabled: disabled,
         labelTextWeight: labelTextWeight,
         isLoading: isLoading,
-        fontSize: large ? 17 : 14,
+        fontSize: large ? 17 : small ? 13 : 14,
         vAlign: large ? '2px' : 'middle'
       },
       labelText

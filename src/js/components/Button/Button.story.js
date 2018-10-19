@@ -8,6 +8,9 @@ storiesOf('Button', module)
   .add('Button Default', () => (
     <Button labelText="Button Default" onClick={action('Button Default Clicked')} />
   ))
+  .add('Button Default small', () => (
+    <Button labelText="small" small={true} />
+  ))
   .add('Button Default (disabled)', () => (
     <Button labelText="Button Default" onClick={action('Button Default Clicked')} disabled />
   ))

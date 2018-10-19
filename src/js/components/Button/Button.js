@@ -24,6 +24,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   large: PropTypes.bool,
+  small: PropTypes.bool,
   fluid: PropTypes.bool,
   icon: PropTypes.node,
   iconPosition: PropTypes.string,
@@ -47,6 +48,7 @@ const defaultProps = {
   borderColorDisabled: '',
   isLoading: false,
   large: false,
+  small: false,
   fluid: false,
   icon: null,
   iconPosition: 'left',
@@ -87,7 +89,9 @@ const Wrapper = styled.button`
   ${({ fluid }) => (fluid ? 'width: 100%;' : '')}
   background-color: ${({ disabled, bgColor, bgColorDisabled }) => (disabled ? bgColorDisabled : bgColor)};
   border-radius: 4px;
-  padding: 8px 16px;
+  height: ${({ small }) => (small ? '35px' : '40px')};
+  line-height: 100%;
+  padding: ${({ small }) => (small ? '11px 18px' : '8px 16px')};
   transition: background-color 0.3s;
   text-align: center;
 
@@ -97,7 +101,8 @@ const Wrapper = styled.button`
 const Label = styled.div`
   display: inline-block;
   vertical-align: ${({ vAlign }) => vAlign};
-  height: 24px;
+  height: 100%;
+  line-height: 100%;
   font-size: ${({ fontSize }) => fontSize}px;
   text-align: center;
   font-weight: ${({ labelTextWeight }) => labelTextWeight};
@@ -143,6 +148,7 @@ const Button = ({
   borderColor, borderColorHover, borderColorActive, borderColorDisabled,
   isLoading,
   large,
+  small,
   fluid,
   icon,
   iconPosition,
@@ -165,6 +171,7 @@ const Button = ({
       borderColorActive={borderColorActive}
       borderColorDisabled={borderColorDisabled}
       fluid={fluid}
+      small={small}
     >
       {
         icon && iconPosition === 'left' &&
@@ -178,7 +185,7 @@ const Button = ({
         disabled={disabled}
         labelTextWeight={labelTextWeight}
         isLoading={isLoading}
-        fontSize={large ? 17 : 14}
+        fontSize={large ? 17 : small ? 13 : 14}
         vAlign={large ? '2px' : 'middle'}
       >
         {labelText}
