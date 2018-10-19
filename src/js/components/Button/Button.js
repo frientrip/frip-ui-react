@@ -258,7 +258,6 @@ const ButtonGhostPrimary = props =>
       bgColorHover={color.white}
       bgColorActive={color.white}
       bgColorDisabled={color.white}
-      labelTextWeight="bold"
       labelColor={color.primary}
       labelColorHover={color.darySkyBlue}
       labelColorDisabled={color.babyBlue}

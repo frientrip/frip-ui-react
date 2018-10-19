@@ -2004,7 +2004,6 @@ var ButtonGhostPrimary = function ButtonGhostPrimary(props) {
     bgColorHover: _Color2.default.white,
     bgColorActive: _Color2.default.white,
     bgColorDisabled: _Color2.default.white,
-    labelTextWeight: 'bold',
     labelColor: _Color2.default.primary,
     labelColorHover: _Color2.default.darySkyBlue,
     labelColorDisabled: _Color2.default.babyBlue,
