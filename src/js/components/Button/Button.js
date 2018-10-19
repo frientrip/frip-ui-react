@@ -91,7 +91,7 @@ const Wrapper = styled.button`
   border-radius: 4px;
   height: ${({ small, large }) => (small ? '35px' : large ? '50px' : '40px')};
   line-height: 100%;
-  padding: ${({ small }) => (small ? '10px 18px' : '12px 18px')};
+  padding: ${({ small }) => (small ? '10px 18px' : '13px 18px')};
   transition: background-color 0.3s;
   text-align: center;
 
@@ -258,6 +258,7 @@ const ButtonGhostPrimary = props =>
       bgColorHover={color.white}
       bgColorActive={color.white}
       bgColorDisabled={color.white}
+      labelTextWeight="bold"
       labelColor={color.primary}
       labelColorHover={color.darySkyBlue}
       labelColorDisabled={color.babyBlue}

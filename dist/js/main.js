@@ -1859,7 +1859,7 @@ var Wrapper = _styledComponents2.default.button(_templateObject3, function (_ref
   return small ? '35px' : large ? '50px' : '40px';
 }, function (_ref10) {
   var small = _ref10.small;
-  return small ? '10px 18px' : '12px 18px';
+  return small ? '10px 18px' : '13px 18px';
 }, function (props) {
   return props.disabled ? disabledCss : enabledCss;
 });
@@ -2004,6 +2004,7 @@ var ButtonGhostPrimary = function ButtonGhostPrimary(props) {
     bgColorHover: _Color2.default.white,
     bgColorActive: _Color2.default.white,
     bgColorDisabled: _Color2.default.white,
+    labelTextWeight: 'bold',
     labelColor: _Color2.default.primary,
     labelColorHover: _Color2.default.darySkyBlue,
     labelColorDisabled: _Color2.default.babyBlue,
