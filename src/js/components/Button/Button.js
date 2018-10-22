@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import color from '../Color';
 
 import Spinner from '../Spinner';
+import fontWeight from 'font-weight';
 
 const propTypes = {
   className: PropTypes.string,
@@ -34,7 +35,7 @@ const defaultProps = {
   className: '',
   onClick: () => {},
   disabled: false,
-  labelTextWeight: 'normal',
+  labelTextWeight: fontWeight.normal,
   labelColor: color.black,
   labelColorHover: '#ffffff',
   labelColorDisabled: '#4a4a4a',
@@ -215,7 +216,7 @@ const ButtonPrimary = props =>
       bgColorHover="#3789db"
       bgColorActive="#3c79b7"
       bgColorDisabled="#99ccff"
-      labelTextWeight="bold"
+      labelTextWeight={fontWeight.bold}
       labelColor={color.white}
       labelColorDisabled={color.white}
     />
@@ -229,7 +230,6 @@ const ButtonDanger = props =>
       bgColorHover="#db6060"
       bgColorActive="#b75b5b"
       bgColorDisabled="#ebf0f5"
-      labelTextWeight={500}
       labelColor={color.white}
       labelColorDisabled={color.black}
     />
