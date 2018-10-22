@@ -25,7 +25,7 @@ const ListItem = styled.li`
   text-align: left;
   list-style-type: none;
   cursor: pointer;
-  background-color: ${({ isSelected }) => (isSelected ? '#f5faff' : color.white)};
+  background-color: ${({ isSelected }) => (isSelected ? '#f5faff' : color.pureWhite)};
   color: ${({ isSelected }) => (isSelected ? color.primary : color.black)};
   user-select: none;
 

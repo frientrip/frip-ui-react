@@ -42,7 +42,7 @@ const InputWrapper = styled.div`
   width: 100%;
   height: 40px;
   ${({ transparent }) => (transparent ? '' : 'border-radius: 4px;')}
-  background-color: ${({ transparent }) => (transparent ? 'transparent' : color.white)};
+  background-color: ${({ transparent }) => (transparent ? 'transparent' : color.pureWhite)};
 `;
 
 const Input = styled.input`
@@ -51,12 +51,12 @@ const Input = styled.input`
   border-radius: inherit;
   border: none;
   ${({ transparent, error }) => (transparent
-    ? `border-bottom: 0.5px solid ${error ? color.red : color.white};`
+    ? `border-bottom: 0.5px solid ${error ? color.red : color.pureWhite};`
     : `border: 1px solid ${error ? color.red : color.lightGrey};`
   )}
   padding: 0 24px 0 16px;
   font-size: 14px;
-  color: ${({ transparent }) => (transparent ? color.white : color.black)};
+  color: ${({ transparent }) => (transparent ? color.pureWhite : color.black)};
   transition: border 0.2s;
   background-color: transparent;
 
@@ -83,7 +83,7 @@ const IconWrapper = styled.div`
 
 const IconWrapperVisible = styled(IconWrapper)`
   opacity: 1;
-  background-color: ${color.white};
+  background-color: ${color.pureWhite};
 `;
 
 const MessageWrapper = styled.div`

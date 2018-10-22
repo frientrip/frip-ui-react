@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import color from '../Color';
 
 import Spinner from '../Spinner';
-import fontWeight from 'font-weight';
+import fontWeight from '../../../font-weight';
 
 const propTypes = {
   className: PropTypes.string,
@@ -37,11 +37,11 @@ const defaultProps = {
   disabled: false,
   labelTextWeight: fontWeight.normal,
   labelColor: color.black,
-  labelColorHover: '#ffffff',
-  labelColorDisabled: '#4a4a4a',
+  labelColorHover: color.black,
+  labelColorDisabled: color.silver,
   bgColor: color.paleGrey,
   bgColorHover: color.lightBlueGrey,
-  bgColorActive: '#cbcfd3',
+  bgColorActive: color.lightBlueGrey,
   bgColorDisabled: color.paleGrey2,
   borderColor: '',
   borderColorHover: '',
@@ -92,7 +92,7 @@ const Wrapper = styled.button`
   border-radius: 4px;
   height: ${({ small, large }) => (small ? '35px' : large ? '50px' : '40px')};
   line-height: 100%;
-  padding: ${({ small }) => (small ? '10px 18px' : '13px 18px')};
+  padding: ${({ small, isIcon }) => (isIcon ? '7px 15px' : (small ? '10px 18px' :  '13px 18px'))};
   transition: background-color 0.3s;
   text-align: center;
 
@@ -174,6 +174,7 @@ const Button = ({
       fluid={fluid}
       small={small}
       large={large}
+      isIcon={icon !== undefined && icon !== null}
     >
       {
         icon && iconPosition === 'left' &&
@@ -213,12 +214,12 @@ const ButtonPrimary = props =>
     <Button
       {...props}
       bgColor={color.primary}
-      bgColorHover="#3789db"
-      bgColorActive="#3c79b7"
-      bgColorDisabled="#99ccff"
+      bgColorHover={color.darkSkyBlue}
+      bgColorActive={color.darkSkyBlue}
+      bgColorDisabled={color.babyBlue}
       labelTextWeight={fontWeight.bold}
-      labelColor={color.white}
-      labelColorDisabled={color.white}
+      labelColor={color.pureWhite}
+      labelColorDisabled={color.pureWhite}
     />
   );
 
@@ -230,22 +231,23 @@ const ButtonDanger = props =>
       bgColorHover="#db6060"
       bgColorActive="#b75b5b"
       bgColorDisabled="#ebf0f5"
-      labelColor={color.white}
+      labelColor={color.pureWhite}
       labelColorDisabled={color.black}
     />
   );
 
+// TODO: Hover 스타일이 없음
 const ButtonGhost = props =>
   (
     <Button
       {...props}
-      bgColor={color.white}
+      bgColor={color.pureWhite}
       bgColorHover="#f3f3f3"
       bgColorActive="#e6e6e6"
-      bgColorDisabled={color.white}
+      bgColorDisabled={color.pureWhite}
       labelColor={color.grey}
       labelColorDisabled={color.grey}
-      borderColor="#d9e0e8"
+      borderColor={color.pinkishGrey}
       borderColorDisabled="rgba(217, 224, 232, 0.5)"
     />
   );
@@ -254,16 +256,16 @@ const ButtonGhostPrimary = props =>
   (
     <Button
       {...props}
-      bgColor={color.white}
-      bgColorHover={color.white}
-      bgColorActive={color.white}
-      bgColorDisabled={color.white}
+      bgColor={color.pureWhite}
+      bgColorHover={color.pureWhite}
+      bgColorActive={color.pureWhite}
+      bgColorDisabled={color.pureWhite}
       labelColor={color.primary}
-      labelColorHover={color.darySkyBlue}
+      labelColorHover={color.darkSkyBlue}
       labelColorDisabled={color.babyBlue}
       borderColor={color.primary}
-      borderColorHover={color.darySkyBlue}
-      borderColorActive={color.darySkyBlue}
+      borderColorHover={color.darkSkyBlue}
+      borderColorActive={color.darkSkyBlue}
       borderColorDisabled={color.babyBlue}
     />
   );
@@ -272,6 +274,7 @@ const IconButton = props =>
   (
     <ButtonGhost
       {...props}
+      borderColor="#9b9b9b"
       labelText=""
       iconPosition="center"
     />

@@ -63,7 +63,7 @@ const SelectedOption = styled.div`
   border-radius: 4px;
   padding: 8px 16px;
   transition: background-color 0.4s;
-  background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
+  background-color: ${({ active }) => (active ? color.lightGrey : color.pureWhite)};
 
   >div:first-child {
     flex: 1 1 auto;
@@ -102,7 +102,7 @@ const Options = styled.div`
   top: 45px;
   left: 0;
   width: 100%;
-  background-color: ${color.white};
+  background-color: ${color.pureWhite};
   border-radius: 4px;
   border: solid 1px #d9e0e8;
   opacity: ${({ visible }) => (visible ? '1' : '0')};
