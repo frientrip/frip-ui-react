@@ -233,6 +233,7 @@ const ButtonDanger = props =>
       bgColorActive="#b75b5b"
       bgColorDisabled="#ebf0f5"
       labelColor={color.pureWhite}
+      labelColorHover={color.pureWhite}
       labelColorDisabled={color.black}
     />
   );

@@ -1994,6 +1994,7 @@ var ButtonDanger = function ButtonDanger(props) {
     bgColorActive: '#b75b5b',
     bgColorDisabled: '#ebf0f5',
     labelColor: _Color2.default.pureWhite,
+    labelColorHover: _Color2.default.pureWhite,
     labelColorDisabled: _Color2.default.black
   }));
 };
