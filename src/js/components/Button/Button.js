@@ -219,6 +219,7 @@ const ButtonPrimary = props =>
       bgColorDisabled={color.babyBlue}
       labelTextWeight={fontWeight.bold}
       labelColor={color.pureWhite}
+      labelColorHover={color.pureWhite}
       labelColorDisabled={color.pureWhite}
     />
   );
@@ -246,6 +247,7 @@ const ButtonGhost = props =>
       bgColorActive="#e6e6e6"
       bgColorDisabled={color.pureWhite}
       labelColor={color.grey}
+      labelColorHover={color.grey}
       labelColorDisabled={color.grey}
       borderColor={color.pinkishGrey}
       borderColorDisabled="rgba(217, 224, 232, 0.5)"

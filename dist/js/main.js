@@ -1982,6 +1982,7 @@ var ButtonPrimary = function ButtonPrimary(props) {
     bgColorDisabled: _Color2.default.babyBlue,
     labelTextWeight: _fontWeight2.default.bold,
     labelColor: _Color2.default.pureWhite,
+    labelColorHover: _Color2.default.pureWhite,
     labelColorDisabled: _Color2.default.pureWhite
   }));
 };
@@ -2005,6 +2006,7 @@ var ButtonGhost = function ButtonGhost(props) {
     bgColorActive: '#e6e6e6',
     bgColorDisabled: _Color2.default.pureWhite,
     labelColor: _Color2.default.grey,
+    labelColorHover: _Color2.default.grey,
     labelColorDisabled: _Color2.default.grey,
     borderColor: _Color2.default.pinkishGrey,
     borderColorDisabled: 'rgba(217, 224, 232, 0.5)'
