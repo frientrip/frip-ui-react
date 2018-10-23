@@ -5,6 +5,7 @@ import color from '../Color';
 import ChevronIcon from '../../assets/svgs/ic-chevron-down-black.svg';
 
 import MenuItem from './MenuItem';
+import fontWeight from '../../../font-weight';
 
 const propTypes = {
   icon: PropTypes.node,
@@ -27,7 +28,7 @@ const Section = styled.div`
   width: 100%;
   margin: 0;
   color: ${color.black};
-  font-weight: 400;
+  font-weight: ${fontWeight.normal};
   border-top: 1px solid ${color.silver};
 
   &:first-of-type {
@@ -72,7 +73,7 @@ const SectionLabelWrapper = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #f5faff;
+    background-color: ${color.veryLightBlue};
   }
 `;
 

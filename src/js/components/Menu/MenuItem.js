@@ -8,21 +8,25 @@ const propTypes = {
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
   isMobile: PropTypes.bool,
+  badge: PropTypes.string,
 };
 
 const defaultProps = {
   isSelected: false,
   isMobile: false,
   onClick: () => {},
+  badge: '',
 };
 
 const ListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 40px;
   margin: 0;
   padding: 8px 8px 8px ${({ isMobile }) => (isMobile ? '56px' : '48px')};
   line-height: 24px;
-  text-align: left;
   list-style-type: none;
   cursor: pointer;
   background-color: ${({ isSelected }) => (isSelected ? '#f5faff' : color.pureWhite)};
@@ -30,12 +34,28 @@ const ListItem = styled.li`
   user-select: none;
 
   &:hover {
-    background-color: #f5faff;
+    background-color: ${color.veryLightBlue};
   }
 `;
+const Badge = styled.div`
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  line-height: 16px;
+  font-size: 10px;
+  color: white;
+  text-align: center;
+  background-color: ${color.primary};
+  overflow: hidden;
+`;
 
-const MenuItem = ({ label, isSelected, onClick, isMobile }) => (
-  <ListItem isMobile={isMobile} isSelected={isSelected} onClick={onClick}>{label}</ListItem>
+const MenuItem = ({ label, isSelected, onClick, isMobile, badge }) => (
+  <ListItem isMobile={isMobile} isSelected={isSelected} onClick={onClick}>
+    {label}
+    {
+      badge && <Badge>{badge}</Badge>
+    }
+  </ListItem>
 );
 
 MenuItem.propTypes = propTypes;
