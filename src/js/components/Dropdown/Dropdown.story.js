@@ -41,6 +41,13 @@ storiesOf('Dropdown', module)
       <option value="3">Option 3</option>
     </DropdownWrapper>
   ))
+  .add('Dropdown with disabled option', () => (
+    <DropdownWrapper>
+      <option value="1" disabled>Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </DropdownWrapper>
+  ))
   .add('Dropdown with specific width', () => {
     const StyledDropdownWrapper = styled(DropdownWrapper)`
       width: 150px;
