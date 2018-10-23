@@ -4,23 +4,28 @@ import styled, { css } from 'styled-components';
 import color from '../Color';
 
 import Spinner from '../Spinner';
+import fontWeight from '../../../font-weight';
 
 const propTypes = {
   className: PropTypes.string,
   labelText: PropTypes.string.isRequired,
   labelTextWeight: PropTypes.number,
   labelColor: PropTypes.string,
+  labelColorHover: PropTypes.string,
   labelColorDisabled: PropTypes.string,
   bgColor: PropTypes.string,
   bgColorHover: PropTypes.string,
   bgColorActive: PropTypes.string,
   bgColorDisabled: PropTypes.string,
   borderColor: PropTypes.string,
+  borderColorHover: PropTypes.string,
+  borderColorActive: PropTypes.string,
   borderColorDisabled: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   large: PropTypes.bool,
+  small: PropTypes.bool,
   fluid: PropTypes.bool,
   icon: PropTypes.node,
   iconPosition: PropTypes.string,
@@ -30,17 +35,21 @@ const defaultProps = {
   className: '',
   onClick: () => {},
   disabled: false,
-  labelTextWeight: 300,
+  labelTextWeight: fontWeight.normal,
   labelColor: color.black,
-  labelColorDisabled: '#4a4a4a',
-  bgColor: color.lightSilver,
-  bgColorHover: '#dbe0e4',
-  bgColorActive: '#cbcfd3',
-  bgColorDisabled: '#f5f8fa',
+  labelColorHover: color.black,
+  labelColorDisabled: color.silver,
+  bgColor: color.paleGrey,
+  bgColorHover: color.lightBlueGrey,
+  bgColorActive: color.lightBlueGrey,
+  bgColorDisabled: color.paleGrey2,
   borderColor: '',
+  borderColorHover: '',
+  borderColorActive: '',
   borderColorDisabled: '',
   isLoading: false,
   large: false,
+  small: false,
   fluid: false,
   icon: null,
   iconPosition: 'left',
@@ -48,20 +57,28 @@ const defaultProps = {
 
 const disabledCss = css`
   user-select: none;
+  color: ${({ labelColorDisabled }) => labelColorDisabled};
   ${({ borderColorDisabled }) => (borderColorDisabled ? `border: 1px solid ${borderColorDisabled};` : '')}
 `;
 
 const enabledCss = css`
+  color: ${({ labelColor }) => labelColor};
   ${({ borderColor }) => (borderColor ? `border: 1px solid ${borderColor};` : '')}
 
-  ${({ bgColorHover, bgColorActive }) => `
+  ${({ bgColorHover, bgColorActive, borderColorHover, borderColorActive, labelColorHover }) => `
     &:hover, &:focus {
+      border-color: ${borderColorHover};
       background-color: ${bgColorHover};
     };
 
     &:active {
+      border-color: ${borderColorActive};
       background-color: ${bgColorActive};
     };
+
+    &:hover, &:active {
+      color: ${labelColorHover};
+    }
   `}
   cursor: pointer;
 `;
@@ -73,7 +90,9 @@ const Wrapper = styled.button`
   ${({ fluid }) => (fluid ? 'width: 100%;' : '')}
   background-color: ${({ disabled, bgColor, bgColorDisabled }) => (disabled ? bgColorDisabled : bgColor)};
   border-radius: 4px;
-  padding: 8px 16px;
+  height: ${({ small, large }) => (small ? '35px' : large ? '50px' : '40px')};
+  line-height: 100%;
+  padding: ${({ small, isIcon }) => (isIcon ? '7px 15px' : (small ? '10px 18px' :  '13px 18px'))};
   transition: background-color 0.3s;
   text-align: center;
 
@@ -83,11 +102,12 @@ const Wrapper = styled.button`
 const Label = styled.div`
   display: inline-block;
   vertical-align: ${({ vAlign }) => vAlign};
-  height: 24px;
+  height: 100%;
+  line-height: 100%;
   font-size: ${({ fontSize }) => fontSize}px;
   text-align: center;
   font-weight: ${({ labelTextWeight }) => labelTextWeight};
-  color: ${({ disabled, labelColor, labelColorDisabled }) => (disabled ? labelColorDisabled : labelColor)};
+  color: inherit;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   opacity: ${({ isLoading }) => (isLoading ? 0 : '')};
   user-select: none;
@@ -124,11 +144,12 @@ const RightIconWrapper = styled(IconWrapper)`
 const Button = ({
   className,
   onClick, disabled,
-  labelText, labelTextWeight, labelColor, labelColorDisabled,
+  labelText, labelTextWeight, labelColor, labelColorHover, labelColorDisabled,
   bgColor, bgColorHover, bgColorActive, bgColorDisabled,
-  borderColor, borderColorDisabled,
+  borderColor, borderColorHover, borderColorActive, borderColorDisabled,
   isLoading,
   large,
+  small,
   fluid,
   icon,
   iconPosition,
@@ -143,9 +164,17 @@ const Button = ({
       bgColorHover={bgColorHover}
       bgColorActive={bgColorActive}
       bgColorDisabled={bgColorDisabled}
+      labelColor={labelColor}
+      labelColorHover={labelColorHover}
+      labelColorDisabled={labelColorDisabled}
       borderColor={borderColor}
+      borderColorHover={borderColorHover}
+      borderColorActive={borderColorActive}
       borderColorDisabled={borderColorDisabled}
       fluid={fluid}
+      small={small}
+      large={large}
+      isIcon={icon !== undefined && icon !== null}
     >
       {
         icon && iconPosition === 'left' &&
@@ -158,10 +187,8 @@ const Button = ({
       <Label
         disabled={disabled}
         labelTextWeight={labelTextWeight}
-        labelColor={labelColor}
-        labelColorDisabled={labelColorDisabled}
         isLoading={isLoading}
-        fontSize={large ? 17 : 14}
+        fontSize={large ? 17 : small ? 13 : 14}
         vAlign={large ? '2px' : 'middle'}
       >
         {labelText}
@@ -187,12 +214,13 @@ const ButtonPrimary = props =>
     <Button
       {...props}
       bgColor={color.primary}
-      bgColorHover="#3789db"
-      bgColorActive="#3c79b7"
-      bgColorDisabled="#99ccff"
-      labelTextWeight={500}
-      labelColor={color.white}
-      labelColorDisabled={color.white}
+      bgColorHover={color.darkSkyBlue}
+      bgColorActive={color.darkSkyBlue}
+      bgColorDisabled={color.babyBlue}
+      labelTextWeight={fontWeight.bold}
+      labelColor={color.pureWhite}
+      labelColorHover={color.pureWhite}
+      labelColorDisabled={color.pureWhite}
     />
   );
 
@@ -204,23 +232,25 @@ const ButtonDanger = props =>
       bgColorHover="#db6060"
       bgColorActive="#b75b5b"
       bgColorDisabled="#ebf0f5"
-      labelTextWeight={500}
-      labelColor={color.white}
+      labelColor={color.pureWhite}
+      labelColorHover={color.pureWhite}
       labelColorDisabled={color.black}
     />
   );
 
+// TODO: Hover 스타일이 없음
 const ButtonGhost = props =>
   (
     <Button
       {...props}
-      bgColor={color.white}
+      bgColor={color.pureWhite}
       bgColorHover="#f3f3f3"
       bgColorActive="#e6e6e6"
-      bgColorDisabled={color.white}
+      bgColorDisabled={color.pureWhite}
       labelColor={color.grey}
+      labelColorHover={color.grey}
       labelColorDisabled={color.grey}
-      borderColor="#d9e0e8"
+      borderColor={color.pinkishGrey}
       borderColorDisabled="rgba(217, 224, 232, 0.5)"
     />
   );
@@ -229,14 +259,17 @@ const ButtonGhostPrimary = props =>
   (
     <Button
       {...props}
-      bgColor={color.white}
-      bgColorHover="#d7ebff"
-      bgColorActive="#aed7ff"
-      bgColorDisabled={color.white}
+      bgColor={color.pureWhite}
+      bgColorHover={color.pureWhite}
+      bgColorActive={color.pureWhite}
+      bgColorDisabled={color.pureWhite}
       labelColor={color.primary}
-      labelColorDisabled={color.primary}
+      labelColorHover={color.darkSkyBlue}
+      labelColorDisabled={color.babyBlue}
       borderColor={color.primary}
-      borderColorDisabled="rgba(51, 153, 255, 0.4)"
+      borderColorHover={color.darkSkyBlue}
+      borderColorActive={color.darkSkyBlue}
+      borderColorDisabled={color.babyBlue}
     />
   );
 
@@ -244,6 +277,7 @@ const IconButton = props =>
   (
     <ButtonGhost
       {...props}
+      borderColor="#9b9b9b"
       labelText=""
       iconPosition="center"
     />

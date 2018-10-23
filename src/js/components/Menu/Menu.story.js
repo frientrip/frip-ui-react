@@ -18,6 +18,20 @@ storiesOf('Menu', module)
       </MenuSection>
     </div>
   ))
+  .add('Menu with badge', () => (
+    <div style={{ width: '300px' }}>
+      <MenuSection label="프립 관리">
+        <MenuItem label="출석부" badge="1" onClick={action('MenuItem Clicked')} />
+        <MenuItem label="Q&A관리" badge="스트링" />
+        <MenuItem label="후기 관리" />
+      </MenuSection>
+      <MenuSection isMobile label="프립 관리" icon={HostIcon}>
+        <MenuItem label="출석부" badge="1" onClick={action('MenuItem Clicked')} />
+        <MenuItem label="Q&A관리" />
+        <MenuItem label="후기 관리" />
+      </MenuSection>
+    </div>
+  ))
   .add('Mobile MenuSection', () => (
     <div style={{ width: '300px' }}>
       <MenuSection isMobile label="프립 관리" icon={HostIcon}>

@@ -23,7 +23,7 @@ const Button = styled.button`
   padding: 8px 16px;
   border: solid 1px #c0c0c0;
   border-right: none;
-  background-color: ${({ isActive }) => (isActive ? '#e6e6e6' : color.white)};
+  background-color: ${({ isActive }) => (isActive ? '#e6e6e6' : color.pureWhite)};
   transition: background-color 0.3s;
   font-size: 14px;
   color: ${color.black};

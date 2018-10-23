@@ -59,11 +59,11 @@ const SelectedOption = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  border: 1px solid ${color.lightGrey};
+  border: 1px solid ${color.white};
   border-radius: 4px;
   padding: 8px 16px;
   transition: background-color 0.4s;
-  background-color: ${({ active }) => (active ? color.lightGrey : color.white)};
+  background-color: ${({ active }) => (active ? color.white2 : color.pureWhite)};
 
   >div:first-child {
     flex: 1 1 auto;
@@ -73,11 +73,11 @@ const SelectedOption = styled.div`
   }
 
   &:hover {
-    background-color: ${({ active }) => (active ? color.lightGrey : '#f3f3f3')};
+    background-color: ${color.white2};
   }
 
   &:active {
-    background-color: ${color.lightGrey};
+    background-color: ${color.white2};
   }
 `;
 
@@ -102,7 +102,7 @@ const Options = styled.div`
   top: 45px;
   left: 0;
   width: 100%;
-  background-color: ${color.white};
+  background-color: ${color.pureWhite};
   border-radius: 4px;
   border: solid 1px #d9e0e8;
   opacity: ${({ visible }) => (visible ? '1' : '0')};
@@ -115,13 +115,17 @@ const Options = styled.div`
 const Option = styled.div`
   padding: 8px 16px;
   cursor: pointer;
-  border-radius: inherit;
+  color: ${({ disabled }) => disabled ? color.white : color.black};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  ${({ disabled }) => disabled && `
+    cursor: not-allowed;
+    user-select: none;
+  `}
 
   &:hover {
-    background-color: #f5faff;
+    background-color: ${({ disabled }) => disabled ? color.pureWhite : color.veryLightBlue};
   }
 `;
 
@@ -181,7 +185,8 @@ class Dropdown extends React.Component {
               filteredChildren.map(option => (
                 <Option
                   key={option.props.value}
-                  onClick={() => this.handleOptionClick(option.props)}
+                  disabled={option.props.disabled}
+                  onClick={!option.props.disabled && (() => this.handleOptionClick(option.props))}
                 >
                   {option.props.children}
                 </Option>
