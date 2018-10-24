@@ -25,7 +25,7 @@ const ListItem = styled.li`
   width: 100%;
   height: 40px;
   margin: 0;
-  padding: 8px 8px 8px ${({ isMobile }) => (isMobile ? '56px' : '48px')};
+  padding: 8px 20px 8px ${({ isMobile }) => (isMobile ? '56px' : '48px')};
   line-height: 24px;
   list-style-type: none;
   cursor: pointer;
@@ -49,7 +49,9 @@ const Badge = styled.div`
   overflow: hidden;
 `;
 
-const MenuItem = ({ label, isSelected, onClick, isMobile, badge }) => (
+const MenuItem = ({
+ label, isSelected, onClick, isMobile, badge 
+}) => (
   <ListItem isMobile={isMobile} isSelected={isSelected} onClick={onClick}>
     {label}
     {
