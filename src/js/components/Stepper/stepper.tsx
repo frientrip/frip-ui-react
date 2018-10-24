@@ -23,7 +23,7 @@ export const Stepper = (props: StepperProps) => {
 
     return (
       <Step
-        key={step}
+        key={`step-${index}-${step}`}
         state={state}
         index={index}
         title={step}
