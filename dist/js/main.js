@@ -8416,7 +8416,7 @@ exports.Stepper = function (props) {
         else if (props.currentStep > index) {
             state = 'resolved';
         }
-        return (React.createElement(step_1.default, { key: step, state: state, index: index, title: step }));
+        return (React.createElement(step_1.default, { key: "step-" + index + "-" + step, state: state, index: index, title: step }));
     });
     return (React.createElement("ol", { className: props.className }, listElements));
 };
@@ -8459,13 +8459,13 @@ exports.StepSymbol = styled_components_1.default(function (props) {
     return typeof props.symbol === 'number'
         ? (React.createElement("div", { className: props.className }, props.symbol))
         : (React.createElement("div", { className: props.className, dangerouslySetInnerHTML: { __html: props.symbol } }));
-})(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-bottom: 4px;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n  border-radius: 100%;\n  color: white;\n  background-color: ", ";\n  text-align: center;\n  line-height: 24px;\n\n  svg {\n    width: 100%;\n    height: 100%;\n  }\n"], ["\n  margin-bottom: 4px;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n  border-radius: 100%;\n  color: white;\n  background-color: ", ";\n  text-align: center;\n  line-height: 24px;\n\n  svg {\n    width: 100%;\n    height: 100%;\n  }\n"])), function (p) { return p.disabled ? Color_1.default.silver : Color_1.default.primary; });
+})(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  margin-bottom: 4px;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n  border-radius: 100%;\n  color: white;\n  background-color: ", ";\n  text-align: center;\n  line-height: 24px;\n  z-index: 2;\n\n  svg {\n    width: 100%;\n    height: 100%;\n  }\n"], ["\n  margin-bottom: 4px;\n  width: 32px;\n  height: 32px;\n  padding: 4px;\n  border-radius: 100%;\n  color: white;\n  background-color: ", ";\n  text-align: center;\n  line-height: 24px;\n  z-index: 2;\n\n  svg {\n    width: 100%;\n    height: 100%;\n  }\n"])), function (p) { return p.disabled ? Color_1.default.silver : Color_1.default.primary; });
 exports.Step = function (props) {
     return (React.createElement("li", { className: props.className },
         React.createElement(exports.StepSymbol, { symbol: props.state === 'resolved' ? ic_check_white_svg_1.default : props.index + 1, disabled: props.state === 'disabled' }),
         props.title));
 };
-var StyledStep = styled_components_1.default(exports.Step)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n    z-index: -1;\n  }\n"], ["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n    z-index: -1;\n  }\n"])), function (p) { return p.state === 'disabled' ? Color_1.default.silver : Color_1.default.primary; }, function (p) { return p.state !== 'resolved' ? Color_1.default.silver : Color_1.default.primary; });
+var StyledStep = styled_components_1.default(exports.Step)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n  }\n"], ["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n  }\n"])), function (p) { return p.state === 'disabled' ? Color_1.default.silver : Color_1.default.primary; }, function (p) { return p.state !== 'resolved' ? Color_1.default.silver : Color_1.default.primary; });
 exports.default = StyledStep;
 var templateObject_1, templateObject_2;
 
