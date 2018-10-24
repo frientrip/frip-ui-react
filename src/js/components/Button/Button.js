@@ -58,21 +58,23 @@ const defaultProps = {
 const disabledCss = css`
   user-select: none;
   color: ${({ labelColorDisabled }) => labelColorDisabled};
-  ${({ borderColorDisabled }) => (borderColorDisabled ? `border: 1px solid ${borderColorDisabled};` : '')}
+  border: 1px solid ${({ borderColorDisabled, bgColorDisabled }) => (borderColorDisabled || bgColorDisabled)};
 `;
 
 const enabledCss = css`
   color: ${({ labelColor }) => labelColor};
-  ${({ borderColor }) => (borderColor ? `border: 1px solid ${borderColor};` : '')}
+  border: 1px solid ${({ borderColor, bgColor }) => (borderColor || bgColor)};
 
-  ${({ bgColorHover, bgColorActive, borderColorHover, borderColorActive, labelColorHover }) => `
+  ${({
+    bgColorHover, bgColorActive, borderColorHover, borderColorActive, labelColorHover,
+  }) => `
     &:hover, &:focus {
-      border-color: ${borderColorHover};
+      border-color: ${borderColorHover || bgColorHover};
       background-color: ${bgColorHover};
     };
 
     &:active {
-      border-color: ${borderColorActive};
+      border-color: ${borderColorActive || bgColorActive};
       background-color: ${bgColorActive};
     };
 
@@ -91,8 +93,8 @@ const Wrapper = styled.button`
   background-color: ${({ disabled, bgColor, bgColorDisabled }) => (disabled ? bgColorDisabled : bgColor)};
   border-radius: 4px;
   height: ${({ small, large }) => (small ? '35px' : large ? '50px' : '40px')};
-  line-height: 100%;
-  padding: ${({ small, isIcon }) => (isIcon ? '7px 15px' : (small ? '10px 18px' :  '13px 18px'))};
+  line-height: ${({ small, large, isIcon }) => (small ? '13px' : (large || isIcon) ? '24px' : '14px')};
+  padding: ${({ small, isIcon }) => (isIcon ? '7px 15px' : (small ? '10px 18px' : '12px 18px'))};
   transition: background-color 0.3s;
   text-align: center;
 
@@ -103,7 +105,7 @@ const Label = styled.div`
   display: inline-block;
   vertical-align: ${({ vAlign }) => vAlign};
   height: 100%;
-  line-height: 100%;
+  line-height: inherit;
   font-size: ${({ fontSize }) => fontSize}px;
   text-align: center;
   font-weight: ${({ labelTextWeight }) => labelTextWeight};
@@ -209,85 +211,4 @@ const Button = ({
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
-const ButtonPrimary = props =>
-  (
-    <Button
-      {...props}
-      bgColor={color.primary}
-      bgColorHover={color.darkSkyBlue}
-      bgColorActive={color.darkSkyBlue}
-      bgColorDisabled={color.babyBlue}
-      labelTextWeight={fontWeight.bold}
-      labelColor={color.pureWhite}
-      labelColorHover={color.pureWhite}
-      labelColorDisabled={color.pureWhite}
-    />
-  );
-
-const ButtonDanger = props =>
-  (
-    <Button
-      {...props}
-      bgColor={color.red}
-      bgColorHover="#db6060"
-      bgColorActive="#b75b5b"
-      bgColorDisabled="#ebf0f5"
-      labelColor={color.pureWhite}
-      labelColorHover={color.pureWhite}
-      labelColorDisabled={color.black}
-    />
-  );
-
-// TODO: Hover 스타일이 없음
-const ButtonGhost = props =>
-  (
-    <Button
-      {...props}
-      bgColor={color.pureWhite}
-      bgColorHover="#f3f3f3"
-      bgColorActive="#e6e6e6"
-      bgColorDisabled={color.pureWhite}
-      labelColor={color.grey}
-      labelColorHover={color.grey}
-      labelColorDisabled={color.grey}
-      borderColor={color.pinkishGrey}
-      borderColorDisabled="rgba(217, 224, 232, 0.5)"
-    />
-  );
-
-const ButtonGhostPrimary = props =>
-  (
-    <Button
-      {...props}
-      bgColor={color.pureWhite}
-      bgColorHover={color.pureWhite}
-      bgColorActive={color.pureWhite}
-      bgColorDisabled={color.pureWhite}
-      labelColor={color.primary}
-      labelColorHover={color.darkSkyBlue}
-      labelColorDisabled={color.babyBlue}
-      borderColor={color.primary}
-      borderColorHover={color.darkSkyBlue}
-      borderColorActive={color.darkSkyBlue}
-      borderColorDisabled={color.babyBlue}
-    />
-  );
-
-const IconButton = props =>
-  (
-    <ButtonGhost
-      {...props}
-      borderColor="#9b9b9b"
-      labelText=""
-      iconPosition="center"
-    />
-  );
-
-export {
-  Button,
-  ButtonPrimary,
-  ButtonDanger,
-  ButtonGhost,
-  ButtonGhostPrimary,
-  IconButton,
-};
+export default Button;
