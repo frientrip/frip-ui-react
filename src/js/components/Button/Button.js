@@ -65,7 +65,9 @@ const enabledCss = css`
   color: ${({ labelColor }) => labelColor};
   border: 1px solid ${({ borderColor, bgColor }) => (borderColor || bgColor)};
 
-  ${({ bgColorHover, bgColorActive, borderColorHover, borderColorActive, labelColorHover }) => `
+  ${({
+    bgColorHover, bgColorActive, borderColorHover, borderColorActive, labelColorHover,
+  }) => `
     &:hover, &:focus {
       border-color: ${borderColorHover || bgColorHover};
       background-color: ${bgColorHover};
@@ -92,7 +94,7 @@ const Wrapper = styled.button`
   border-radius: 4px;
   height: ${({ small, large }) => (small ? '35px' : large ? '50px' : '40px')};
   line-height: ${({ small, large, isIcon }) => (small ? '13px' : (large || isIcon) ? '24px' : '14px')};
-  padding: ${({ small, isIcon }) => (isIcon ? '7px 15px' : (small ? '10px 18px' :  '12px 18px'))};
+  padding: ${({ small, isIcon }) => (isIcon ? '7px 15px' : (small ? '10px 18px' : '12px 18px'))};
   transition: background-color 0.3s;
   text-align: center;
 

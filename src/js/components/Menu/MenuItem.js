@@ -50,7 +50,7 @@ const Badge = styled.div`
 `;
 
 const MenuItem = ({
- label, isSelected, onClick, isMobile, badge 
+  label, isSelected, onClick, isMobile, badge,
 }) => (
   <ListItem isMobile={isMobile} isSelected={isSelected} onClick={onClick}>
     {label}
