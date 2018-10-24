@@ -31,6 +31,7 @@ export const StepSymbol = styled((props: StepSymbolProps) => {
   background-color: ${p => p.disabled ? color.silver : color.primary};
   text-align: center;
   line-height: 24px;
+  z-index: 2;
 
   svg {
     width: 100%;
@@ -76,7 +77,6 @@ const StyledStep = styled(Step)`
     width: 70%;
     height: 2px;
     background-color: ${p => p.state !== 'resolved' ? color.silver : color.primary};
-    z-index: -1;
   }
 `;
 
