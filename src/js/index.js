@@ -7,6 +7,7 @@ import { Form, Input } from './components/Form';
 import Stepper from './components/Stepper/index.ts';
 import { Tabs, Tab } from './components/Tabs';
 import { PageButton, PrevButton, NextButton } from './components/Pagination';
+import Toggle from './components/Toggle/index.tsx';
 
 export {
   Button,
@@ -26,4 +27,5 @@ export {
   PageButton,
   PrevButton,
   NextButton,
+  Toggle,
 };
