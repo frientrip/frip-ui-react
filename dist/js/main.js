@@ -362,7 +362,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _templateObject = _taggedTemplateLiteral(['\n  user-select: none;\n  color: ', ';\n  border: 1px solid ', ';\n'], ['\n  user-select: none;\n  color: ', ';\n  border: 1px solid ', ';\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  color: ', ';\n  border: 1px solid ', ';\n\n  ', '\n  cursor: pointer;\n'], ['\n  color: ', ';\n  border: 1px solid ', ';\n\n  ', '\n  cursor: pointer;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  height: ', ';\n  line-height: ', ';\n  padding: ', ';\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  height: ', ';\n  line-height: ', ';\n  padding: ', ';\n  transition: background-color 0.3s;\n  text-align: center;\n\n  ', '\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  height: ', ';\n  line-height: ', ';\n  padding: ', ';\n  transition: background-color 0.3s;\n  text-align: center;\n  font-family: \'Spoqa Han Sans\', sans-serif;\n\n  ', '\n'], ['\n  border: none;\n  position: relative;\n  display: ', ';\n  ', '\n  background-color: ', ';\n  border-radius: 4px;\n  height: ', ';\n  line-height: ', ';\n  padding: ', ';\n  transition: background-color 0.3s;\n  text-align: center;\n  font-family: \'Spoqa Han Sans\', sans-serif;\n\n  ', '\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 100%;\n  line-height: inherit;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n'], ['\n  display: inline-block;\n  vertical-align: ', ';\n  height: 100%;\n  line-height: inherit;\n  font-size: ', 'px;\n  text-align: center;\n  font-weight: ', ';\n  color: inherit;\n  opacity: ', ';\n  opacity: ', ';\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n'], ['\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  text-align: center;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n'], ['\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  overflow: hidden;\n  vertical-align: middle;\n']),
@@ -390,7 +390,7 @@ var _Spinner = __webpack_require__(30);
 
 var _Spinner2 = _interopRequireDefault(_Spinner);
 
-var _fontWeight = __webpack_require__(12);
+var _fontWeight = __webpack_require__(8);
 
 var _fontWeight2 = _interopRequireDefault(_fontWeight);
 
@@ -420,7 +420,8 @@ var propTypes = {
   small: _propTypes2.default.bool,
   fluid: _propTypes2.default.bool,
   icon: _propTypes2.default.node,
-  iconPosition: _propTypes2.default.string
+  iconPosition: _propTypes2.default.string,
+  tabIndex: _propTypes2.default.number
 };
 
 var defaultProps = {
@@ -444,7 +445,8 @@ var defaultProps = {
   small: false,
   fluid: false,
   icon: null,
-  iconPosition: 'left'
+  iconPosition: 'left',
+  tabIndex: 0
 };
 
 var disabledCss = (0, _styledComponents.css)(_templateObject, function (_ref) {
@@ -549,12 +551,13 @@ var Button = function Button(_ref17) {
       small = _ref17.small,
       fluid = _ref17.fluid,
       icon = _ref17.icon,
-      iconPosition = _ref17.iconPosition;
+      iconPosition = _ref17.iconPosition,
+      tabIndex = _ref17.tabIndex;
   return _react2.default.createElement(
     Wrapper,
     {
       className: className,
-      tabIndex: disabled ? undefined : '0',
+      tabIndex: tabIndex !== undefined ? tabIndex : !disabled,
       onClick: disabled || isLoading ? function () {} : onClick,
       disabled: disabled || isLoading,
       bgColor: bgColor,
@@ -582,7 +585,7 @@ var Button = function Button(_ref17) {
         labelTextWeight: labelTextWeight,
         isLoading: isLoading,
         fontSize: large ? 17 : small ? 13 : 14,
-        vAlign: large ? '2px' : 'middle'
+        vAlign: large ? '2px' : '0px'
       },
       labelText
     ),
@@ -706,6 +709,28 @@ module.exports = emptyFunction;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+// Ref. https://developer.mozilla.org/ko/docs/Web/CSS/font-weight#%EC%9D%BC%EB%B0%98%EC%A0%81%EC%9D%B8_%EA%B0%80%EC%A4%91%EC%B9%98_%EC%9D%B4%EB%A6%84_%EB%A7%A4%ED%95%91
+var fontWeight = {
+    thin: 100,
+    extraLight: 200,
+    light: 300,
+    normal: 400,
+    medium: 500,
+    semiBold: 600,
+    bold: 700,
+    extraBold: 800,
+    heavy: 900,
+};
+exports.default = fontWeight;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -758,7 +783,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,7 +880,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -924,7 +949,7 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -943,35 +968,13 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-// Ref. https://developer.mozilla.org/ko/docs/Web/CSS/font-weight#%EC%9D%BC%EB%B0%98%EC%A0%81%EC%9D%B8_%EA%B0%80%EC%A4%91%EC%B9%98_%EC%9D%B4%EB%A6%84_%EB%A7%A4%ED%95%91
-var fontWeight = {
-    thin: 100,
-    extraLight: 200,
-    light: 300,
-    normal: 400,
-    medium: 500,
-    semiBold: 600,
-    bold: 700,
-    extraBold: 800,
-    heavy: 900,
-};
-exports.default = fontWeight;
-
-
-/***/ }),
 /* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -1240,8 +1243,8 @@ module.exports = emptyObject;
 
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(6);
-  var warning = __webpack_require__(10);
-  var ReactPropTypesSecret = __webpack_require__(11);
+  var warning = __webpack_require__(11);
+  var ReactPropTypesSecret = __webpack_require__(12);
   var loggedTypeFailures = {};
 }
 
@@ -1923,7 +1926,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  flex: 1 1 auto;\n  width: 100%;\n  height: 0;\n'], ['\n  flex: 1 1 auto;\n  width: 100%;\n  height: 0;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  flex: 1 1 auto;\n  width: 100%;\n'], ['\n  flex: 1 1 auto;\n  width: 100%;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -2099,7 +2102,7 @@ exports.default = _Button2.default;
  * LICENSE file in the root directory of this source tree.
  */
 
-var k=__webpack_require__(9),n=__webpack_require__(6),p=__webpack_require__(14),q=__webpack_require__(7),r="function"===typeof Symbol&&Symbol.for,t=r?Symbol.for("react.element"):60103,u=r?Symbol.for("react.portal"):60106,v=r?Symbol.for("react.fragment"):60107,w=r?Symbol.for("react.strict_mode"):60108,x=r?Symbol.for("react.profiler"):60114,y=r?Symbol.for("react.provider"):60109,z=r?Symbol.for("react.context"):60110,A=r?Symbol.for("react.async_mode"):60111,B=
+var k=__webpack_require__(10),n=__webpack_require__(6),p=__webpack_require__(14),q=__webpack_require__(7),r="function"===typeof Symbol&&Symbol.for,t=r?Symbol.for("react.element"):60103,u=r?Symbol.for("react.portal"):60106,v=r?Symbol.for("react.fragment"):60107,w=r?Symbol.for("react.strict_mode"):60108,x=r?Symbol.for("react.profiler"):60114,y=r?Symbol.for("react.provider"):60109,z=r?Symbol.for("react.context"):60110,A=r?Symbol.for("react.async_mode"):60111,B=
 r?Symbol.for("react.forward_ref"):60112;r&&Symbol.for("react.timeout");var C="function"===typeof Symbol&&Symbol.iterator;function D(a){for(var b=arguments.length-1,e="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=0;c<b;c++)e+="&args[]="+encodeURIComponent(arguments[c+1]);n(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",e)}
 var E={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function F(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||E}F.prototype.isReactComponent={};F.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?D("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};F.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};function G(){}
 G.prototype=F.prototype;function H(a,b,e){this.props=a;this.context=b;this.refs=p;this.updater=e||E}var I=H.prototype=new G;I.constructor=H;k(I,F.prototype);I.isPureReactComponent=!0;var J={current:null},K=Object.prototype.hasOwnProperty,L={key:!0,ref:!0,__self:!0,__source:!0};
@@ -2136,10 +2139,10 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(9);
+var _assign = __webpack_require__(10);
 var invariant = __webpack_require__(6);
 var emptyObject = __webpack_require__(14);
-var warning = __webpack_require__(10);
+var warning = __webpack_require__(11);
 var emptyFunction = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(15);
 
@@ -3624,10 +3627,10 @@ module.exports = react;
 
 var emptyFunction = __webpack_require__(7);
 var invariant = __webpack_require__(6);
-var warning = __webpack_require__(10);
-var assign = __webpack_require__(9);
+var warning = __webpack_require__(11);
+var assign = __webpack_require__(10);
 
-var ReactPropTypesSecret = __webpack_require__(11);
+var ReactPropTypesSecret = __webpack_require__(12);
 var checkPropTypes = __webpack_require__(15);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
@@ -4174,7 +4177,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 var emptyFunction = __webpack_require__(7);
 var invariant = __webpack_require__(6);
-var ReactPropTypesSecret = __webpack_require__(11);
+var ReactPropTypesSecret = __webpack_require__(12);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -4350,7 +4353,7 @@ var _Color = __webpack_require__(1);
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _fontWeight = __webpack_require__(12);
+var _fontWeight = __webpack_require__(8);
 
 var _fontWeight2 = _interopRequireDefault(_fontWeight);
 
@@ -4765,7 +4768,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReactTableDefaults", function() { return ReactTableDefaults; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lifecycle__ = __webpack_require__(40);
@@ -6459,7 +6462,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pagination__ = __webpack_require__(43);
@@ -6819,7 +6822,7 @@ var emptyObj = function emptyObj() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -7781,7 +7784,7 @@ var _MenuItem = __webpack_require__(21);
 
 var _MenuItem2 = _interopRequireDefault(_MenuItem);
 
-var _fontWeight = __webpack_require__(12);
+var _fontWeight = __webpack_require__(8);
 
 var _fontWeight2 = _interopRequireDefault(_fontWeight);
 
@@ -8140,13 +8143,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: inline-block;\n  width: 100%;\n'], ['\n  display: inline-block;\n  width: 100%;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  ', '\n  background-color: ', ';\n'], ['\n  position: relative;\n  width: 100%;\n  height: 40px;\n  ', '\n  background-color: ', ';\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  font-family: \'Spoqa Han Sans\', sans-serif;\n  margin-bottom: 5px;\n  padding-left: ', ';\n'], ['\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  font-family: \'Spoqa Han Sans\', sans-serif;\n  margin-bottom: 5px;\n  padding-left: ', ';\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  width: ', ';\n  height: 40px;\n  ', '\n  background-color: ', ';\n  margin-bottom: 10px;\n'], ['\n  position: relative;\n  width: ', ';\n  height: 40px;\n  ', '\n  background-color: ', ';\n  margin-bottom: 10px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  ', '\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  transition: border 0.2s;\n  background-color: transparent;\n\n  &:focus {\n    border-color: ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n'], ['\n  width: 100%;\n  height: 100%;\n  border-radius: inherit;\n  border: none;\n  ', '\n  padding: 0 24px 0 16px;\n  font-size: 14px;\n  color: ', ';\n  transition: border 0.2s;\n  background-color: transparent;\n\n  &:focus {\n    border-color: ', ';\n    outline: none;\n  }\n\n  &:focus + div {\n    opacity: 1;\n  }\n\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 16px;\n  height: 16px;\n  right: 8px;\n  top: 8px;\n  opacity: 0;\n  user-select: none;\n'], ['\n  position: absolute;\n  width: 16px;\n  height: 16px;\n  right: 8px;\n  top: 8px;\n  opacity: 0;\n  user-select: none;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  opacity: 1;\n  background-color: ', ';\n'], ['\n  opacity: 1;\n  background-color: ', ';\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  width: 100%;\n  margin-top: 2px;\n  font-size: 12px;\n  color: ', ';\n  font-weight: 300;\n'], ['\n  width: 100%;\n  margin-top: 2px;\n  font-size: 12px;\n  color: ', ';\n  font-weight: 300;\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n  position: relative;\n  color: ', ';\n  font-size: 12px;\n  font-weight: 600;\n  min-height: 18px;\n  margin-bottom: 5px;\n'], ['\n  position: relative;\n  color: ', ';\n  font-size: 12px;\n  font-weight: 600;\n  min-height: 18px;\n  margin-bottom: 5px;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  width: 100%;\n  font-size: 12px;\n  line-height: 12px;\n  color: ', ';\n  font-weight: 300;\n'], ['\n  width: 100%;\n  font-size: 12px;\n  line-height: 12px;\n  color: ', ';\n  font-weight: 300;\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n  position: ', ';\n  color: ', ';\n  font-size: ', '\n  font-weight: ', ';\n  min-height: 18px;\n  margin-bottom: 16px;\n  left: 0;\n  z-index: 1;\n  top: ', ';\n'], ['\n  position: ', ';\n  color: ', ';\n  font-size: ', '\n  font-weight: ', ';\n  min-height: 18px;\n  margin-bottom: 16px;\n  left: 0;\n  z-index: 1;\n  top: ', ';\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n  color: ', ';\n'], ['\n  color: ', ';\n']);
 
 var _react = __webpack_require__(0);
@@ -8164,6 +8167,10 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 var _Color = __webpack_require__(1);
 
 var _Color2 = _interopRequireDefault(_Color);
+
+var _fontWeight = __webpack_require__(8);
+
+var _fontWeight2 = _interopRequireDefault(_fontWeight);
 
 var _icDeleteLGrey = __webpack_require__(59);
 
@@ -8193,7 +8200,10 @@ var propTypes = {
   error: _propTypes2.default.bool,
   value: _propTypes2.default.string,
   placeholder: _propTypes2.default.string,
-  transparent: _propTypes2.default.bool
+  transparent: _propTypes2.default.bool,
+  bigLabel: _propTypes2.default.bool,
+  tabIndex: _propTypes2.default.number,
+  inputWidth: _propTypes2.default.string
 };
 
 var defaultProps = {
@@ -8206,28 +8216,37 @@ var defaultProps = {
   error: false,
   value: '',
   placeholder: '',
-  transparent: false
+  transparent: false,
+  bigLabel: false,
+  tabIndex: 0,
+  inputWidth: '100%'
 };
 
-var Wrapper = _styledComponents2.default.div(_templateObject);
+var Wrapper = _styledComponents2.default.div(_templateObject, function (_ref) {
+  var bigLabel = _ref.bigLabel;
+  return bigLabel ? '155px' : '0px';
+});
 
-var InputWrapper = _styledComponents2.default.div(_templateObject2, function (_ref) {
-  var transparent = _ref.transparent;
+var InputWrapper = _styledComponents2.default.div(_templateObject2, function (_ref2) {
+  var inputWidth = _ref2.inputWidth;
+  return inputWidth;
+}, function (_ref3) {
+  var transparent = _ref3.transparent;
   return transparent ? '' : 'border-radius: 4px;';
-}, function (_ref2) {
-  var transparent = _ref2.transparent;
+}, function (_ref4) {
+  var transparent = _ref4.transparent;
   return transparent ? 'transparent' : _Color2.default.pureWhite;
 });
 
-var Input = _styledComponents2.default.input(_templateObject3, function (_ref3) {
-  var transparent = _ref3.transparent,
-      error = _ref3.error;
+var Input = _styledComponents2.default.input(_templateObject3, function (_ref5) {
+  var transparent = _ref5.transparent,
+      error = _ref5.error;
   return transparent ? 'border-bottom: 0.5px solid ' + (error ? _Color2.default.red : _Color2.default.pureWhite) + ';' : 'border: 1px solid ' + (error ? _Color2.default.red : _Color2.default.lightGrey) + ';';
-}, function (_ref4) {
-  var transparent = _ref4.transparent;
+}, function (_ref6) {
+  var transparent = _ref6.transparent;
   return transparent ? _Color2.default.pureWhite : _Color2.default.black;
-}, function (_ref5) {
-  var error = _ref5.error;
+}, function (_ref7) {
+  var error = _ref7.error;
   return error ? _Color2.default.red : _Color2.default.primary;
 });
 
@@ -8235,14 +8254,23 @@ var IconWrapper = _styledComponents2.default.div(_templateObject4);
 
 var IconWrapperVisible = (0, _styledComponents2.default)(IconWrapper)(_templateObject5, _Color2.default.pureWhite);
 
-var MessageWrapper = _styledComponents2.default.div(_templateObject6, function (_ref6) {
-  var error = _ref6.error;
+var MessageWrapper = _styledComponents2.default.div(_templateObject6, function (_ref8) {
+  var error = _ref8.error;
   return error ? _Color2.default.red : _Color2.default.grey;
 });
 
-var LabelWrapper = _styledComponents2.default.div(_templateObject7, function (_ref7) {
-  var error = _ref7.error;
+var LabelWrapper = _styledComponents2.default.div(_templateObject7, function (_ref9) {
+  var bigLabel = _ref9.bigLabel;
+  return bigLabel ? 'absolute' : 'relative';
+}, function (_ref10) {
+  var error = _ref10.error;
   return error ? _Color2.default.red : _Color2.default.black;
+}, function (_ref11) {
+  var bigLabel = _ref11.bigLabel;
+  return bigLabel ? '20px' : '14px';
+}, _fontWeight2.default.normal, function (_ref12) {
+  var bigLabel = _ref12.bigLabel;
+  return bigLabel ? '5px' : '0';
 });
 
 var RequiredWrapper = _styledComponents2.default.span(_templateObject8, _Color2.default.red);
@@ -8268,8 +8296,8 @@ var InputComponent = function (_React$Component) {
 
   _createClass(InputComponent, [{
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(_ref8) {
-      var value = _ref8.value;
+    value: function componentWillReceiveProps(_ref13) {
+      var value = _ref13.value;
 
       this.setState({
         value: value
@@ -8308,15 +8336,18 @@ var InputComponent = function (_React$Component) {
           message = _props.message,
           error = _props.error,
           placeholder = _props.placeholder,
-          transparent = _props.transparent;
+          transparent = _props.transparent,
+          bigLabel = _props.bigLabel,
+          tabIndex = _props.tabIndex,
+          inputWidth = _props.inputWidth;
 
 
       return _react2.default.createElement(
         Wrapper,
-        { className: className },
+        { className: className, bigLabel: label && bigLabel },
         label && _react2.default.createElement(
           LabelWrapper,
-          { error: error },
+          { bigLabel: bigLabel, error: error },
           label,
           required && _react2.default.createElement(
             RequiredWrapper,
@@ -8326,7 +8357,7 @@ var InputComponent = function (_React$Component) {
         ),
         _react2.default.createElement(
           InputWrapper,
-          { transparent: transparent },
+          { inputWidth: inputWidth, transparent: transparent },
           _react2.default.createElement(Input, {
             type: type,
             error: error,
@@ -8334,7 +8365,8 @@ var InputComponent = function (_React$Component) {
             value: this.state.value,
             innerRef: this.inputRef,
             placeholder: placeholder,
-            transparent: transparent
+            transparent: transparent,
+            tabIndex: tabIndex
           }),
           this.state.value && !error && _react2.default.createElement(IconWrapper, {
             dangerouslySetInnerHTML: { __html: _icDeleteLGrey2.default },
