@@ -23,6 +23,12 @@ const defaultProps = {
   justified: false,
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+`;
+
 const TabLabel = styled.div`
   ${({ justified }) => (justified ? 'flex-basis: 100%;' : '')}
   display: inline-block;
@@ -42,13 +48,11 @@ const TabLabel = styled.div`
 `;
 
 const TabLabels = styled.div`
+  flex: 0 0 auto;
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
   margin-bottom: 10px;
-`;
-
-const TabContent = styled.div`
 `;
 
 class Tabs extends React.Component {
@@ -72,7 +76,7 @@ class Tabs extends React.Component {
     const tabLabels = filteredChildren.map(({ props: { label } }) => label);
 
     return (
-      <div className={this.props.className}>
+      <Wrapper className={this.props.className}>
         <TabLabels>
           {
             tabLabels.map((label, index) =>
@@ -89,12 +93,10 @@ class Tabs extends React.Component {
               ))
           }
         </TabLabels>
-        <TabContent>
-          {
-            filteredChildren[this.props.activeIndex]
-          }
-        </TabContent>
-      </div>
+        {
+          filteredChildren[this.props.activeIndex]
+        }
+      </Wrapper>
     );
   }
 }

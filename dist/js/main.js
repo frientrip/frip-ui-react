@@ -1923,7 +1923,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n'], ['\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  flex: 1 1 auto;\n  width: 100%;\n  height: 0;\n'], ['\n  flex: 1 1 auto;\n  width: 100%;\n  height: 0;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -1950,13 +1950,13 @@ var defaultProps = {
   children: null
 };
 
-var TabContent = _styledComponents2.default.div(_templateObject);
+var Wrapper = _styledComponents2.default.div(_templateObject);
 
 var Tab = function Tab(_ref) {
   var label = _ref.label,
       children = _ref.children;
   return _react2.default.createElement(
-    TabContent,
+    Wrapper,
     { label: label },
     children
   );
@@ -8519,9 +8519,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  ', '\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  text-align: center;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n'], ['\n  ', '\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  text-align: center;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: flex;\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n'], ['\n  display: flex;\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n'], ['\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  flex-flow: column nowrap;\n  height: 100%;\n'], ['\n  display: flex;\n  flex-flow: column nowrap;\n  height: 100%;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  ', '\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  text-align: center;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n'], ['\n  ', '\n  display: inline-block;\n  font-size: ', ';\n  padding: 12px 16px;\n  color: ', ';\n  border-color: ', ';\n  border-bottom: ', ';\n  font-weight: 400;\n  text-align: center;\n  cursor: pointer;\n  transition: color 0.2s;\n\n  &:hover {\n    color: ', ';\n  }\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  display: flex;\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n'], ['\n  flex: 0 0 auto;\n  display: flex;\n  overflow-x: auto;\n  white-space: nowrap;\n  margin-bottom: 10px;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -8571,7 +8571,9 @@ var defaultProps = {
   justified: false
 };
 
-var TabLabel = _styledComponents2.default.div(_templateObject, function (_ref) {
+var Wrapper = _styledComponents2.default.div(_templateObject);
+
+var TabLabel = _styledComponents2.default.div(_templateObject2, function (_ref) {
   var justified = _ref.justified;
   return justified ? 'flex-basis: 100%;' : '';
 }, function (_ref2) {
@@ -8588,9 +8590,7 @@ var TabLabel = _styledComponents2.default.div(_templateObject, function (_ref) {
   return isActive ? _Color2.default.primary : _Color2.default.black;
 });
 
-var TabLabels = _styledComponents2.default.div(_templateObject2);
-
-var TabContent = _styledComponents2.default.div(_templateObject3);
+var TabLabels = _styledComponents2.default.div(_templateObject3);
 
 var Tabs = function (_React$Component) {
   _inherits(Tabs, _React$Component);
@@ -8629,7 +8629,7 @@ var Tabs = function (_React$Component) {
       });
 
       return _react2.default.createElement(
-        'div',
+        Wrapper,
         { className: this.props.className },
         _react2.default.createElement(
           TabLabels,
@@ -8650,11 +8650,7 @@ var Tabs = function (_React$Component) {
             );
           })
         ),
-        _react2.default.createElement(
-          TabContent,
-          null,
-          filteredChildren[this.props.activeIndex]
-        )
+        filteredChildren[this.props.activeIndex]
       );
     }
   }]);
