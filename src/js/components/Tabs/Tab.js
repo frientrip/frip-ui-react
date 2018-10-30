@@ -11,13 +11,15 @@ const defaultProps = {
   children: null,
 };
 
-const TabContent = styled.div`
+const Wrapper = styled.div`
+  flex: 1 1 auto;
+  width: 100%;
 `;
 
 const Tab = ({ label, children }) => (
-  <TabContent label={label}>
+  <Wrapper label={label}>
     {children}
-  </TabContent>
+  </Wrapper>
 );
 
 Tab.propTypes = propTypes;
