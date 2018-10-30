@@ -8694,8 +8694,8 @@ var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObjec
 var Toggle = function (props) {
     return (React.createElement(Wrapper, { onClick: props.onClick },
         React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "64", height: "32", viewBox: "0 0 64 32" },
-            React.createElement("g", { fill: "none", "fill-rule": "evenodd" },
-                React.createElement("rect", { width: props.value ? '64' : '63', height: props.value ? '32' : '31', x: props.value ? '' : '.5', y: props.value ? '' : '.5', fill: props.value ? '#39F' : '#D9E0E8', stroke: props.value ? '' : '#D9E0E8', rx: props.value ? '16' : '15.5' }),
+            React.createElement("g", { fill: "none", fillRule: "evenodd" },
+                React.createElement("rect", { width: props.value ? '64' : '63', height: props.value ? '32' : '31', x: props.value ? '0' : '.5', y: props.value ? '0' : '.5', fill: props.value ? '#39F' : '#D9E0E8', stroke: props.value ? '' : '#D9E0E8', rx: props.value ? '16' : '15.5' }),
                 React.createElement("circle", { cx: props.value ? '48' : '16', cy: "16", r: "14", fill: "#FFF" })))));
 };
 exports.default = Toggle;

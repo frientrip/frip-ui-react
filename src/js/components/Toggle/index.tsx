@@ -26,12 +26,12 @@ const Toggle: React.SFC<ToggleProps> = (props) => {
         height="32"
         viewBox="0 0 64 32"
       >
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <rect
             width={props.value ? '64' : '63'}
             height={props.value ? '32' : '31'}
-            x={props.value ? '' : '.5'}
-            y={props.value ? '' : '.5'}
+            x={props.value ? '0' : '.5'}
+            y={props.value ? '0' : '.5'}
             fill={props.value ? '#39F' : '#D9E0E8'}
             stroke={props.value ? '' : '#D9E0E8'}
             rx={props.value ? '16' : '15.5'}
