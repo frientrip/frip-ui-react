@@ -1985,7 +1985,7 @@ module.exports = __webpack_require__(24);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NextButton = exports.PrevButton = exports.PageButton = exports.Tab = exports.Tabs = exports.Stepper = exports.Input = exports.Form = exports.Color = exports.MenuItem = exports.MenuSection = exports.List = exports.Dropdown = exports.IconButton = exports.ButtonGhostPrimary = exports.ButtonPrimary = exports.Button = undefined;
+exports.Toggle = exports.NextButton = exports.PrevButton = exports.PageButton = exports.Tab = exports.Tabs = exports.Stepper = exports.Input = exports.Form = exports.Color = exports.MenuItem = exports.MenuSection = exports.List = exports.Dropdown = exports.IconButton = exports.ButtonGhostPrimary = exports.ButtonPrimary = exports.Button = undefined;
 
 var _Button = __webpack_require__(25);
 
@@ -2015,6 +2015,10 @@ var _Tabs = __webpack_require__(65);
 
 var _Pagination = __webpack_require__(20);
 
+var _index3 = __webpack_require__(67);
+
+var _index4 = _interopRequireDefault(_index3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Button = _Button2.default;
@@ -2034,6 +2038,7 @@ exports.Tab = _Tabs.Tab;
 exports.PageButton = _Pagination.PageButton;
 exports.PrevButton = _Pagination.PrevButton;
 exports.NextButton = _Pagination.NextButton;
+exports.Toggle = _index4.default;
 
 /***/ }),
 /* 25 */
@@ -8661,6 +8666,41 @@ Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
 
 exports.default = Tabs;
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __importStar(__webpack_require__(0));
+var styled_components_1 = __importDefault(__webpack_require__(3));
+var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 64px;\n  height: 32px;\n\n  rect, circle {\n    transition: all 0.2s;\n  }\n"], ["\n  width: 64px;\n  height: 32px;\n\n  rect, circle {\n    transition: all 0.2s;\n  }\n"])));
+var Toggle = function (props) {
+    return (React.createElement(Wrapper, { onClick: props.onClick },
+        React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: "64", height: "32", viewBox: "0 0 64 32" },
+            React.createElement("g", { fill: "none", "fill-rule": "evenodd" },
+                React.createElement("rect", { width: props.value ? '64' : '63', height: props.value ? '32' : '31', x: props.value ? '' : '.5', y: props.value ? '' : '.5', fill: props.value ? '#39F' : '#D9E0E8', stroke: props.value ? '' : '#D9E0E8', rx: props.value ? '16' : '15.5' }),
+                React.createElement("circle", { cx: props.value ? '48' : '16', cy: "16", r: "14", fill: "#FFF" })))));
+};
+exports.default = Toggle;
+var templateObject_1;
+
 
 /***/ })
 /******/ ]);
