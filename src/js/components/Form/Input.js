@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import color from '../Color';
+import fontWeight from '../../../font-weight';
 
 import DeleteIcon from '../../assets/svgs/ic-delete-l-grey.svg';
 import ErrorIcon from '../../assets/svgs/ic-danger-red.svg';
@@ -17,6 +18,9 @@ const propTypes = {
   value: PropTypes.string,
   placeholder: PropTypes.string,
   transparent: PropTypes.bool,
+  bigLabel: PropTypes.bool,
+  tabIndex: PropTypes.number,
+  inputWidth: PropTypes.string,
 };
 
 const defaultProps = {
@@ -30,19 +34,27 @@ const defaultProps = {
   value: '',
   placeholder: '',
   transparent: false,
+  bigLabel: false,
+  tabIndex: 0,
+  inputWidth: '100%'
 };
 
 const Wrapper = styled.div`
+  position: relative;
   display: inline-block;
   width: 100%;
+  font-family: 'Spoqa Han Sans', sans-serif;
+  margin-bottom: 5px;
+  padding-left: ${( { bigLabel }) => (bigLabel ? '155px' : '0px')};
 `;
 
 const InputWrapper = styled.div`
   position: relative;
-  width: 100%;
+  width: ${({ inputWidth }) => (inputWidth)};
   height: 40px;
   ${({ transparent }) => (transparent ? '' : 'border-radius: 4px;')}
   background-color: ${({ transparent }) => (transparent ? 'transparent' : color.pureWhite)};
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
@@ -88,19 +100,22 @@ const IconWrapperVisible = styled(IconWrapper)`
 
 const MessageWrapper = styled.div`
   width: 100%;
-  margin-top: 2px;
   font-size: 12px;
+  line-height: 12px;
   color: ${({ error }) => (error ? color.red : color.grey)};
   font-weight: 300;
 `;
 
 const LabelWrapper = styled.div`
-  position: relative;
+  position: ${({ bigLabel }) => (bigLabel ? 'absolute' : 'relative')};
   color: ${({ error }) => (error ? color.red : color.black)};
-  font-size: 12px;
-  font-weight: 600;
+  font-size: ${({ bigLabel }) => (bigLabel ? '20px' : '14px')}
+  font-weight: ${fontWeight.normal};
   min-height: 18px;
-  margin-bottom: 5px;
+  margin-bottom: 16px;
+  left: 0;
+  z-index: 1;
+  top: ${({ bigLabel }) => (bigLabel ? '5px' : '0')};
 `;
 
 const RequiredWrapper = styled.span`
@@ -152,18 +167,21 @@ class InputComponent extends React.Component {
       error,
       placeholder,
       transparent,
+      bigLabel,
+      tabIndex,
+      inputWidth,
     } = this.props;
 
     return (
-      <Wrapper className={className}>
+      <Wrapper className={className} bigLabel={label && bigLabel}>
         {
           label &&
-          <LabelWrapper error={error}>
+          <LabelWrapper bigLabel={bigLabel} error={error}>
             {label}
             {required && <RequiredWrapper> *</RequiredWrapper>}
           </LabelWrapper>
         }
-        <InputWrapper transparent={transparent}>
+        <InputWrapper inputWidth={inputWidth} transparent={transparent}>
           <Input
             type={type}
             error={error}
@@ -172,6 +190,7 @@ class InputComponent extends React.Component {
             innerRef={this.inputRef}
             placeholder={placeholder}
             transparent={transparent}
+            tabIndex={tabIndex}
           />
           {
             this.state.value && !error && <IconWrapper
