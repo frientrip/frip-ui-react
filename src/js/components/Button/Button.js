@@ -29,6 +29,7 @@ const propTypes = {
   fluid: PropTypes.bool,
   icon: PropTypes.node,
   iconPosition: PropTypes.string,
+  tabIndex: PropTypes.number,
 };
 
 const defaultProps = {
@@ -53,6 +54,7 @@ const defaultProps = {
   fluid: false,
   icon: null,
   iconPosition: 'left',
+  tabIndex: 0,
 };
 
 const disabledCss = css`
@@ -97,6 +99,7 @@ const Wrapper = styled.button`
   padding: ${({ small, isIcon }) => (isIcon ? '7px 15px' : (small ? '10px 18px' : '12px 18px'))};
   transition: background-color 0.3s;
   text-align: center;
+  font-family: 'Spoqa Han Sans', sans-serif;
 
   ${props => (props.disabled ? disabledCss : enabledCss)}
 `;
@@ -155,11 +158,12 @@ const Button = ({
   fluid,
   icon,
   iconPosition,
+  tabIndex,
 }) =>
   (
     <Wrapper
       className={className}
-      tabIndex={disabled ? undefined : '0'}
+      tabIndex={tabIndex !== undefined ? tabIndex : !disabled }
       onClick={disabled || isLoading ? () => {} : onClick}
       disabled={disabled || isLoading}
       bgColor={bgColor}
@@ -191,7 +195,7 @@ const Button = ({
         labelTextWeight={labelTextWeight}
         isLoading={isLoading}
         fontSize={large ? 17 : small ? 13 : 14}
-        vAlign={large ? '2px' : 'middle'}
+        vAlign={large ? '2px' : '0px'}
       >
         {labelText}
       </Label>
