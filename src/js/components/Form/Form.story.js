@@ -46,6 +46,9 @@ storiesOf('Form', module)
       <Input type="number" label="Number" onChange={action('Input changed')} message="Description" />
     </div>
   ))
+  .add('RadioGroup with Label', () => (
+    <RadioGroup labelText="Radio Group" onChange={action('Radio value changed')} options={[{ value: 'one', labelText: 'One' }, { value: 'two', labelText: 'Two' }, { value: 'three', labelText: 'Three' }]} />
+  ))
   .add('Form', () => (
     <div style={{ width: '150px' }}>
       <Form
