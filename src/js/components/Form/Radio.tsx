@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import fontWeight from '../../../font-weight';
 import color from '../Color';
 
-const Label = styled.div<{ error?:boolean, bigLabel?:boolean }>`
+const Wrapper = styled.div`
+  font-family: inherit;
+`;
+
+const LabelText = styled.div<{ error?:boolean, bigLabel?:boolean }>`
   color: ${({ error }) => (error ? color.red : color.black)};
   font-size: ${({ bigLabel }) => (bigLabel ? '20px' : '14px')}
   font-weight: ${fontWeight.normal};
@@ -12,6 +16,15 @@ const Label = styled.div<{ error?:boolean, bigLabel?:boolean }>`
   left: 0;
   z-index: 1;
   top: ${({ bigLabel }) => (bigLabel ? '5px' : '0')};
+`;
+
+const StyledLabel = styled.label`
+  font-family: inherit;
+  cursor: pointer;
+
+  &:hover {
+    color: ${color.primary};
+  }
 `;
 
 const RequiredWrapper = styled.span`
@@ -32,14 +45,15 @@ const RadioInput = styled.input`
   opacity: 0;
 `;
 
-const LabelWrapper = styled.div<{ baseLength?: string }>`
+const OptionWrapper = styled.div<{ baseLength?: string }>`
   display: inline-flex;
   font-size: 14px;
   color: ${color.black};
   height: 40px;
   justify-content: flex-start;
   align-items: center;
-  flex-basis: ${({ baseLength }) => (baseLength ? baseLength : '100px')};
+  flex-basis: ${({ baseLength }) => (baseLength ? baseLength : 'auto')};
+  margin-bottom: 10px;
 `;
 
 const CustomRadio = styled.div<{ checked: boolean }>`
@@ -83,6 +97,7 @@ export interface RadioGroupProps {
   baseLength?: string;
   direction?: 'column' | 'row';
   required?: boolean;
+  className?: string;
 }
 
 export interface RadioGroupState {
@@ -103,27 +118,39 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
   private handleOnOptionClick(e: React.FormEvent<HTMLInputElement>) {
     this.setState({
       selectedOption: e.currentTarget.value,
+    }, () => {
+      if (this.props.onChange != null && this.state.selectedOption != null) {
+        this.props.onChange(this.state.selectedOption);
+      }
     });
 
-    if (this.props.onChange != null && this.state.selectedOption != null) {
-      this.props.onChange(this.state.selectedOption);
-    }
   }
 
   public render() {
 
-    const { labelText, options, bigLabel, error, direction, required } = this.props;
+    const {
+      labelText,
+      options,
+      bigLabel,
+      baseLength,
+      error,
+      direction,
+      required,
+      className,
+    } = this.props;
     const { selectedOption } = this.state;
 
     return (
-      <div>
-        <Label bigLabel={bigLabel} error={error}>{labelText}</Label>
-        {required && <RequiredWrapper> *</RequiredWrapper>}
+      <Wrapper className={className}>
+        <LabelText bigLabel={bigLabel} error={error}>
+          {labelText}
+          {required && <RequiredWrapper> *</RequiredWrapper>}
+        </LabelText>
         <RadioInputWrapper direction={direction}>
         {
           options.map(option => (
-            <LabelWrapper>
-              <label key={option.value} htmlFor={`radio-${option.value}`}>
+            <OptionWrapper baseLength={baseLength}>
+              <StyledLabel key={option.value} htmlFor={`radio-${option.value}`}>
                 <CustomRadio checked={selectedOption === option.value}/>
                 <RadioInput
                   type="radio"
@@ -134,12 +161,12 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
                   onChange={this.handleOnOptionClick}
                 />
                 {option.labelText}
-              </label>
-            </LabelWrapper>
+              </StyledLabel>
+            </OptionWrapper>
             ))
         }
         </RadioInputWrapper>
-      </div>
+      </Wrapper>
     );
   }
 }
