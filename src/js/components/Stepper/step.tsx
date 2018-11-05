@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import color from '../Color';
 import IconCheck from '../../assets/svgs/ic-check-white.svg';
+import color from '../Color';
 
 /**
  * StepSymbol의 Prop 속성

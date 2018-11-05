@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Stepper from './';
-import { ButtonPrimary } from '../Button';
+import { storiesOf } from '@storybook/react';
+import React from 'react';
 import { specs } from 'storybook-addon-specifications';
+import { ButtonPrimary } from '../Button';
+import Stepper from './';
 import stepperTestSuite from './stepper.test';
 
 class StepperDemo extends React.Component<{}, {step: number, steps: string[]}> {

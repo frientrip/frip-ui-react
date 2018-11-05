@@ -1,7 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-// import iconToggleOff from '../../assets/svgs/toggle-off.svg';
-// import iconToggleOn from '../../assets/svgs/toggle-on.svg';
 
 interface ToggleProps {
   value: boolean;
