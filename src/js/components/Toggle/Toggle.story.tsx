@@ -3,17 +3,42 @@ import { storiesOf } from '@storybook/react';
 import React from 'react';
 import Toggle from './index';
 
-class ToggleStory extends React.Component<any, any> {
+interface ToggleStoryState {
+  value: boolean;
+  disabled: boolean;
+}
+
+class ToggleStory extends React.Component<{}, ToggleStoryState> {
   state = {
     value: false,
+    disabled: false,
   };
 
-  render() {
+  constructor(props: {}) {
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
+  }
+
+  /**
+   * 토글 처리 함수
+   *
+   * @private
+   * @memberof ToggleStory
+   */
+  private handleToggle() {
+    this.setState((prevState: any) => ({ value: !prevState.value }));
+    action('toggle')(this.state.value);
+  }
+
+  public render() {
     return (
-      <Toggle value={this.state.value} onClick={() => {
-        this.setState((prevState: any) => ({ value: !prevState.value }));
-        action('toggle')(this.state.value);
-      }}/>
+      <div>
+        <label>
+          <input type="checkbox" checked={!this.state.disabled} onClick={() => this.setState((state: ToggleStoryState) => ({ disabled: !state.disabled }))} />
+          토글 버튼 활성화
+        </label>
+        <Toggle disabled={this.state.disabled} value={this.state.value} onClick={this.handleToggle}/>
+      </div>
     );
   }
 }

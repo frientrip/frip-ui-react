@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 interface ToggleProps {
+  disabled?: boolean;
   value: boolean;
   onClick: () => any;
 }
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
 
 const Toggle: React.SFC<ToggleProps> = (props) => {
   return (
-    <Wrapper onClick={props.onClick}>
+    <Wrapper onClick={props.disabled ? undefined : props.onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="64"
