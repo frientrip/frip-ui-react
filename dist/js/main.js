@@ -120,6 +120,12 @@ exports.default = colors;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("styled-components");
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -152,12 +158,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("styled-components");
 
 /***/ }),
 /* 4 */
@@ -374,11 +374,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -1848,11 +1848,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -1932,11 +1932,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -1984,64 +1984,47 @@ module.exports = __webpack_require__(24);
 
 "use strict";
 
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Button_1 = __importStar(__webpack_require__(25));
+exports.Button = Button_1.default;
+exports.ButtonPrimary = Button_1.ButtonPrimary;
+exports.IconButton = Button_1.IconButton;
+exports.ButtonGhostPrimary = Button_1.ButtonGhostPrimary;
+var Dropdown_1 = __importDefault(__webpack_require__(36));
+exports.Dropdown = Dropdown_1.default;
+var List_1 = __importDefault(__webpack_require__(38));
+exports.List = List_1.default;
+var Menu_1 = __webpack_require__(54);
+exports.MenuSection = Menu_1.MenuSection;
+exports.MenuItem = Menu_1.MenuItem;
+var Color_1 = __importDefault(__webpack_require__(1));
+exports.Color = Color_1.default;
+var Form_1 = __webpack_require__(56);
+exports.Form = Form_1.Form;
+exports.Input = Form_1.Input;
+exports.Radio = Form_1.Radio;
+var Stepper_1 = __importDefault(__webpack_require__(62));
+exports.Stepper = Stepper_1.default;
+var Tabs_1 = __webpack_require__(66);
+exports.Tabs = Tabs_1.Tabs;
+exports.Tab = Tabs_1.Tab;
+var Pagination_1 = __webpack_require__(20);
+exports.PageButton = Pagination_1.PageButton;
+exports.PrevButton = Pagination_1.PrevButton;
+exports.NextButton = Pagination_1.NextButton;
+var index_tsx_1 = __importDefault(__webpack_require__(68));
+exports.Toggle = index_tsx_1.default;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Toggle = exports.NextButton = exports.PrevButton = exports.PageButton = exports.Tab = exports.Tabs = exports.Stepper = exports.Input = exports.Form = exports.Color = exports.MenuItem = exports.MenuSection = exports.List = exports.Dropdown = exports.IconButton = exports.ButtonGhostPrimary = exports.ButtonPrimary = exports.Button = undefined;
-
-var _Button = __webpack_require__(25);
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _Dropdown = __webpack_require__(36);
-
-var _Dropdown2 = _interopRequireDefault(_Dropdown);
-
-var _List = __webpack_require__(38);
-
-var _List2 = _interopRequireDefault(_List);
-
-var _Menu = __webpack_require__(54);
-
-var _Color = __webpack_require__(1);
-
-var _Color2 = _interopRequireDefault(_Color);
-
-var _Form = __webpack_require__(56);
-
-var _index = __webpack_require__(61);
-
-var _index2 = _interopRequireDefault(_index);
-
-var _Tabs = __webpack_require__(65);
-
-var _Pagination = __webpack_require__(20);
-
-var _index3 = __webpack_require__(67);
-
-var _index4 = _interopRequireDefault(_index3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.Button = _Button2.default;
-exports.ButtonPrimary = _Button.ButtonPrimary;
-exports.ButtonGhostPrimary = _Button.ButtonGhostPrimary;
-exports.IconButton = _Button.IconButton;
-exports.Dropdown = _Dropdown2.default;
-exports.List = _List2.default;
-exports.MenuSection = _Menu.MenuSection;
-exports.MenuItem = _Menu.MenuItem;
-exports.Color = _Color2.default;
-exports.Form = _Form.Form;
-exports.Input = _Form.Input;
-exports.Stepper = _index2.default;
-exports.Tabs = _Tabs.Tabs;
-exports.Tab = _Tabs.Tab;
-exports.PageButton = _Pagination.PageButton;
-exports.PrevButton = _Pagination.PrevButton;
-exports.NextButton = _Pagination.NextButton;
-exports.Toggle = _index4.default;
 
 /***/ }),
 /* 25 */
@@ -4264,11 +4247,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -4538,11 +4521,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -7032,7 +7015,7 @@ var ReactTablePagination = function (_Component) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_prop_types__);
 
 
@@ -7376,7 +7359,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -7549,11 +7532,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -7764,11 +7747,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -7932,24 +7915,17 @@ exports.default = MenuSection;
 
 "use strict";
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Form_1 = __importDefault(__webpack_require__(57));
+exports.Form = Form_1.default;
+var Input_1 = __importDefault(__webpack_require__(58));
+exports.Input = Input_1.default;
+var Radio_1 = __importDefault(__webpack_require__(61));
+exports.Radio = Radio_1.default;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Input = exports.Form = undefined;
-
-var _Form = __webpack_require__(57);
-
-var _Form2 = _interopRequireDefault(_Form);
-
-var _Input = __webpack_require__(58);
-
-var _Input2 = _interopRequireDefault(_Input);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.Form = _Form2.default;
-exports.Input = _Input2.default;
 
 /***/ }),
 /* 57 */
@@ -7970,7 +7946,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _react = __webpack_require__(0);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -8156,11 +8132,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -8412,24 +8388,23 @@ module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var stepper_1 = __importDefault(__webpack_require__(62));
-exports.default = stepper_1.default;
-
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 };
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -8442,24 +8417,87 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(__webpack_require__(0));
-var styled_components_1 = __importDefault(__webpack_require__(3));
-var step_1 = __importDefault(__webpack_require__(63));
-exports.Stepper = function (props) {
-    var listElements = props.stepLabels.map(function (step, index) {
-        var state = 'disabled';
-        if (props.currentStep === index) {
-            state = 'active';
-        }
-        else if (props.currentStep > index) {
-            state = 'resolved';
-        }
-        return (React.createElement(step_1.default, { key: "step-" + index + "-" + step, state: state, index: index, title: step }));
-    });
-    return (React.createElement("ol", { className: props.className }, listElements));
+var styled_components_1 = __importDefault(__webpack_require__(2));
+var font_weight_1 = __importDefault(__webpack_require__(8));
+var Color_1 = __importDefault(__webpack_require__(1));
+var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  font-family: inherit;\n"], ["\n  font-family: inherit;\n"])));
+var LabelText = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  color: ", ";\n  font-size: ", "\n  font-weight: ", ";\n  min-height: 18px;\n  margin-bottom: 14px;\n  left: 0;\n  z-index: 1;\n  top: ", ";\n"], ["\n  color: ", ";\n  font-size: ", "\n  font-weight: ", ";\n  min-height: 18px;\n  margin-bottom: 14px;\n  left: 0;\n  z-index: 1;\n  top: ", ";\n"])), function (_a) {
+    var error = _a.error;
+    return (error ? Color_1.default.red : Color_1.default.black);
+}, function (_a) {
+    var bigLabel = _a.bigLabel;
+    return (bigLabel ? '20px' : '14px');
+}, font_weight_1.default.normal, function (_a) {
+    var bigLabel = _a.bigLabel;
+    return (bigLabel ? '5px' : '0');
+});
+var StyledLabel = styled_components_1.default.label(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  font-family: inherit;\n  cursor: pointer;\n\n  &:hover {\n    color: ", ";\n  }\n"], ["\n  font-family: inherit;\n  cursor: pointer;\n\n  &:hover {\n    color: ", ";\n  }\n"])), Color_1.default.primary);
+var RequiredWrapper = styled_components_1.default.span(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  color: ", ";\n"], ["\n  color: ", ";\n"])), Color_1.default.red);
+var RadioInputWrapper = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  display: flex;\n  position: relative;\n  flex-wrap: wrap;\n  flex-direction: ", ";\n"], ["\n  display: flex;\n  position: relative;\n  flex-wrap: wrap;\n  flex-direction: ", ";\n"])), function (_a) {
+    var direction = _a.direction;
+    return (direction ? direction : 'row');
+});
+var RadioInput = styled_components_1.default.input(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n"], ["\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n"])));
+var OptionWrapper = styled_components_1.default.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  display: inline-flex;\n  font-size: 14px;\n  color: ", ";\n  height: 40px;\n  justify-content: flex-start;\n  align-items: center;\n  flex-basis: ", ";\n  margin-bottom: 10px;\n"], ["\n  display: inline-flex;\n  font-size: 14px;\n  color: ", ";\n  height: 40px;\n  justify-content: flex-start;\n  align-items: center;\n  flex-basis: ", ";\n  margin-bottom: 10px;\n"])), Color_1.default.black, function (_a) {
+    var baseLength = _a.baseLength;
+    return (baseLength ? baseLength : 'auto');
+});
+var CustomRadio = styled_components_1.default.div(templateObject_8 || (templateObject_8 = __makeTemplateObject(["\n  display: inline-flex;\n  position: relative;\n  width: 22px;\n  height: 22px;\n  border-radius: 50%;\n  border: 1px solid ", ";\n  cursor: pointer;\n  background-color: ", ";\n  margin-right: 10px;\n  justify-content: center;\n  align-items: center;\n\n  &:hover {\n    border-color: ", ";\n    background-color: rgba(51, 153, 255, 0.2);\n  }\n\n  &:after {\n    content: '';\n    width: 12px;\n    height: 12px;\n    border-radius: 50%;\n    background-color: ", ";\n  }\n"], ["\n  display: inline-flex;\n  position: relative;\n  width: 22px;\n  height: 22px;\n  border-radius: 50%;\n  border: 1px solid ", ";\n  cursor: pointer;\n  background-color: ", ";\n  margin-right: 10px;\n  justify-content: center;\n  align-items: center;\n\n  &:hover {\n    border-color: ", ";\n    background-color: rgba(51, 153, 255, 0.2);\n  }\n\n  &:after {\n    content: '';\n    width: 12px;\n    height: 12px;\n    border-radius: 50%;\n    background-color: ", ";\n  }\n"])), Color_1.default.pinkishGrey, Color_1.default.pureWhite, Color_1.default.primary, function (_a) {
+    var checked = _a.checked;
+    return (checked ? Color_1.default.primary : 'transparent');
+});
+var RadioGroup = /** @class */ (function (_super) {
+    __extends(RadioGroup, _super);
+    function RadioGroup(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            selectedOption: null,
+        };
+        _this.handleOnOptionClick = _this.handleOnOptionClick.bind(_this);
+        return _this;
+    }
+    RadioGroup.prototype.handleOnOptionClick = function (e) {
+        var _this = this;
+        this.setState({
+            selectedOption: e.currentTarget.value,
+        }, function () {
+            if (_this.props.onChange != null && _this.state.selectedOption != null) {
+                _this.props.onChange(_this.state.selectedOption);
+            }
+        });
+    };
+    RadioGroup.prototype.render = function () {
+        var _this = this;
+        var _a = this.props, labelText = _a.labelText, options = _a.options, bigLabel = _a.bigLabel, baseLength = _a.baseLength, error = _a.error, direction = _a.direction, required = _a.required, className = _a.className;
+        var selectedOption = this.state.selectedOption;
+        return (React.createElement(Wrapper, { className: className },
+            React.createElement(LabelText, { bigLabel: bigLabel, error: error },
+                labelText,
+                required && React.createElement(RequiredWrapper, null, " *")),
+            React.createElement(RadioInputWrapper, { direction: direction }, options.map(function (option) { return (React.createElement(OptionWrapper, { baseLength: baseLength },
+                React.createElement(StyledLabel, { key: option.value, htmlFor: "radio-" + option.value },
+                    React.createElement(CustomRadio, { checked: selectedOption === option.value }),
+                    React.createElement(RadioInput, { type: "radio", id: "radio-" + option.value, name: "radio-" + option.value, value: option.value, checked: selectedOption === option.value, onChange: _this.handleOnOptionClick }),
+                    option.labelText))); }))));
+    };
+    return RadioGroup;
+}(React.Component));
+exports.default = RadioGroup;
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8;
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var StyledStepper = styled_components_1.default(exports.Stepper)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  justify-content: space-between;\n  padding: 0;\n  list-style: none;\n  font-size: 14px;\n\n  li:last-child::after {\n    display: none;\n  }\n"], ["\n  display: flex;\n  justify-content: space-between;\n  padding: 0;\n  list-style: none;\n  font-size: 14px;\n\n  li:last-child::after {\n    display: none;\n  }\n"])));
-exports.default = StyledStepper;
-var templateObject_1;
+Object.defineProperty(exports, "__esModule", { value: true });
+var stepper_1 = __importDefault(__webpack_require__(63));
+exports.default = stepper_1.default;
 
 
 /***/ }),
@@ -8484,9 +8522,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(__webpack_require__(0));
-var styled_components_1 = __importDefault(__webpack_require__(3));
+var styled_components_1 = __importDefault(__webpack_require__(2));
+var step_1 = __importDefault(__webpack_require__(64));
+exports.Stepper = function (props) {
+    var listElements = props.stepLabels.map(function (step, index) {
+        var state = 'disabled';
+        if (props.currentStep === index) {
+            state = 'active';
+        }
+        else if (props.currentStep > index) {
+            state = 'resolved';
+        }
+        return (React.createElement(step_1.default, { key: "step-" + index + "-" + step, state: state, index: index, title: step }));
+    });
+    return (React.createElement("ol", { className: props.className }, listElements));
+};
+var StyledStepper = styled_components_1.default(exports.Stepper)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  justify-content: space-between;\n  padding: 0;\n  list-style: none;\n  font-size: 14px;\n\n  li:last-child::after {\n    display: none;\n  }\n"], ["\n  display: flex;\n  justify-content: space-between;\n  padding: 0;\n  list-style: none;\n  font-size: 14px;\n\n  li:last-child::after {\n    display: none;\n  }\n"])));
+exports.default = StyledStepper;
+var templateObject_1;
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __importStar(__webpack_require__(0));
+var styled_components_1 = __importDefault(__webpack_require__(2));
 var Color_1 = __importDefault(__webpack_require__(1));
-var ic_check_white_svg_1 = __importDefault(__webpack_require__(64));
+var ic_check_white_svg_1 = __importDefault(__webpack_require__(65));
 /**
  * 각 step의 Symbol symbol prop으로 표시할 값을 넘긴다.
  * symbol이 number 이면 index, string이면 html에 넣을 수 있는 값(svg)으로 간주
@@ -8502,19 +8582,19 @@ exports.Step = function (props) {
         React.createElement(exports.StepSymbol, { symbol: props.state === 'resolved' ? ic_check_white_svg_1.default : props.index + 1, disabled: props.state === 'disabled' }),
         props.title));
 };
-var StyledStep = styled_components_1.default(exports.Step)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n  }\n"], ["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n  }\n"])), function (p) { return p.state === 'disabled' ? Color_1.default.silver : Color_1.default.primary; }, function (p) { return p.state !== 'resolved' ? Color_1.default.silver : Color_1.default.primary; });
+var StyledStep = styled_components_1.default(exports.Step)(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n  font-size: 12px;\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n  }\n"], ["\n  position: relative;\n  display: flex;\n  flex-flow: column nowrap;\n  flex: 1 1 0;\n  align-items: center;\n  height: 60px;\n  color: ", ";\n  font-size: 12px;\n\n  &::after {\n    content: \"\";\n    position: absolute;\n    top: 16px;\n    right: -35%;\n    display: block;\n    width: 70%;\n    height: 2px;\n    background-color: ", ";\n  }\n"])), function (p) { return p.state !== 'active' ? Color_1.default.silver : Color_1.default.primary; }, function (p) { return p.state !== 'resolved' ? Color_1.default.silver : Color_1.default.primary; });
 exports.default = StyledStep;
 var templateObject_1, templateObject_2;
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports) {
 
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"none\" fill-rule=\"evenodd\" stroke=\"#FFF\" stroke-linecap=\"round\" d=\"M4 10.69l7 6L20.183 7\"></path></svg>"
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8525,7 +8605,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Tab = exports.Tabs = undefined;
 
-var _Tabs = __webpack_require__(66);
+var _Tabs = __webpack_require__(67);
 
 var _Tabs2 = _interopRequireDefault(_Tabs);
 
@@ -8539,7 +8619,7 @@ exports.Tabs = _Tabs2.default;
 exports.Tab = _Tab2.default;
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8559,11 +8639,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(2);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _styledComponents = __webpack_require__(3);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -8696,7 +8776,7 @@ Tabs.defaultProps = defaultProps;
 exports.default = Tabs;
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8717,7 +8797,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(__webpack_require__(0));
-var styled_components_1 = __importDefault(__webpack_require__(3));
+var styled_components_1 = __importDefault(__webpack_require__(2));
 var Wrapper = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 64px;\n  height: 32px;\n\n  rect, circle {\n    transition: all 0.2s;\n  }\n"], ["\n  width: 64px;\n  height: 32px;\n\n  rect, circle {\n    transition: all 0.2s;\n  }\n"])));
 var Toggle = function (props) {
     return (React.createElement(Wrapper, { onClick: props.onClick },
