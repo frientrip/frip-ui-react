@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 `;
 
 const TabLabel = styled.div`
-  ${({ justified }) => (justified ? 'flex-basis: 100%;' : '')}
+  ${({ justified }) => (justified ? 'flex-basis: 100%;' : 'min-width: 120px')}
   display: inline-block;
   font-size: ${({ big }) => (big ? '18px' : '14px')};
   padding: 12px 16px;

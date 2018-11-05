@@ -8687,7 +8687,7 @@ var Wrapper = _styledComponents2.default.div(_templateObject);
 
 var TabLabel = _styledComponents2.default.div(_templateObject2, function (_ref) {
   var justified = _ref.justified;
-  return justified ? 'flex-basis: 100%;' : '';
+  return justified ? 'flex-basis: 100%;' : 'min-width: 120px';
 }, function (_ref2) {
   var big = _ref2.big;
   return big ? '18px' : '14px';
