@@ -17,6 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const Toggle: React.SFC<ToggleProps> = (props) => {
+  const value = props.disabled ? !props.value : props.value;
   return (
     <Wrapper onClick={props.disabled ? undefined : props.onClick}>
       <svg
@@ -27,18 +28,19 @@ const Toggle: React.SFC<ToggleProps> = (props) => {
       >
         <g fill="none" fillRule="evenodd">
           <rect
-            width={props.value ? '64' : '63'}
-            height={props.value ? '32' : '31'}
-            x={props.value ? '0' : '.5'}
-            y={props.value ? '0' : '.5'}
-            fill={props.value ? '#39F' : '#D9E0E8'}
-            stroke={props.value ? '' : '#D9E0E8'}
-            rx={props.value ? '16' : '15.5'}
+            width={value ? '64' : '63'}
+            height={value ? '32' : '31'}
+            x={value ? '0' : '.5'}
+            y={value ? '0' : '.5'}
+            fill={value ? '#39F' : '#D9E0E8'}
+            stroke={value ? '' : '#D9E0E8'}
+            rx={value ? '16' : '15.5'}
           />
           <circle
-            cx={props.value ? '48' : '16'}
+            cx={value ? '48' : '16'}
             cy="16"
             r="14"
+            opacity={props.disabled ? '0.5' : '1'}
             fill="#FFF"
           />
         </g>

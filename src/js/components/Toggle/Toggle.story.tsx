@@ -4,14 +4,18 @@ import React from 'react';
 import Toggle from './index';
 
 interface ToggleStoryState {
+  isToggleFail: boolean;
   value: boolean;
   disabled: boolean;
+  result: string;
 }
 
 class ToggleStory extends React.Component<{}, ToggleStoryState> {
   state = {
+    isToggleFail: false,
     value: false,
     disabled: false,
+    result: '',
   };
 
   constructor(props: {}) {
@@ -26,24 +30,28 @@ class ToggleStory extends React.Component<{}, ToggleStoryState> {
    * @memberof ToggleStory
    */
   private handleToggle() {
-    this.setState((prevState: any) => ({ value: !prevState.value }));
     action('toggle')(this.state.value);
+    this.setState({ disabled: true, result: 'loading...' });
+    setTimeout(() => {
+      this.setState((prevState: ToggleStoryState) => ({ value: this.state.isToggleFail ? prevState.value : !prevState.value, disabled: false, result: this.state.isToggleFail ? 'fail' : 'success' }));
+    },         1000);
   }
 
   public render() {
     return (
       <div>
         <label>
-          <input type="checkbox" checked={!this.state.disabled} onClick={() => this.setState((state: ToggleStoryState) => ({ disabled: !state.disabled }))} />
-          토글 버튼 활성화
+          <input type="checkbox" checked={!this.state.isToggleFail} onClick={() => this.setState((state: ToggleStoryState) => ({ isToggleFail: !state.isToggleFail }))} />
+          토글 액션 성공
         </label>
         <Toggle disabled={this.state.disabled} value={this.state.value} onClick={this.handleToggle}/>
+        result: {this.state.result}
       </div>
     );
   }
 }
 
 storiesOf('Toggle', module)
-  .add('Toggle Default', () => {
+  .add('Toggle default', () => {
     return (<ToggleStory />);
   });
