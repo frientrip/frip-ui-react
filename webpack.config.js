@@ -41,9 +41,4 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-    }),
-  ],
 };

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
-    "build": "webpack",
+    "build": "webpack --optimize-minimize",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o .out",
     "deploy-storybook": "aws s3 cp .out s3://ui-comp.frip.co.kr/ --recursive --cache-control no-cache --exclude .DS_Store"
@@ -42,6 +42,7 @@
     "tslint": "^5.11.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.0.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^3.10.0"
   },
   "peerDependencies": {
