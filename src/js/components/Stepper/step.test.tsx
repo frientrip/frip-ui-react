@@ -1,5 +1,5 @@
-import React from 'react';
 import { mount, shallow } from 'enzyme';
+import React from 'react';
 import { Step, StepSymbol } from './step';
 
 export default describe('Step Default', () => {

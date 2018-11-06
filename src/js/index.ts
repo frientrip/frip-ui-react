@@ -1,13 +1,13 @@
-import Button, { ButtonPrimary, IconButton, ButtonGhostPrimary } from './components/Button';
-import Dropdown from './components/Dropdown';
-import List from './components/List';
-import { MenuSection, MenuItem } from './components/Menu';
+import Button, { ButtonGhostPrimary, ButtonPrimary, IconButton } from './components/Button';
 import Color from './components/Color';
+import Dropdown from './components/Dropdown';
 import { Form, Input, Radio } from './components/Form';
+import List from './components/List';
+import { MenuItem, MenuSection } from './components/Menu';
+import { NextButton, PageButton, PrevButton } from './components/Pagination';
 import Stepper from './components/Stepper';
-import { Tabs, Tab } from './components/Tabs';
-import { PageButton, PrevButton, NextButton } from './components/Pagination';
-import Toggle from './components/Toggle/index.tsx';
+import { Tab, Tabs } from './components/Tabs';
+import Toggle from './components/Toggle';
 
 export {
   Button,
