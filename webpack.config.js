@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   entry: ['./src/js/index.ts'],
@@ -38,6 +37,7 @@ module.exports = {
       },
     ],
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
