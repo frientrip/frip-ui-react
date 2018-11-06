@@ -7,6 +7,7 @@ import { MenuItem, MenuSection } from './components/Menu';
 import { NextButton, PageButton, PrevButton } from './components/Pagination';
 import Stepper from './components/Stepper';
 import { Tab, Tabs } from './components/Tabs';
+import TextEditor from './components/TextEditor';
 import Toggle from './components/Toggle';
 
 export {
@@ -29,4 +30,5 @@ export {
   PrevButton,
   NextButton,
   Toggle,
+  TextEditor,
 };

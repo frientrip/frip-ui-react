@@ -1,6 +1,6 @@
 import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 interface TextEditorProps {
@@ -38,9 +38,6 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
   public render() {
     return (
       <Wrapper>
-        <Helmet>
-          <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css" />
-        </Helmet>
         <div id="editor" dangerouslySetInnerHTML={{ __html: this.props.value }} />
       </Wrapper>
     );
