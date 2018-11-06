@@ -9,7 +9,9 @@ class TextEditorStory extends React.Component<{}, { value: string }> {
 
   public render() {
     return (
-      <TextEditor value={this.state.value} onChange={(value: string) => this.setState({ value })} />
+      <div style={{ display: 'flex', height: '300px' }}>
+        <TextEditor value={this.state.value} onChange={(value: string) => this.setState({ value })} />
+      </div>
     );
   }
 }

@@ -56,19 +56,6 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       <Wrapper>
         <Toolbar id="editor-toolbar">
           <div className="ql-formats">
-            <select className="ql-font">
-              <option />
-              <option value="serif" />
-              <option value="monospace" />
-            </select>
-            <select className="ql-size">
-              <option value="small" />
-              <option selected />
-              <option value="large" />
-              <option value="huge" />
-            </select>
-          </div>
-          <div className="ql-formats">
             <button className="ql-bold" />
             <button className="ql-italic" />
             <button className="ql-underline" />
