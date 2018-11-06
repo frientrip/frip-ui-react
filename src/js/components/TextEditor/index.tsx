@@ -13,8 +13,19 @@ interface TextEditorState {
 }
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 1 0;
   width: 100%;
-  height: 100%;
+`;
+
+const Toolbar = styled.div`
+  flex: 0 0 auto;
+  width: 100%;
+`;
+
+const Body = styled.div`
+  flex: 1 1 0;
 `;
 
 export default class TextEditor extends React.Component<TextEditorProps, TextEditorState> {
@@ -29,6 +40,11 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
   public componentDidMount() {
     if (this.state.quill === null) {
       const quill = new Quill('#editor', {
+        modules: {
+          toolbar: {
+            container: '#editor-toolbar',
+          },
+        },
         theme: 'snow',
       });
       this.setState({ quill });
@@ -38,7 +54,42 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
   public render() {
     return (
       <Wrapper>
-        <div id="editor" dangerouslySetInnerHTML={{ __html: this.props.value }} />
+        <Toolbar id="editor-toolbar">
+          <div className="ql-formats">
+            <select className="ql-font">
+              <option />
+              <option value="serif" />
+              <option value="monospace" />
+            </select>
+            <select className="ql-size">
+              <option value="small" />
+              <option selected />
+              <option value="large" />
+              <option value="huge" />
+            </select>
+          </div>
+          <div className="ql-formats">
+            <button className="ql-bold" />
+            <button className="ql-italic" />
+            <button className="ql-underline" />
+          </div>
+          <div className="ql-formats">
+            <button className="ql-list" value="ordered" />
+            <button className="ql-list" value="bullet" />
+            <select className="ql-align">
+              <option />
+              <option value="center" />
+              <option value="right" />
+              <option value="justify" />
+            </select>
+          </div>
+          <div className="ql-formats">
+            <button className="ql-link" />
+            <button className="ql-image" />
+            <button className="ql-video" />
+          </div>
+        </Toolbar>
+        <Body id="editor" dangerouslySetInnerHTML={{ __html: this.props.value }} />
       </Wrapper>
     );
   }
