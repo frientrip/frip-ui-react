@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   flex: 1 1 0;
   width: 100%;
+  overflow: scroll;
 `;
 
 const Toolbar = styled.div`
@@ -26,6 +27,7 @@ const Toolbar = styled.div`
 
 const Body = styled.div`
   flex: 1 1 0;
+  height: 0 !important;
 `;
 
 export default class TextEditor extends React.Component<TextEditorProps, TextEditorState> {
