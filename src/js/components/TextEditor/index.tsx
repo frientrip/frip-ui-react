@@ -1,4 +1,5 @@
-import Quill from 'quill';
+import Quill, { DeltaStatic, Sources } from 'quill';
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import 'quill/dist/quill.snow.css';
 import * as React from 'react';
 import styled from 'styled-components';
@@ -9,6 +10,7 @@ interface TextEditorProps {
 }
 
 interface TextEditorState {
+  defaultValue: string;
   quill: Quill|null;
 }
 
@@ -35,6 +37,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
     super(props);
 
     this.state = {
+      defaultValue: this.props.value,
       quill: null,
     };
   }
@@ -48,6 +51,13 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
           },
         },
         theme: 'snow',
+      });
+
+      quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
+        const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
+          inlineStyles: true,
+        });
+        this.props.onChange(converter.convert());
       });
       this.setState({ quill });
     }
@@ -78,7 +88,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
             <button className="ql-video" />
           </div>
         </Toolbar>
-        <Body id="editor" dangerouslySetInnerHTML={{ __html: this.props.value }} />
+        <Body id="editor" dangerouslySetInnerHTML={{ __html: this.state.defaultValue }} />
       </Wrapper>
     );
   }
