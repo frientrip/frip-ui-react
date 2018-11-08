@@ -1,6 +1,7 @@
-import Quill from 'quill';
+import Quill, { DeltaStatic, Sources } from 'quill';
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import 'quill/dist/quill.snow.css';
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 interface TextEditorProps {
@@ -9,12 +10,26 @@ interface TextEditorProps {
 }
 
 interface TextEditorState {
+  defaultValue: string;
   quill: Quill|null;
 }
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 1 0;
   width: 100%;
-  height: 100%;
+  overflow: scroll;
+`;
+
+const Toolbar = styled.div`
+  flex: 0 0 auto;
+  width: 100%;
+`;
+
+const Body = styled.div`
+  flex: 1 1 0;
+  height: 0 !important;
 `;
 
 export default class TextEditor extends React.Component<TextEditorProps, TextEditorState> {
@@ -22,6 +37,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
     super(props);
 
     this.state = {
+      defaultValue: this.props.value,
       quill: null,
     };
   }
@@ -29,7 +45,19 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
   public componentDidMount() {
     if (this.state.quill === null) {
       const quill = new Quill('#editor', {
+        modules: {
+          toolbar: {
+            container: '#editor-toolbar',
+          },
+        },
         theme: 'snow',
+      });
+
+      quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
+        const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
+          inlineStyles: true,
+        });
+        this.props.onChange(converter.convert());
       });
       this.setState({ quill });
     }
@@ -38,10 +66,29 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
   public render() {
     return (
       <Wrapper>
-        <Helmet>
-          <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css" />
-        </Helmet>
-        <div id="editor" dangerouslySetInnerHTML={{ __html: this.props.value }} />
+        <Toolbar id="editor-toolbar">
+          <div className="ql-formats">
+            <button className="ql-bold" />
+            <button className="ql-italic" />
+            <button className="ql-underline" />
+          </div>
+          <div className="ql-formats">
+            <button className="ql-list" value="ordered" />
+            <button className="ql-list" value="bullet" />
+            <select className="ql-align">
+              <option />
+              <option value="center" />
+              <option value="right" />
+              <option value="justify" />
+            </select>
+          </div>
+          <div className="ql-formats">
+            <button className="ql-link" />
+            <button className="ql-image" />
+            <button className="ql-video" />
+          </div>
+        </Toolbar>
+        <Body id="editor" dangerouslySetInnerHTML={{ __html: this.state.defaultValue }} />
       </Wrapper>
     );
   }
