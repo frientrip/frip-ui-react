@@ -23,7 +23,7 @@
 .rbc-month-view,
 .rbc-day-bg + .rbc-day-bg,
 .rbc-header + .rbc-header {
-  border-color: #c0c0c0;
+  border-color: #e6e6e6;
 }
 
 .rbc-day-bg {
@@ -31,21 +31,21 @@
 }
 
 .rbc-event {
-  font-size: 12px;
-  font-weight: 300;
-  padding: 2px 4px;
-  border-radius: 4px;
-  background-color: #3399ff;
-  margin: 0 8px;
+  border-radius: 0;
+  padding: 6px;
+  background-color: #ffcd00;
+  color: #4a4a4a;
+  font-size: 11px;
+  line-height: 16px;
 }
 
 .rbc-event:hover,
 .rbc-event.rbc-selected:hover {
-  background-color: #3789db;
+  background-color: #e6b900;
 }
 
 .rbc-event.rbc-selected {
-  background-color: #3399ff;
+  background-color: #ffcd00;
 }
 
 .rbc-show-more {
@@ -68,7 +68,20 @@
 }
 
 .rbc-today {
-  background-color: #f4f4f4;
+  background-color: white;
+}
+
+.rbc-date-cell {
+  padding: 8px 8px 8px 16px;
+}
+
+.rbc-today:after {
+  content: "오늘";
+  padding: 8px;
+  color: #3399ff;
+  font-size: 12px;
+  font-weight: normal;
+  float: right;
 }
 
 .rbc-label {
