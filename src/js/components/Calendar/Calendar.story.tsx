@@ -1,6 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
+import moment, { Moment } from 'moment';
 import React from 'react';
+import Button, { ButtonPrimary } from '../Button';
 import { CalendarEvent } from './Calendar';
 import Calendar from './index';
 
@@ -29,17 +31,39 @@ const events: CalendarEvent[] = [
 
 const slotSelectLogger = action('Slot Selected');
 const eventClickLogger = action('Event clicked');
-const primaryButtonClickLogger = action('Primary button clicked');
+
+class CalendarStory extends React.Component<any, {currentDate: Moment}> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      currentDate: moment(),
+    };
+  }
+  public render() {
+    return (
+      <div style={{ height: '100%', position: 'relative' }}>
+        <ButtonPrimary labelText="이전" onClick={() => this.setState((state: any) => ({
+          currentDate: state.currentDate.subtract(1, 'month'),
+        }))} />
+        <ButtonPrimary labelText="이후" onClick={() => this.setState((state: any) => ({
+          currentDate: state.currentDate.add(1, 'month'),
+        }))} />
+        <ButtonPrimary labelText="오늘" onClick={() => this.setState({
+          currentDate: moment(),
+        })} />
+        <Calendar
+          currentDate={this.state.currentDate.toDate()}
+          events={events}
+          onSelectDate={slotInfo => slotSelectLogger(slotInfo)}
+          onSelectEvent={event => eventClickLogger(event)}
+        />
+      </div>
+    );
+  }
+}
 
 storiesOf('Calendar', module)
   .add('Demo', () => (
-    <div style={{ height: '100%', position: 'relative' }}>
-      <Calendar
-        events={events}
-        onSelectDate={slotInfo => slotSelectLogger(slotInfo)}
-        onSelectEvent={event => eventClickLogger(event)}
-        primaryButtonLabel="프라이머리 버튼"
-        onClickPrimaryButton={() => primaryButtonClickLogger()}
-      />
-    </div>
+    <CalendarStory />
   ));

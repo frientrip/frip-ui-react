@@ -35,8 +35,7 @@ export interface CalendarSlot {
 }
 
 interface CalendarProps {
-  primaryButtonLabel?: string;
-  onClickPrimaryButton?: () => any;
+  currentDate: Date;
   events?: CalendarEvent[];
   onSelectDate?: (slotInfo: CalendarSlot) => any;
   onSelectEvent?: (event: CalendarEvent) => any;
@@ -104,31 +103,12 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
 
   render() {
     const {
+      currentDate,
       events,
       eventComponent,
-      primaryButtonLabel,
-      onClickPrimaryButton,
     } = this.props;
 
     const components = {
-      toolbar: (props: any) => (
-        <Toolbar
-          todayLabel={props.messages.today}
-          monthLabel={props.label}
-          primaryButtonLabel={primaryButtonLabel}
-          onClickPrimaryButton={onClickPrimaryButton}
-          onClickToday={() => {
-            props.onNavigate('TODAY', props.date);
-          }}
-          onClickPrevMonth={() => {
-            props.onNavigate('PREV', props.date);
-            console.log();
-          }}
-          onClickNextMonth={() => {
-            props.onNavigate!('NEXT', props.date);
-          }}
-        />
-      ),
       event: eventComponent && ((props: any) => {
         const EventComponent: any = eventComponent;
         return (
@@ -141,6 +121,9 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
       <Wrapper>
         <BigCalendar
           localizer={localizer}
+          toolbar={false}
+          date={currentDate}
+          onNavigate={() => {}}
           events={events}
           formats={formats}
           messages={messages}
