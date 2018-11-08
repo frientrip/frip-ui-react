@@ -190,15 +190,18 @@ const Button = ({
         icon && iconPosition === 'center' &&
         <CenterIconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
       }
-      <Label
-        disabled={disabled}
-        labelTextWeight={labelTextWeight}
-        isLoading={isLoading}
-        fontSize={large ? 17 : small ? 13 : 14}
-        vAlign={large ? '2px' : '0px'}
-      >
-        {labelText}
-      </Label>
+      {
+        labelText &&
+        <Label
+          disabled={disabled}
+          labelTextWeight={labelTextWeight}
+          isLoading={isLoading}
+          fontSize={large ? 17 : small ? 13 : 14}
+          vAlign={large ? '2px' : '0px'}
+        >
+          {labelText}
+        </Label>
+      }
       {
         icon && iconPosition === 'right' &&
         <RightIconWrapper dangerouslySetInnerHTML={{ __html: icon }} />
