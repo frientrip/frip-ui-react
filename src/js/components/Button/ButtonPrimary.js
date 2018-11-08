@@ -1,11 +1,10 @@
 import React from 'react';
 import Button from './Button';
 import color from '../Color';
-import fontWeight from '../../../font-weight';
+import fontWeight from '../../../font-weight.ts';
 
 const ButtonPrimary = props => (
   <Button
-    {...props}
     bgColor={color.primary}
     bgColorHover={color.darkSkyBlue}
     bgColorActive={color.darkSkyBlue}
@@ -14,6 +13,7 @@ const ButtonPrimary = props => (
     labelColor={color.pureWhite}
     labelColorHover={color.pureWhite}
     labelColorDisabled={color.pureWhite}
+    {...props}
   />
 );
 
