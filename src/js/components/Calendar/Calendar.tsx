@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import BigCalendar, { stringOrDate } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import styled from 'styled-components';
@@ -112,7 +112,22 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
 
     const components = {
       toolbar: (props: any) => (
-        <Toolbar {...props} primaryButtonLabel={primaryButtonLabel} onClickPrimaryButton={onClickPrimaryButton} />
+        <Toolbar
+          todayLabel={props.messages.today}
+          monthLabel={props.label}
+          primaryButtonLabel={primaryButtonLabel}
+          onClickPrimaryButton={onClickPrimaryButton}
+          onClickToday={() => {
+            props.onNavigate('TODAY', props.date);
+          }}
+          onClickPrevMonth={() => {
+            props.onNavigate('PREV', props.date);
+            console.log();
+          }}
+          onClickNextMonth={() => {
+            props.onNavigate!('NEXT', props.date);
+          }}
+        />
       ),
       event: eventComponent && ((props: any) => {
         const EventComponent: any = eventComponent;
