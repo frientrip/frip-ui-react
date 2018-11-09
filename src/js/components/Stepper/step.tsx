@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import color from '../Color';
 import IconCheck from '../../assets/svgs/ic-check-white.svg';
+import color from '../Color';
 
 /**
  * StepSymbol의 Prop 속성
@@ -66,7 +66,8 @@ const StyledStep = styled(Step)`
   flex: 1 1 0;
   align-items: center;
   height: 60px;
-  color: ${p => p.state === 'disabled' ? color.silver : color.primary};
+  color: ${p => p.state !== 'active' ? color.silver : color.primary};
+  font-size: 12px;
 
   &::after {
     content: "";

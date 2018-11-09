@@ -1,7 +1,7 @@
-import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import Stepper from './stepper';
+import React from 'react';
 import { Step, StepProps } from './step';
+import Stepper from './stepper';
 
 export default describe('stepper Default', () => {
   /**

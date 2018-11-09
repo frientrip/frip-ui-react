@@ -14,7 +14,9 @@ storiesOf('Tabs', module)
         Second Tab Content
       </Tab>
       <Tab label="Third Tab with Long Label">
-        Third Tab Content
+        <section style={{ height: '100%' }}>
+          안녕하세요.
+        </section>
       </Tab>
     </Tabs>
   ))
