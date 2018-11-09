@@ -21,6 +21,7 @@ const propTypes = {
   bigLabel: PropTypes.bool,
   tabIndex: PropTypes.number,
   inputWidth: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -36,7 +37,8 @@ const defaultProps = {
   transparent: false,
   bigLabel: false,
   tabIndex: 0,
-  inputWidth: '100%'
+  inputWidth: '100%',
+  disabled: false,
 };
 
 const Wrapper = styled.div`
@@ -45,7 +47,7 @@ const Wrapper = styled.div`
   width: 100%;
   font-family: 'Spoqa Han Sans', sans-serif;
   margin-bottom: 5px;
-  padding-left: ${( { bigLabel }) => (bigLabel ? '155px' : '0px')};
+  padding-left: ${( { bigLabel }) => (bigLabel ? '155px' : 0)};
 `;
 
 const InputWrapper = styled.div`
@@ -64,11 +66,12 @@ const Input = styled.input`
   border: none;
   ${({ transparent, error }) => (transparent
     ? `border-bottom: 0.5px solid ${error ? color.red : color.pureWhite};`
-    : `border: 1px solid ${error ? color.red : color.lightGrey};`
+    : `border: 1px solid ${error ? color.red : color.white};`
   )}
   padding: 0 24px 0 16px;
   font-size: 14px;
   color: ${({ transparent }) => (transparent ? color.pureWhite : color.black)};
+  color: ${({ disabled }) => (disabled ? color.lightGrey : null)};
   transition: border 0.2s;
   background-color: transparent;
 
@@ -170,6 +173,7 @@ class InputComponent extends React.Component {
       bigLabel,
       tabIndex,
       inputWidth,
+      disabled,
     } = this.props;
 
     return (
@@ -191,6 +195,7 @@ class InputComponent extends React.Component {
             placeholder={placeholder}
             transparent={transparent}
             tabIndex={tabIndex}
+            disabled={disabled}
           />
           {
             this.state.value && !error && <IconWrapper
