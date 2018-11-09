@@ -1,3 +1,4 @@
+import Accordion from './components/Accordion';
 import Button, { ButtonGhostPrimary, ButtonPrimary, IconButton } from './components/Button';
 import Color from './components/Color';
 import Dropdown from './components/Dropdown';
@@ -11,6 +12,7 @@ import TextEditor from './components/TextEditor';
 import Toggle from './components/Toggle';
 
 export {
+  Accordion,
   Button,
   ButtonPrimary,
   ButtonGhostPrimary,
