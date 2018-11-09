@@ -98,10 +98,12 @@ export interface RadioGroupProps {
   direction?: 'column' | 'row';
   required?: boolean;
   className?: string;
+  tabIndex?: number;
+  defaultValue?: string;
 }
 
 export interface RadioGroupState {
-  selectedOption: null | string;
+  selectedOption: string;
 }
 
 export default class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
@@ -109,10 +111,19 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
     super(props);
 
     this.state = {
-      selectedOption: null,
+      selectedOption: '',
     };
 
     this.handleOnOptionClick = this.handleOnOptionClick.bind(this);
+  }
+
+  static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
+    if (state.selectedOption === '' && props.defaultValue != null) {
+      return {
+        selectedOption: props.defaultValue,
+      }
+    }
+    return state;
   }
 
   private handleOnOptionClick(e: React.FormEvent<HTMLInputElement>) {
@@ -127,7 +138,6 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
   }
 
   public render() {
-
     const {
       labelText,
       options,
@@ -137,15 +147,19 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
       direction,
       required,
       className,
+      tabIndex,
     } = this.props;
     const { selectedOption } = this.state;
 
     return (
       <Wrapper className={className}>
-        <LabelText bigLabel={bigLabel} error={error}>
-          {labelText}
-          {required && <RequiredWrapper> *</RequiredWrapper>}
-        </LabelText>
+        {
+          labelText &&
+          <LabelText bigLabel={bigLabel} error={error}>
+            {labelText}
+            {required && <RequiredWrapper> *</RequiredWrapper>}
+          </LabelText>
+        }
         <RadioInputWrapper direction={direction}>
         {
           options.map(option => (
@@ -153,6 +167,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
               <StyledLabel key={option.value} htmlFor={`radio-${option.value}`}>
                 <CustomRadio checked={selectedOption === option.value}/>
                 <RadioInput
+                  tabIndex={tabIndex}
                   type="radio"
                   id={`radio-${option.value}`}
                   name={`radio-${option.value}`}
