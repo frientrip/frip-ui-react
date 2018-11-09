@@ -113,7 +113,7 @@ const Label = styled.div`
   text-align: center;
   font-weight: ${({ labelTextWeight }) => labelTextWeight};
   color: inherit;
-  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
+  opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
   opacity: ${({ isLoading }) => (isLoading ? 0 : '')};
   user-select: none;
 `;
