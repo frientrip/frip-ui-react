@@ -54,7 +54,7 @@ class Form extends Component {
         ...this.state.fields,
         [key]: {
           ...this.accessField(key),
-          value: typeof value === 'object' ? value.target.value : value,
+          value: (value instanceof Event) ? value.target.value : value, // Type check for event object
           isValid,
           ...(forceDirty && { isDirty: true }),
           errorMessage: isValid ? '' : this.accessField(key).validators[invalidIdx].errorMessage,
