@@ -1,5 +1,5 @@
 import Accordion from './components/Accordion';
-import Button, { ButtonGhostPrimary, ButtonPrimary, IconButton } from './components/Button';
+import Button, { ButtonGhost, ButtonGhostPrimary, ButtonPrimary, IconButton } from './components/Button';
 import Color from './components/Color';
 import Dropdown from './components/Dropdown';
 import { Form, Input, Radio } from './components/Form';
@@ -14,6 +14,7 @@ import Toggle from './components/Toggle';
 export {
   Accordion,
   Button,
+  ButtonGhost,
   ButtonPrimary,
   ButtonGhostPrimary,
   IconButton,
