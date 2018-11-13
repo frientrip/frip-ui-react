@@ -1,6 +1,7 @@
 import Accordion from './components/Accordion';
 import Button, { ButtonGhost, ButtonGhostPrimary, ButtonPrimary, IconButton } from './components/Button';
 import Color from './components/Color';
+import Counter from './components/Counter';
 import Dropdown from './components/Dropdown';
 import { Form, Input, Radio } from './components/Form';
 import List from './components/List';
@@ -23,6 +24,7 @@ export {
   MenuSection,
   MenuItem,
   Color,
+  Counter,
   Form,
   Input,
   Radio,
