@@ -102,6 +102,7 @@ const Options = styled.div`
   top: 45px;
   left: 0;
   width: 100%;
+  max-height: 220px;
   background-color: ${color.pureWhite};
   border-radius: 4px;
   border: solid 1px #d9e0e8;
@@ -115,7 +116,7 @@ const Options = styled.div`
 const Option = styled.div`
   padding: 8px 16px;
   cursor: pointer;
-  color: ${({ disabled }) => disabled ? color.white : color.black};
+  color: ${({ disabled }) => (disabled ? color.white : color.black)};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -125,7 +126,7 @@ const Option = styled.div`
   `}
 
   &:hover {
-    background-color: ${({ disabled }) => disabled ? color.pureWhite : color.veryLightBlue};
+    background-color: ${({ disabled }) => (disabled ? color.pureWhite : color.veryLightBlue)};
   }
 `;
 
