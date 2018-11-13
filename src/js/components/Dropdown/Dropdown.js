@@ -8,6 +8,8 @@ const propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
   disabled: PropTypes.bool,
+  focused: PropTypes.bool.isRequired,
+  onFocusChanged: PropTypes.func.isRequired,
   children: PropTypes.node,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
@@ -134,26 +136,26 @@ const Option = styled.div`
 class Dropdown extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
+
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
   }
+
   handleButtonClick() {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
+    this.props.onFocusChanged(!this.props.focused);
   }
+
   handleOptionClick(selectedOption) {
     this.props.onChange(selectedOption.value);
     this.handleButtonClick();
   }
+
   render() {
     const {
       label,
       disabled,
       children,
+      focused,
     } = this.props;
 
     const filteredChildren = React.Children.toArray(children)
@@ -170,18 +172,18 @@ class Dropdown extends React.Component {
           }
           <SelectedOption
             disabled={disabled}
-            active={this.state.isOpen}
+            active={focused}
             onClick={disabled ? null : this.handleButtonClick}
           >
             <div>{this.props.value}</div>
             <ChevronWrapper
               dangerouslySetInnerHTML={{ __html: ChevronIcon }}
               down
-              up={this.state.isOpen}
+              up={focused}
             />
           </SelectedOption>
           <Options
-            visible={this.state.isOpen}
+            visible={focused}
           >
             {
               filteredChildren.map(option => (
