@@ -111,6 +111,7 @@ const Options = styled.div`
   transform-origin: left top;
   transform: ${({ visible }) => (visible ? 'translateY(0) scale(1,1)' : 'translateY(-10px) scale(1,0)')};
   z-index: 99;
+  overflow-y: scroll;
 `;
 
 const Option = styled.div`

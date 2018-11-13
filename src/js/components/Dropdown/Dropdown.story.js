@@ -77,4 +77,35 @@ storiesOf('Dropdown', module)
         <option value="3">Option 3</option>
       </DropdownWrapper>
     </div>
+  ))
+  .add('Dropdown max height', () => (
+    <div style={{ width: '200px' }}>
+      <DropdownWrapper label="Option A">
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 3</option>
+        <option value="5">Option 3</option>
+        <option value="6">Option 3</option>
+        <option value="7">Option 3</option>
+        <option value="8">Option 3</option>
+        <option value="9">Option 3</option>
+        <option value="10">Option 3</option>
+        <option value="11">Option 3</option>
+        <option value="12">Option 3</option>
+        <option value="13">Option 3</option>
+        <option value="14">Option 3</option>
+        <option value="15">Option 3</option>
+        <option value="16">Option 3</option>
+        <option value="17">Option 3</option>
+        <option value="18">Option 3</option>
+        <option value="19">Option 3</option>
+        <option value="20">Option 3</option>
+        <option value="21">Option 3</option>
+        <option value="22">Option 3</option>
+        <option value="23">Option 3</option>
+        <option value="24">Option 3</option>
+        <option value="25">Option 3</option>
+      </DropdownWrapper>
+    </div>
   ));
