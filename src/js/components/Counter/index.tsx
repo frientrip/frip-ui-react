@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   border: solid 1px #e6e6e6;
   border-radius: 4px;
   width: 182px;
+  color: ${colors.black};
 `;
 
 const ControlButton = styled.div<{ disabled?: boolean }>`
