@@ -8,6 +8,8 @@ import colors from '../Color';
 interface CounterProps {
   value: number;
   onChange: (value: number) => any;
+  disableDecrease?: boolean;
+  disableIncrease?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -19,19 +21,29 @@ const Wrapper = styled.div`
   height: 40px;
 `;
 
-const ControlButton = styled.div`
+const ControlButton = styled.div<{ disabled?: boolean }>`
   flex: 0 0 40px;
   width: 40px;
   height: 40px;
   padding: 12px;
   line-height: 16px;
 
-  &:hover {
-    background-color: ${colors.veryLightBlue};
-  }
-  &:active {
-    background-color: ${colors.babyBlue}
-  }
+  ${({ disabled }) => (disabled ? `
+    path {
+      fill: #e6e6e6;
+    }
+  ` : `
+    path {
+      fill: #4a4a4a;
+    }
+
+    &:hover {
+      background-color: ${colors.veryLightBlue};
+    }
+    &:active {
+      background-color: ${colors.babyBlue}
+    }
+  `)}
 `;
 
 const Value = styled.input`
@@ -45,11 +57,38 @@ const Value = styled.input`
 `;
 
 const Counter: React.SFC<CounterProps> = (props) => {
+  const { value, onChange, disableDecrease, disableIncrease } = props;
+  const handleDirectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(event.target.value);
+
+    if (disableDecrease && newValue < value) {
+      return;
+    }
+    if (disableIncrease && newValue > value) {
+      return;
+    }
+
+    onChange(newValue);
+  };
+
   return (
     <Wrapper>
-      <ControlButton dangerouslySetInnerHTML={{ __html: MinusIcon }} onClick={() => props.onChange(props.value - 1)} />
-      <Value type="number" value={props.value} onChange={event => props.onChange(Number(event.target.value))} onWheel={e => e.preventDefault()} />
-      <ControlButton dangerouslySetInnerHTML={{ __html: PlusIcon }} onClick={() => props.onChange(props.value + 1)} />
+      <ControlButton
+        disabled={disableDecrease}
+        dangerouslySetInnerHTML={{ __html: MinusIcon }}
+        onClick={disableDecrease ? undefined : () => onChange(value - 1)}
+      />
+      <Value
+        type="number"
+        value={value}
+        onChange={handleDirectChange}
+        onWheel={e => e.preventDefault()}
+      />
+      <ControlButton
+        disabled={disableIncrease}
+        dangerouslySetInnerHTML={{ __html: PlusIcon }}
+        onClick={disableIncrease ? undefined : () => onChange(value + 1)}
+      />
     </Wrapper>
   );
 };
