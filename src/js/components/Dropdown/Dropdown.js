@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import onClickOutside from 'react-onclickoutside';
 import color from '../Color';
 import ChevronIcon from '../../assets/svgs/ic-chevron-down-black.svg';
 
@@ -148,6 +149,11 @@ class Dropdown extends React.Component {
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  handleClickOutside(event) {
+    this.props.onFocusChanged(false);
   }
 
   handleButtonClick() {
@@ -218,4 +224,4 @@ class Dropdown extends React.Component {
 Dropdown.propTypes = propTypes;
 Dropdown.defaultProps = defaultProps;
 
-export default Dropdown;
+export default onClickOutside(Dropdown);
