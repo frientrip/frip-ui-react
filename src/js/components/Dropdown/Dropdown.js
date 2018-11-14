@@ -99,21 +99,30 @@ const ChevronWrapper = styled.div`
   }
 `;
 
+const OptionBox = styled.div`
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+`;
+
 const Options = styled.div`
   position: absolute;
   top: 45px;
   left: 0;
+  display: flex;
+  flex-flow: column nowrap;
   width: 100%;
   max-height: 220px;
   background-color: ${color.pureWhite};
   border-radius: 4px;
   border: solid 1px #d9e0e8;
+  padding: 10px 0;
   opacity: ${({ visible }) => (visible ? '1' : '0')};
   transition: transform 0.2s ease-in-out, opacity 0.2s;
   transform-origin: left top;
   transform: ${({ visible }) => (visible ? 'translateY(0) scale(1,1)' : 'translateY(-10px) scale(1,0)')};
   z-index: 99;
-  overflow-y: scroll;
 `;
 
 const Option = styled.div`
@@ -185,17 +194,20 @@ class Dropdown extends React.Component {
           <Options
             visible={focused}
           >
-            {
-              filteredChildren.map(option => (
-                <Option
-                  key={option.props.value}
-                  disabled={option.props.disabled}
-                  onClick={!option.props.disabled && (() => this.handleOptionClick(option.props))}
-                >
-                  {option.props.children}
-                </Option>
-              ))
-            }
+            <OptionBox>
+              {
+                filteredChildren.map(option => (
+                  <Option
+                    key={option.props.value}
+                    disabled={option.props.disabled}
+                    onClick={!option.props.disabled && (() => this.handleOptionClick(option.props))}
+                  >
+                    {option.props.children}
+                  </Option>
+                ))
+              }
+            </OptionBox>
+
           </Options>
         </SelectionWrapper>
       </Wrapper>
