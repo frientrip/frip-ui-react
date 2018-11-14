@@ -63,25 +63,6 @@ storiesOf('Dropdown', module)
       </StyledDropdownWrapper>
     );
   })
-  .add('Multiple dropdowns', () => {
-    const StyledDropdownWrapper = styled(DropdownWrapper)`
-      width: 150px;
-    `;
-    return (
-      <div style={{ display: 'flex' }}>
-        <StyledDropdownWrapper>
-          <option value="1">Option 1</option>
-          <option value="2">Very very very very very very very very long option</option>
-          <option value="3">Option 3</option>
-        </StyledDropdownWrapper>
-        <StyledDropdownWrapper>
-          <option value="1">Option 1</option>
-          <option value="2">Very very very very very very very very long option</option>
-          <option value="3">Option 3</option>
-        </StyledDropdownWrapper>
-      </div>
-    );
-  })
   .add('Dropdown with Label', () => (
     <div style={{ width: '200px' }}>
       <DropdownWrapper label="Dropdown title">
