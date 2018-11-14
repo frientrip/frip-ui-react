@@ -7,6 +7,7 @@ import ChevronIcon from '../../assets/svgs/ic-chevron-down-black.svg';
 const propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
+  invalid: PropTypes.bool,
   disabled: PropTypes.bool,
   focused: PropTypes.bool.isRequired,
   onFocusChanged: PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ const propTypes = {
 const defaultProps = {
   className: '',
   label: '',
+  invalid: false,
   disabled: false,
   children: null,
 };
@@ -61,7 +63,7 @@ const SelectedOption = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  border: 1px solid ${color.white};
+  border: 1px solid ${({ invalid }) => (invalid ? color.red : color.white)};
   border-radius: 4px;
   padding: 8px 16px;
   transition: background-color 0.4s;
@@ -162,6 +164,7 @@ class Dropdown extends React.Component {
   render() {
     const {
       label,
+      invalid,
       disabled,
       children,
       focused,
@@ -180,6 +183,7 @@ class Dropdown extends React.Component {
             disabled ? <Blocker /> : null
           }
           <SelectedOption
+            invalid={invalid}
             disabled={disabled}
             active={focused}
             onClick={disabled ? null : this.handleButtonClick}

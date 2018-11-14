@@ -22,6 +22,7 @@ class DropdownWrapper extends React.Component {
   render() {
     return (
       <Dropdown
+        {...this.props}
         className={this.props.className}
         disabled={this.props.disabled}
         label={this.props.label}
@@ -39,6 +40,13 @@ class DropdownWrapper extends React.Component {
 storiesOf('Dropdown', module)
   .add('Dropdown', () => (
     <DropdownWrapper>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </DropdownWrapper>
+  ))
+  .add('Invaild dropdown', () => (
+    <DropdownWrapper invalid>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>
