@@ -120,7 +120,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
   }
 
   static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
-    if (state.selectedOption === '' && props.defaultValue !== '' && !state.isDirty) {
+    if (state.selectedOption === '' && props.defaultValue && !state.isDirty) {
       props.onChange && props.defaultValue && props.onChange(props.defaultValue);
       return {
         selectedOption: props.defaultValue,
