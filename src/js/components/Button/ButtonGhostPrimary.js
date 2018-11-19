@@ -4,7 +4,6 @@ import Button from './Button';
 
 const ButtonGhostPrimary = props => (
   <Button
-    {...props}
     bgColor={color.pureWhite}
     bgColorHover={color.pureWhite}
     bgColorActive={color.pureWhite}
@@ -16,6 +15,7 @@ const ButtonGhostPrimary = props => (
     borderColorHover={color.darkSkyBlue}
     borderColorActive={color.darkSkyBlue}
     borderColorDisabled={color.babyBlue}
+    {...props}
   />
 );
 
