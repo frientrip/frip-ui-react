@@ -104,6 +104,7 @@ export interface RadioGroupProps {
 
 export interface RadioGroupState {
   selectedOption: string;
+  isDirty: boolean;
 }
 
 export default class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
@@ -112,15 +113,18 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
 
     this.state = {
       selectedOption: '',
+      isDirty: false,
     };
 
     this.handleOnOptionClick = this.handleOnOptionClick.bind(this);
   }
 
   static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
-    if (state.selectedOption === '' && props.defaultValue != null) {
+    if (state.selectedOption === '' && props.defaultValue !== '' && !state.isDirty) {
+      props.onChange && props.defaultValue && props.onChange(props.defaultValue);
       return {
         selectedOption: props.defaultValue,
+        isDirty: true,
       }
     }
     return state;
@@ -130,7 +134,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
     this.setState({
       selectedOption: e.currentTarget.value,
     }, () => {
-      if (this.props.onChange != null && this.state.selectedOption != null) {
+      if (this.props.onChange && this.state.selectedOption !== '') {
         this.props.onChange(this.state.selectedOption);
       }
     });
@@ -163,7 +167,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
         <RadioInputWrapper direction={direction}>
         {
           options.map(option => (
-            <OptionWrapper baseLength={baseLength}>
+            <OptionWrapper key={option.value} baseLength={baseLength}>
               <StyledLabel key={option.value} htmlFor={`radio-${option.value}`}>
                 <CustomRadio checked={selectedOption === option.value}/>
                 <RadioInput
