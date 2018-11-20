@@ -49,7 +49,7 @@ const OptionWrapper = styled.div<{ baseLength?: string }>`
   display: inline-flex;
   font-size: 14px;
   color: ${color.black};
-  height: 40px;
+  min-height: 40px;
   justify-content: flex-start;
   align-items: center;
   flex-basis: ${({ baseLength }) => (baseLength ? baseLength : 'auto')};
@@ -83,9 +83,16 @@ const CustomRadio = styled.div<{ checked: boolean }>`
   }
 `;
 
+const OptionDescription = styled.span`
+  margin-left: 32px;
+  font-size: 14px;
+  color: #9b9b9b;
+`;
+
 export type RadioOption = {
   value: string;
   labelText: string;
+  description?: string;
 };
 
 export interface RadioGroupProps {
@@ -125,7 +132,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
       return {
         selectedOption: props.defaultValue,
         isDirty: true,
-      }
+      };
     }
     return state;
   }
@@ -133,7 +140,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
   private handleOnOptionClick(e: React.FormEvent<HTMLInputElement>) {
     this.setState({
       selectedOption: e.currentTarget.value,
-    }, () => {
+    },            () => {
       if (this.props.onChange && this.state.selectedOption !== '') {
         this.props.onChange(this.state.selectedOption);
       }
@@ -179,7 +186,11 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
                   checked={selectedOption === option.value}
                   onChange={this.handleOnOptionClick}
                 />
-                {option.labelText}
+                {option.labelText}<br />
+                {
+                  option.description &&
+                  <OptionDescription>{option.description}</OptionDescription>
+                }
               </StyledLabel>
             </OptionWrapper>
             ))
