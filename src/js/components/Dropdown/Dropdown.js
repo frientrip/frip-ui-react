@@ -149,9 +149,27 @@ class Dropdown extends React.Component {
     this.state = {
       isOpen: false,
     };
+    this.node = React.createRef();
 
+    this.handleClick = this.handleClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClick);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick);
+  }
+
+  handleClick(e) {
+    if (!this.node.current.contains(e.target)) {
+      this.setState({
+        isOpen: false,
+      });
+    }
   }
 
   handleButtonClick() {
@@ -177,7 +195,7 @@ class Dropdown extends React.Component {
       .filter(node => node.type === 'option');
 
     return (
-      <Wrapper className={this.props.className}>
+      <Wrapper className={this.props.className} innerRef={this.node}>
         {
           label ? <Label>{label}</Label> : null
         }
