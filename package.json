@@ -7,6 +7,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "build": "webpack --optimize-minimize",
+    "build:watch": "webpack --optimize-minimize --watch",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -c .storybook -o .out",
     "deploy-storybook": "aws s3 cp .out s3://ui-comp.frip.co.kr/ --recursive --cache-control no-cache --exclude .DS_Store"
