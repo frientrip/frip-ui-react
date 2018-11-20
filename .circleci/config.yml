@@ -11,12 +11,12 @@ jobs:
                 keys:
                     - v1-dependencies-{{ checksum "package.json" }}
                     - v1-dependencies-
-            - run: yarn install
+            - run: npm install
             - save_cache:
                 paths:
                     - node_modules
                 key: v1-dependencies-{{ checksum "package.json" }}
-            - run: yarn test
+            - run: npm run test
 
     build_and_deploy:
         docker:
@@ -36,13 +36,13 @@ jobs:
                 keys:
                     - v1-dependencies-{{ checksum "package.json" }}
                     - v1-dependencies-
-            - run: yarn install
+            - run: npm install
             - save_cache:
                 paths:
                     - node_modules
                 key: v1-dependencies-{{ checksum "package.json" }}
-            - run: yarn build-storybook
-            - run: yarn deploy-storybook
+            - run: npm run build:storybook
+            - run: npm run deploy:storybook
 
 workflows:
     version: 2
