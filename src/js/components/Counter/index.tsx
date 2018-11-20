@@ -17,7 +17,6 @@ const Wrapper = styled.div`
   align-items: center;
   border: solid 1px #e6e6e6;
   border-radius: 4px;
-  width: 182px;
   color: ${colors.black};
 `;
 
@@ -47,7 +46,8 @@ const ControlButton = styled.div<{ disabled?: boolean }>`
 `;
 
 const Value = styled.input`
-  width: 100px;
+  flex: 1 1 auto;
+  width: 100%;
   height: 40px;
   border: 0;
   border-left: solid 1px #e6e6e6;

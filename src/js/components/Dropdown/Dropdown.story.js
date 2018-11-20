@@ -9,6 +9,7 @@ class DropdownWrapper extends React.Component {
     super(props);
     this.state = {
       value: '선택하세요..',
+      focused: false,
     };
     this.changeValue = this.changeValue.bind(this);
   }
@@ -21,11 +22,14 @@ class DropdownWrapper extends React.Component {
   render() {
     return (
       <Dropdown
+        {...this.props}
         className={this.props.className}
         disabled={this.props.disabled}
         label={this.props.label}
         value={this.state.value}
         onChange={this.changeValue}
+        focused={this.state.focused}
+        onFocusChanged={value => this.setState({ focused: value })}
       >
         {this.props.children}
       </Dropdown>
@@ -36,6 +40,13 @@ class DropdownWrapper extends React.Component {
 storiesOf('Dropdown', module)
   .add('Dropdown', () => (
     <DropdownWrapper>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </DropdownWrapper>
+  ))
+  .add('Invaild dropdown', () => (
+    <DropdownWrapper invalid>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>

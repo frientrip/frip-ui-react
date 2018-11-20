@@ -7,7 +7,10 @@ import ChevronIcon from '../../assets/svgs/ic-chevron-down-black.svg';
 const propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
+  invalid: PropTypes.bool,
   disabled: PropTypes.bool,
+  focused: PropTypes.bool.isRequired,
+  onFocusChanged: PropTypes.func.isRequired,
   children: PropTypes.node,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
@@ -16,6 +19,7 @@ const propTypes = {
 const defaultProps = {
   className: '',
   label: '',
+  invalid: false,
   disabled: false,
   children: null,
 };
@@ -59,7 +63,7 @@ const SelectedOption = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  border: 1px solid ${color.white};
+  border: 1px solid ${({ invalid }) => (invalid ? color.red : color.white)};
   border-radius: 4px;
   padding: 8px 16px;
   transition: background-color 0.4s;
@@ -97,21 +101,30 @@ const ChevronWrapper = styled.div`
   }
 `;
 
+const OptionBox = styled.div`
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+`;
+
 const Options = styled.div`
   position: absolute;
   top: 45px;
   left: 0;
+  display: flex;
+  flex-flow: column nowrap;
   width: 100%;
   max-height: 220px;
   background-color: ${color.pureWhite};
   border-radius: 4px;
   border: solid 1px #d9e0e8;
+  padding: 10px 0;
   opacity: ${({ visible }) => (visible ? '1' : '0')};
   transition: transform 0.2s ease-in-out, opacity 0.2s;
   transform-origin: left top;
   transform: ${({ visible }) => (visible ? 'translateY(0) scale(1,1)' : 'translateY(-10px) scale(1,0)')};
   z-index: 99;
-  overflow-y: scroll;
 `;
 
 const Option = styled.div`
@@ -134,26 +147,27 @@ const Option = styled.div`
 class Dropdown extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-    };
+
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
   }
+
   handleButtonClick() {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
+    this.props.onFocusChanged(!this.props.focused);
   }
+
   handleOptionClick(selectedOption) {
     this.props.onChange(selectedOption.value);
     this.handleButtonClick();
   }
+
   render() {
     const {
       label,
+      invalid,
       disabled,
       children,
+      focused,
     } = this.props;
 
     const filteredChildren = React.Children.toArray(children)
@@ -169,31 +183,35 @@ class Dropdown extends React.Component {
             disabled ? <Blocker /> : null
           }
           <SelectedOption
+            invalid={invalid}
             disabled={disabled}
-            active={this.state.isOpen}
+            active={focused}
             onClick={disabled ? null : this.handleButtonClick}
           >
             <div>{this.props.value}</div>
             <ChevronWrapper
               dangerouslySetInnerHTML={{ __html: ChevronIcon }}
               down
-              up={this.state.isOpen}
+              up={focused}
             />
           </SelectedOption>
           <Options
-            visible={this.state.isOpen}
+            visible={focused}
           >
-            {
-              filteredChildren.map(option => (
-                <Option
-                  key={option.props.value}
-                  disabled={option.props.disabled}
-                  onClick={!option.props.disabled && (() => this.handleOptionClick(option.props))}
-                >
-                  {option.props.children}
-                </Option>
-              ))
-            }
+            <OptionBox>
+              {
+                filteredChildren.map(option => (
+                  <Option
+                    key={option.props.value}
+                    disabled={option.props.disabled}
+                    onClick={!option.props.disabled && (() => this.handleOptionClick(option.props))}
+                  >
+                    {option.props.children}
+                  </Option>
+                ))
+              }
+            </OptionBox>
+
           </Options>
         </SelectionWrapper>
       </Wrapper>
