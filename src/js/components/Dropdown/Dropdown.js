@@ -9,8 +9,6 @@ const propTypes = {
   label: PropTypes.string,
   invalid: PropTypes.bool,
   disabled: PropTypes.bool,
-  focused: PropTypes.bool.isRequired,
-  onFocusChanged: PropTypes.func.isRequired,
   children: PropTypes.node,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
@@ -148,12 +146,36 @@ class Dropdown extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      isOpen: false,
+    };
+    this.node = React.createRef();
+
+    this.handleClick = this.handleClick.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOptionClick = this.handleOptionClick.bind(this);
   }
 
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClick);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick);
+  }
+
+  handleClick(e) {
+    if (!this.node.current.contains(e.target)) {
+      this.setState({
+        isOpen: false,
+      });
+    }
+  }
+
   handleButtonClick() {
-    this.props.onFocusChanged(!this.props.focused);
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen,
+    }));
   }
 
   handleOptionClick(selectedOption) {
@@ -167,14 +189,13 @@ class Dropdown extends React.Component {
       invalid,
       disabled,
       children,
-      focused,
     } = this.props;
 
     const filteredChildren = React.Children.toArray(children)
       .filter(node => node.type === 'option');
 
     return (
-      <Wrapper className={this.props.className}>
+      <Wrapper className={this.props.className} innerRef={this.node}>
         {
           label ? <Label>{label}</Label> : null
         }
@@ -185,18 +206,18 @@ class Dropdown extends React.Component {
           <SelectedOption
             invalid={invalid}
             disabled={disabled}
-            active={focused}
+            active={this.state.isOpen}
             onClick={disabled ? null : this.handleButtonClick}
           >
             <div>{this.props.value}</div>
             <ChevronWrapper
               dangerouslySetInnerHTML={{ __html: ChevronIcon }}
               down
-              up={focused}
+              up={this.state.isOpen}
             />
           </SelectedOption>
           <Options
-            visible={focused}
+            visible={this.state.isOpen}
           >
             <OptionBox>
               {
