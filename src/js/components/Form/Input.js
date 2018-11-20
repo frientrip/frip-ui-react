@@ -15,7 +15,7 @@ const propTypes = {
   message: PropTypes.string,
   required: PropTypes.bool,
   error: PropTypes.bool,
-  value: PropTypes.string,
+  defaultValue: PropTypes.string,
   placeholder: PropTypes.string,
   transparent: PropTypes.bool,
   bigLabel: PropTypes.bool,
@@ -32,7 +32,6 @@ const defaultProps = {
   message: '',
   required: false,
   error: false,
-  value: '',
   placeholder: '',
   transparent: false,
   bigLabel: false,
@@ -129,7 +128,8 @@ class InputComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value || '',
+      value: props.defaultValue || '',
+      isDirty: false,
     };
 
     this.inputRef = React.createRef();
@@ -137,19 +137,22 @@ class InputComponent extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.resetInput = this.resetInput.bind(this);
   }
-  componentWillReceiveProps({ value }) {
-    this.setState({
-      value,
-    });
+  static getDerivedStateFromProps(props, state) {
+    if (state.value === '' && props.defaultValue && !state.isDirty) {
+      props.onChange && props.onChange(props.defaultValue);
+      return {
+        value: props.defaultValue,
+        isDirty: true,
+      }
+    }
+    return state;
   }
   handleInputChange(e) {
     const val = e.target.value;
 
-    if (this.props.value === undefined) {
-      this.setState({
-        value: val,
-      });
-    }
+    this.setState({
+      value: val,
+    });
 
     this.props.onChange(val, e);
   }
