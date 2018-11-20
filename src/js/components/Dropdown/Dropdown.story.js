@@ -9,7 +9,6 @@ class DropdownWrapper extends React.Component {
     super(props);
     this.state = {
       value: '선택하세요..',
-      focused: false,
     };
     this.changeValue = this.changeValue.bind(this);
   }
@@ -28,8 +27,6 @@ class DropdownWrapper extends React.Component {
         label={this.props.label}
         value={this.state.value}
         onChange={this.changeValue}
-        focused={this.state.focused}
-        onFocusChanged={value => this.setState({ focused: value })}
       >
         {this.props.children}
       </Dropdown>
