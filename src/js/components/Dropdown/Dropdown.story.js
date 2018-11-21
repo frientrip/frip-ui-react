@@ -14,7 +14,7 @@ class DropdownWrapper extends React.Component {
   }
 
   changeValue(value) {
-    action(`Dropdown value changes to ${value}`);
+    action('Dropdown value changed')(value);
     this.setState({ value });
   }
 
