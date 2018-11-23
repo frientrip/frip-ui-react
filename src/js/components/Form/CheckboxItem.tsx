@@ -16,6 +16,7 @@ const Wrapper = styled.label<{ checked: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     color: ${colors.primary};
@@ -35,6 +36,10 @@ const Box = styled.div<{ checked: boolean; }>`
   border-radius: 4px;
   line-height: 20px;
   background-color: ${({ checked }) => (checked ? colors.primary : colors.pureWhite)};
+
+  svg {
+    vertical-align: baseline;
+  }
 `;
 
 const Input = styled.input`
