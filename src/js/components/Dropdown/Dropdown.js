@@ -12,6 +12,7 @@ const propTypes = {
   children: PropTypes.node,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  defaultValue: PropTypes.string,
 };
 
 const defaultProps = {
@@ -149,7 +150,8 @@ class Dropdown extends React.Component {
 
     this.state = {
       isOpen: false,
-      value: '',
+      value: props.defaultValue || '',
+      isDirty: false,
     };
     this.node = React.createRef();
 
@@ -164,6 +166,17 @@ class Dropdown extends React.Component {
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.value === '' && props.defaultValue && !state.isDirty) {
+      props.onChange && props.onChange(props.defaultValue);
+      return {
+        value: props.defaultValue,
+        isDirty: true,
+      }
+    }
+    return state;
   }
 
   handleClick(e) {
@@ -195,6 +208,7 @@ class Dropdown extends React.Component {
       disabled,
       children,
       placeholder,
+      defaultValue,
     } = this.props;
 
     const filteredChildren = React.Children.toArray(children)

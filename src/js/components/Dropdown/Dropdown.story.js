@@ -41,7 +41,14 @@ storiesOf('Dropdown', module)
       <option value="3">Option 3</option>
     </DropdownWrapper>
   ))
-  .add('Invaild dropdown', () => (
+  .add('Dropdown w/ defaultValue', () => (
+    <DropdownWrapper defaultValue="2">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </DropdownWrapper>
+  ))
+  .add('Invalid dropdown', () => (
     <DropdownWrapper invalid>
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
