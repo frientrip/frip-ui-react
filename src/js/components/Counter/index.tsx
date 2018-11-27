@@ -26,8 +26,11 @@ const ControlButton = styled.div<{ disabled?: boolean }>`
   height: 40px;
   padding: 12px;
   line-height: 16px;
+  cursor: pointer;
 
   ${({ disabled }) => (disabled ? `
+    cursor: not-allowed;
+
     path {
       fill: #e6e6e6;
     }
