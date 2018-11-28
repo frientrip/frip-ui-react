@@ -5,7 +5,7 @@ import colors from '../Color/index';
 
 interface CheckboxItemProps {
   label: string;
-  onClick: (checked: boolean) => any;
+  onChange: (checked: boolean) => any;
 }
 
 interface CheckboxItemState {
@@ -72,9 +72,13 @@ class CheckboxItem extends React.Component<CheckboxItemProps, CheckboxItemState>
    * @memberof CheckboxItem
    */
   private handleClick() {
-    this.setState(state => ({
-      checked: !(state.checked),
-    }));
+    this.setState(
+      state => ({
+        checked: !(state.checked),
+      }),
+      () => {
+        this.props.onChange(this.state.checked);
+      });
   }
 
   public render() {

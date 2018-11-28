@@ -61,7 +61,7 @@ storiesOf('Form', module)
   .add('Checkbox item', () => (
     <CheckboxItem
       label="안녕"
-      onClick={value => action('Checkbox value changed')(value)}
+      onChange={value => action('Checkbox value changed')(value)}
     />
   ))
   .add('Form', () => (
