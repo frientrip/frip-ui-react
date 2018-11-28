@@ -6,7 +6,7 @@ import PlusIcon from '../../assets/svgs/plus-black.svg';
 import colors from '../Color';
 
 interface CounterProps {
-  value: number;
+  value: number|null;
   onChange: (value: number) => any;
   disableDecrease?: boolean;
   disableIncrease?: boolean;
@@ -26,8 +26,11 @@ const ControlButton = styled.div<{ disabled?: boolean }>`
   height: 40px;
   padding: 12px;
   line-height: 16px;
+  cursor: pointer;
 
   ${({ disabled }) => (disabled ? `
+    cursor: not-allowed;
+
     path {
       fill: #e6e6e6;
     }
@@ -57,41 +60,107 @@ const Value = styled.input`
   text-align: center;
 `;
 
-const Counter: React.SFC<CounterProps> = (props) => {
-  const { value, onChange, disableDecrease, disableIncrease } = props;
-  const handleDirectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+/**
+ * Counter 컴포넌트
+ * 값이 null일 때 변경을 시도하면 0으로 초기화
+ *
+ * @export
+ * @class Counter
+ * @extends {React.Component<CounterProps>}
+ */
+export default class Counter extends React.Component<CounterProps> {
+  constructor(props: CounterProps) {
+    super(props);
+
+    this.handleMinusButtonClicked = this.handleMinusButtonClicked.bind(this);
+    this.handlePlusButtonClicked = this.handlePlusButtonClicked.bind(this);
+    this.handleDirectChange = this.handleDirectChange.bind(this);
+  }
+
+  /**
+   * 마이너스 버튼 클릭을 처리하는 함수
+   *
+   * @private
+   * @returns
+   * @memberof Counter
+   */
+  private handleMinusButtonClicked() {
+    if (this.props.disableDecrease) {
+      return;
+    }
+    if (this.props.value === null) {
+      this.props.onChange(0);
+      return;
+    }
+    this.props.onChange(this.props.value - 1);
+  }
+
+  /**
+   * 플러스 버튼 클릭을 처리하는 함수
+   *
+   * @private
+   * @returns
+   * @memberof Counter
+   */
+  private handlePlusButtonClicked() {
+    if (this.props.disableIncrease) {
+      return;
+    }
+    if (this.props.value === null) {
+      this.props.onChange(0);
+      return;
+    }
+    this.props.onChange(this.props.value + 1);
+  }
+
+  /**
+   * 인풋 창에 직접 값을 입력했을 때 처리 함수
+   *
+   * @private
+   * @param {React.ChangeEvent<HTMLInputElement>} event
+   * @returns
+   * @memberof Counter
+   */
+  private handleDirectChange(event: React.ChangeEvent<HTMLInputElement>) {
+    if (this.props.value === null) {
+      this.props.onChange(0);
+      return;
+    }
+
     const newValue = Number(event.target.value);
 
-    if (disableDecrease && newValue < value) {
+    if (this.props.disableDecrease && newValue < this.props.value) {
       return;
     }
-    if (disableIncrease && newValue > value) {
+    if (this.props.disableIncrease && newValue > this.props.value) {
       return;
     }
 
-    onChange(newValue);
-  };
+    this.props.onChange(newValue);
+  }
 
-  return (
-    <Wrapper>
-      <ControlButton
-        disabled={disableDecrease}
-        dangerouslySetInnerHTML={{ __html: MinusIcon }}
-        onClick={disableDecrease ? undefined : () => onChange(value - 1)}
-      />
-      <Value
-        type="number"
-        value={value}
-        onChange={handleDirectChange}
-        onWheel={e => e.preventDefault()}
-      />
-      <ControlButton
-        disabled={disableIncrease}
-        dangerouslySetInnerHTML={{ __html: PlusIcon }}
-        onClick={disableIncrease ? undefined : () => onChange(value + 1)}
-      />
-    </Wrapper>
-  );
-};
+  public render() {
+    const { value, disableDecrease, disableIncrease } = this.props;
 
-export default Counter;
+    return (
+      <Wrapper>
+        <ControlButton
+          disabled={disableDecrease}
+          dangerouslySetInnerHTML={{ __html: MinusIcon }}
+          onClick={this.handleMinusButtonClicked}
+        />
+        <Value
+          type="number"
+          value={value !== null ? value : ''}
+          onChange={this.handleDirectChange}
+          onWheel={e => e.preventDefault()}
+        />
+        <ControlButton
+          disabled={disableIncrease}
+          dangerouslySetInnerHTML={{ __html: PlusIcon }}
+          onClick={this.handlePlusButtonClicked}
+        />
+      </Wrapper>
+    );
+  }
+}
