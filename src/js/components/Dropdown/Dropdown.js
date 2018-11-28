@@ -11,7 +11,8 @@ const propTypes = {
   disabled: PropTypes.bool,
   children: PropTypes.node,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  defaultValue: PropTypes.string,
 };
 
 const defaultProps = {
@@ -20,6 +21,7 @@ const defaultProps = {
   invalid: false,
   disabled: false,
   children: null,
+  placeholder: '선택해주세요',
 };
 
 const Wrapper = styled.div`
@@ -148,6 +150,8 @@ class Dropdown extends React.Component {
 
     this.state = {
       isOpen: false,
+      value: props.defaultValue || '',
+      isDirty: false,
     };
     this.node = React.createRef();
 
@@ -162,6 +166,17 @@ class Dropdown extends React.Component {
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClick);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.value === '' && props.defaultValue && !state.isDirty) {
+      props.onChange && props.onChange(props.defaultValue);
+      return {
+        value: props.defaultValue,
+        isDirty: true,
+      }
+    }
+    return state;
   }
 
   handleClick(e) {
@@ -179,6 +194,9 @@ class Dropdown extends React.Component {
   }
 
   handleOptionClick(selectedOption) {
+    this.setState({
+      value: selectedOption.value,
+    })
     this.props.onChange(selectedOption.value);
     this.handleButtonClick();
   }
@@ -189,10 +207,15 @@ class Dropdown extends React.Component {
       invalid,
       disabled,
       children,
+      placeholder,
+      defaultValue,
     } = this.props;
 
     const filteredChildren = React.Children.toArray(children)
       .filter(node => node.type === 'option');
+
+    const selectedOption = filteredChildren
+      .filter(option => option.props.value === this.state.value);
 
     return (
       <Wrapper className={this.props.className} innerRef={this.node}>
@@ -209,7 +232,11 @@ class Dropdown extends React.Component {
             active={this.state.isOpen}
             onClick={disabled ? null : this.handleButtonClick}
           >
-            <div>{this.props.value}</div>
+            {
+              this.state.value ?
+                <div>{selectedOption && selectedOption[0] && selectedOption[0].props.children}</div>
+                : <div>{placeholder}</div>
+            }
             <ChevronWrapper
               dangerouslySetInnerHTML={{ __html: ChevronIcon }}
               down
