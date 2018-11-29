@@ -5,10 +5,12 @@ import colors from '../Color/index';
 
 interface CheckboxItemProps {
   label: string;
+  defaultValue?: boolean;
   onChange: (checked: boolean) => any;
 }
 
 interface CheckboxItemState {
+  isOverrided: boolean;
   checked: boolean;
 }
 
@@ -58,10 +60,23 @@ class CheckboxItem extends React.Component<CheckboxItemProps, CheckboxItemState>
     super(props);
 
     this.state = {
-      checked: false,
+      isOverrided: props.defaultValue === undefined,
+      checked: props.defaultValue || false,
     };
 
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps: CheckboxItemProps, prevState: CheckboxItemState): CheckboxItemState {
+    if (nextProps.defaultValue !== undefined && !prevState.isOverrided) {
+      // defaultValue가 생기는 경우 업데이트
+      return {
+        isOverrided: true,
+        checked: nextProps.defaultValue,
+      };
+    }
+
+    return prevState;
   }
 
   /**
