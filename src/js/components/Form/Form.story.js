@@ -2,9 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Input from './Input';
-import RadioGroup from './Radio'
+import RadioGroup from './Radio';
 import Form from './Form';
 import { ButtonPrimary, ButtonDanger } from '../Button';
+import CheckboxItem from './CheckboxItem';
+
 
 const required = {
   validate: value => Boolean(value.length),
@@ -55,6 +57,12 @@ storiesOf('Form', module)
   ))
   .add('RadioGroup with Initial Value', () => (
     <RadioGroup onChange={action('Radio value changed')} options={[{ value: 'one', labelText: 'One' }, { value: 'two', labelText: 'Two' }, { value: 'three', labelText: 'Three' }]} initialValue="three" />
+  ))
+  .add('Checkbox item', () => (
+    <CheckboxItem
+      label="안녕"
+      onChange={value => action('Checkbox value changed')(value)}
+    />
   ))
   .add('Form', () => (
     <div style={{ width: '150px' }}>
