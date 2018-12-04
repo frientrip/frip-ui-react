@@ -83,28 +83,40 @@ class Form extends Component {
   validateAllFields() {
     let isFormValid = true;
 
+    const validatedFields = {
+      ...Object.keys(this.state.fields).reduce((acc, curr) => {
+        const { isValid, invalidIdx } = this.validateField(curr);
+        isFormValid = isFormValid && isValid;
+        return ({
+          ...acc,
+          [curr]: {
+            ...this.accessField(curr),
+            isDirty: true,
+            isValid,
+            errorMessage: isValid ? '' : this.accessField(curr).validators[invalidIdx].errorMessage,
+          },
+        });
+      }, {}),
+    };
+
     this.setState({
-      fields: {
-        ...Object.keys(this.state.fields).reduce((acc, curr) => {
-          const { isValid, invalidIdx } = this.validateField(curr);
-          isFormValid = isFormValid && isValid;
-          return ({
-            ...acc,
-            [curr]: {
-              ...this.accessField(curr),
-              isDirty: true,
-              isValid,
-              errorMessage: isValid ? '' : this.accessField(curr).validators[invalidIdx].errorMessage,
-            },
-          });
-        }, {}),
-      },
+      fields: validatedFields,
     });
 
-    return isFormValid;
+    return { fields: validatedFields, isValid: isFormValid };
   }
   submit() {
-    return this.validateAllFields() && this.state.fields;
+    const { fields, isValid } = this.validateAllFields();
+
+    const finalFields = {
+      ...Object.keys(fields).reduce((acc, curr) =>
+        ({
+          ...acc,
+          [curr]: fields[curr].value,
+        }), {}),
+    };
+
+    return isValid && finalFields;
   }
   accessField(key) {
     return this.state.fields[key];
