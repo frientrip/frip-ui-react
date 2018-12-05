@@ -89,6 +89,15 @@ const OptionDescription = styled.span`
   color: #9b9b9b;
 `;
 
+const MessageWrapper = styled.div<{ error?: boolean }>`
+  width: 100%;
+  font-size: 12px;
+  line-height: 12px;
+  color: ${({ error }) => (error ? color.red : color.grey)};
+  font-weight: 300;
+  margin-bottom: 10px;
+`;
+
 export type RadioOption = {
   value: string;
   labelText: string;
@@ -107,6 +116,7 @@ export interface RadioGroupProps {
   className?: string;
   tabIndex?: number;
   defaultValue?: string;
+  message?: string;
 }
 
 export interface RadioGroupState {
@@ -117,10 +127,9 @@ export interface RadioGroupState {
 export default class RadioGroup extends React.Component<RadioGroupProps, RadioGroupState> {
   constructor(props: RadioGroupProps) {
     super(props);
-
     this.state = {
-      selectedOption: '',
-      isDirty: false,
+      selectedOption: props.defaultValue || '',
+      isDirty: props.defaultValue ? true : false,
     };
 
     this.handleOnOptionClick = this.handleOnOptionClick.bind(this);
@@ -159,6 +168,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
       required,
       className,
       tabIndex,
+      message,
     } = this.props;
     const { selectedOption } = this.state;
 
@@ -170,6 +180,12 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
             {labelText}
             {required && <RequiredWrapper> *</RequiredWrapper>}
           </LabelText>
+        }
+        {
+          message && 
+            <MessageWrapper error={error}>
+              {message}
+            </MessageWrapper>
         }
         <RadioInputWrapper direction={direction}>
         {

@@ -22,6 +22,7 @@ const propTypes = {
   tabIndex: PropTypes.number,
   inputWidth: PropTypes.string,
   disabled: PropTypes.bool,
+  maxLength: PropTypes.number,
 };
 
 const defaultProps = {
@@ -124,12 +125,19 @@ const RequiredWrapper = styled.span`
   color: ${color.red};
 `;
 
+const WordCountWrapper = styled.div`
+  position: absolute;
+  font-size: 12px;
+  right: 30px;
+  top: 10px;
+`;
+
 class InputComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: props.defaultValue || '',
-      isDirty: false,
+      isDirty: props.defaultValue ? true : false,
     };
 
     this.inputRef = React.createRef();
@@ -177,6 +185,7 @@ class InputComponent extends React.Component {
       tabIndex,
       inputWidth,
       disabled,
+      maxLength,
     } = this.props;
 
     return (
@@ -199,6 +208,7 @@ class InputComponent extends React.Component {
             transparent={transparent}
             tabIndex={tabIndex}
             disabled={disabled}
+            maxLength={maxLength}
           />
           {
             this.state.value && !error && <IconWrapper
@@ -211,6 +221,12 @@ class InputComponent extends React.Component {
               dangerouslySetInnerHTML={{ __html: ErrorIcon }}
               onClick={this.resetInput}
             />
+          }
+          {
+            maxLength &&
+              <WordCountWrapper>
+                {this.state.value.length}/{maxLength}
+              </WordCountWrapper>
           }
         </InputWrapper>
         {
