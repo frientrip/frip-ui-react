@@ -56,21 +56,22 @@ const Label = styled.div`
   user-select: none;
 `;
 
-const Content = styled.div<{ isOpen: boolean }>`
+const Content = styled.div<{ isOpen: boolean, contentHeight?: string }>`
   display: block;
   overflow: hidden;
-  height: 100%;
+  overflow-y: auto;
+  height: ${({ contentHeight }) => (contentHeight || '100%')};
   width: 100%;
   margin: 0;
   padding: 0;
   max-height: ${({ isOpen }) => (isOpen ? '2000px' : '0')};
   transform-origin: left top;
   transform: ${({ isOpen }) => (isOpen ? 'translateY(0) scale(1,1)' : 'translateY(-2px) scale(1,0)')};
-  transition: height 0.2s ease-in-out, transform 0.2s ease-in-out;
 `;
 
 interface AccordionSectionProps {
   content: React.ComponentType;
+  contentHeight?: string;
   sectionLabel: string;
 }
 
@@ -95,6 +96,7 @@ class AccordionSection extends React.Component<AccordionSectionProps, AccordionS
     const {
       sectionLabel,
       content,
+      contentHeight,
     } = this.props;
 
     return (
@@ -110,6 +112,7 @@ class AccordionSection extends React.Component<AccordionSectionProps, AccordionS
         </SectionLabelWrapper>
         <Content
           isOpen={this.state.isOpen}
+          contentHeight={contentHeight}
         >
           {content}
         </Content>
@@ -121,6 +124,7 @@ class AccordionSection extends React.Component<AccordionSectionProps, AccordionS
 interface AccordionProps {
   contents: React.ComponentType[];
   sectionLabels: string[];
+  contentHeight?: string;
 }
 
 class Accordion extends React.Component<AccordionProps> {
@@ -128,12 +132,13 @@ class Accordion extends React.Component<AccordionProps> {
     const {
       sectionLabels,
       contents,
+      contentHeight,
     } = this.props;
 
     return (
       <div>
         {
-          contents.map((content, idx) => <AccordionSection key={sectionLabels[idx]} content={content} sectionLabel={sectionLabels[idx]} />)
+          contents.map((content, idx) => <AccordionSection key={sectionLabels[idx]} content={content} sectionLabel={sectionLabels[idx]} contentHeight={contentHeight}/>)
         }
       </div>
     );
