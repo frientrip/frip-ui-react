@@ -6,16 +6,18 @@ import Toggle from './index';
 interface ToggleStoryState {
   isToggleFail: boolean;
   value: boolean;
-  disabled: boolean;
+  status: 'transition'|'completed';
   result: string;
+  disabled: boolean;
 }
 
 class ToggleStory extends React.Component<{}, ToggleStoryState> {
   state = {
     isToggleFail: false,
     value: false,
-    disabled: false,
+    status: 'completed' as 'completed',
     result: '',
+    disabled: false,
   };
 
   constructor(props: {}) {
@@ -31,9 +33,9 @@ class ToggleStory extends React.Component<{}, ToggleStoryState> {
    */
   private handleToggle() {
     action('toggle')(this.state.value);
-    this.setState({ disabled: true, result: 'loading...' });
+    this.setState({ status: 'transition', result: 'loading...' });
     setTimeout(() => {
-      this.setState((prevState: ToggleStoryState) => ({ value: this.state.isToggleFail ? prevState.value : !prevState.value, disabled: false, result: this.state.isToggleFail ? 'fail' : 'success' }));
+      this.setState((prevState: ToggleStoryState) => ({ value: this.state.isToggleFail ? prevState.value : !prevState.value, status: 'completed', result: this.state.isToggleFail ? 'fail' : 'success' }));
     },         1000);
   }
 
@@ -44,7 +46,11 @@ class ToggleStory extends React.Component<{}, ToggleStoryState> {
           <input type="checkbox" checked={!this.state.isToggleFail} onClick={() => this.setState((state: ToggleStoryState) => ({ isToggleFail: !state.isToggleFail }))} />
           토글 액션 성공
         </label>
-        <Toggle disabled={this.state.disabled} value={this.state.value} onClick={this.handleToggle}/>
+        <label>
+          <input type="checkbox" checked={this.state.disabled} onChange={e => this.setState({ disabled: e.currentTarget.checked })} />
+          비활성화 하기
+        </label>
+        <Toggle status={this.state.status} disabled={this.state.disabled} value={this.state.value} onClick={this.handleToggle}/>
         result: {this.state.result}
       </div>
     );
