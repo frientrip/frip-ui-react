@@ -5,12 +5,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 interface TextEditorProps {
-  value: string;
+  defaultValue: string;
   onChange: (value: string) => any;
 }
 
 interface TextEditorState {
-  defaultValue: string;
   quill: Quill|null;
 }
 
@@ -33,17 +32,25 @@ const Body = styled.div`
 `;
 
 export default class TextEditor extends React.Component<TextEditorProps, TextEditorState> {
+  editorBody: React.RefObject<HTMLDivElement>;
+
   constructor(props: TextEditorProps) {
     super(props);
 
+    this.editorBody = React.createRef<HTMLDivElement>();
+
     this.state = {
-      defaultValue: this.props.value,
       quill: null,
     };
   }
 
   public componentDidMount() {
     if (this.state.quill === null) {
+      if (this.editorBody.current) {
+        // 초기값 입력
+        this.editorBody.current.innerHTML = this.props.defaultValue;
+      }
+
       const quill = new Quill('#editor', {
         modules: {
           toolbar: {
@@ -54,6 +61,8 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       });
 
       quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
+        console.log(delta, source);
+
         const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
           inlineStyles: true,
         });
@@ -88,7 +97,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
             <button className="ql-video" />
           </div>
         </Toolbar>
-        <Body id="editor" dangerouslySetInnerHTML={{ __html: this.state.defaultValue }} />
+        <Body id="editor" innerRef={this.editorBody} />
       </Wrapper>
     );
   }
