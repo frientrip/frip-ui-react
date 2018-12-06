@@ -5,7 +5,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 interface TextEditorProps {
-  defaultValue: string;
+  defaultValue?: string;
   onChange: (value: string) => any;
   uploader?: (file: File) => Promise<string>; // 파일을 받아서 URL 리턴
 }
@@ -49,7 +49,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
     if (this.state.quill === null) {
       if (this.editorBody.current) {
         // 초기값 입력
-        this.editorBody.current.innerHTML = this.props.defaultValue;
+        this.editorBody.current.innerHTML = this.props.defaultValue || '';
       }
 
       const quill = new Quill('#editor', {
