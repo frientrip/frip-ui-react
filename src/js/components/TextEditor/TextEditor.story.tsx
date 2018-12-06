@@ -10,7 +10,11 @@ class TextEditorStory extends React.Component<{}, { value: string }> {
   public render() {
     return (
       <div style={{ display: 'flex', height: '300px' }}>
-        <TextEditor value={this.state.value} onChange={(value: string) => this.setState({ value })} />
+        <TextEditor
+          defaultValue={this.state.value}
+          onChange={(value: string) => this.setState({ value })}
+          uploader={file => new Promise(resolve => resolve('https://image.shutterstock.com/image-vector/sample-red-square-grunge-stamp-260nw-338250266.jpg'))}
+        />
         <div style={{ width: '50%' }}>
           본문
           <div dangerouslySetInnerHTML={{ __html: this.state.value }} />
