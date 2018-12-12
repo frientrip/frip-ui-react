@@ -15,7 +15,10 @@ const propTypes = {
   message: PropTypes.string,
   required: PropTypes.bool,
   error: PropTypes.bool,
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   placeholder: PropTypes.string,
   transparent: PropTypes.bool,
   bigLabel: PropTypes.bool,
@@ -39,6 +42,7 @@ const defaultProps = {
   tabIndex: 0,
   inputWidth: '100%',
   disabled: false,
+  defaultValue: '',
 };
 
 const Wrapper = styled.div`
@@ -69,7 +73,7 @@ const Input = styled.input`
     : `border: 1px solid ${error ? color.red : color.white};`
   )}
   padding: 0 24px 0 16px;
-  font-size: 14px;
+  font-size: 12px;
   color: ${({ transparent }) => (transparent ? color.pureWhite : color.black)};
   color: ${({ disabled }) => (disabled ? color.lightGrey : null)};
   transition: border 0.2s;
@@ -136,8 +140,8 @@ class InputComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.defaultValue || '',
-      isDirty: props.defaultValue ? true : false,
+      value: '',
+      isDirty: false,
     };
 
     this.inputRef = React.createRef();
@@ -211,7 +215,7 @@ class InputComponent extends React.Component {
             maxLength={maxLength}
           />
           {
-            this.state.value && !error && <IconWrapper
+            this.state.value && !maxLength && !error && <IconWrapper
               dangerouslySetInnerHTML={{ __html: DeleteIcon }}
               onClick={this.resetInput}
             />

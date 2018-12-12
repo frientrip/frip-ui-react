@@ -50,6 +50,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       if (this.editorBody.current) {
         // 초기값 입력
         this.editorBody.current.innerHTML = this.props.defaultValue || '';
+        this.props.defaultValue && this.props.onChange(this.props.defaultValue);
       }
 
       const quill = new Quill('#editor', {

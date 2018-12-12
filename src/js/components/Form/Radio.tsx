@@ -107,7 +107,7 @@ export type RadioOption = {
 export interface RadioGroupProps {
   labelText: string;
   options: RadioOption[];
-  onChange?: (value: string) => void;
+  onChange?: (value: string | number) => void;
   bigLabel?: boolean;
   error?: boolean;
   baseLength?: string;
@@ -115,7 +115,7 @@ export interface RadioGroupProps {
   required?: boolean;
   className?: string;
   tabIndex?: number;
-  defaultValue?: string;
+  defaultValue?: string | number;
   message?: string;
 }
 
@@ -128,8 +128,8 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
   constructor(props: RadioGroupProps) {
     super(props);
     this.state = {
-      selectedOption: props.defaultValue || '',
-      isDirty: props.defaultValue ? true : false,
+      selectedOption: '',
+      isDirty: false,
     };
 
     this.handleOnOptionClick = this.handleOnOptionClick.bind(this);

@@ -12,7 +12,10 @@ const propTypes = {
   children: PropTypes.node,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 const defaultProps = {
@@ -22,6 +25,7 @@ const defaultProps = {
   disabled: false,
   children: null,
   placeholder: '선택해주세요',
+  defaultValue: '',
 };
 
 const Wrapper = styled.div`
@@ -150,7 +154,7 @@ class Dropdown extends React.Component {
 
     this.state = {
       isOpen: false,
-      value: props.defaultValue || '',
+      value: '',
       isDirty: false,
     };
     this.node = React.createRef();
@@ -233,8 +237,8 @@ class Dropdown extends React.Component {
             onClick={disabled ? null : this.handleButtonClick}
           >
             {
-              this.state.value ?
-                <div>{selectedOption && selectedOption[0] && selectedOption[0].props.children}</div>
+              selectedOption.length ?
+                <div>{selectedOption[0] && selectedOption[0].props.children}</div>
                 : <div>{placeholder}</div>
             }
             <ChevronWrapper

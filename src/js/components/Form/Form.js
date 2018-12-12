@@ -20,7 +20,7 @@ class Form extends Component {
           {
             ...acc,
             [curr.key]: {
-              value: curr.defaultValue || '',
+              value: curr.defaultValue !== undefined ? curr.defaultValue : '',
               validators: curr.validators || [],
               isDirty: false,
               onChange: this.makeOnChangeHandler(curr.key),
@@ -49,9 +49,9 @@ class Form extends Component {
     };
   }
   updateFieldInState(key, value, isValid, forceDirty, invalidIdx, cb) {
-    this.setState({
+    this.setState(state => ({
       fields: {
-        ...this.state.fields,
+        ...state.fields,
         [key]: {
           ...this.accessField(key),
           value: (value instanceof Event) ? value.target.value : value, // Type check for event object
@@ -60,7 +60,7 @@ class Form extends Component {
           errorMessage: isValid ? '' : this.accessField(key).validators[invalidIdx].errorMessage,
         },
       },
-    }, cb);
+    }), cb);
   }
   validateField(key, value) {
     const val = (value === undefined) ? this.accessField(key).value : value;
