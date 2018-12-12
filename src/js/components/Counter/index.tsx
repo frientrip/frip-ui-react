@@ -7,17 +7,25 @@ import colors from '../Color';
 
 interface CounterProps {
   value: number|null;
+  defaultValue?: number;
   onChange: (value: number) => any;
   disableDecrease?: boolean;
   disableIncrease?: boolean;
+  className?: string;
+  error?: boolean;
 }
 
-const Wrapper = styled.div`
+interface CounterState {
+  isDirty: boolean;
+}
+
+const Wrapper = styled.div<{ error?: boolean}>`
   display: flex;
   align-items: center;
   border: solid 1px #e6e6e6;
   border-radius: 4px;
   color: ${colors.black};
+  border-color: ${({ error }) => (error ? colors.red : '#e6e6e6')};
 `;
 
 const ControlButton = styled.div<{ disabled?: boolean }>`
@@ -68,13 +76,28 @@ const Value = styled.input`
  * @class Counter
  * @extends {React.Component<CounterProps>}
  */
-export default class Counter extends React.Component<CounterProps> {
+export default class Counter extends React.Component<CounterProps, CounterState> {
+
+  state = {
+    isDirty: false,
+  }
+
   constructor(props: CounterProps) {
     super(props);
 
     this.handleMinusButtonClicked = this.handleMinusButtonClicked.bind(this);
     this.handlePlusButtonClicked = this.handlePlusButtonClicked.bind(this);
     this.handleDirectChange = this.handleDirectChange.bind(this);
+  }
+
+  static getDerivedStateFromProps(props: CounterProps, state: CounterState) {
+    if (props.defaultValue !== undefined && !state.isDirty) {
+      props.onChange && props.onChange(props.defaultValue);
+      return {
+        isDirty: true,
+      }
+    }
+    return state;
   }
 
   /**
@@ -140,10 +163,10 @@ export default class Counter extends React.Component<CounterProps> {
   }
 
   public render() {
-    const { value, disableDecrease, disableIncrease } = this.props;
+    const { className, error, value, disableDecrease, disableIncrease } = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper className={className} error={error}>
         <ControlButton
           disabled={disableDecrease}
           dangerouslySetInnerHTML={{ __html: MinusIcon }}
