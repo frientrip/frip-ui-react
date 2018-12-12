@@ -2,14 +2,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 interface ToggleProps {
+  status?: 'transition'|'completed';
   disabled?: boolean;
   value: boolean;
   onClick: () => any;
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ disabled?: boolean, inTransition?: boolean }>`
   width: 64px;
   height: 32px;
+  cursor: ${({ disabled, inTransition }) => (disabled ? 'not-allowed' : inTransition ? 'progress' : 'pointer')}
 
   rect, circle {
     transition: all 0.2s;
@@ -17,9 +19,10 @@ const Wrapper = styled.div`
 `;
 
 const Toggle: React.SFC<ToggleProps> = (props) => {
-  const value = props.disabled ? !props.value : props.value;
+  const status = props.status || 'completed';
+  const value = status === 'transition' ? !props.value : props.value;
   return (
-    <Wrapper onClick={props.disabled ? undefined : props.onClick}>
+    <Wrapper disabled={props.disabled} inTransition={status === 'transition'} onClick={props.disabled ? undefined : props.onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="64"
@@ -40,7 +43,7 @@ const Toggle: React.SFC<ToggleProps> = (props) => {
             cx={value ? '48' : '16'}
             cy="16"
             r="14"
-            opacity={props.disabled ? '0.5' : '1'}
+            opacity={props.disabled || status === 'transition' ? '0.5' : '1'}
             fill="#FFF"
           />
         </g>
