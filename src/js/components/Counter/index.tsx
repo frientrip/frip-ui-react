@@ -8,7 +8,7 @@ import colors from '../Color';
 interface CounterProps {
   value: number|null;
   defaultValue?: number;
-  onChange: (value: number) => any;
+  onChange: (value: number|null) => any;
   disableDecrease?: boolean;
   disableIncrease?: boolean;
   className?: string;
@@ -80,7 +80,7 @@ export default class Counter extends React.Component<CounterProps, CounterState>
 
   state = {
     isDirty: false,
-  }
+  };
 
   constructor(props: CounterProps) {
     super(props);
@@ -95,7 +95,7 @@ export default class Counter extends React.Component<CounterProps, CounterState>
       props.onChange && props.onChange(props.defaultValue);
       return {
         isDirty: true,
-      }
+      };
     }
     return state;
   }
@@ -145,12 +145,17 @@ export default class Counter extends React.Component<CounterProps, CounterState>
    * @memberof Counter
    */
   private handleDirectChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (this.props.value === null) {
-      this.props.onChange(0);
+    if (event.target.value === '') {
+      this.props.onChange(null);
       return;
     }
 
     const newValue = Number(event.target.value);
+
+    if (this.props.value === null) {
+      this.props.onChange(newValue);
+      return;
+    }
 
     if (this.props.disableDecrease && newValue < this.props.value) {
       return;
