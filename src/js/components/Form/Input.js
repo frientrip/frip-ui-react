@@ -26,6 +26,7 @@ const propTypes = {
   inputWidth: PropTypes.string,
   disabled: PropTypes.bool,
   maxLength: PropTypes.number,
+  width: PropTypes.string,
 };
 
 const defaultProps = {
@@ -40,15 +41,15 @@ const defaultProps = {
   transparent: false,
   bigLabel: false,
   tabIndex: 0,
-  inputWidth: '100%',
   disabled: false,
   defaultValue: '',
+  width: '100%',
 };
 
 const Wrapper = styled.div`
+  width: ${({ width }) => (width)};
   position: relative;
   display: inline-block;
-  width: 100%;
   font-family: 'Spoqa Han Sans', sans-serif;
   margin-bottom: 5px;
   padding-left: ${( { bigLabel }) => (bigLabel ? '155px' : 0)};
@@ -56,7 +57,7 @@ const Wrapper = styled.div`
 
 const InputWrapper = styled.div`
   position: relative;
-  width: ${({ inputWidth }) => (inputWidth)};
+  width: ${({ inputWidth }) => (inputWidth || '100%')};
   height: 40px;
   ${({ transparent }) => (transparent ? '' : 'border-radius: 4px;')}
   background-color: ${({ transparent }) => (transparent ? 'transparent' : color.pureWhite)};
@@ -75,9 +76,9 @@ const Input = styled.input`
   padding: 0 24px 0 16px;
   font-size: 12px;
   color: ${({ transparent }) => (transparent ? color.pureWhite : color.black)};
-  color: ${({ disabled }) => (disabled ? color.lightGrey : null)};
+  color: ${({ disabled }) => (disabled ? color.grey : null)};
   transition: border 0.2s;
-  background-color: transparent;
+  background-color: ${({ transparent }) => (transparent ? 'transparent' : color.pureWhite)};
 
   &:focus {
     border-color: ${({ error }) => (error ? color.red : color.primary)};
@@ -86,6 +87,15 @@ const Input = styled.input`
 
   &:focus + div {
     opacity: 1;
+  }
+
+  &:disabled {
+    color: ${color.grey};
+    opacity: 1;
+  }
+
+  &::placeholder {
+    color: ${color.grey};
   }
 
 `;
@@ -106,9 +116,9 @@ const IconWrapperVisible = styled(IconWrapper)`
 `;
 
 const MessageWrapper = styled.div`
-  width: 100%;
+  width: ${({ width }) => (width || '100%')};
   font-size: 12px;
-  line-height: 12px;
+  line-height: 14px;
   color: ${({ error }) => (error ? color.red : color.grey)};
   font-weight: 300;
 `;
@@ -190,10 +200,11 @@ class InputComponent extends React.Component {
       inputWidth,
       disabled,
       maxLength,
+      width,
     } = this.props;
 
     return (
-      <Wrapper className={className} bigLabel={label && bigLabel}>
+      <Wrapper className={className} bigLabel={label && bigLabel} width={width}>
         {
           label &&
           <LabelWrapper bigLabel={bigLabel} error={error}>
@@ -235,7 +246,7 @@ class InputComponent extends React.Component {
         </InputWrapper>
         {
           message &&
-          <MessageWrapper error={error}>
+          <MessageWrapper error={error} width={inputWidth}>
             {message}
           </MessageWrapper>
         }
