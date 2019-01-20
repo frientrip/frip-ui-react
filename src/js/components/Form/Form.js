@@ -31,7 +31,8 @@ class Form extends Component {
         ), {}),
       },
     };
-    this.validateAllFields = this.validateAllFields.bind(this);
+    this.constructValidatedFieldsFromFieldsArray = this.constructValidatedFieldsFromFieldsArray.bind(this)
+    this.validate = this.validate.bind(this);
     this.submit = this.submit.bind(this);
   }
   makeOnChangeHandler(key) {
@@ -80,13 +81,16 @@ class Form extends Component {
       return { isValid: acc.isValid && isValid, invalidIdx };
     }, { isValid: true, invalidIdx: null });
   }
-  validateAllFields() {
+  // accepts an array of field keys to construct validated fields object
+  constructValidatedFieldsFromFieldsArray(fieldsArray) {
     let isFormValid = true;
+    const invalidFields = [];
 
     const validatedFields = {
-      ...Object.keys(this.state.fields).reduce((acc, curr) => {
+      ...fieldsArray.reduce((acc, curr) => {
         const { isValid, invalidIdx } = this.validateField(curr);
         isFormValid = isFormValid && isValid;
+        !isValid && invalidFields.push(curr);
         return ({
           ...acc,
           [curr]: {
@@ -96,27 +100,32 @@ class Form extends Component {
             errorMessage: isValid ? '' : this.accessField(curr).validators[invalidIdx].errorMessage,
           },
         });
-      }, {}),
+      }, this.state.fields),
     };
 
     this.setState({
       fields: validatedFields,
     });
 
-    return { fields: validatedFields, isValid: isFormValid };
+    return { fields: validatedFields, isValid: isFormValid, invalidFields };
+  }
+  validate(fieldsArray) {
+    if (fieldsArray && fieldsArray.length) {
+      return this.constructValidatedFieldsFromFieldsArray(fieldsArray);
+    } else {
+      return this.constructValidatedFieldsFromFieldsArray(Object.keys(this.state.fields));
+    }
   }
   submit() {
-    const { fields, isValid } = this.validateAllFields();
-
     const finalFields = {
-      ...Object.keys(fields).reduce((acc, curr) =>
+      ...Object.keys(this.state.fields).reduce((acc, curr) =>
         ({
           ...acc,
-          [curr]: fields[curr].value,
+          [curr]: this.state.fields[curr].value,
         }), {}),
     };
 
-    return isValid && finalFields;
+    return finalFields;
   }
   accessField(key) {
     return this.state.fields[key];
@@ -127,7 +136,7 @@ class Form extends Component {
     } = this.state;
 
     return (this.props.children({
-      fields, validate: this.validateAllFields, submit: this.submit,
+      fields, validate: this.validate, submit: this.submit,
     }));
   }
 }

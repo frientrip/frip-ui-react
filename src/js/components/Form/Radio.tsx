@@ -18,12 +18,13 @@ const LabelText = styled.div<{ error?:boolean, bigLabel?:boolean }>`
   top: ${({ bigLabel }) => (bigLabel ? '5px' : '0')};
 `;
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<{ disabled: boolean }>`
   font-family: inherit;
   cursor: pointer;
+  color: ${({ disabled }) => (disabled ? color.white : 'inherit')};
 
   &:hover {
-    color: ${color.primary};
+    color: ${({ disabled }) => (disabled ? color.white : color.primary)};
   }
 `;
 
@@ -56,13 +57,13 @@ const OptionWrapper = styled.div<{ baseLength?: string }>`
   margin-bottom: 10px;
 `;
 
-const CustomRadio = styled.div<{ checked: boolean }>`
+const CustomRadio = styled.div<{ checked: boolean, disabled: boolean }>`
   display: inline-flex;
   position: relative;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 1px solid ${color.pinkishGrey};
+  border: 1px solid ${({ disabled }) => (disabled ? color.white : color.pinkishGrey)};
   cursor: pointer;
   background-color: ${color.pureWhite};
   margin-right: 10px;
@@ -70,8 +71,8 @@ const CustomRadio = styled.div<{ checked: boolean }>`
   align-items: center;
 
   &:hover {
-    border-color: ${color.primary};
-    background-color: rgba(51, 153, 255, 0.2);
+    border-color: ${({ disabled }) => (disabled ? color.white : color.primary)};
+    background-color: ${({ disabled }) => (disabled ? color.pureWhite : 'rgba(51, 153, 255, 0.2)')};
   }
 
   &:after {
@@ -102,6 +103,7 @@ export type RadioOption = {
   value: string;
   labelText: string;
   description?: string;
+  disabled: boolean;
 };
 
 export interface RadioGroupProps {
@@ -191,14 +193,15 @@ export default class RadioGroup extends React.Component<RadioGroupProps, RadioGr
         {
           options.map(option => (
             <OptionWrapper key={option.value} baseLength={baseLength}>
-              <StyledLabel key={option.value} htmlFor={`radio-${option.value}`}>
-                <CustomRadio checked={selectedOption === option.value}/>
+              <StyledLabel key={option.value} disabled={option.disabled} htmlFor={`radio-${option.value}`}>
+                <CustomRadio checked={selectedOption === option.value} disabled={option.disabled} />
                 <RadioInput
                   tabIndex={tabIndex}
                   type="radio"
                   id={`radio-${option.value}`}
                   name={`radio-${option.value}`}
                   value={option.value}
+                  disabled={option.disabled}
                   checked={selectedOption === option.value}
                   onChange={this.handleOnOptionClick}
                 />
