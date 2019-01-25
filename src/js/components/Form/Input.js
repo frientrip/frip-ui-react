@@ -142,8 +142,12 @@ const RequiredWrapper = styled.span`
 const WordCountWrapper = styled.div`
   position: absolute;
   font-size: 12px;
-  right: 30px;
+  right: 15px;
   top: 10px;
+`;
+
+const WordCount = styled.span`
+  color: ${({ error }) => (error ? color.red : 'inherit')};
 `;
 
 class InputComponent extends React.Component {
@@ -171,6 +175,9 @@ class InputComponent extends React.Component {
   }
   handleInputChange(e) {
     const val = e.target.value;
+    if (this.props.maxLength && val.length > this.props.maxLength) {
+      return;
+    }
 
     this.setState({
       value: val,
@@ -232,7 +239,7 @@ class InputComponent extends React.Component {
             />
           }
           {
-            error && <IconWrapperVisible
+            error && !maxLength && <IconWrapperVisible
               dangerouslySetInnerHTML={{ __html: ErrorIcon }}
               onClick={this.resetInput}
             />
@@ -240,7 +247,12 @@ class InputComponent extends React.Component {
           {
             maxLength &&
               <WordCountWrapper>
-                {this.state.value.length}/{maxLength}
+                <WordCount
+                  error={this.state.value.length > maxLength}
+                >
+                  {this.state.value.length}
+                </WordCount>
+                /{maxLength}
               </WordCountWrapper>
           }
         </InputWrapper>
