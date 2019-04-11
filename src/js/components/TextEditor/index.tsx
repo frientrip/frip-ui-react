@@ -62,7 +62,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       });
 
       quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
-        console.log('delta', delta, oldDelta, source);
+
         if (this.props.uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
           // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
           const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
