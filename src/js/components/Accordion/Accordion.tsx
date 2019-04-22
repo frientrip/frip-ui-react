@@ -44,10 +44,6 @@ const SectionLabelWrapper = styled.div`
   background-color: white;
   transition: background-color 0.4s;
   cursor: pointer;
-
-  &:hover {
-    background-color: ${color.veryLightBlue};
-  }
 `;
 
 const Label = styled.div`

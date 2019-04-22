@@ -29,7 +29,6 @@ const Toolbar = styled.div`
 
 const Body = styled.div`
   flex: 1 1 0;
-  height: 0 !important;
 `;
 
 export default class TextEditor extends React.Component<TextEditorProps, TextEditorState> {
@@ -63,23 +62,31 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       });
 
       quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
+
         if (this.props.uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
           // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
           const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
 
-          this.props.uploader(delta.ops[1].insert.image)
-            .then((url) => {
-              const newImage = new DeltaInstance()
-                .retain(delta.ops![0].retain!)
-                .delete(1)
-                .insert({ image: url });
-              quill.updateContents(newImage, 'api');
-            });
+          const imageOps = delta.ops.filter(op => op.insert !== undefined);
+          const retainOps = delta.ops.filter(op => op.retain !== undefined);
+
+          if (imageOps.length) {
+            this.props.uploader(imageOps[0].insert.image)
+              .then((url) => {
+                const newImage = new DeltaInstance()
+                  .retain(retainOps.length ? retainOps[0].retain! : 0)
+                  .delete(1)
+                  .insert({ image: url });
+                quill.updateContents(newImage, 'api');
+              }); 
+          }
+
         }
 
         const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
           inlineStyles: true,
         });
+
         this.props.onChange(converter.convert());
       });
       this.setState({ quill });
