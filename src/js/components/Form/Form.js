@@ -31,16 +31,23 @@ class Form extends Component {
         ), {}),
       },
     };
-    this.constructValidatedFieldsFromFieldsArray = this.constructValidatedFieldsFromFieldsArray.bind(this)
+    this.constructValidatedFieldsFromFieldsArray = this.constructValidatedFieldsFromFieldsArray.bind(this);
     this.validate = this.validate.bind(this);
     this.submit = this.submit.bind(this);
   }
   makeOnChangeHandler(key) {
     return (value) => {
+      let trimmedValue = value;
+
+      if (typeof value === 'string') {
+        // if value is string, trim it
+        trimmedValue = value.trim();
+      }
+
       // VALUE CHANGED
-      const { isValid, invalidIdx } = this.validateField(key, value);
+      const { isValid, invalidIdx } = this.validateField(key, trimmedValue);
       // OWN VALUE VALIDATED
-      this.updateFieldInState(key, value, isValid, true, invalidIdx, () => {
+      this.updateFieldInState(key, trimmedValue, isValid, true, invalidIdx, () => {
         // VALIDATE RELATED FIELDS
         this.accessField(key).relatedFields.forEach((relatedKey) => {
           const { isValid: relatedIsValid, invalidIdx: relatedInvalidIdx } = this.validateField(relatedKey);
@@ -112,9 +119,8 @@ class Form extends Component {
   validate(fieldsArray) {
     if (fieldsArray && fieldsArray.length) {
       return this.constructValidatedFieldsFromFieldsArray(fieldsArray);
-    } else {
-      return this.constructValidatedFieldsFromFieldsArray(Object.keys(this.state.fields));
     }
+    return this.constructValidatedFieldsFromFieldsArray(Object.keys(this.state.fields));
   }
   submit() {
     const finalFields = {
