@@ -8,6 +8,7 @@ interface TextEditorProps {
   defaultValue?: string;
   onChange: (value: string) => any;
   uploader?: (file: File) => Promise<string>; // 파일을 받아서 URL 리턴
+  onCatchUploaderError?: (e: Error) => any;
 }
 
 interface TextEditorState {
@@ -45,11 +46,14 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
   }
 
   public componentDidMount() {
-    if (this.state.quill === null) {
+    const { defaultValue, onChange, uploader, onCatchUploaderError } = this.props;
+    const { quill } = this.state;
+
+    if (quill === null) {
       if (this.editorBody.current) {
         // 초기값 입력
-        this.editorBody.current.innerHTML = this.props.defaultValue || '';
-        this.props.defaultValue && this.props.onChange(this.props.defaultValue);
+        this.editorBody.current.innerHTML = defaultValue || '';
+        defaultValue && onChange(defaultValue);
       }
 
       const quill = new Quill('#editor', {
@@ -61,33 +65,42 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
         theme: 'snow',
       });
 
+      // quill 이벤트 핸들러 추가
       quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
-
-        if (this.props.uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
+        if (uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
           // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
           const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
-
           const imageOps = delta.ops.filter(op => op.insert !== undefined);
           const retainOps = delta.ops.filter(op => op.retain !== undefined);
 
           if (imageOps.length) {
-            this.props.uploader(imageOps[0].insert.image)
+            uploader(imageOps[0].insert.image)
               .then((url) => {
                 const newImage = new DeltaInstance()
                   .retain(retainOps.length ? retainOps[0].retain! : 0)
                   .delete(1)
                   .insert({ image: url });
                 quill.updateContents(newImage, 'api');
-              }); 
-          }
+              })
+              .catch((e) => {
+                // 못 올라간 이미지 제거
+                const newImage = new DeltaInstance()
+                  .retain(retainOps.length ? retainOps[0].retain! : 0)
+                  .delete(1);
+                quill.updateContents(newImage, 'api');
 
+                if (onCatchUploaderError !== undefined) {
+                  onCatchUploaderError(e);
+                }
+              });
+          }
         }
 
         const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
           inlineStyles: true,
         });
 
-        this.props.onChange(converter.convert());
+        onChange(converter.convert());
       });
       this.setState({ quill });
     }
