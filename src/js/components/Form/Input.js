@@ -27,6 +27,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   maxLength: PropTypes.number,
   width: PropTypes.string,
+  unit: PropTypes.string,
 };
 
 const defaultProps = {
@@ -44,6 +45,7 @@ const defaultProps = {
   disabled: false,
   defaultValue: '',
   width: '100%',
+  unit: '',
 };
 
 const Wrapper = styled.div`
@@ -52,7 +54,7 @@ const Wrapper = styled.div`
   display: inline-block;
   font-family: 'Spoqa Han Sans', sans-serif;
   margin-bottom: 5px;
-  padding-left: ${( { bigLabel }) => (bigLabel ? '155px' : 0)};
+  padding-left: ${({ bigLabel }) => (bigLabel ? '155px' : 0)};
 `;
 
 const InputWrapper = styled.div`
@@ -64,29 +66,34 @@ const InputWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
+const BorderedContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  padding: 0 16px;
+  transition: border 0.2s;
+
+  ${({ onlyBorderBottom, borderColor }) => (onlyBorderBottom
+    ? `border-bottom: 0.5px solid ${borderColor};`
+    : `border: 1px solid ${borderColor};`
+  )}
+`;
+
 const Input = styled.input`
   width: 100%;
   height: 100%;
   border-radius: inherit;
   border: none;
-  ${({ transparent, error }) => (transparent
-    ? `border-bottom: 0.5px solid ${error ? color.red : color.pureWhite};`
-    : `border: 1px solid ${error ? color.red : color.white};`
-  )}
-  padding: 0 24px 0 16px;
+  padding: 0;
   font-size: 12px;
   color: ${({ transparent }) => (transparent ? color.pureWhite : color.black)};
   color: ${({ disabled }) => (disabled ? color.grey : null)};
-  transition: border 0.2s;
   background-color: ${({ transparent }) => (transparent ? 'transparent' : color.pureWhite)};
 
   &:focus {
-    border-color: ${({ error }) => (error ? color.red : color.primary)};
     outline: none;
-  }
-
-  &:focus + div {
-    opacity: 1;
   }
 
   &:disabled {
@@ -100,13 +107,18 @@ const Input = styled.input`
 
 `;
 
+const Unit = styled.div`
+  line-height: 12px;
+  text-align: right;
+  font-size: 12px;
+`;
+
 const IconWrapper = styled.div`
   position: absolute;
   width: 16px;
   height: 16px;
-  right: 8px;
+  right: 24px;
   top: 8px;
-  opacity: 0;
   user-select: none;
 `;
 
@@ -155,12 +167,16 @@ class InputComponent extends React.Component {
     super(props);
     this.state = {
       value: '',
+      isFocused: false,
       isDirty: false,
     };
 
     this.inputRef = React.createRef();
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputFocused = this.handleInputFocused.bind(this);
+    this.handleInputBlured = this.handleInputBlured.bind(this);
+
     this.resetInput = this.resetInput.bind(this);
   }
   static getDerivedStateFromProps(props, state) {
@@ -169,10 +185,30 @@ class InputComponent extends React.Component {
       return {
         value: props.defaultValue,
         isDirty: true,
-      }
+      };
     }
     return state;
   }
+
+  get borderColor() {
+    const { transparent, error } = this.props;
+    const { isFocused } = this.state;
+
+    if (error) {
+      return color.red;
+    }
+
+    if (isFocused) {
+      return color.primary;
+    }
+
+    if (transparent) {
+      return color.pureWhite;
+    }
+
+    return color.white;
+  }
+
   handleInputChange(e) {
     const val = e.target.value;
     if (this.props.maxLength && val.length > this.props.maxLength) {
@@ -185,6 +221,7 @@ class InputComponent extends React.Component {
 
     this.props.onChange(val, e);
   }
+
   resetInput() {
     this.inputRef.current.focus();
     this.setState({
@@ -192,6 +229,19 @@ class InputComponent extends React.Component {
     });
     this.props.onChange('');
   }
+
+  handleInputFocused() {
+    this.setState({
+      isFocused: true,
+    });
+  }
+
+  handleInputBlured() {
+    this.setState({
+      isFocused: false,
+    });
+  }
+
   render() {
     const {
       className,
@@ -208,7 +258,9 @@ class InputComponent extends React.Component {
       disabled,
       maxLength,
       width,
+      unit,
     } = this.props;
+    const { isFocused } = this.state;
 
     return (
       <Wrapper className={className} bigLabel={label && bigLabel} width={width}>
@@ -220,32 +272,48 @@ class InputComponent extends React.Component {
           </LabelWrapper>
         }
         <InputWrapper inputWidth={inputWidth} transparent={transparent}>
-          <Input
-            type={type}
-            error={error}
-            onChange={this.handleInputChange}
-            value={this.state.value}
-            innerRef={this.inputRef}
-            placeholder={placeholder}
-            transparent={transparent}
-            tabIndex={tabIndex}
-            disabled={disabled}
-            maxLength={maxLength}
-          />
-          {
-            this.state.value && !maxLength && !error && <IconWrapper
-              dangerouslySetInnerHTML={{ __html: DeleteIcon }}
-              onClick={this.resetInput}
+          <BorderedContainer
+            onlyBorderBottom={transparent}
+            borderColor={this.borderColor}
+          >
+            <Input
+              type={type}
+              error={error}
+              onChange={this.handleInputChange}
+              value={this.state.value}
+              innerRef={this.inputRef}
+              placeholder={placeholder}
+              transparent={transparent}
+              tabIndex={tabIndex}
+              disabled={disabled}
+              maxLength={maxLength}
             />
+            {
+              unit && (
+                <Unit>
+                  {unit}
+                </Unit>
+              )
+            }
+          </BorderedContainer>
+          {
+            this.state.value && !maxLength && !error && isFocused && (
+              <IconWrapper
+                dangerouslySetInnerHTML={{ __html: DeleteIcon }}
+                onClick={this.resetInput}
+              />
+            )
           }
           {
-            error && !maxLength && <IconWrapperVisible
-              dangerouslySetInnerHTML={{ __html: ErrorIcon }}
-              onClick={this.resetInput}
-            />
+            error && !maxLength && (
+              <IconWrapperVisible
+                dangerouslySetInnerHTML={{ __html: ErrorIcon }}
+                onClick={this.resetInput}
+              />
+            )
           }
           {
-            maxLength &&
+            maxLength && (
               <WordCountWrapper>
                 <WordCount
                   error={this.state.value.length > maxLength}
@@ -254,13 +322,15 @@ class InputComponent extends React.Component {
                 </WordCount>
                 /{maxLength}
               </WordCountWrapper>
+            )
           }
         </InputWrapper>
         {
-          message &&
-          <MessageWrapper error={error} width={inputWidth}>
-            {message}
-          </MessageWrapper>
+          message && (
+            <MessageWrapper error={error} width={inputWidth}>
+              {message}
+            </MessageWrapper>
+          )
         }
       </Wrapper>
     );
