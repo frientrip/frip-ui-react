@@ -72,7 +72,7 @@ const BorderedContainer = styled.div`
   width: 100%;
   height: 100%;
   border-radius: inherit;
-  padding: 0 16px;
+  padding-right: 8px;
   transition: border 0.2s;
 
   ${({ onlyBorderBottom, borderColor }) => (onlyBorderBottom
@@ -86,7 +86,7 @@ const Input = styled.input`
   height: 100%;
   border-radius: inherit;
   border: none;
-  padding: 0;
+  padding: 0 16px;
   font-size: 12px;
   color: ${({ transparent }) => (transparent ? color.pureWhite : color.black)};
   color: ${({ disabled }) => (disabled ? color.grey : null)};
@@ -109,6 +109,7 @@ const Input = styled.input`
 
 const Unit = styled.div`
   line-height: 12px;
+  padding: 0 16px;
   text-align: right;
   font-size: 12px;
 `;
@@ -117,13 +118,12 @@ const IconWrapper = styled.div`
   position: absolute;
   width: 16px;
   height: 16px;
-  right: 24px;
+  right: ${({ right }) => right};
   top: 8px;
   user-select: none;
 `;
 
 const IconWrapperVisible = styled(IconWrapper)`
-  opacity: 1;
   background-color: ${color.pureWhite};
 `;
 
@@ -174,9 +174,8 @@ class InputComponent extends React.Component {
     this.inputRef = React.createRef();
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleInputFocused = this.handleInputFocused.bind(this);
-    this.handleInputBlured = this.handleInputBlured.bind(this);
-
+    this.handleInputFocus = this.handleInputFocus.bind(this);
+    this.handleInputBlur = this.handleInputBlur.bind(this);
     this.resetInput = this.resetInput.bind(this);
   }
   static getDerivedStateFromProps(props, state) {
@@ -230,13 +229,13 @@ class InputComponent extends React.Component {
     this.props.onChange('');
   }
 
-  handleInputFocused() {
+  handleInputFocus() {
     this.setState({
       isFocused: true,
     });
   }
 
-  handleInputBlured() {
+  handleInputBlur() {
     this.setState({
       isFocused: false,
     });
@@ -287,6 +286,8 @@ class InputComponent extends React.Component {
               tabIndex={tabIndex}
               disabled={disabled}
               maxLength={maxLength}
+              onFocus={this.handleInputFocus}
+              onBlur={this.handleInputBlur}
             />
             {
               unit && (
@@ -299,6 +300,7 @@ class InputComponent extends React.Component {
           {
             this.state.value && !maxLength && !error && isFocused && (
               <IconWrapper
+                right={unit ? '36px' : '8px'}
                 dangerouslySetInnerHTML={{ __html: DeleteIcon }}
                 onClick={this.resetInput}
               />
@@ -307,6 +309,7 @@ class InputComponent extends React.Component {
           {
             error && !maxLength && (
               <IconWrapperVisible
+                right={unit ? '36px' : '8px'}
                 dangerouslySetInnerHTML={{ __html: ErrorIcon }}
                 onClick={this.resetInput}
               />
