@@ -109,7 +109,7 @@ const Input = styled.input`
 
 const Unit = styled.div`
   line-height: 12px;
-  padding: 0 16px;
+  padding: 0 8px 0 0;
   text-align: right;
   font-size: 12px;
 `;
