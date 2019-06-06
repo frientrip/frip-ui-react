@@ -120,7 +120,10 @@ const IconWrapper = styled.div`
   height: 16px;
   right: ${({ right }) => right};
   top: 8px;
-  user-select: none;
+
+  ${({ isVisible }) => (!isVisible && `
+    display: none;
+  `)}
 `;
 
 const IconWrapperVisible = styled(IconWrapper)`
@@ -169,7 +172,10 @@ class InputComponent extends React.Component {
       value: '',
       isFocused: false,
       isDirty: false,
+      isDeleteButtonVisible: false,
     };
+
+    this.DELETE_BUTTON_FADE_OUT_DELAY = 100;
 
     this.inputRef = React.createRef();
 
@@ -178,6 +184,7 @@ class InputComponent extends React.Component {
     this.handleInputBlur = this.handleInputBlur.bind(this);
     this.resetInput = this.resetInput.bind(this);
   }
+
   static getDerivedStateFromProps(props, state) {
     if (state.value === '' && props.defaultValue && !state.isDirty) {
       props.onChange && props.onChange(props.defaultValue);
@@ -186,6 +193,8 @@ class InputComponent extends React.Component {
         isDirty: true,
       };
     }
+
+
     return state;
   }
 
@@ -208,6 +217,7 @@ class InputComponent extends React.Component {
     return color.white;
   }
 
+
   handleInputChange(e) {
     const val = e.target.value;
     if (this.props.maxLength && val.length > this.props.maxLength) {
@@ -222,7 +232,7 @@ class InputComponent extends React.Component {
   }
 
   resetInput() {
-    this.inputRef.current.focus();
+    // this.inputRef.current.focus();
     this.setState({
       value: '',
     });
@@ -232,12 +242,21 @@ class InputComponent extends React.Component {
   handleInputFocus() {
     this.setState({
       isFocused: true,
+      isDeleteButtonVisible: true,
     });
   }
 
   handleInputBlur() {
     this.setState({
       isFocused: false,
+    }, () => {
+      // focus가 풀렸을 때 바로 사라지면 클릭 이벤트를 잡지 못하므로,
+      // 약간의 시간을 두고 사라지게 처리
+      setTimeout(() => {
+        this.setState({
+          isDeleteButtonVisible: false,
+        });
+      }, this.DELETE_BUTTON_FADE_OUT_DELAY);
     });
   }
 
@@ -259,7 +278,7 @@ class InputComponent extends React.Component {
       width,
       unit,
     } = this.props;
-    const { isFocused } = this.state;
+    const { isDeleteButtonVisible } = this.state;
 
     return (
       <Wrapper className={className} bigLabel={label && bigLabel} width={width}>
@@ -297,15 +316,12 @@ class InputComponent extends React.Component {
               )
             }
           </BorderedContainer>
-          {
-            this.state.value && !maxLength && !error && isFocused && (
-              <IconWrapper
-                right={unit ? '36px' : '8px'}
-                dangerouslySetInnerHTML={{ __html: DeleteIcon }}
-                onClick={this.resetInput}
-              />
-            )
-          }
+          <IconWrapper
+            isVisible={this.state.value && !maxLength && !error && isDeleteButtonVisible}
+            right={unit ? '36px' : '8px'}
+            dangerouslySetInnerHTML={{ __html: DeleteIcon }}
+            onClick={this.resetInput}
+          />
           {
             error && !maxLength && (
               <IconWrapperVisible
