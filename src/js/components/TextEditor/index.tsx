@@ -29,7 +29,8 @@ const Toolbar = styled.div`
 `;
 
 const Body = styled.div`
-  flex: 1 1 0;
+  flex: 1 1 auto;
+  overflow: auto;
 `;
 
 export default class TextEditor extends React.Component<TextEditorProps, TextEditorState> {
