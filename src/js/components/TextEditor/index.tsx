@@ -18,9 +18,9 @@ interface TextEditorState {
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  flex: 1 1 0;
+  flex: 1 1 0%; /* HACK: for IE */
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const Toolbar = styled.div`
