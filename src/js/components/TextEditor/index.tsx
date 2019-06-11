@@ -1,3 +1,4 @@
+import { find as _find } from 'lodash';
 import Quill, { Delta, DeltaStatic, Sources } from 'quill';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import 'quill/dist/quill.snow.css';
@@ -44,6 +45,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
     this.state = {
       quill: null,
     };
+
     this.handleQuillTextChange = this.handleQuillTextChange.bind(this);
   }
 
@@ -87,27 +89,24 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       return;
     }
 
-    if (uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
-      // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
+    if (delta.ops !== undefined && source === 'user') {
+      // operation이 존재하고, 사용자의 시행일 경우
+      const imageInsertOp = _find(delta.ops, op => op.insert !== undefined && op.insert.image !== undefined);
+      const retainOp = _find(delta.ops, op => op.retain !== undefined);
       const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
-      const imageOps = delta.ops.filter(op => op.insert !== undefined);
-      const retainOps = delta.ops.filter(op => op.retain !== undefined);
+      const newDelta = new DeltaInstance()
+        .retain(retainOp !== undefined ? retainOp.retain! : 0) // retain undefined 아닌 op를 찾았으므로 존재 보장됨
+        .delete(1);
 
-      if (imageOps.length) {
-        uploader(imageOps[0].insert.image)
+      if (uploader && imageInsertOp !== undefined) {
+        // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
+        uploader(imageInsertOp.insert.image)
           .then((url) => {
-            const newImage = new DeltaInstance()
-              .retain(retainOps.length ? retainOps[0].retain! : 0)
-              .delete(1)
-              .insert({ image: url });
-            quill.updateContents(newImage, 'api');
+            quill.updateContents(newDelta.insert({ image: url }), 'api');
           })
           .catch((e) => {
             // 못 올라간 이미지 제거
-            const newImage = new DeltaInstance()
-              .retain(retainOps.length ? retainOps[0].retain! : 0)
-              .delete(1);
-            quill.updateContents(newImage, 'api');
+            quill.updateContents(newDelta, 'api');
 
             if (onCatchUploaderError !== undefined) {
               onCatchUploaderError(e);
