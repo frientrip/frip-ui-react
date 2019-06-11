@@ -94,8 +94,6 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       return;
     }
 
-    console.log(delta);
-
     if (delta.ops !== undefined && source === 'user') {
       // operation이 존재하고, 사용자의 시행일 경우
       const retainOp = _find(delta.ops, op => op.retain !== undefined);
