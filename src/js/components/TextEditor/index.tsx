@@ -110,7 +110,7 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
         if (insertOp.insert.video && !TextEditor.YOUTUBE_REG_EX.test(insertOp.insert.video)) {
           // 비디오 URL을 추가했는데, youtube url이 아닐 때
           if (onError) {
-            onError(new Error(`유효한 youtube URL이 아닙니다: ${insertOp.insert.video}`));
+            onError(new Error(`유효한 youtube URL이 아닙니다.`));
           }
           quill.updateContents(newDelta, 'api');
         }
