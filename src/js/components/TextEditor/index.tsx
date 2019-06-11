@@ -44,10 +44,11 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
     this.state = {
       quill: null,
     };
+    this.handleQuillTextChange = this.handleQuillTextChange.bind(this);
   }
 
   public componentDidMount() {
-    const { defaultValue, onChange, uploader, onCatchUploaderError } = this.props;
+    const { defaultValue, onChange } = this.props;
     const { quill } = this.state;
 
     if (quill === null) {
@@ -67,44 +68,59 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       });
 
       // quill 이벤트 핸들러 추가
-      quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
-        if (uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
-          // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
-          const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
-          const imageOps = delta.ops.filter(op => op.insert !== undefined);
-          const retainOps = delta.ops.filter(op => op.retain !== undefined);
-
-          if (imageOps.length) {
-            uploader(imageOps[0].insert.image)
-              .then((url) => {
-                const newImage = new DeltaInstance()
-                  .retain(retainOps.length ? retainOps[0].retain! : 0)
-                  .delete(1)
-                  .insert({ image: url });
-                quill.updateContents(newImage, 'api');
-              })
-              .catch((e) => {
-                // 못 올라간 이미지 제거
-                const newImage = new DeltaInstance()
-                  .retain(retainOps.length ? retainOps[0].retain! : 0)
-                  .delete(1);
-                quill.updateContents(newImage, 'api');
-
-                if (onCatchUploaderError !== undefined) {
-                  onCatchUploaderError(e);
-                }
-              });
-          }
-        }
-
-        const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
-          inlineStyles: true,
-        });
-
-        onChange(converter.convert());
-      });
+      quill.on('text-change', this.handleQuillTextChange);
       this.setState({ quill });
     }
+  }
+
+  /**
+   * quill text-change 이벤트가 발생했을 때 처리 함수
+   * @param delta
+   * @param oldDelta
+   * @param source
+   */
+  private handleQuillTextChange(delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) {
+    const { onChange, uploader, onCatchUploaderError } = this.props;
+    const { quill } = this.state;
+
+    if (quill === null) {
+      return;
+    }
+
+    if (uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
+      // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
+      const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
+      const imageOps = delta.ops.filter(op => op.insert !== undefined);
+      const retainOps = delta.ops.filter(op => op.retain !== undefined);
+
+      if (imageOps.length) {
+        uploader(imageOps[0].insert.image)
+          .then((url) => {
+            const newImage = new DeltaInstance()
+              .retain(retainOps.length ? retainOps[0].retain! : 0)
+              .delete(1)
+              .insert({ image: url });
+            quill.updateContents(newImage, 'api');
+          })
+          .catch((e) => {
+            // 못 올라간 이미지 제거
+            const newImage = new DeltaInstance()
+              .retain(retainOps.length ? retainOps[0].retain! : 0)
+              .delete(1);
+            quill.updateContents(newImage, 'api');
+
+            if (onCatchUploaderError !== undefined) {
+              onCatchUploaderError(e);
+            }
+          });
+      }
+    }
+
+    const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
+      inlineStyles: true,
+    });
+
+    onChange(converter.convert());
   }
 
   public render() {
