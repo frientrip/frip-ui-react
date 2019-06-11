@@ -9,6 +9,7 @@ interface TextEditorProps {
   defaultValue?: string;
   onChange: (value: string) => any;
   uploader?: (file: File) => Promise<string>; // 파일을 받아서 URL 리턴
+  onError?: (e: any) => void;
   onCatchUploaderError?: (e: Error) => any;
 }
 
@@ -82,10 +83,13 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
    * @param source
    */
   private handleQuillTextChange(delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) {
-    const { onChange, uploader, onCatchUploaderError } = this.props;
+    const { onChange, uploader, onError, onCatchUploaderError } = this.props;
     const { quill } = this.state;
 
     if (quill === null) {
+      if (onError) {
+        onError(new TypeError('quill 인스턴스가 null입니다.'));
+      }
       return;
     }
 
