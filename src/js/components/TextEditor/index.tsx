@@ -20,7 +20,7 @@ interface TextEditorState {
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  flex: 1 1 0%; /* HACK: for IE */
+  flex: 1 1 0;
   width: 100%;
   overflow: auto;
 `;
