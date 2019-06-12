@@ -1,3 +1,4 @@
+import { find as _find } from 'lodash';
 import Quill, { Delta, DeltaStatic, Sources } from 'quill';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import 'quill/dist/quill.snow.css';
@@ -8,6 +9,7 @@ interface TextEditorProps {
   defaultValue?: string;
   onChange: (value: string) => any;
   uploader?: (file: File) => Promise<string>; // 파일을 받아서 URL 리턴
+  onError?: (e: any) => void;
   onCatchUploaderError?: (e: Error) => any;
 }
 
@@ -34,6 +36,7 @@ const Body = styled.div`
 `;
 
 export default class TextEditor extends React.Component<TextEditorProps, TextEditorState> {
+  static readonly YOUTUBE_REG_EX = /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)\&?/;
   editorBody: React.RefObject<HTMLDivElement>;
 
   constructor(props: TextEditorProps) {
@@ -44,10 +47,12 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
     this.state = {
       quill: null,
     };
+
+    this.handleQuillTextChange = this.handleQuillTextChange.bind(this);
   }
 
   public componentDidMount() {
-    const { defaultValue, onChange, uploader, onCatchUploaderError } = this.props;
+    const { defaultValue, onChange } = this.props;
     const { quill } = this.state;
 
     if (quill === null) {
@@ -67,44 +72,72 @@ export default class TextEditor extends React.Component<TextEditorProps, TextEdi
       });
 
       // quill 이벤트 핸들러 추가
-      quill.on('text-change', (delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) => {
-        if (uploader && delta.ops && delta.ops.filter(op => op.insert && op.insert.image).length > 0 && source === 'user') {
-          // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
-          const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
-          const imageOps = delta.ops.filter(op => op.insert !== undefined);
-          const retainOps = delta.ops.filter(op => op.retain !== undefined);
-
-          if (imageOps.length) {
-            uploader(imageOps[0].insert.image)
-              .then((url) => {
-                const newImage = new DeltaInstance()
-                  .retain(retainOps.length ? retainOps[0].retain! : 0)
-                  .delete(1)
-                  .insert({ image: url });
-                quill.updateContents(newImage, 'api');
-              })
-              .catch((e) => {
-                // 못 올라간 이미지 제거
-                const newImage = new DeltaInstance()
-                  .retain(retainOps.length ? retainOps[0].retain! : 0)
-                  .delete(1);
-                quill.updateContents(newImage, 'api');
-
-                if (onCatchUploaderError !== undefined) {
-                  onCatchUploaderError(e);
-                }
-              });
-          }
-        }
-
-        const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
-          inlineStyles: true,
-        });
-
-        onChange(converter.convert());
-      });
+      quill.on('text-change', this.handleQuillTextChange);
       this.setState({ quill });
     }
+  }
+
+  /**
+   * quill text-change 이벤트가 발생했을 때 처리 함수
+   * @param delta
+   * @param oldDelta
+   * @param source
+   */
+  private handleQuillTextChange(delta: DeltaStatic, oldDelta: DeltaStatic, source: Sources) {
+    const { onChange, uploader, onError, onCatchUploaderError } = this.props;
+    const { quill } = this.state;
+
+    if (quill === null) {
+      if (onError) {
+        onError(new TypeError('quill 인스턴스가 null입니다.'));
+      }
+      return;
+    }
+
+    if (delta.ops !== undefined && source === 'user') {
+      // operation이 존재하고, 사용자의 시행일 경우
+      const retainOp = _find(delta.ops, op => op.retain !== undefined);
+      const DeltaInstance: typeof Delta = Quill.import('delta'); // HACK
+      const newDelta = new DeltaInstance()
+        .retain(retainOp !== undefined ? retainOp.retain! : 0) // retain undefined 아닌 op를 찾았으므로 존재 보장됨
+        .delete(1);
+
+      const insertOp = _find(delta.ops, op => op.insert !== undefined);
+
+      if (insertOp) {
+        // 삽입 시행이 있을 때
+
+        if (insertOp.insert.video && !TextEditor.YOUTUBE_REG_EX.test(insertOp.insert.video)) {
+          // 비디오 URL을 추가했는데, youtube url이 아닐 때
+          if (onError) {
+            onError(new Error(`유효한 youtube URL이 아닙니다.`));
+          }
+          quill.updateContents(newDelta, 'api');
+        }
+
+        if (insertOp.insert.image && uploader) {
+          // 업로더가 존재하고 사용자가 이미지를 올린 경우 업로더에게서 URL을 받고, 올린 이미지로 바꿔치기
+          uploader(insertOp.insert.image)
+            .then((url) => {
+              quill.updateContents(newDelta.insert({ image: url }), 'api');
+            })
+            .catch((e) => {
+              // 못 올라간 이미지 제거
+              quill.updateContents(newDelta, 'api');
+
+              if (onCatchUploaderError !== undefined) {
+                onCatchUploaderError(e);
+              }
+            });
+        }
+      }
+    }
+
+    const converter = new QuillDeltaToHtmlConverter(quill.getContents().ops!, {
+      inlineStyles: true,
+    });
+
+    onChange(converter.convert());
   }
 
   public render() {
