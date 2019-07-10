@@ -37,8 +37,9 @@ const ListItem = styled.li`
     background-color: ${color.veryLightBlue};
   }
 `;
+
 const Badge = styled.div`
-  width: 16px;
+  min-width: 16px;
   height: 16px;
   border-radius: 8px;
   line-height: 16px;
@@ -47,6 +48,7 @@ const Badge = styled.div`
   text-align: center;
   background-color: ${color.primary};
   overflow: hidden;
+  padding: 0 5px;
 `;
 
 const MenuItem = ({
