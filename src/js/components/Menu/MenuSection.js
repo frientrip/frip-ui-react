@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import color from '../Color';
-import ChevronIcon from '../../assets/svgs/ic-chevron-down-black.svg';
+import ChevronIcon from '../../assets/svgs/ic-chevron-down-grey.svg';
 
 import MenuItem from './MenuItem';
 import fontWeight from '../../../font-weight';
