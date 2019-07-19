@@ -55,7 +55,7 @@ const ChevronWrapper = styled.div`
   right: 16px;
   cursor: pointer;
   opacity: 1;
-  transform: ${({ down }) => (down ? 'rotate(0)' : 'rotate(90deg)')};
+  transform: ${({ down }) => (down ? 'rotate(0)' : 'rotate(180deg)')};
   transition: opacity 0.4s, transform 0.5s;
 
   &:hover {
