@@ -1,4 +1,5 @@
 const path = require('path');
+const DtsGeneratorPlugin = require('dts-generator-webpack-plugin').default;
 
 module.exports = {
   entry: ['./src/js/index.ts'],
@@ -38,6 +39,13 @@ module.exports = {
     ],
   },
   devtool: 'cheap-module-source-map',
+  plugins: [
+    new DtsGeneratorPlugin({
+      name: 'frip-ui-react',
+      main: 'frip-ui-react/js/index',
+      project: './'
+    })
+  ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
