@@ -64,7 +64,7 @@ interface FormSubmissionSet {
 }
 
 /**
- * render 함수의 파라미터
+ * render prop의 파라미터
  */
 interface FormRenderPropParams {
   fields: FormFieldSet;
@@ -289,7 +289,7 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   /**
-   * child에 전달할 validate 함수
+   * render prop에 전달할 validate 함수
    * @param fieldKeys
    */
   @bind
@@ -307,7 +307,7 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   /**
-   * child에 전달하는 submit 함수
+   * render prop에 전달하는 submit 함수
    */
   @bind
   submit(): FormSubmissionSet {
