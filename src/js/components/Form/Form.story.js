@@ -71,12 +71,12 @@ storiesOf('Form', module)
           {
             key: 'lastName',
             validators: [required, longerThan(5)],
-            relatedFields: ['firstName'],
+            relatedFieldKeys: ['firstName'],
           },
           {
             key: 'firstName',
             validators: [longerThan(2), requiredIfNotEmpty],
-            relatedFields: ['lastName'],
+            relatedFieldKeys: ['lastName'],
           },
         ]}
       >

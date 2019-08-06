@@ -23,34 +23,49 @@ interface FieldValidationResult {
 interface FormValidationResult {
   isValid: boolean;
   fields: FormFieldSet;
-  invalidFields: FormFieldInState[];
+  invalidFields: FormField[];
 }
 
-interface FormFieldInProps {
+/**
+ * 필드 객체를 생성하기 위한 정보 객체
+ */
+interface FormFieldPrototype {
   key: string;
   defaultValue?: FormValue;
-  relatedFields?: string[]; // 관련된 필드의 key 값
+  relatedFieldKeys?: string[]; // 관련된 필드의 key 값
   validators?: FormValidator[];
 }
 
-interface FormFieldInState {
+/**
+ * form 입력 단위
+ */
+interface FormField {
   value: FormValue;
   validators: FormValidator[];
   isDirty: boolean;
   isValid: boolean;
   onChange: FormValueChangeHandler;
-  relatedFields: string[]; // 관련된 필드의 key 값
+  relatedFieldKeys: string[]; // 관련된 필드의 key 값
   errorMessage: string;
 }
 
+/**
+ * 필드 모음의 객체 형태
+ */
 interface FormFieldSet {
-  [key: string]: FormFieldInState;
+  [key: string]: FormField;
 }
 
+/**
+ * 필드 submit시 전달하는 객체
+ */
 interface FormSubmissionSet {
   [key: string]: FormValue;
 }
 
+/**
+ * render 함수의 파라미터
+ */
 interface FormRenderPropParams {
   fields: FormFieldSet;
   validate: (fieldKeys: string[]) => FormValidationResult;
@@ -58,7 +73,7 @@ interface FormRenderPropParams {
 }
 
 interface FormProps {
-  fields: FormFieldInProps[];
+  fields: FormFieldPrototype[];
   children?: (params: FormRenderPropParams) => React.ReactNode;
   render?: (params: FormRenderPropParams) => React.ReactNode;
 }
@@ -73,20 +88,20 @@ class Form extends React.Component<FormProps, FormState> {
 
     this.state = {
       fields: {
-        ...props.fields.reduce(
-          (acc, curr) => (
-            {
-              ...acc,
-              [curr.key]: {
-                value: curr.defaultValue !== undefined ? curr.defaultValue : '',
-                validators: curr.validators || [],
-                isDirty: false,
-                onChange: this.makeOnChangeHandler(curr.key),
-                relatedFields: curr.relatedFields || [],
-                errorMessage: '',
-              },
-            }
-        ),
+        ..._reduce(
+          props.fields,
+          (acc, curr) => ({
+            ...acc,
+            [curr.key]: {
+              value: curr.defaultValue !== undefined ? curr.defaultValue : '',
+              validators: curr.validators || [],
+              isDirty: false,
+              isValid: true,
+              onChange: this.makeOnChangeHandler(curr.key),
+              relatedFieldKeys: curr.relatedFieldKeys || [],
+              errorMessage: '',
+            } as FormField,
+          }),
           {},
         ),
       },
@@ -102,12 +117,12 @@ class Form extends React.Component<FormProps, FormState> {
     return this.state.fields[key];
   }
 
-  private accessRelatedFields(key: string): string[] {
-    return _get(
-      this.accessField(key),
-      'relatedFields',
-      [],
-    );
+  /**
+   * 주어진 key와 관련된 필드 key 목록을 반환합니다.
+   * @param key
+   */
+  private accessRelatedFieldKeys(key: string): string[] {
+    return this.accessField(key).relatedFieldKeys;
   }
 
   /**
@@ -123,13 +138,11 @@ class Form extends React.Component<FormProps, FormState> {
       ? currentField.value
       : value;
     const relatedValues = _reduce(
-      this.accessRelatedFields(key),
-      (args, relateKey) => {
-        return [
-          ...args,
-          this.accessField(relateKey).value,
-        ];
-      },
+      this.accessRelatedFieldKeys(key),
+      (args, relateKey) => ([
+        ...args,
+        this.accessField(relateKey).value,
+      ]),
       [] as FormValue[],
     );
 
@@ -160,7 +173,7 @@ class Form extends React.Component<FormProps, FormState> {
     // VALIDATE RELATED FIELDS
     const validateRelatedFields = () => {
       _forEach(
-        this.accessRelatedFields(key),
+        this.accessRelatedFieldKeys(key),
         (relatedKey) => {
           const { isValid: relatedIsValid, invalidIdx: relatedInvalidIdx } = this.validateField(relatedKey);
           this.updateFieldInState(relatedKey, this.accessField(relatedKey).value, relatedIsValid, false, relatedInvalidIdx || undefined);
@@ -195,7 +208,7 @@ class Form extends React.Component<FormProps, FormState> {
   updateFieldInState(key: string, value: FormValue, isValid: boolean, forceDirty: boolean, invalidIdx?: number, cb?: () => void) {
     this.setState(
       (state) => {
-        const currentField: FormFieldInState = _get(
+        const currentField: FormField = _get(
           state,
           ['fields', key],
         );
@@ -213,7 +226,7 @@ class Form extends React.Component<FormProps, FormState> {
               value,
               isValid,
               errorMessage,
-            },
+            } as FormField,
           },
         };
       },
@@ -243,7 +256,7 @@ class Form extends React.Component<FormProps, FormState> {
             isValid,
             errorMessage,
             isDirty: true,
-          },
+          } as FormField,
         };
       },
       { ...this.state.fields },
@@ -265,7 +278,7 @@ class Form extends React.Component<FormProps, FormState> {
           field,
         ];
       },
-      [] as FormFieldInState[],
+      [] as FormField[],
     );
 
     return {
