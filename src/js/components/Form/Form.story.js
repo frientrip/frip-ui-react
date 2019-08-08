@@ -81,7 +81,7 @@ storiesOf('Form', module)
         ]}
       >
         {
-          ({ fields, validate, submit }) =>
+          ({ fields, onValidate: validate, onSubmit: submit }) =>
             (
               <div>
                 <Input

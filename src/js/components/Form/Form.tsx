@@ -2,7 +2,7 @@ import bind from 'bind-decorator';
 import { forEach as _forEach, get as _get, keys as _keys, reduce as _reduce } from 'lodash';
 import * as React from 'react';
 
-type FormValue = string|boolean;
+type FormValue = any;
 type FormValidator = {
   validate: (value: FormValue, ...relatedValue: FormValue[]) => boolean,
   errorMessage: string;
@@ -66,16 +66,16 @@ interface FormSubmissionSet {
 /**
  * render prop의 파라미터
  */
-interface FormRenderPropParams {
+interface FormRenderProps {
   fields: FormFieldSet;
-  validate: (fieldKeys: string[]) => FormValidationResult;
-  submit: () => FormSubmissionSet;
+  onValidate: (fieldKeys?: string[]) => FormValidationResult;
+  onSubmit: () => FormSubmissionSet;
 }
 
 interface FormProps {
   fields: FormFieldPrototype[];
-  children?: (params: FormRenderPropParams) => React.ReactNode;
-  render?: (params: FormRenderPropParams) => React.ReactNode;
+  children?: (params: FormRenderProps) => React.ReactNode;
+  render?: React.ComponentType<FormRenderProps>;
 }
 
 interface FormState {
@@ -169,7 +169,7 @@ class Form extends React.Component<FormProps, FormState> {
    * key 값의 인풋이 바뀌었을 때 처리 함수를 만듧니다.
    * @param key
    */
-  makeOnChangeHandler(key: string): FormValueChangeHandler {
+  private makeOnChangeHandler(key: string): FormValueChangeHandler {
     // VALIDATE RELATED FIELDS
     const validateRelatedFields = () => {
       _forEach(
@@ -205,7 +205,7 @@ class Form extends React.Component<FormProps, FormState> {
    * @param invalidIdx
    * @param cb
    */
-  updateFieldInState(key: string, value: FormValue, isValid: boolean, forceDirty: boolean, invalidIdx?: number, cb?: () => void) {
+  private updateFieldInState(key: string, value: FormValue, isValid: boolean, forceDirty: boolean, invalidIdx?: number, cb?: () => void) {
     this.setState(
       (state) => {
         const currentField: FormField = _get(
@@ -239,7 +239,7 @@ class Form extends React.Component<FormProps, FormState> {
    * accepts an array of field keys to construct validated fields object
    * @param fieldKeys
    */
-  constructValidatedFieldsFromFieldsArray(fieldKeys: string[]): FormValidationResult {
+  private constructValidatedFieldsFromFieldsArray(fieldKeys: string[]): FormValidationResult {
     const validatedFields = _reduce(
       fieldKeys,
       (fields, key) => {
@@ -293,7 +293,7 @@ class Form extends React.Component<FormProps, FormState> {
    * @param fieldKeys
    */
   @bind
-  validate(fieldKeys: string[]): FormValidationResult {
+  private handleValidate(fieldKeys?: string[]): FormValidationResult {
     const result = this.constructValidatedFieldsFromFieldsArray(
       fieldKeys && fieldKeys.length
         ? fieldKeys
@@ -310,7 +310,7 @@ class Form extends React.Component<FormProps, FormState> {
    * render prop에 전달하는 submit 함수
    */
   @bind
-  submit(): FormSubmissionSet {
+  private handleSubmit(): FormSubmissionSet {
     const finalFields = {
       ..._reduce(
         this.state.fields,
@@ -329,7 +329,7 @@ class Form extends React.Component<FormProps, FormState> {
   /**
    * Function as Child Component 일 때 렌더링 함수
    */
-  renderFaCC() {
+  private renderFaCC() {
     const { children } = this.props;
     const {
       fields,
@@ -338,26 +338,28 @@ class Form extends React.Component<FormProps, FormState> {
     if (typeof children === 'function') {
       return children({
         fields,
-        validate: this.validate,
-        submit: this.submit,
-      });
+        validate: this.handleValidate,
+        submit: this.handleSubmit,
+      } as any); // HACK: deprecated
     }
 
     return null;
   }
 
   public render() {
-    const { render } = this.props;
+    const { render: View } = this.props;
 
-    if (render === undefined) {
+    if (View === undefined) {
       return this.renderFaCC();
     }
 
-    return render({
-      fields: this.state.fields,
-      validate: this.validate,
-      submit: this.submit,
-    });
+    return (
+      <View
+        fields={this.state.fields}
+        onValidate={this.handleValidate}
+        onSubmit={this.handleSubmit}
+      />
+    );
   }
 }
 
