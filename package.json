@@ -60,6 +60,7 @@
     "@types/storybook__addon-storyshots": "^3.4.3",
     "@types/storybook__react": "^3.0.9",
     "babel-preset-stage-3": "^6.24.1",
+    "bind-decorator": "^1.0.11",
     "css-loader": "^0.28.11",
     "lodash": "^4.17.13",
     "merge": "^1.2.1",
