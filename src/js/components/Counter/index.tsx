@@ -184,7 +184,7 @@ export default class Counter extends React.Component<CounterProps, CounterState>
             type="number"
             value={value !== null ? value : ''}
             onChange={this.handleDirectChange}
-            onWheel={e => e.preventDefault()}
+            onWheel={() => false}
           />
           <ControlButton
             disabled={disableIncrease}
