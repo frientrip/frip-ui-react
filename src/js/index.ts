@@ -3,10 +3,11 @@ import Button, { ButtonGhost, ButtonGhostPrimary, ButtonPrimary, IconButton } fr
 import Color from './components/Color';
 import Counter from './components/Counter';
 import Dropdown from './components/Dropdown';
-import { CheckboxItem, Form, Input, Radio } from './components/Form';
+import { CheckboxItem, Form, Input } from './components/Form';
 import List from './components/List';
 import { MenuItem, MenuSection } from './components/Menu';
 import { NextButton, PageButton, PrevButton } from './components/Pagination';
+import Radio from './components/RadioGroup';
 import Stepper from './components/Stepper';
 import { Tab, Tabs } from './components/Tabs';
 import TextEditor from './components/TextEditor';
