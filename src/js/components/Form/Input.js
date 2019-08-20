@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import color from '../Color';
 import fontWeight from '../../../font-weight';
-
+import MessageWrapper from '../MessageWrapper'
 import DeleteIcon from '../../assets/svgs/ic-delete-l-grey.svg';
 import ErrorIcon from '../../assets/svgs/ic-danger-red.svg';
 
@@ -63,7 +63,6 @@ const InputWrapper = styled.div`
   height: 40px;
   ${({ transparent }) => (transparent ? '' : 'border-radius: 4px;')}
   background-color: ${({ transparent }) => (transparent ? 'transparent' : color.pureWhite)};
-  margin-bottom: 10px;
 `;
 
 const BorderedContainer = styled.div`
@@ -128,14 +127,6 @@ const IconWrapper = styled.div`
 
 const IconWrapperVisible = styled(IconWrapper)`
   background-color: ${color.pureWhite};
-`;
-
-const MessageWrapper = styled.div`
-  width: ${({ width }) => (width || '100%')};
-  font-size: 12px;
-  line-height: 14px;
-  color: ${({ error }) => (error ? color.red : color.grey)};
-  font-weight: 300;
 `;
 
 const LabelWrapper = styled.div`
@@ -344,6 +335,7 @@ class InputComponent extends React.Component {
             )
           }
         </InputWrapper>
+
         {
           message && (
             <MessageWrapper error={error} width={inputWidth}>

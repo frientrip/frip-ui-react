@@ -4,6 +4,7 @@ import '../../../css/reset.css';
 import MinusIcon from '../../assets/svgs/minus-black.svg';
 import PlusIcon from '../../assets/svgs/plus-black.svg';
 import colors from '../Color';
+import MessageWrapper from '../MessageWrapper';
 
 interface CounterProps {
   value: number|null;
@@ -13,13 +14,14 @@ interface CounterProps {
   disableIncrease?: boolean;
   className?: string;
   error?: boolean;
+  message?: string;
 }
 
 interface CounterState {
   isDirty: boolean;
 }
 
-const Wrapper = styled.div<{ error?: boolean}>`
+const InputWrapper = styled.div<{ error?: boolean}>`
   display: flex;
   align-items: center;
   border: solid 1px #e6e6e6;
@@ -168,27 +170,37 @@ export default class Counter extends React.Component<CounterProps, CounterState>
   }
 
   public render() {
-    const { className, error, value, disableDecrease, disableIncrease } = this.props;
+    const { className, error, value, disableDecrease, disableIncrease, message } = this.props;
 
     return (
-      <Wrapper className={className} error={error}>
-        <ControlButton
-          disabled={disableDecrease}
-          dangerouslySetInnerHTML={{ __html: MinusIcon }}
-          onClick={this.handleMinusButtonClicked}
-        />
-        <Value
-          type="number"
-          value={value !== null ? value : ''}
-          onChange={this.handleDirectChange}
-          onWheel={e => e.preventDefault()}
-        />
-        <ControlButton
-          disabled={disableIncrease}
-          dangerouslySetInnerHTML={{ __html: PlusIcon }}
-          onClick={this.handlePlusButtonClicked}
-        />
-      </Wrapper>
+      <div className={className}>
+        <InputWrapper error={error}>
+          <ControlButton
+            disabled={disableDecrease}
+            dangerouslySetInnerHTML={{ __html: MinusIcon }}
+            onClick={this.handleMinusButtonClicked}
+          />
+          <Value
+            type="number"
+            value={value !== null ? value : ''}
+            onChange={this.handleDirectChange}
+            onWheel={() => false}
+          />
+          <ControlButton
+            disabled={disableIncrease}
+            dangerouslySetInnerHTML={{ __html: PlusIcon }}
+            onClick={this.handlePlusButtonClicked}
+          />
+        </InputWrapper>
+
+        {
+          message && (
+            <MessageWrapper error={error}>
+              {message}
+            </MessageWrapper>
+          )
+        }
+      </div>
     );
   }
 }

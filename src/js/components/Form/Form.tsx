@@ -176,7 +176,7 @@ class Form extends React.Component<FormProps, FormState> {
         this.accessRelatedFieldKeys(key),
         (relatedKey) => {
           const { isValid: relatedIsValid, invalidIdx: relatedInvalidIdx } = this.validateField(relatedKey);
-          this.updateFieldInState(relatedKey, this.accessField(relatedKey).value, relatedIsValid, false, relatedInvalidIdx || undefined);
+          this.updateFieldInState(relatedKey, this.accessField(relatedKey).value, relatedIsValid, false, relatedInvalidIdx !== null ? relatedInvalidIdx : undefined);
         },
       );
     };
@@ -192,7 +192,7 @@ class Form extends React.Component<FormProps, FormState> {
       // VALUE CHANGED
       const { isValid, invalidIdx } = this.validateField(key, trimmedValue);
       // OWN VALUE VALIDATED
-      this.updateFieldInState(key, trimmedValue, isValid, true, invalidIdx || undefined, validateRelatedFields);
+      this.updateFieldInState(key, trimmedValue, isValid, true, invalidIdx !== null ? invalidIdx : undefined, validateRelatedFields);
     };
   }
 
