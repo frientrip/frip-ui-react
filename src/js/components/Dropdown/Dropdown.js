@@ -49,18 +49,6 @@ const Label = styled.div`
   margin-bottom: 4px;
 `;
 
-const Blocker = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  cursor: not-allowed;
-  background-color: white;
-  opacity: 0.7;
-  z-index: 100;
-`;
-
 const SelectedOption = styled.div`
   display: flex;
   align-items: center;
@@ -72,6 +60,11 @@ const SelectedOption = styled.div`
   padding: 8px 16px;
   transition: background-color 0.4s;
   background-color: ${({ active }) => (active ? color.white2 : color.pureWhite)};
+  
+  ${({ disabled }) => disabled && `
+    cursor: not-allowed;
+    opacity: 0.7;
+  `}
 
   >div:first-child {
     flex: 1 1 auto;
@@ -81,7 +74,7 @@ const SelectedOption = styled.div`
   }
 
   &:hover {
-    background-color: ${color.white2};
+    background-color: ${({ disabled }) => !disabled && color.white2};
   }
 
   &:active {
@@ -200,7 +193,7 @@ class Dropdown extends React.Component {
   handleOptionClick(selectedOption) {
     this.setState({
       value: selectedOption.value,
-    })
+    });
     this.props.onChange(selectedOption.value);
     this.handleButtonClick();
   }
@@ -227,9 +220,6 @@ class Dropdown extends React.Component {
           label ? <Label>{label}</Label> : null
         }
         <SelectionWrapper>
-          {
-            disabled ? <Blocker /> : null
-          }
           <SelectedOption
             invalid={invalid}
             disabled={disabled}
