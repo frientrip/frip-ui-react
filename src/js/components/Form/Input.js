@@ -85,8 +85,8 @@ const Input = styled.input`
   height: 100%;
   border-radius: inherit;
   border: none;
-  padding: 0 16px;
   font-size: 12px;
+  padding: 0 ${({ maxLength }) => maxLength ? '60px 0 16px' : '16px'};
   color: ${({ transparent }) => (transparent ? color.pureWhite : color.black)};
   color: ${({ disabled }) => (disabled ? color.grey : null)};
   background-color: ${({ transparent }) => (transparent ? 'transparent' : color.pureWhite)};
