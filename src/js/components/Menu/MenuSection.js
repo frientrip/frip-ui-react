@@ -13,6 +13,7 @@ const propTypes = {
   children: PropTypes.node,
   onClick: PropTypes.func,
   isMobile: PropTypes.bool,
+  defaultOpen: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -105,7 +106,7 @@ class MenuSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
+      isOpen: !!props.defaultOpen,
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
