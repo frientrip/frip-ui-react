@@ -56,6 +56,10 @@ const RadioOptionListWrapper = styled.div<{ direction?: 'column' | 'row' }>`
   position: relative;
   flex-wrap: wrap;
 
+  >* {
+    margin-bottom: 40px;
+  }
+
   ${({ direction }) => {
     switch (direction) {
       case 'column':
@@ -66,14 +70,6 @@ const RadioOptionListWrapper = styled.div<{ direction?: 'column' | 'row' }>`
       default:
         return `
           flex-direction: row;
-
-          >* {
-            margin-bottom: 40px;
-
-            &:last-child {
-              margin-bottom: 0;
-            }
-          }
         `;
     }
   }}
